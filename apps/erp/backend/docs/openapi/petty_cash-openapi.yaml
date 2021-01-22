@@ -1,0 +1,53 @@
+openapi: 3.0.3
+info:
+  title: ERP API - Medine.dev
+  description: ERP API - Medine.dev
+  version: 1.0.0
+servers:
+  - url: 'http://127.0.0.1:8000/'
+paths:
+  /petty_cash:
+    get:
+      parameters:
+        - in: query
+          name: id
+          required: false
+          schema:
+            type: number
+        - in: query
+          name: name
+          required: false
+          schema:
+            type: number
+      responses:
+        200:
+          description: testing 200
+          content:
+            application/json:
+              schema:
+                type: string
+        404:
+          description: testing 404
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+        403:
+          description: testing 403
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+
