@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Auth;
+namespace Tests\Feature\Users;
 
 use App\Models\User;
 use Faker\Factory;
@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
-final class AuthControllerTest extends TestCase
+final class UserControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
