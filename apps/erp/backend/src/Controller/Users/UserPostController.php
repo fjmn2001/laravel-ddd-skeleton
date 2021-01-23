@@ -22,7 +22,10 @@ final class UserPostController extends Controller
 
     public function __invoke(Request $request)
     {
-        //todo: add request validation
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'body' => 'required',
+        ]);
         ($this->creator)(new UserCreatorRequest(
             $request->input('name'),
             $request->input('email'),

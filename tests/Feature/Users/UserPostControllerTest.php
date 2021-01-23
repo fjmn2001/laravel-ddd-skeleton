@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
-final class UserControllerTest extends TestCase
+final class UserPostControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -18,7 +18,7 @@ final class UserControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->faker = Factory::create();;
+        $this->faker = Factory::create();
         parent::setUp();
     }
 
@@ -30,7 +30,6 @@ final class UserControllerTest extends TestCase
         Passport::actingAs(
             User::factory()->create()
         );
-
         $response = $this->postJson('/api/users', [
             'name' => $this->faker->name(),
             'email' => $this->faker->email,
