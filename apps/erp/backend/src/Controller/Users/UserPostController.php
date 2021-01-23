@@ -22,15 +22,22 @@ final class UserPostController extends Controller
 
     public function __invoke(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|max:255',
-            'body' => 'required',
-        ]);
+        $this->validateRequest($request);
         ($this->creator)(new UserCreatorRequest(
             $request->input('name'),
             $request->input('email'),
             Hash::make($request->input('password')),
         ));
+
         return new JsonResponse([], JsonResponse::HTTP_CREATED);
+    }
+
+    private function validateRequest(Request $request): void
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'required|max:255'
+        ]);
     }
 }
