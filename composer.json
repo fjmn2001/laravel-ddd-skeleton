@@ -38,6 +38,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
+            "Medine\\Apps\\ERP\\Backend\\": "apps/erp/backend/src/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
