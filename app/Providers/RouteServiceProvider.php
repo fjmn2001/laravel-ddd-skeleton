@@ -12,7 +12,10 @@ use function Lambdish\Phunctional\map;
 class RouteServiceProvider extends ServiceProvider
 {
     private $myCustomRouteFiles = [
-        'apps/erp/backend/routes/petty_cash.php'
+        'apps/erp/backend/routes/auth.php',
+        'src/ERP/Users/Infrastructure/config/routes/index.php',
+        'apps/erp/backend/routes/petty_cash.php',
+        'routes/api.php'
     ];
 
     /**
