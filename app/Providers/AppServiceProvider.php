@@ -11,6 +11,9 @@ use Medine\ERP\Company\Infrastructure\MySqlCompanyRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
+    private $wiringObjects = [
+        
+    ];
     /**
      * Register any application services.
      *

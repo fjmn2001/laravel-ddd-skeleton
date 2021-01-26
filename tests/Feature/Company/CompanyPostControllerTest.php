@@ -2,11 +2,8 @@
 
 declare(strict_types=1);
 
-
 namespace Tests\Feature\Company;
 
-
-use App\Models\Company;
 use App\Models\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -38,7 +35,6 @@ final class CompanyPostControllerTest extends TestCase
         $response = $this->postJson('/api/company', [
             'id' => Uuid::uuid4(),
             'name' => $this->faker->company,
-            'address' => $this->faker->address,
             'status' => 'activo',
             'logo' => "coca-cola.jpg",
         ]);
