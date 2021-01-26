@@ -22,8 +22,10 @@ final class CompanyCreator
     {
         $company = new Company(
           $request->id(),
-          $request->nombre(),
-          $request->direccion()
+          $request->name(),
+          $request->address(),
+          $request->status(),
+          $request->logo()
         );
 
         $this->repository->save($company);

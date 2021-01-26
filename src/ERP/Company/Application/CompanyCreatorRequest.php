@@ -10,18 +10,24 @@ final class CompanyCreatorRequest
 {
 
     private $id;
-    private $nombre;
-    private $direccion;
+    private $name;
+    private $address;
+    private $status;
+    private $logo;
 
     public function __construct(
         string $id,
-        string $nombre,
-        string $direccion
+        string $name,
+        string $address,
+        string $status,
+        string $logo
     )
     {
         $this->id = $id;
-        $this->nombre = $nombre;
-        $this->direccion = $direccion;
+        $this->name = $name;
+        $this->address = $address;
+        $this->status = $status;
+        $this->logo = $logo;
     }
 
     public function id(): string
@@ -29,14 +35,23 @@ final class CompanyCreatorRequest
         return $this->id;
     }
 
-    public function nombre(): string
+    public function name(): string
     {
-        return $this->nombre;
+        return $this->name;
     }
 
-    public function direccion(): string
+    public function address(): string
     {
-        return $this->direccion;
+        return $this->address;
     }
 
+    public function status(): string
+    {
+        return $this->status;
+    }
+
+    public function logo(): string
+    {
+        return $this->logo;
+    }
 }

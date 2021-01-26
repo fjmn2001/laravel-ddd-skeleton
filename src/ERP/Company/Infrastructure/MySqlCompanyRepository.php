@@ -16,8 +16,10 @@ final class MySqlCompanyRepository implements CompanyRepository
     {
         DB::table('companies')->insert([
             'id' => $company->id(),
-            'nombre' => $company->nombre(),
-            'direccion' => $company->direccion(),
+            'name' => $company->name(),
+            'address' => $company->address(),
+            'status' => $company->status(),
+            'logo' => $company->logo(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);

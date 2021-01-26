@@ -6,12 +6,18 @@ declare(strict_types=1);
 namespace Tests\Feature\Company;
 
 
+use App\Models\Company;
+use App\Models\User;
 use Faker\Factory;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Laravel\Passport\Passport;
 use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 
 final class CompanyPostControllerTest extends TestCase
 {
+    use DatabaseTransactions;
+
     private $faker;
 
     protected function setUp(): void
@@ -25,10 +31,16 @@ final class CompanyPostControllerTest extends TestCase
      */
     public function it_should_create_a_new_company()
     {
+        Passport::actingAs(
+            User::factory()->create()
+        );
+
         $response = $this->postJson('/api/company', [
             'id' => Uuid::uuid4(),
-            'nombre' => $this->faker->name(),
-            'direccion' => $this->faker->address,
+            'name' => $this->faker->company,
+            'address' => $this->faker->address,
+            'status' => 'activo',
+            'logo' => "coca-cola.jpg",
         ]);
 
         $response->assertJson([]);

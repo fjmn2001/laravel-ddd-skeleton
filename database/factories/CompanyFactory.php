@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Ramsey\Uuid\Uuid;
 
 class CompanyFactory extends Factory
 {
@@ -22,7 +23,11 @@ class CompanyFactory extends Factory
     public function definition()
     {
         return [
-            //
-        ];
+            'id' => Uuid::uuid4(),
+            'name' => $this->faker->company,
+            'address' => $this->faker->address,
+            'status' => 'activo',
+            'logo' => "coca-cola.jpg",
+            ];
     }
 }
