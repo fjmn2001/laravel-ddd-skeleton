@@ -47,3 +47,16 @@ final class CompanyPostControllerTest extends TestCase
         $response->assertStatus(201);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
