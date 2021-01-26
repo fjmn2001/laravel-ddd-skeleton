@@ -1,5 +1,5 @@
 # For more information: https://laravel.com/docs/sail
-version: '3.7'
+version: '3.3'
 services:
   nginx:
     image: nginx:stable-alpine
