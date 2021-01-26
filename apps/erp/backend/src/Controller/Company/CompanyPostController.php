@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Medine\ERP\Company\Application\CompanyCreator;
 use Medine\ERP\Company\Application\CompanyCreatorRequest;
 
@@ -28,8 +29,10 @@ final class CompanyPostController extends Controller
 
             ($this->creator)( new CompanyCreatorRequest(
                 $request->input('id', ''),
-                $request->input('nombre', ''),
-                $request->input('direccion', '')
+                $request->input('name', ''),
+                $request->input('address', ''),
+                $request->input('status', ''),
+                $request->input('logo', '')
             ));
 
         }catch (\Exception $e) {
@@ -38,7 +41,7 @@ final class CompanyPostController extends Controller
 
         $response = [
             "code" => strlen($error) ? JsonResponse::HTTP_UNAUTHORIZED : JsonResponse::HTTP_CREATED,
-            "message" => strlen($error) ? $error : "Pelicula creada con exito"
+            "message" => strlen($error) ? $error : "Successfully created company"
         ];
 
         return response()->json($response, $response['code']);
