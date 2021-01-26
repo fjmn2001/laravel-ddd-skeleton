@@ -8,12 +8,15 @@ use Medine\ERP\Users\Infrastructure\MySqlUserRepository;
 
 use Medine\ERP\Company\Domain\CompanyRepository;
 use Medine\ERP\Company\Infrastructure\MySqlCompanyRepository;
+use function Lambdish\Phunctional\each;
 
 class AppServiceProvider extends ServiceProvider
 {
     private $wiringObjects = [
-        
+        UserRepository::class => MySqlUserRepository::class,
+        CompanyRepository::class => MySqlCompanyRepository::class
     ];
+
     /**
      * Register any application services.
      *
@@ -31,14 +34,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->bind(
-            UserRepository::class,
-            MySqlUserRepository::class
-        );
-
-        $this->app->bind(
-            CompanyRepository::class,
-            MySqlCompanyRepository::class
-        );
+        each(function ($concrete, $abstract) {
+            $this->app->bind(
+                $abstract,
+                $concrete
+            );
+        }, $this->wiringObjects);
     }
 }

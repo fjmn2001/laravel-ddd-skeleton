@@ -14,13 +14,15 @@ final class CompanyCreatorRequest
     private $address;
     private $status;
     private $logo;
+    private $userId;
 
     public function __construct(
         string $id,
         string $name,
         string $address,
         string $status,
-        string $logo
+        string $logo,
+        string $userId
     )
     {
         $this->id = $id;
@@ -28,6 +30,7 @@ final class CompanyCreatorRequest
         $this->address = $address;
         $this->status = $status;
         $this->logo = $logo;
+        $this->userId = $userId;
     }
 
     public function id(): string
@@ -53,5 +56,10 @@ final class CompanyCreatorRequest
     public function logo(): string
     {
         return $this->logo;
+    }
+
+    public function userId(): string
+    {
+        return $this->userId;
     }
 }

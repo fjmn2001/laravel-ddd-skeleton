@@ -6,7 +6,7 @@ declare(strict_types=1);
 namespace Medine\ERP\Company\Domain;
 
 
-final class CompanieHasUsers
+final class CompanyHasUser
 {
     private $id;
     private $companyId;
@@ -14,7 +14,7 @@ final class CompanieHasUsers
     private $rolId;
     private $status;
 
-    public function __construct(
+    private function __construct(
         string $id,
         string $companyId,
         string $userId,
@@ -27,5 +27,16 @@ final class CompanieHasUsers
         $this->userId = $userId;
         $this->rolId = $rolId;
         $this->status = $status;
+    }
+
+    public static function create(string $companyId, string $userId, string $rolId)
+    {
+        return new self(
+            Uuid::random(),
+            $companyId,
+            $userId,
+            $rolId,
+            'todo: valueobje for status'
+        );
     }
 }
