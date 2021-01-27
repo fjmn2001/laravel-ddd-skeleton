@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Medine\ERP\Users\Domain\ValueObjects;
 
 use Medine\ERP\Shared\Domain\Exceptions\EmptyArgumentException;
-use Medine\ERP\Shared\Domain\ValueObjects\StringValueObject;
+use Medine\ERP\Shared\Domain\ValueObjects\EmailValueObject;
 
-final class UserEmail extends StringValueObject
+
+final class UserEmail extends EmailValueObject
 {
     public function __construct(string $value)
     {

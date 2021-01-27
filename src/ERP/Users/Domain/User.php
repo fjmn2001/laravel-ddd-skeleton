@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Users\Domain;
 
+use Medine\ERP\Users\Domain\ValueObjects\UserEmail;
+use Medine\ERP\Users\Domain\ValueObjects\UserName;
+use Medine\ERP\Users\Domain\ValueObjects\UserPassword;
+
 final class User
 {
     private $name;
@@ -11,9 +15,9 @@ final class User
     private $password;
 
     public function __construct(
-        string $name,
-        string $email,
-        string $password
+        UserName $name,
+        UserEmail $email,
+        UserPassword $password
     )
     {
         $this->name = $name;
@@ -21,17 +25,17 @@ final class User
         $this->password = $password;
     }
 
-    public function name(): string
+    public function name(): UserName
     {
         return $this->name;
     }
 
-    public function email(): string
+    public function email(): UserEmail
     {
         return $this->email;
     }
 
-    public function password(): string
+    public function password(): UserPassword
     {
         return $this->password;
     }
