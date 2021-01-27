@@ -15,6 +15,7 @@ class RouteServiceProvider extends ServiceProvider
         'apps/erp/backend/routes/auth.php',
         'src/ERP/Users/Infrastructure/config/routes/index.php',
         'src/ERP/Company/Infrastructure/config/routes/index.php',
+        'src/ERP/Roles/Infrastructure/config/routes/index.php',
         'apps/erp/backend/routes/petty_cash.php',
         'routes/api.php'
     ];
