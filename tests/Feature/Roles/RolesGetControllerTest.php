@@ -46,20 +46,17 @@ final class RolesGetControllerTest extends TestCase
             'company_id' => $COMPANY_ID,//TODO: Implement this line
         ]);
 
-        $response = $this->getJson('/api/roles');
-
-        $response->assertJson([
-            'page' => 1,
-            'records' => 1,
-            'rows' => [[
-                'id' => $ROL_ID,
-                'name' => $NAME,
-                'description' => $DESCRIPTION,
-                'superuser' => $SUPERUSER,
-                'status' => 'active'
-            ]],
-            'total' => 1
+        $response = $this->json('GET', '/api/roles', [
+            "page" => 1
         ]);
+
+        $response->assertJson([[
+            'id' => $ROL_ID,
+            'name' => $NAME,
+            'description' => $DESCRIPTION,
+            'superuser' => $SUPERUSER,
+            'status' => 'active'
+        ]]);
         $response->assertStatus(200);
     }
 }
