@@ -9,6 +9,11 @@ use Medine\ERP\Company\Domain\Company;
 use Medine\ERP\Company\Domain\CompanyHasUserRepository;
 use Medine\ERP\Company\Domain\CompanyRepository;
 use Medine\ERP\Roles\Domain\Rol;
+use Medine\ERP\Roles\Domain\ValueObjects\RolCompanyId;
+use Medine\ERP\Roles\Domain\ValueObjects\RolDescription;
+use Medine\ERP\Roles\Domain\ValueObjects\RolId;
+use Medine\ERP\Roles\Domain\ValueObjects\RolName;
+use Medine\ERP\Roles\Domain\ValueObjects\RolSuperUser;
 use Ramsey\Uuid\Uuid;
 
 final class CompanyCreator
@@ -36,17 +41,17 @@ final class CompanyCreator
 
         //todo: create rol!!!
         $rol = Rol::create(
-            Uuid::uuid4()->toString(),
-            'Admin',
-            'rol of admin',
-            'si',
-            $request->id(),
+            new RolId(Uuid::uuid4()->toString()),
+            new RolName('Admin'),
+            new RolDescription('rol of admin'),
+            new RolSuperUser('si'),
+            new RolCompanyId($request->id()),
         );
 
         $companyHasUser = CompanyHasUser::create(
             $request->id(),
             $request->userId(),
-            $rol->id()
+            $rol->id()->value()
         );
 
         $this->repository->save($company);
