@@ -10,7 +10,7 @@ use Medine\ERP\Roles\Domain\ValueObjects\RolDescription;
 use Medine\ERP\Roles\Domain\ValueObjects\RolId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolName;
 use Medine\ERP\Roles\Domain\ValueObjects\RolStatus;
-use Medine\ERP\Roles\Domain\ValueObjects\RolSuperUser;
+use Medine\ERP\Roles\Domain\ValueObjects\RolSuperuser;
 
 final class MySqlRolRepository implements RolRepository
 {
@@ -47,7 +47,7 @@ final class MySqlRolRepository implements RolRepository
             new RolId($row->id),
             new RolName($row->name),
             new RolDescription($row->description),
-            new RolSuperUser($row->superuser),
+            new RolSuperuser($row->superuser),
             new RolStatus($row->status),
             new RolCompanyId($row->company_id),
             new \DateTimeImmutable($row->created_at),
