@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 final class CompanyPostControllerTest extends TestCase
 {
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 
     private $faker;
 
