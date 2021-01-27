@@ -11,7 +11,7 @@ use Laravel\Passport\Passport;
 use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 
-final class RolPostControllerTest extends TestCase
+final class RolPutControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -26,40 +26,32 @@ final class RolPostControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_should_create_a_new_superuser_rol()
+    public function it_should_update_an_existing_rol()
     {
         Passport::actingAs(
             User::factory()->create()
         );
-        $response = $this->postJson('/api/roles', [
-            'id' => Uuid::uuid4()->toString(),
-            'name' => $this->faker->name(),
+
+        $ROL_ID = Uuid::uuid4()->toString();
+        $ORIGINAL_NAME = 'original_name';
+        $NEW_NAME = 'new_name';
+
+        $this->postJson('/api/roles', [
+            'id' => $ROL_ID,
+            'name' => $ORIGINAL_NAME,
             'description' => $this->faker->text(25),
             'superuser' => 'yes',
             'company_id' => Uuid::uuid4()->toString(),//TODO: Implement this line
         ]);
 
-        $response->assertJson([]);
-        $response->assertStatus(201);
-    }
-
-    /**
-     * @test
-     */
-    public function it_should_create_a_new__no_superuser_rol()
-    {
-        Passport::actingAs(
-            User::factory()->create()
-        );
-        $response = $this->postJson('/api/roles', [
-            'id' => Uuid::uuid4()->toString(),
-            'name' => $this->faker->name(),
+        $response = $this->putJson('/api/roles/' . $ROL_ID, [
+            'name' => $NEW_NAME,
             'description' => $this->faker->text(25),
             'superuser' => 'no',
-            'company_id' => Uuid::uuid4()->toString(),//TODO: Implement this line
+            'status' => 'active'
         ]);
 
         $response->assertJson([]);
-        $response->assertStatus(201);
+        $response->assertStatus(200);
     }
 }

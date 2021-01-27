@@ -23,27 +23,19 @@ final class CompanyPostController extends Controller
 
     public function __invoke(Request $request): JsonResponse
     {
-        $error = '';
-
         try {
-
-            ($this->creator)( new CompanyCreatorRequest(
+            ($this->creator)(new CompanyCreatorRequest(
                 $request->input('id', ''),
                 $request->input('name', ''),
-                $request->input('address', ''),
                 $request->input('status', ''),
-                $request->input('logo', '')
+                $request->input('logo', ''),
+                (string)Auth::user()->id
             ));
 
-        }catch (\Exception $e) {
-            $error = $e->getMessage();
+        } catch (\Exception $e) {
+            return response()->json($e->getMessage(), $e->getCode());
         }
 
-        $response = [
-            "code" => strlen($error) ? JsonResponse::HTTP_UNAUTHORIZED : JsonResponse::HTTP_CREATED,
-            "message" => strlen($error) ? $error : "Successfully created company"
-        ];
-
-        return response()->json($response, $response['code']);
+        return response()->json([], JsonResponse::HTTP_CREATED);
     }
 }
