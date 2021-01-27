@@ -120,4 +120,14 @@ final class Rol
     {
         return $this->updatedAt;
     }
+
+    public function changeName(string $newName)
+    {
+        $this->name = $newName;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $newUpdateAt)
+    {
+        $this->updatedAt = $newUpdateAt;
+    }
 }

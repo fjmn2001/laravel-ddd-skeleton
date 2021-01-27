@@ -23,6 +23,11 @@ final class RolUpdater
             throw new RolNotExistsException($request->id());
         }
 
+        if (false === ($rol->name() === $request->name())) {
+            $rol->changeName($request->name());
+            $rol->setUpdatedAt(new \DateTimeImmutable());
+        }
+
         $this->repository->update($rol);
     }
 }
