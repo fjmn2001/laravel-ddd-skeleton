@@ -27,7 +27,6 @@ final class CompanyPostController extends Controller
             ($this->creator)(new CompanyCreatorRequest(
                 $request->input('id', ''),
                 $request->input('name', ''),
-                $request->input('address', ''),
                 $request->input('status', ''),
                 $request->input('logo', ''),
                 (string)Auth::user()->id

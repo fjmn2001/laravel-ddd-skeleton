@@ -8,6 +8,7 @@ namespace Medine\ERP\Company\Application;
 
 use Medine\ERP\Company\Domain\CompanyHasUser;
 use Medine\ERP\Company\Domain\Company;
+use Medine\ERP\Company\Domain\CompanyHasUserRepository;
 use Medine\ERP\Company\Domain\CompanyRepository;
 
 final class CompanyCreator
@@ -29,7 +30,6 @@ final class CompanyCreator
         $company = new Company(
             $request->id(),
             $request->name(),
-            $request->address(),
             $request->status(),
             $request->logo()
         );

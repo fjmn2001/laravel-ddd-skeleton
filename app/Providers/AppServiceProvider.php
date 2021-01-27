@@ -8,13 +8,18 @@ use Medine\ERP\Users\Infrastructure\MySqlUserRepository;
 
 use Medine\ERP\Company\Domain\CompanyRepository;
 use Medine\ERP\Company\Infrastructure\MySqlCompanyRepository;
+
+use Medine\ERP\Company\Domain\CompanyHasUserRepository;
+use Medine\ERP\Company\Infrastructure\MySqlCompanyHasUserRepository;
+
 use function Lambdish\Phunctional\each;
 
 class AppServiceProvider extends ServiceProvider
 {
     private $wiringObjects = [
         UserRepository::class => MySqlUserRepository::class,
-        CompanyRepository::class => MySqlCompanyRepository::class
+        CompanyRepository::class => MySqlCompanyRepository::class,
+        CompanyHasUserRepository::class => MySqlCompanyHasUserRepository::class
     ];
 
     /**
