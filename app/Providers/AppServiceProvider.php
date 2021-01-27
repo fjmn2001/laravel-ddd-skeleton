@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Medine\ERP\Roles\Domain\MySqlRolRepository;
+use Medine\ERP\Roles\Domain\RolRepository;
 use Medine\ERP\Users\Domain\UserRepository;
 use Medine\ERP\Users\Infrastructure\MySqlUserRepository;
 
@@ -19,7 +21,8 @@ class AppServiceProvider extends ServiceProvider
     private $wiringObjects = [
         UserRepository::class => MySqlUserRepository::class,
         CompanyRepository::class => MySqlCompanyRepository::class,
-        CompanyHasUserRepository::class => MySqlCompanyHasUserRepository::class
+        CompanyHasUserRepository::class => MySqlCompanyHasUserRepository::class,
+        RolRepository::class => MySqlRolRepository::class
     ];
 
     /**
