@@ -130,11 +130,33 @@ final class Rol
 
     public function changeName(RolName $newName)
     {
-        $this->name = $newName;
+        if (false === ($this->name()->equal($newName))) {
+            $this->name = $newName;
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $newUpdateAt)
+    public function changeDescription(RolDescription $newDescription)
     {
-        $this->updatedAt = $newUpdateAt;
+        if (false === ($this->description()->equal($newDescription))) {
+            $this->description = $newDescription;
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function changeSuperuser(RolSuperuser $newValue)
+    {
+        if (false === ($this->superuser()->equal($newValue))) {
+            $this->superuser = $newValue;
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function changeStatus(RolStatus $newValue)
+    {
+        if (false === ($this->status()->equal($newValue))) {
+            $this->status = $newValue;
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 }
