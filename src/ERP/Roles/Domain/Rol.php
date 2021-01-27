@@ -4,6 +4,13 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Roles\Domain;
 
+use Medine\ERP\Roles\Domain\ValueObjects\RolCompanyId;
+use Medine\ERP\Roles\Domain\ValueObjects\RolDescription;
+use Medine\ERP\Roles\Domain\ValueObjects\RolId;
+use Medine\ERP\Roles\Domain\ValueObjects\RolName;
+use Medine\ERP\Roles\Domain\ValueObjects\RolStatus;
+use Medine\ERP\Roles\Domain\ValueObjects\RolSuperUser;
+
 final class Rol
 {
     const STATUS_ACTIVE = 'active';
@@ -18,12 +25,12 @@ final class Rol
     private $updatedAt;
 
     private function __construct(
-        string $id,
-        string $name,
-        ?string $description,
-        string $superuser,
-        string $status,
-        string $companyId,
+        RolId $id,
+        RolName $name,
+        ?RolDescription $description,
+        RolSuperUser $superuser,
+        RolStatus $status,
+        RolCompanyId $companyId,
         \DateTimeImmutable $createdAt,
         \DateTimeImmutable $updatedAt
     )
@@ -39,11 +46,11 @@ final class Rol
     }
 
     public static function create(
-        string $id,
-        string $name,
-        ?string $description,
-        string $superuser,
-        string $companyId
+        RolId $id,
+        RolName $name,
+        ?RolDescription $description,
+        RolSuperUser $superuser,
+        RolCompanyId $companyId
     ): self
     {
         return new self(
@@ -51,7 +58,7 @@ final class Rol
             $name,
             $description,
             $superuser,
-            self::STATUS_ACTIVE,
+            new RolStatus(self::STATUS_ACTIVE),
             $companyId,
             new \DateTimeImmutable(),
             new \DateTimeImmutable()
@@ -59,12 +66,12 @@ final class Rol
     }
 
     public static function fromDatabase(
-        string $id,
-        string $name,
-        ?string $description,
-        string $superuser,
-        string $status,
-        string $companyId,
+        RolId $id,
+        RolName $name,
+        ?RolDescription $description,
+        RolSuperUser $superuser,
+        RolStatus $status,
+        RolCompanyId $companyId,
         \DateTimeImmutable $createdAt,
         \DateTimeImmutable $updatedAt
     ): self
@@ -81,32 +88,32 @@ final class Rol
         );
     }
 
-    public function id(): string
+    public function id(): RolId
     {
         return $this->id;
     }
 
-    public function name(): string
+    public function name(): RolName
     {
         return $this->name;
     }
 
-    public function description(): ?string
+    public function description(): ?RolDescription
     {
         return $this->description;
     }
 
-    public function superuser(): string
+    public function superuser(): RolSuperUser
     {
         return $this->superuser;
     }
 
-    public function status(): string
+    public function status(): RolStatus
     {
         return $this->status;
     }
 
-    public function companyId(): string
+    public function companyId(): RolCompanyId
     {
         return $this->companyId;
     }
@@ -121,7 +128,7 @@ final class Rol
         return $this->updatedAt;
     }
 
-    public function changeName(string $newName)
+    public function changeName(RolName $newName)
     {
         $this->name = $newName;
     }

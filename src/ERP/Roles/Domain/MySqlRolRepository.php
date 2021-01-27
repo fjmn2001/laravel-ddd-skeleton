@@ -5,6 +5,12 @@ declare(strict_types=1);
 namespace Medine\ERP\Roles\Domain;
 
 use Illuminate\Support\Facades\DB;
+use Medine\ERP\Roles\Domain\ValueObjects\RolCompanyId;
+use Medine\ERP\Roles\Domain\ValueObjects\RolDescription;
+use Medine\ERP\Roles\Domain\ValueObjects\RolId;
+use Medine\ERP\Roles\Domain\ValueObjects\RolName;
+use Medine\ERP\Roles\Domain\ValueObjects\RolStatus;
+use Medine\ERP\Roles\Domain\ValueObjects\RolSuperUser;
 
 final class MySqlRolRepository implements RolRepository
 {
@@ -12,11 +18,11 @@ final class MySqlRolRepository implements RolRepository
     public function save(Rol $rol): void
     {
         DB::table('roles')->insert([
-            'id' => $rol->id(),
-            'name' => $rol->name(),
-            'description' => $rol->description(),
-            'superuser' => $rol->superuser(),
-            'company_id' => $rol->companyId(),
+            'id' => $rol->id()->value(),
+            'name' => $rol->name()->value(),
+            'description' => $rol->description()->value(),
+            'superuser' => $rol->superuser()->value(),
+            'company_id' => $rol->companyId()->value(),
             'created_at' => $rol->createdAt(),
             'updated_at' => $rol->updatedAt(),
         ]);
@@ -24,26 +30,26 @@ final class MySqlRolRepository implements RolRepository
 
     public function update(Rol $rol): void
     {
-        DB::table('roles')->where('roles.id', $rol->id())->take(1)->update([
-            'name' => $rol->name(),
-            'description' => $rol->description(),
-            'superuser' => $rol->superuser(),
-            'status' => $rol->status(),
+        DB::table('roles')->where('roles.id', $rol->id()->value())->take(1)->update([
+            'name' => $rol->name()->value(),
+            'description' => $rol->description()->value(),
+            'superuser' => $rol->superuser()->value(),
+            'status' => $rol->status()->value(),
             'updated_at' => $rol->updatedAt(),
         ]);
     }
 
-    public function find(string $id): ?Rol
+    public function find(RolId $id): ?Rol
     {
-        $row = DB::table('roles')->where('roles.id', $id)->first();
+        $row = DB::table('roles')->where('roles.id', $id->value())->first();
 
         return !empty($row) ? Rol::fromDatabase(
-            $row->id,
-            $row->name,
-            $row->description,
-            $row->superuser,
-            $row->status,
-            $row->company_id,
+            new RolId($row->id),
+            new RolName($row->name),
+            new RolDescription($row->description),
+            new RolSuperUser($row->superuser),
+            new RolStatus($row->status),
+            new RolCompanyId($row->company_id),
             new \DateTimeImmutable($row->created_at),
             new \DateTimeImmutable($row->updated_at),
         ) : null;
