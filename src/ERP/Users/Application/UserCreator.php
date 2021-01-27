@@ -6,6 +6,9 @@ namespace Medine\ERP\Users\Application;
 
 use Medine\ERP\Users\Domain\User;
 use Medine\ERP\Users\Domain\UserRepository;
+use Medine\ERP\Users\Domain\ValueObjects\UserEmail;
+use Medine\ERP\Users\Domain\ValueObjects\UserName;
+use Medine\ERP\Users\Domain\ValueObjects\UserPassword;
 
 final class UserCreator
 {
@@ -19,9 +22,9 @@ final class UserCreator
     public function __invoke(UserCreatorRequest $request)
     {
         $user = new User(
-            $request->name(),
-            $request->email(),
-            $request->password()
+            new UserName($request->name()),
+            new UserEmail($request->email()),
+            new UserPassword($request->password())
         );
         $this->repository->save($user);
     }
