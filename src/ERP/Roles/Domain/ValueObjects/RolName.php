@@ -8,6 +8,9 @@ use Medine\ERP\Shared\Domain\ValueObjects\StringValueObject;
 
 final class RolName extends StringValueObject
 {
+    protected $exceptionMessage = "Rol name can't be empty";
+    protected $exceptionCode = 400;
+
     public function __construct(string $value)
     {
         $this->notEmpty($value);
@@ -15,9 +18,4 @@ final class RolName extends StringValueObject
         parent::__construct($value);
     }
 
-    private function notEmpty(string $value): void
-    {
-        if (empty($value))
-            throw new EmptyArgumentException("User name can't be empty");
-    }
 }

@@ -11,6 +11,7 @@ use Medine\ERP\Roles\Domain\ValueObjects\RolId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolName;
 use Medine\ERP\Roles\Domain\ValueObjects\RolStatus;
 use Medine\ERP\Roles\Domain\ValueObjects\RolSuperuser;
+use Medine\ERP\Shared\Domain\Criteria;
 
 final class MySqlRolRepository implements RolRepository
 {
@@ -53,5 +54,37 @@ final class MySqlRolRepository implements RolRepository
             new \DateTimeImmutable($row->created_at),
             new \DateTimeImmutable($row->updated_at),
         ) : null;
+    }
+
+    public function matching(Criteria $criteria): array
+    {
+        $query = DB::table('roles');
+
+        //todo: add filters!!!
+
+        if ($criteria->limit()) {
+            $query->take($criteria->limit());
+        }
+
+        if ($criteria->offset()) {
+            $query->skip($criteria->offset());
+        }
+
+        if ($criteria->order()->orderBy()->value()) {
+            $query->orderBy($criteria->order()->orderBy()->value(), $criteria->order()->orderType()->value());
+        }
+
+        return $query->get()->map(function ($row) {
+            return Rol::fromDatabase(
+                new RolId($row->id),
+                new RolName($row->name),
+                new RolDescription($row->description),
+                new RolSuperuser($row->superuser),
+                new RolStatus($row->status),
+                new RolCompanyId($row->company_id),
+                new \DateTimeImmutable($row->created_at),
+                new \DateTimeImmutable($row->updated_at),
+            );
+        })->toArray();
     }
 }
