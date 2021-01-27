@@ -58,6 +58,29 @@ final class Rol
         );
     }
 
+    public static function fromDatabase(
+        string $id,
+        string $name,
+        ?string $description,
+        string $superuser,
+        string $status,
+        string $companyId,
+        \DateTimeImmutable $createdAt,
+        \DateTimeImmutable $updatedAt
+    ): self
+    {
+        return new self(
+            $id,
+            $name,
+            $description,
+            $superuser,
+            $status,
+            $companyId,
+            $createdAt,
+            $updatedAt
+        );
+    }
+
     public function id(): string
     {
         return $this->id;
