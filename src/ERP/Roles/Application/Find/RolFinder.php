@@ -11,20 +11,16 @@ use Medine\ERP\Roles\Domain\ValueObjects\RolId;
 
 final class RolFinder
 {
-    private $repository;
+    private $finder;
 
-    public function __construct(RolRepository $repository)
+    public function __construct(\Medine\ERP\Roles\Domain\Service\RolFinder $finder)
     {
-        $this->repository = $repository;
+        $this->finder = $finder;
     }
 
     public function __invoke(RolFinderRequest $request): RolResponse
     {
-        $rol = $this->repository->find(new RolId($request->id()));
-
-        if (null === $rol) {
-            throw new RolNotExistsException($request->id());
-        }
+        $rol = ($this->finder)(new RolId($request->id()));
 
         return new RolResponse(
             $rol->id()->value(),
