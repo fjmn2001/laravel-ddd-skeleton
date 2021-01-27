@@ -38,3 +38,12 @@ composer-install:
 
 test:
 	docker-compose exec php php vendor/bin/phpunit
+
+migrate:
+	docker-compose exec php php artisan migrate
+
+migrate-refresh:
+	docker-compose exec php php artisan migrate:refresh
+
+migrate-rollback:
+	docker-compose exec php php artisan migrate:rollback
