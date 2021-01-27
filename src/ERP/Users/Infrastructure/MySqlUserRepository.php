@@ -14,9 +14,9 @@ final class MySqlUserRepository implements UserRepository
     public function save(User $user): void
     {
         DB::table('users')->insert([
-            'name' => $user->name(),
-            'email' => $user->email(),
-            'password' => $user->password()
+            'name' => $user->name()->value(),
+            'email' => $user->email()->value(),
+            'password' => $user->password()->value()
         ]);
     }
 }

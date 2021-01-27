@@ -6,68 +6,76 @@ declare(strict_types=1);
 namespace Medine\ERP\Company\Domain;
 
 
-final class Company
-{
+use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 
+final class CompanyHasUser
+{
     private $id;
-    private $name;
+    private $companyId;
+    private $userId;
+    private $rolId;
     private $status;
-    private $logo;
     private $createdAt;
     private $updatedAt;
 
     private function __construct(
         string $id,
-        string $name,
+        string $companyId,
+        string $userId,
+        string $rolId,
         string $status,
-        string $logo,
         \DateTimeImmutable $createdAt,
         \DateTimeImmutable $updatedAt
     )
     {
         $this->id = $id;
-        $this->name = $name;
+        $this->companyId = $companyId;
+        $this->userId = $userId;
+        $this->rolId = $rolId;
         $this->status = $status;
-        $this->logo = $logo;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
     }
 
     public static function create(
-        string $id,
-        string $name,
-        string $status,
-        string $logo
+        string $companyId,
+        string $userId,
+        string $rolId
     ): self
     {
         return new self(
-            $id,
-            $name,
-            $status,
-            $logo,
+            Uuid::random()->value(),
+            $companyId,
+            $userId,
+            $rolId,
+            'todo: valueobje for status',
             new \DateTimeImmutable(),
             new \DateTimeImmutable()
         );
     }
-
     public function id(): string
     {
         return $this->id;
     }
 
-    public function name(): string
+    public function companyId(): string
     {
-        return $this->name;
+        return $this->companyId;
+    }
+
+    public function userId(): string
+    {
+        return $this->userId;
+    }
+
+    public function rolId(): string
+    {
+        return $this->rolId;
     }
 
     public function status(): string
     {
         return $this->status;
-    }
-
-    public function logo(): string
-    {
-        return $this->logo;
     }
 
     public function createdAt(): \DateTimeImmutable
