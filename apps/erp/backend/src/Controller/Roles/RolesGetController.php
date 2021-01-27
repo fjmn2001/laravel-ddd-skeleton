@@ -31,7 +31,7 @@ final class RolesGetController extends Controller
             $request->get('offset')
         ));
 
-        return new JsonResponse(map(function (RolResponse $rolResponse) {
+        $rows = map(function (RolResponse $rolResponse) {
             return [
                 'id' => $rolResponse->id(),
                 'name' => $rolResponse->name(),
@@ -39,6 +39,13 @@ final class RolesGetController extends Controller
                 'superuser' => $rolResponse->superuser(),
                 'status' => $rolResponse->status()
             ];
-        }, $response->roles()), JsonResponse::HTTP_OK);
+        }, $response->roles());
+
+        return new JsonResponse([
+            'page' => 1,
+            'records' => 1,
+            'rows' => $rows,
+            'total' => 1
+        ], JsonResponse::HTTP_OK);
     }
 }
