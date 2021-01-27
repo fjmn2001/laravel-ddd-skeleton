@@ -25,7 +25,7 @@ final class FloatValueObject
         return $this->value === $newValue->value();
     }
 
-    protected function notEmpty(string $value): void
+    protected function notEmpty(float $value): void
     {
         if (empty($value))
             throw new EmptyArgumentException($this->exceptionMessage, $this->exceptionCode);
