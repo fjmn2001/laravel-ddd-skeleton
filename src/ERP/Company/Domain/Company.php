@@ -11,6 +11,7 @@ final class Company
 
     private $id;
     private $name;
+    private $address;
     private $status;
     private $logo;
     private $createdAt;
@@ -19,6 +20,7 @@ final class Company
     private function __construct(
         string $id,
         string $name,
+        string $address,
         string $status,
         string $logo,
         \DateTimeImmutable $createdAt,
@@ -27,6 +29,7 @@ final class Company
     {
         $this->id = $id;
         $this->name = $name;
+        $this->address = $address;
         $this->status = $status;
         $this->logo = $logo;
         $this->createdAt = $createdAt;
@@ -36,6 +39,7 @@ final class Company
     public static function create(
         string $id,
         string $name,
+        string $address,
         string $status,
         string $logo
     ): self
@@ -43,6 +47,7 @@ final class Company
         return new self(
             $id,
             $name,
+            $address,
             $status,
             $logo,
             new \DateTimeImmutable(),
@@ -58,6 +63,11 @@ final class Company
     public function name(): string
     {
         return $this->name;
+    }
+
+    public function address(): string
+    {
+        return $this->address;
     }
 
     public function status(): string

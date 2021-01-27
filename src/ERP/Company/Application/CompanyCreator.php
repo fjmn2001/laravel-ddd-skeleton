@@ -9,24 +9,28 @@ use Medine\ERP\Company\Domain\Company;
 use Medine\ERP\Company\Domain\CompanyHasUserRepository;
 use Medine\ERP\Company\Domain\CompanyRepository;
 use Medine\ERP\Roles\Domain\Rol;
+use Medine\ERP\Roles\Domain\RolRepository;
 use Medine\ERP\Roles\Domain\ValueObjects\RolCompanyId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolDescription;
 use Medine\ERP\Roles\Domain\ValueObjects\RolId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolName;
-use Medine\ERP\Roles\Domain\ValueObjects\RolSuperUser;
+use Medine\ERP\Roles\Domain\ValueObjects\RolSuperuser;
 use Ramsey\Uuid\Uuid;
 
 final class CompanyCreator
 {
     private $repository;
+    private $rolRepository;
     private $companyHasUserRepository;
 
     public function __construct(
         CompanyRepository $repository,
+        RolRepository $rolRepository,
         CompanyHasUserRepository $companyHasUserRepository
     )
     {
         $this->repository = $repository;
+        $this->rolRepository = $rolRepository;
         $this->companyHasUserRepository = $companyHasUserRepository;
     }
 
@@ -35,16 +39,16 @@ final class CompanyCreator
         $company = Company::create(
             $request->id(),
             $request->name(),
+            $request->address(),
             $request->status(),
             $request->logo()
         );
 
-        //todo: create rol!!!
         $rol = Rol::create(
             new RolId(Uuid::uuid4()->toString()),
             new RolName('Admin'),
             new RolDescription('rol of admin'),
-            new RolSuperUser('si'),
+            new RolSuperuser('yes'),
             new RolCompanyId($request->id()),
         );
 
@@ -55,6 +59,7 @@ final class CompanyCreator
         );
 
         $this->repository->save($company);
+        $this->rolRepository->save($rol);
         $this->companyHasUserRepository->save($companyHasUser);
     }
 }

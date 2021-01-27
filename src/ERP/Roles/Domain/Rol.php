@@ -9,7 +9,7 @@ use Medine\ERP\Roles\Domain\ValueObjects\RolDescription;
 use Medine\ERP\Roles\Domain\ValueObjects\RolId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolName;
 use Medine\ERP\Roles\Domain\ValueObjects\RolStatus;
-use Medine\ERP\Roles\Domain\ValueObjects\RolSuperUser;
+use Medine\ERP\Roles\Domain\ValueObjects\RolSuperuser;
 
 final class Rol
 {
@@ -28,7 +28,7 @@ final class Rol
         RolId $id,
         RolName $name,
         ?RolDescription $description,
-        RolSuperUser $superuser,
+        RolSuperuser $superuser,
         RolStatus $status,
         RolCompanyId $companyId,
         \DateTimeImmutable $createdAt,
@@ -49,7 +49,7 @@ final class Rol
         RolId $id,
         RolName $name,
         ?RolDescription $description,
-        RolSuperUser $superuser,
+        RolSuperuser $superuser,
         RolCompanyId $companyId
     ): self
     {
@@ -69,7 +69,7 @@ final class Rol
         RolId $id,
         RolName $name,
         ?RolDescription $description,
-        RolSuperUser $superuser,
+        RolSuperuser $superuser,
         RolStatus $status,
         RolCompanyId $companyId,
         \DateTimeImmutable $createdAt,
@@ -103,7 +103,7 @@ final class Rol
         return $this->description;
     }
 
-    public function superuser(): RolSuperUser
+    public function superuser(): RolSuperuser
     {
         return $this->superuser;
     }
