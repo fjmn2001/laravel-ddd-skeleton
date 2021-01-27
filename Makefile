@@ -39,6 +39,10 @@ composer-install:
 test:
 	docker-compose exec php php vendor/bin/phpunit
 
+#make fun=your_function_test test-filter
+test-filter:
+	docker-compose exec php php vendor/bin/phpunit --filter $(fun)
+
 migrate:
 	docker-compose exec php php artisan migrate
 
