@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Medine\ERP\Roles\Application\Update;
 
 use Medine\ERP\Roles\Domain\RolRepository;
+use Medine\ERP\Roles\Domain\ValueObjects\RolDescription;
 use Medine\ERP\Roles\Domain\ValueObjects\RolId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolName;
+use Medine\ERP\Roles\Domain\ValueObjects\RolStatus;
+use Medine\ERP\Roles\Domain\ValueObjects\RolSuperuser;
 
 final class RolUpdater
 {
@@ -25,10 +28,10 @@ final class RolUpdater
             throw new RolNotExistsException($request->id());
         }
 
-        if (false === ($rol->name()->value() === $request->name())) {
-            $rol->changeName(new RolName($request->name()));
-            $rol->setUpdatedAt(new \DateTimeImmutable());
-        }
+        $rol->changeName(new RolName($request->name()));
+        $rol->changeDescription(new RolDescription($request->description()));
+        $rol->changeSuperuser(new RolSuperuser($request->superuser()));
+        $rol->changeStatus(new RolStatus($request->status()));
 
         $this->repository->update($rol);
     }
