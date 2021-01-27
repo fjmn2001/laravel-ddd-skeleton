@@ -8,5 +8,5 @@ namespace Medine\ERP\Company\Domain;
 
 interface CompanyHasUserRepository
 {
-    public function save(CompanyHasUser $company): void;
+    public function save(CompanyHasUser $companyHasUser): void;
 }

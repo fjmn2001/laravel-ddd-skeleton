@@ -13,18 +13,41 @@ final class Company
     private $name;
     private $status;
     private $logo;
+    private $createdAt;
+    private $updatedAt;
 
-    public function __construct(
+    private function __construct(
         string $id,
         string $name,
         string $status,
-        string $logo
+        string $logo,
+        \DateTimeImmutable $createdAt,
+        \DateTimeImmutable $updatedAt
     )
     {
         $this->id = $id;
         $this->name = $name;
         $this->status = $status;
         $this->logo = $logo;
+        $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
+    }
+
+    public static function create(
+        string $id,
+        string $name,
+        string $status,
+        string $logo
+    ): self
+    {
+        return new self(
+            $id,
+            $name,
+            $status,
+            $logo,
+            new \DateTimeImmutable(),
+            new \DateTimeImmutable()
+        );
     }
 
     public function id(): string
@@ -45,5 +68,15 @@ final class Company
     public function logo(): string
     {
         return $this->logo;
+    }
+
+    public function createdAt(): \DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function updatedAt(): \DateTimeImmutable
+    {
+        return $this->updatedAt;
     }
 }

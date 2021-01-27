@@ -19,8 +19,8 @@ final class MySqlCompanyRepository implements CompanyRepository
             'name' => $company->name(),
             'status' => $company->status(),
             'logo' => $company->logo(),
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
+            'created_at' => $company->createdAt(),
+            'updated_at' => $company->updatedAt()
         ]);
     }
 }
