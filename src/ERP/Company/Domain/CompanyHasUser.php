@@ -44,7 +44,7 @@ final class CompanyHasUser
     ): self
     {
         return new self(
-            Uuid::random()->value(),
+            Uuid::random(),
             $companyId,
             $userId,
             $rolId,

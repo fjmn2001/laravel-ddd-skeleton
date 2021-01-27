@@ -14,7 +14,7 @@ final class MySqlCompanyHasUserRepository implements CompanyHasUserRepository
 
     public function save(CompanyHasUser $companyHasUser): void
     {
-        DB::table('company_has_user')->insert([
+        DB::table('companies')->insert([
             'id' => $companyHasUser->id(),
             'company_id' => $companyHasUser->companyId(),
             'user_id' => $companyHasUser->userId(),
