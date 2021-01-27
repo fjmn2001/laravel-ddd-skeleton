@@ -17,4 +17,9 @@ class StringValueObject
     {
         return $this->value;
     }
+
+    public function equal(self $newValue): bool
+    {
+        return $this->value === $newValue->value();
+    }
 }

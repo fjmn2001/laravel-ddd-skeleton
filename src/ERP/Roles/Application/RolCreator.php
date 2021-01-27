@@ -10,7 +10,7 @@ use Medine\ERP\Roles\Domain\ValueObjects\RolCompanyId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolDescription;
 use Medine\ERP\Roles\Domain\ValueObjects\RolId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolName;
-use Medine\ERP\Roles\Domain\ValueObjects\RolSuperUser;
+use Medine\ERP\Roles\Domain\ValueObjects\RolSuperuser;
 
 final class RolCreator
 {
@@ -27,7 +27,7 @@ final class RolCreator
             new RolId($request->id()),
             new RolName($request->name()),
             new RolDescription($request->description()),
-            new RolSuperUser($request->superuser()),
+            new RolSuperuser($request->superuser()),
             new RolCompanyId($request->companyId())
         );
         $this->repository->save($rol);
