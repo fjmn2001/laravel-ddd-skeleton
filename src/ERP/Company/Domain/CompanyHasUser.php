@@ -6,8 +6,6 @@ declare(strict_types=1);
 namespace Medine\ERP\Company\Domain;
 
 
-use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
-
 final class CompanyHasUser
 {
     private $id;
