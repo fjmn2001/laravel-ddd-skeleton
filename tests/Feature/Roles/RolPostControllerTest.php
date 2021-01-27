@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\Users;
+namespace Tests\Feature\Roles;
 
 use App\Models\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Laravel\Passport\Passport;
+use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 
-final class UserControllerTest extends TestCase
+final class RolPostControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -18,23 +19,24 @@ final class UserControllerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->faker = Factory::create();;
+        $this->faker = Factory::create();
         parent::setUp();
     }
 
     /**
      * @test
      */
-    public function it_should_create_a_new_user()
+    public function it_should_create_a_new_superuser_rol()
     {
         Passport::actingAs(
             User::factory()->create()
         );
-
-        $response = $this->postJson('/api/users', [
+        $response = $this->postJson('/api/roles', [
+            'id' => Uuid::uuid4()->toString(),
             'name' => $this->faker->name(),
-            'email' => $this->faker->email,
-            'password' => $this->faker->password
+            'description' => $this->faker->text(25),
+            'superuser' => 'yes',
+            'company_id' => Uuid::uuid4()->toString(),//TODO: Implement this line
         ]);
 
         $response->assertJson([]);
