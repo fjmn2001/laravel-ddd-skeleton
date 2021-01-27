@@ -15,7 +15,8 @@ final class MySqlRolRepository implements RolRepository
             'id' => $rol->id(),
             'name' => $rol->name(),
             'description' => $rol->description(),
-            'superuser' => $rol->superuser()
+            'superuser' => $rol->superuser(),
+            'company_id' => $rol->companyId()
         ]);
     }
 }

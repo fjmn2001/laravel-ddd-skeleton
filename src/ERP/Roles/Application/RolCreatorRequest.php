@@ -10,18 +10,21 @@ final class RolCreatorRequest
     private $name;
     private $description;
     private $superuser;
+    private $companyId;
 
     public function __construct(
         string $id,
         string $name,
         ?string $description,
-        string $superuser
+        string $superuser,
+        string $companyId
     )
     {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
         $this->superuser = $superuser;
+        $this->companyId = $companyId;
     }
 
     public function id(): string
@@ -42,5 +45,10 @@ final class RolCreatorRequest
     public function superuser(): string
     {
         return $this->superuser;
+    }
+
+    public function companyId(): string
+    {
+        return $this->companyId;
     }
 }

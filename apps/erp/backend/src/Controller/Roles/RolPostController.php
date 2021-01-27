@@ -26,7 +26,8 @@ final class RolPostController extends Controller
             $request->input('id'),
             $request->input('name'),
             $request->input('description'),
-            $request->input('superuser')
+            $request->input('superuser'),
+            $request->input('company_id')
         ));
 
         return new JsonResponse([], JsonResponse::HTTP_CREATED);

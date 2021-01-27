@@ -35,7 +35,8 @@ final class RolPostControllerTest extends TestCase
             'id' => Uuid::uuid4()->toString(),
             'name' => $this->faker->name(),
             'description' => $this->faker->text(25),
-            'superuser' => 'yes'
+            'superuser' => 'yes',
+            'company_id' => Uuid::uuid4()->toString(),//TODO: Implement this line
         ]);
 
         $response->assertJson([]);

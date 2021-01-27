@@ -22,7 +22,8 @@ final class RolCreator
             $request->id(),
             $request->name(),
             $request->description(),
-            $request->superuser()
+            $request->superuser(),
+            $request->companyId()
         );
         $this->repository->save($rol);
     }
