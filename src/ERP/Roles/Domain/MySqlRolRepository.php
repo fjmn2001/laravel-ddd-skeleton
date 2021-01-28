@@ -62,7 +62,7 @@ final class MySqlRolRepository implements RolRepository
     {
         $query = DB::table('roles');
 
-        //todo: add filters!!!
+        $query = (new MySqlRolFilters($query))($criteria);
 
         if ($criteria->limit()) {
             $query->take($criteria->limit());
