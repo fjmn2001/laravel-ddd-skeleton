@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Medine\ERP\Roles\Domain;
 
 use Medine\ERP\Roles\Domain\ValueObjects\RolCompanyId;
+use Medine\ERP\Roles\Domain\ValueObjects\RolCreatedAt;
 use Medine\ERP\Roles\Domain\ValueObjects\RolDescription;
 use Medine\ERP\Roles\Domain\ValueObjects\RolId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolName;
 use Medine\ERP\Roles\Domain\ValueObjects\RolStatus;
 use Medine\ERP\Roles\Domain\ValueObjects\RolSuperuser;
+use Medine\ERP\Roles\Domain\ValueObjects\RolUpdatedAt;
 
 final class Rol
 {
@@ -31,8 +33,8 @@ final class Rol
         RolSuperuser $superuser,
         RolStatus $status,
         RolCompanyId $companyId,
-        \DateTimeImmutable $createdAt,
-        \DateTimeImmutable $updatedAt
+        RolCreatedAt $createdAt,
+        RolUpdatedAt $updatedAt
     )
     {
         $this->id = $id;
@@ -60,8 +62,8 @@ final class Rol
             $superuser,
             new RolStatus(self::STATUS_ACTIVE),
             $companyId,
-            new \DateTimeImmutable(),
-            new \DateTimeImmutable()
+            new RolCreatedAt(),
+            new RolUpdatedAt(),
         );
     }
 
@@ -72,8 +74,8 @@ final class Rol
         RolSuperuser $superuser,
         RolStatus $status,
         RolCompanyId $companyId,
-        \DateTimeImmutable $createdAt,
-        \DateTimeImmutable $updatedAt
+        RolCreatedAt $createdAt,
+        RolUpdatedAt $updatedAt
     ): self
     {
         return new self(
@@ -118,45 +120,45 @@ final class Rol
         return $this->companyId;
     }
 
-    public function createdAt(): \DateTimeImmutable
+    public function createdAt(): RolCreatedAt
     {
         return $this->createdAt;
     }
 
-    public function updatedAt(): \DateTimeImmutable
+    public function updatedAt(): RolUpdatedAt
     {
         return $this->updatedAt;
     }
 
     public function changeName(RolName $newName)
     {
-        if (false === ($this->name()->equal($newName))) {
+        if (false === ($this->name()->equals($newName))) {
             $this->name = $newName;
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->updatedAt = new RolUpdatedAt();
         }
     }
 
     public function changeDescription(RolDescription $newDescription)
     {
-        if (false === ($this->description()->equal($newDescription))) {
+        if (false === ($this->description()->equals($newDescription))) {
             $this->description = $newDescription;
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->updatedAt = new RolUpdatedAt();
         }
     }
 
     public function changeSuperuser(RolSuperuser $newValue)
     {
-        if (false === ($this->superuser()->equal($newValue))) {
+        if (false === ($this->superuser()->equals($newValue))) {
             $this->superuser = $newValue;
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->updatedAt = new RolUpdatedAt();
         }
     }
 
     public function changeStatus(RolStatus $newValue)
     {
-        if (false === ($this->status()->equal($newValue))) {
+        if (false === ($this->status()->equals($newValue))) {
             $this->status = $newValue;
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->updatedAt = new RolUpdatedAt();
         }
     }
 }

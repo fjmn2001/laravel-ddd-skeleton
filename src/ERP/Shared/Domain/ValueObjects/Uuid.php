@@ -27,6 +27,11 @@ class Uuid
         return $this->uuid;
     }
 
+    public function equals(self $newValue): bool
+    {
+        return $this->uuid === $newValue->value();
+    }
+
     private function ensureIsValidUuid(string $uuid): void
     {
         if(!RamseyUuid::isValid($uuid)){
