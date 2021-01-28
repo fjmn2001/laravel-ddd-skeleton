@@ -20,8 +20,8 @@ final class MySqlCompanyRepository implements CompanyRepository
             'address' => $company->address()->value(),
             'status' => $company->status()->value(),
             'logo' => $company->logo()->value(),
-            'created_at' => $company->createdAt(),
-            'updated_at' => $company->updatedAt()
+            'created_at' => $company->createdAt()->value(),
+            'updated_at' => $company->updatedAt()->value()
         ]);
     }
 }

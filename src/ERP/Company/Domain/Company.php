@@ -7,10 +7,12 @@ namespace Medine\ERP\Company\Domain;
 
 
 use Medine\ERP\Company\Domain\ValueObjects\CompanyAddress;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyCreatedAt;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyId;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyLogo;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyName;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyStatus;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyUpdatedAt;
 
 final class Company
 {
@@ -29,8 +31,8 @@ final class Company
         CompanyAddress $address,
         CompanyStatus $status,
         CompanyLogo $logo,
-        \DateTimeImmutable $createdAt,
-        \DateTimeImmutable $updatedAt
+        CompanyCreatedAt $createdAt,
+        CompanyUpdatedAt $updatedAt
     )
     {
         $this->id = $id;
@@ -56,8 +58,8 @@ final class Company
             $address,
             $status,
             $logo,
-            new \DateTimeImmutable(),
-            new \DateTimeImmutable()
+            new CompanyCreatedAt(),
+            new CompanyUpdatedAt()
         );
     }
 
@@ -86,12 +88,12 @@ final class Company
         return $this->logo;
     }
 
-    public function createdAt(): \DateTimeImmutable
+    public function createdAt(): CompanyCreatedAt
     {
         return $this->createdAt;
     }
 
-    public function updatedAt(): \DateTimeImmutable
+    public function updatedAt(): CompanyUpdatedAt
     {
         return $this->updatedAt;
     }

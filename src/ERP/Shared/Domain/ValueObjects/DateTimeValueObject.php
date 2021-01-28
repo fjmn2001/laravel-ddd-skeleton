@@ -10,7 +10,7 @@ class DateTimeValueObject
 {
     private $date;
 
-    public function __construct(string $date)
+    public function __construct(string $date = 'now')
     {
         $this->date = $this->setDate($date);
     }
@@ -20,15 +20,19 @@ class DateTimeValueObject
         $dateTimeImmutable = \DateTimeImmutable::createFromFormat($format, $dateTime);
 
         if (false == $dateTimeImmutable)
-            throw new InvalidDateException("The given date time is invalid");
+            throw new InvalidDateException("The given date time is invalid", 400);
 
         return new self(
-            $dateTimeImmutable->format(DATE_ISO8601)
+            $dateTimeImmutable->format('Y-m-d H:s:i')
         );
     }
 
     private function setDate(string $date): string
     {
+        $date = $date != 'now'
+            ? $date
+            : date('Y-m-d H:s:i');
+
         $explodedDate = explode('-', $date);
 
         if (!checkdate(
@@ -36,7 +40,7 @@ class DateTimeValueObject
             (int)$explodedDate[2],
             (int)$explodedDate[0]
         ))
-            throw new InvalidDateException('Given date is not accepted');
+            throw new InvalidDateException('The given date time is invalid', 400);
 
         return $date;
     }
