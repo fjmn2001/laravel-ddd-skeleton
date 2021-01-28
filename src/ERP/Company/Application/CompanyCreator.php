@@ -8,6 +8,11 @@ use Medine\ERP\Company\Domain\CompanyHasUser;
 use Medine\ERP\Company\Domain\Company;
 use Medine\ERP\Company\Domain\CompanyHasUserRepository;
 use Medine\ERP\Company\Domain\CompanyRepository;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyAddress;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyId;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyLogo;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyName;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyStatus;
 use Medine\ERP\Roles\Domain\Rol;
 use Medine\ERP\Roles\Domain\RolRepository;
 use Medine\ERP\Roles\Domain\ValueObjects\RolCompanyId;
@@ -37,11 +42,11 @@ final class CompanyCreator
     public function __invoke(CompanyCreatorRequest $request): void
     {
         $company = Company::create(
-            $request->id(),
-            $request->name(),
-            $request->address(),
-            $request->status(),
-            $request->logo()
+            new CompanyId($request->id()),
+            new CompanyName($request->name()),
+            new CompanyAddress($request->address()),
+            new CompanyStatus($request->status()),
+            new CompanyLogo($request->logo())
         );
 
         $rol = Rol::create(
@@ -53,9 +58,9 @@ final class CompanyCreator
         );
 
         $companyHasUser = CompanyHasUser::create(
-            $request->id(),
+            new CompanyId($request->id()),
             $request->userId(),
-            $rol->id()->value()
+            $rol->id()
         );
 
         $this->repository->save($company);
