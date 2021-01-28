@@ -58,9 +58,9 @@ final class CompanyCreator
         );
 
         $companyHasUser = CompanyHasUser::create(
-            $request->id(),
+            new CompanyId($request->id()),
             $request->userId(),
-            $rol->id()->value()
+            $rol->id()
         );
 
         $this->repository->save($company);

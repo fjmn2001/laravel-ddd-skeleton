@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Company\Domain\ValueObjects;
 
-use Medine\ERP\Shared\Domain\ValueObjects\DateValueObject;
+use Medine\ERP\Shared\Domain\ValueObjects\DateTimeValueObject;
 
-final class CompanyUpdatedAt extends DateValueObject
+final class CompanyUpdatedAt extends DateTimeValueObject
 {
 
 }
