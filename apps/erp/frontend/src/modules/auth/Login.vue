@@ -12,30 +12,35 @@
             <div>
                 <button type="submit">Sing In</button>
             </div>
+            <div v-if="this.$store.state.token">
+                <button type="button" @click="logout">Logout</button>
+            </div>
+            <pre>
+                token: {{ this.$store.state.token }}
+                <br>
+                isLogged: {{ this.$store.getters.isLogged }}
+            </pre>
         </form>
     </div>
 </template>
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import axios from "axios";
 
 @Component
 export default class Login extends Vue {
     username = '';
     password = '';
 
-
     submit() {
-        axios.post('http://localhost:8888/api/auth/login', {
+        this.$store.dispatch('retrieveToken', {
             username: this.username,
             password: this.password
-        }, {
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
-        }).then((response) => console.log(response.data));
+        })
+    }
+
+    logout() {
+        this.$store.dispatch('destroyToken')
     }
 }
 </script>
