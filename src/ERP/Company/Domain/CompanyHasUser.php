@@ -6,6 +6,8 @@ declare(strict_types=1);
 namespace Medine\ERP\Company\Domain;
 
 
+use Medine\ERP\Company\Domain\ValueObjects\CompanyId;
+use Medine\ERP\Roles\Domain\ValueObjects\RolId;
 use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 
 final class CompanyHasUser
@@ -20,9 +22,9 @@ final class CompanyHasUser
 
     private function __construct(
         string $id,
-        string $companyId,
+        CompanyId $companyId,
         string $userId,
-        string $rolId,
+        RolId $rolId,
         string $status,
         \DateTimeImmutable $createdAt,
         \DateTimeImmutable $updatedAt
@@ -38,9 +40,9 @@ final class CompanyHasUser
     }
 
     public static function create(
-        string $companyId,
+        CompanyId $companyId,
         string $userId,
-        string $rolId
+        RolId $rolId
     ): self
     {
         return new self(
@@ -58,7 +60,7 @@ final class CompanyHasUser
         return $this->id;
     }
 
-    public function companyId(): string
+    public function companyId(): CompanyId
     {
         return $this->companyId;
     }
@@ -68,7 +70,7 @@ final class CompanyHasUser
         return $this->userId;
     }
 
-    public function rolId(): string
+    public function rolId(): RolId
     {
         return $this->rolId;
     }

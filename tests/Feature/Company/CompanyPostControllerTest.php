@@ -35,6 +35,7 @@ final class CompanyPostControllerTest extends TestCase
         $response = $this->postJson('/api/company', [
             'id' => Uuid::uuid4(),
             'name' => $this->faker->company,
+            'address' => $this->faker->address,
             'status' => 'activo',
             'logo' => "coca-cola.jpg",
         ]);

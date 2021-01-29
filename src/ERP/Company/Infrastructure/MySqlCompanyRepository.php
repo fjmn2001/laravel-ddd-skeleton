@@ -15,13 +15,13 @@ final class MySqlCompanyRepository implements CompanyRepository
     public function save(Company $company): void
     {
         DB::table('companies')->insert([
-            'id' => $company->id(),
-            'name' => $company->name(),
-            'address' => $company->address(),
-            'status' => $company->status(),
-            'logo' => $company->logo(),
-            'created_at' => $company->createdAt(),
-            'updated_at' => $company->updatedAt()
+            'id' => $company->id()->value(),
+            'name' => $company->name()->value(),
+            'address' => $company->address()->value(),
+            'status' => $company->status()->value(),
+            'logo' => $company->logo()->value(),
+            'created_at' => $company->createdAt()->value(),
+            'updated_at' => $company->updatedAt()->value()
         ]);
     }
 }

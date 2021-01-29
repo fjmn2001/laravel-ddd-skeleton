@@ -16,9 +16,9 @@ final class MySqlCompanyHasUserRepository implements CompanyHasUserRepository
     {
         DB::table('company_has_user')->insert([
             'id' => $companyHasUser->id(),
-            'company_id' => $companyHasUser->companyId(),
+            'company_id' => $companyHasUser->companyId()->value(),
             'user_id' => $companyHasUser->userId(),
-            'rol_id' => $companyHasUser->rolId(),
+            'rol_id' => $companyHasUser->rolId()->value(),
             'status' => $companyHasUser->status(),
             'created_at' => $companyHasUser->createdAt(),
             'updated_at' => $companyHasUser->updatedAt()

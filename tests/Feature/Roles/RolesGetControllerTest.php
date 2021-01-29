@@ -47,7 +47,10 @@ final class RolesGetControllerTest extends TestCase
         ]);
 
         $response = $this->json('GET', '/api/roles', [
-            "page" => 1
+            "page" => 1,
+            'filters' => [
+                ['field' => 'name', 'value' => $NAME]
+            ]
         ]);
 
         $response->assertJson([[

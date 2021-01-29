@@ -6,14 +6,17 @@ namespace Medine\ERP\Roles\Domain;
 
 use Illuminate\Support\Facades\DB;
 use Medine\ERP\Roles\Domain\ValueObjects\RolCompanyId;
+use Medine\ERP\Roles\Domain\ValueObjects\RolCreatedAt;
 use Medine\ERP\Roles\Domain\ValueObjects\RolDescription;
 use Medine\ERP\Roles\Domain\ValueObjects\RolId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolName;
 use Medine\ERP\Roles\Domain\ValueObjects\RolStatus;
 use Medine\ERP\Roles\Domain\ValueObjects\RolSuperuser;
+use Medine\ERP\Roles\Domain\ValueObjects\RolUpdatedAt;
 use Medine\ERP\Shared\Domain\Criteria;
+use Medine\ERP\Shared\Infrastructure\MySqlRepository;
 
-final class MySqlRolRepository implements RolRepository
+final class MySqlRolRepository extends MySqlRepository implements RolRepository
 {
 
     public function save(Rol $rol): void
@@ -24,8 +27,8 @@ final class MySqlRolRepository implements RolRepository
             'description' => $rol->description()->value(),
             'superuser' => $rol->superuser()->value(),
             'company_id' => $rol->companyId()->value(),
-            'created_at' => $rol->createdAt(),
-            'updated_at' => $rol->updatedAt(),
+            'created_at' => $rol->createdAt()->value(),
+            'updated_at' => $rol->updatedAt()->value(),
         ]);
     }
 
@@ -36,7 +39,7 @@ final class MySqlRolRepository implements RolRepository
             'description' => $rol->description()->value(),
             'superuser' => $rol->superuser()->value(),
             'status' => $rol->status()->value(),
-            'updated_at' => $rol->updatedAt(),
+            'updated_at' => $rol->updatedAt()->value(),
         ]);
     }
 
@@ -51,28 +54,16 @@ final class MySqlRolRepository implements RolRepository
             new RolSuperuser($row->superuser),
             new RolStatus($row->status),
             new RolCompanyId($row->company_id),
-            new \DateTimeImmutable($row->created_at),
-            new \DateTimeImmutable($row->updated_at),
+            new RolCreatedAt($row->created_at),
+            new RolUpdatedAt($row->updated_at),
         ) : null;
     }
 
     public function matching(Criteria $criteria): array
     {
         $query = DB::table('roles');
-
-        //todo: add filters!!!
-
-        if ($criteria->limit()) {
-            $query->take($criteria->limit());
-        }
-
-        if ($criteria->offset()) {
-            $query->skip($criteria->offset());
-        }
-
-        if ($criteria->order()->orderBy()->value()) {
-            $query->orderBy($criteria->order()->orderBy()->value(), $criteria->order()->orderType()->value());
-        }
+        $query = (new MySqlRolFilters($query))($criteria);
+        $query = $this->completeBuilder($criteria, $query);
 
         return $query->get()->map(function ($row) {
             return Rol::fromDatabase(
@@ -82,8 +73,8 @@ final class MySqlRolRepository implements RolRepository
                 new RolSuperuser($row->superuser),
                 new RolStatus($row->status),
                 new RolCompanyId($row->company_id),
-                new \DateTimeImmutable($row->created_at),
-                new \DateTimeImmutable($row->updated_at),
+                new RolCreatedAt($row->created_at),
+                new RolUpdatedAt($row->updated_at),
             );
         })->toArray();
     }
