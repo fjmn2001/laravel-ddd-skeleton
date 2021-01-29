@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 final class UserPostControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     private $faker;
 

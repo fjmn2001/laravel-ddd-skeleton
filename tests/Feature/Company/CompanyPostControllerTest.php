@@ -14,7 +14,7 @@ use Tests\TestCase;
 
 final class CompanyPostControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     private $faker;
 
