@@ -7,13 +7,14 @@ namespace Tests\Feature\Company;
 use App\Models\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Passport\Passport;
 use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 
 final class CompanyPostControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use RefreshDatabase;
 
     private $faker;
 
