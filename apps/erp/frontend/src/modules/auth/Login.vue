@@ -2,20 +2,20 @@
     <div class="container">
         <div class=" center-login-med row ">
             <div class="col-lg-7 col-md-9 col-sm-11 row-login text-center">
-                <img src="images/logo2_SF%201.svg" class="img-fluid mb-5">
+                <img src="@/assets/images/logo2_SF_1.svg" class="img-fluid mb-5">
                 <div class="div-text mb-5">
                     <h4 class="font-italic font-weight-bold text-re"><b class="clr-text">Inicio de Sesión</b></h4>
                 </div>
                 <div class="input-group mb-5">
                     <div class="input-group-prepend">
-                        <span class="input-group-text "><img src="./../../assets/images/icons/@.svg"><br></span>
+                        <span class="input-group-text "><img src="@/assets/images/icons/@.svg"><br></span>
                     </div>
                     <input type="text" class="form-control " placeholder="Dirección de correo electrónico"
                            aria-label="Username" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group mb-5">
                     <div class="input-group-prepend">
-                        <span class="input-group-text "><img src="images/icons/key.svg"></span>
+                        <span class="input-group-text "><img src="@/assets/images/icons/key.svg"></span>
                     </div>
                     <input type="text" class="form-control " aria-label="Username" aria-describedby="basic-addon1"
                            placeholder="Contraseña">
