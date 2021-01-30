@@ -12,6 +12,5 @@
 </template>
 
 <style lang="scss">
-@import "~bootstrap";
 @import "./assets/css/style.css";
 </style>
