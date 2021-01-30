@@ -62,6 +62,8 @@ export default class Login extends Vue {
         this.$store.dispatch('retrieveToken', {
             username: this.username,
             password: this.password
+        }).then(() => {
+            this.$router.push({name: 'home'});
         }).catch(error => {
             console.log(error)
             this.errorMessage = error.response.data;
