@@ -8,7 +8,7 @@
                 </div>
                 <div class="input-group mb-5">
                     <div class="input-group-prepend">
-                        <span class="input-group-text "><img src="images/icons/@.svg"><br></span>
+                        <span class="input-group-text "><img src="./../../assets/images/icons/@.svg"><br></span>
                     </div>
                     <input type="text" class="form-control " placeholder="Dirección de correo electrónico"
                            aria-label="Username" aria-describedby="basic-addon1">
