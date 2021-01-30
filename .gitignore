@@ -1,5 +1,8 @@
 /node_modules
 /public/hot
+/prototype_ERP/pinegrow.json
+/prototype_ERP/.idea
+/prototype_ERP/_pgbackup/
 /public/storage
 /storage/*.key
 /vendor
