@@ -9,10 +9,10 @@
 import {Component, Vue} from 'vue-property-decorator';
 
 @Component
-export default class Login extends Vue {
+export default class Home extends Vue {
     logout() {
         this.$store.dispatch('destroyToken').then(() => {
-            console.log('goto landing page...');
+            this.$router.push({name: 'landing'});
         })
     }
 }

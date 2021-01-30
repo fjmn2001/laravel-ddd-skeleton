@@ -3,12 +3,14 @@ import VueRouter, {RouteConfig} from 'vue-router'
 //import Home from '../views/Home.vue'
 import auth from '../modules/auth/router/index';
 import home from '../modules/home/router/index';
+import landing from '../modules/landing/router/index';
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
     ...auth,
     ...home,
+    ...landing,
     // {
     //     path: '/',
     //     name: 'Home',
