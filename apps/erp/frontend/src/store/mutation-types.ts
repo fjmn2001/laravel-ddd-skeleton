@@ -1,0 +1,2 @@
+export const RETRIEVE_TOKEN = 'RETRIEVE_TOKEN';
+export const DESTROY_TOKEN = 'DESTROY_TOKEN';
