@@ -4,6 +4,9 @@ export default [
     {
         path: '/',
         name: 'landing',
-        component: Landing
+        component: Landing,
+        meta: {
+            requiresVisitor: true
+        }
     },
 ];

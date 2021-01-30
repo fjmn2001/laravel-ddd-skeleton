@@ -4,6 +4,9 @@ export default [
     {
         path: '/auth/login',
         name: 'auth.login',
-        component: Login
+        component: Login,
+        meta: {
+            requiresVisitor: true
+        }
     },
 ];
