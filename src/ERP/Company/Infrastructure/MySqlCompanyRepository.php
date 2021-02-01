@@ -8,6 +8,13 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Medine\ERP\Company\Domain\Company;
 use Medine\ERP\Company\Domain\CompanyRepository;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyAddress;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyCreatedAt;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyId;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyLogo;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyName;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyStatus;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyUpdatedAt;
 
 final class MySqlCompanyRepository implements CompanyRepository
 {
@@ -24,4 +31,31 @@ final class MySqlCompanyRepository implements CompanyRepository
             'updated_at' => $company->updatedAt()->value()
         ]);
     }
+
+    public function update(Company $company): void
+    {
+        DB::table('companies')->where('companies.id', $company->id()->value())->take(1)->update([
+            'name' => $company->name()->value(),
+            'address' => $company->address()->value(),
+            'status' => $company->status()->value(),
+            'logo' => $company->logo()->value(),
+            'updated_at' => $company->updatedAt()->value(),
+        ]);
+    }
+
+    public function find(CompanyId $id): ?Company
+    {
+        $row = DB::table('companies')->where('companies.id', $id->value())->first();
+
+        return !empty($row) ? Company::fromDatabase(
+            new CompanyId($row->id),
+            new CompanyName($row->name),
+            new CompanyAddress($row->address),
+            new CompanyStatus($row->status),
+            new CompanyLogo($row->logo),
+            new CompanyCreatedAt($row->created_at),
+            new CompanyUpdatedAt($row->updated_at)
+        ) : null;
+    }
+
 }
