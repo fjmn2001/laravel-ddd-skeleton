@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        ERP_URL: 'http://localhost:8888',
+        ERP_URL: process.env.VUE_APP_ERP_URL,
         token: localStorage.getItem('access_token') || null
     },
 
