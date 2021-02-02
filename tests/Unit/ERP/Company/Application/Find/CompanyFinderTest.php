@@ -4,7 +4,10 @@
 namespace Tests\Unit\ERP\Company\Application\Find;
 
 
+use Medine\ERP\Company\Application\Find\CompanyFinder;
+use Medine\ERP\Company\Application\Find\CompanyFinderRequest;
 use Medine\ERP\Company\Domain\Service\CompanyNotExistsException;
+use Tests\Unit\ERP\Company\Infrastructure\InMemoryCompanyRepository;
 use Tests\Unit\ExampleTest;
 use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 
@@ -18,13 +21,13 @@ class CompanyFinderTest extends ExampleTest
     {
         $this->expectException(CompanyNotExistsException::class);
         $ROL_ID = Uuid::random();
-        $repository = new InMemoryRolRepository();
+        $repository = new InMemoryCompanyRepository();
 
-        $finder = new RolFinder(new \Medine\ERP\Roles\Domain\Service\RolFinder(
+        $finder = new CompanyFinder(new \Medine\ERP\Company\Domain\Service\CompanyFinder(
             $repository
         ));
 
-        ($finder)(new RolFinderRequest($ROL_ID->value()));
+        ($finder)(new CompanyFinderRequest($ROL_ID->value()));
 
     }
 
