@@ -16,8 +16,7 @@ class DateTimeValueObjectTest extends TestCase
      */
     public function it_should_return_a_date_whith_format_Ymd()
     {
-        $date_time = new DateTimeValueObject();
-        $date_Ymd = $date_time->createFromFormat('d/m/Y', '01/03/2021');
+        $date_Ymd = DateTimeValueObject::createFromFormat('d/m/Y', '01/03/2021');
 
         $date_carbon = Carbon::createFromFormat('Y-m-d','2021-03-01' );
         $date_comparate = $date_carbon->format('Y-m-d H:s:i');
