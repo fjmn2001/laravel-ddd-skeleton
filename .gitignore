@@ -17,3 +17,5 @@ npm-debug.log
 yarn-error.log
 .idea
 /mysql/*
+/apps/erp/frontend/node_modules
+/apps/erp/frontend/dist
