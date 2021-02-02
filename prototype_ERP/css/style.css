@@ -1,7 +1,4 @@
-
-
-/* Fonts ----------------------------------*/
-
+/* Fonts ---------------------------------- */
 @font-face {
     font-family: 'Poppins-Bold';
     src: url(../fonts/Poppins-Bold.ttf);
@@ -32,8 +29,7 @@
     src: url(../fonts/Poppins-MediumItalic.ttf);
 }
 
-/* End fonts ----------------------------------*/
-
+/* End fonts ---------------------------------- */
 * {
     padding: 0px;
     margin: 0px;
@@ -883,7 +879,6 @@ select {
 
 select::-ms-expand {
     display: none;
-
 }
 
 .table tbody tr {
@@ -900,8 +895,7 @@ select::-ms-expand {
     width: 320px;
 }
 
-/* login ----------------------------------------------------------------------------------------------------*/
-
+/* login ---------------------------------------------------------------------------------------------------- */
 .center-login-med {
     display: flex;
     align-items: center;
@@ -921,8 +915,6 @@ select::-ms-expand {
     padding-top: 70px;
     border-radius: 16.6291px;
 }
-
-
 
 .olvidar-clave {
     font-family: Arial;
@@ -1000,7 +992,12 @@ select::-ms-expand {
     transform: translateY(3px);
 }
 
-.input-group-text{
+.input-group-text {
     background-color: white;
 }
-/* Fin login ----------------------------------------------------------------------------------------------------*/
+
+/* Fin login ---------------------------------------------------------------------------------------------------- */
+.tabla-des {
+    padding-left: 39px;
+    padding-right: 39px;
+}

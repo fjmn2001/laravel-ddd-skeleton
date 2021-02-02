@@ -171,8 +171,8 @@
                     <div class="pl-1 pr-1">
                         <div class="div-title-table mt-2 row">
                             <div class="align-items-center col-8 col-lg-9 col-md-8 col-sm-8 d-flex d-lg-flex d-md-flex d-sm-flex flex-column flex-lg-row flex-md-column flex-sm-column pl-3 pl-lg-4 pl-md-3">
-                                <h2 class="align-items-center d-flex d-inline mb-md-0 xtitle-table">Crear orden de venta</h2>
-                                <p class="ml-lg-4 ml-md-0 navigation pt-lg-2 pt-md-1"><a href="">Ventas</a> -&gt; <a href="tabla.html">Órdenes de ventas</a> -&gt; <a href="" class="font-weight-bolder">Crear</a></p>
+                                <h2 class="align-items-center d-flex d-inline mb-md-0 xtitle-table">Crear orden de compra</h2>
+                                <p class="ml-lg-4 ml-md-0 navigation pt-lg-2 pt-md-1"><a href="">Compras</a> -&gt; <a href="tabla.html">Órdenes de compras</a> -&gt; <a href="" class="font-weight-bolder">Crear</a></p>
                             </div>
                             <div class="align-items-center btn-sm col-4 col-lg-3 col-md-4 col-sm-4 d-flex justify-content-end">
                                 <div class="dropdown">
@@ -189,33 +189,33 @@
                             <div class="mt-4">
                                 <div class="d-flex d-lg-flex d-md-flex d-sm-flex empesable flex-column flex-lg-row flex-md-column flex-sm-column pb-2 pt-2">
                                     <div class="align-items-center col-lg-3 col-md-10 d-flex">
-                                        <h5 class="mb-0 xtitle-buscar">Empezar orden de venta desde&nbsp;</h5>
+                                        <h5 class="mb-0 xtitle-buscar">Empezar órden de compra desde&nbsp;</h5>
                                     </div>
                                     <div class="col-lg-8 col-md-12 d-flex">
                                         <div class="col-md-6 d-flex">
                                             <select class="form-control inp-filter">
                                                 <option value=""></option>
-                                                <option value="1" selected="">Cliente</option>
+                                                <option value="1" selected="">Proveedor</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6 d-flex disablem">
                                             <select class="form-control inp-filter" disabled="">
                                                 <option value=""></option>
-                                                <option value="1" selected="">Cliente</option>
+                                                <option value="1" selected="">Proveedor</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="align-items-center d-flex justify-content-between pl-sm-3 pr-sm-3 pt-sm-3 row">
                                     <div class="d-flex">
-                                        <h4 class="mb-3 ml-5 ml-md-4 mt-3 pb-md-0" style="padding-left: 14px;">Datos de orden de venta</h4>
+                                        <h4 class="mb-3 ml-5 ml-md-4 mt-3 pb-md-0" style="padding-left: 14px;">Datos de órden de compra</h4>
                                     </div>
                                     <a href="#des01" id="desplegar-busqueda" class="arrow-left icon mr-4" data-toggle="collapse" data-target="#de01"></a>
                                 </div>
                                 <div id="de01" class="des01 pb-4 pl-4 pr-4 pt-3">
                                     <div class="pl-3 pr-3 row">
-                                        <div class="col-lg-3 col-md-6">
-                                            <label>Cliente</label>
+                                        <div class="col-lg-3 col-md-6 ">
+                                            <label>Proveedor</label>
                                             <input type="text" required="" class="form-control inp-filter">
                                         </div>
                                         <div class="col-lg-3 col-md-6">
@@ -228,7 +228,7 @@
                                             </select>
                                         </div>
                                         <div class="align-items-baseline col-lg-3 col-md-6 d-flex mt-lg-0 mt-md-3" style="align-self: center;">
-                                            <h6>Saldo por cobrar:</h6>
+                                            <h6>Saldo por pagar:</h6>
                                             <h4 class="pl-3 text-danger">$ 10.00</h4>
                                         </div>
                                         <div class="align-items-baseline col-lg-3 col-md-6 d-flex mt-lg-0 mt-md-3" style="align-self: center;">
@@ -238,20 +238,12 @@
                                     </div>
                                     <div class="mt-3 pl-3 pr-3 row">
                                         <div class="col-lg-3 col-md-6 col-sm-12">
-                                            <label class="lbl-nombre">Fecha de emisión</label>
+                                            <label class="lbl-nombre">Fecha de inicio</label>
                                             <input class="form-control inp-filter" type="text" onfocus="(this.type='date')" required="">
                                         </div>
                                         <div class="col-lg-3 col-md-6 col-sm-12">
-                                            <label class="lbl-nombre">Válido hasta</label>
+                                            <label class="lbl-nombre">Fecha de hasta</label>
                                             <input class="form-control inp-filter" type="text" onfocus="(this.type='date')" required="">
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-sm-12">
-                                            <label>Lista de precio</label>
-                                            <select class="form-control inp-filter">
-                                                <option value=""></option>
-                                                <option value="1">01</option>
-                                                <option value="3">02</option>
-                                            </select>
                                         </div>
                                         <div class="col-lg-3 col-md-6 col-sm-12">
                                             <label>Centro contable</label>
@@ -261,20 +253,6 @@
                                                 <option value="2">Caracas</option>
                                                 <option value="3">Puerto la cruz</option>
                                             </select>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3 pl-3 pr-3 row">
-                                        <div class="col-lg-3 col-md-6">
-                                            <label class="lbl-nombre">Forma de entrega</label>
-                                            <input type="text" required="" class="form-control inp-filter">
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-sm-12">
-                                            <label class="lbl-nombre">Despacho desde bodega</label>
-                                            <input type="text" required="" class="form-control inp-filter">
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-sm-12">
-                                            <label>Vendedor:</label>
-                                            <input type="text" required="" class="form-control inp-filter" value="José Pereira">
                                         </div>
                                         <div class="col-lg-3 col-md-6 col-sm-12">
                                             <label class="lbl-nombre">Estado</label>
@@ -287,29 +265,33 @@
                                         </div>
                                     </div>
                                     <div class="mt-3 pl-3 pr-3 row">
+                                        <div class="col-lg-3 col-md-6 ">
+                                            <label class="lbl-nombre">Referencia</label>
+                                            <input type="text" required="" class="form-control inp-filter">
+                                        </div>
                                         <div class="col-lg-3 col-md-6 col-sm-12">
-                                            <label class="lbl-nombre">Cuenta por cobrar</label>
-                                            <select required="" class="form-control inp-filter">
-                                                <option value=""></option>
-                                                <option value="1">01</option>
-                                                <option value="1">02</option>
-                                            </select>
+                                            <label>Creado por:</label>
+                                            <input type="text" required="" class="form-control inp-filter" value="José Pereira">
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <label class="lbl-nombre">Ubicación de bodega</label>
+                                            <input type="text" required="" class="form-control inp-filter">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="d-table-item mt-3">
+                    <div class="d-table-item mt-3 ">
                         <div class="align-items-center d-flex justify-content-between pt-2 row">
                             <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column" style="padding-left: 27px;">
                                 <h5 class="xtitle-buscar" style="margin-left: 20px;">Lista de ítems</h5>
                             </div>
-                            <a href="#des04" class="arrow-left icon mr-5 desplegar-busqueda" data-toggle="collapse"></a>
+                            <a href="#des05" class="arrow-left icon mr-5 desplegar-busqueda" data-toggle="collapse"></a>
                         </div>
-                        <div id="des04" class=" table-responsive">
-                            <table class=" table">
-                                <thead>
+                        <div id="des05" class="mt-1 table-responsive">
+                            <table class="table">
+                                <thead class="">
                                     <tr>
                                         <th>Ítems</th>
                                         <th>Categoría</th>
@@ -324,7 +306,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th class="align-items-center d-flex pl-4"> <a href="#row01" class="btn mr-4" data-toggle="collapse"> <i class="des-row icon-arrow-right"></i></a><a href="#" data-toggle="modal" data-target="#exampleModal"> <img src="images/item01.jpg" class="ima-sm-item rounded-circle small"></a> </th>
+                                        <th class="align-items-center d-flex pl-4"> <a href="#row01" class="btn  mr-4" data-toggle="collapse"> <i class="des-row icon-arrow-right"></i></a><a href="#" data-toggle="modal" data-target="#exampleModal"> <img src="images/item01.jpg" class="ima-sm-item rounded-circle small"></a> </th>
                                         <td>
                                             <input type="text" class="form-control inp-filter" value="Hogar">
                                         </td>
@@ -382,14 +364,14 @@
                         </div>
                         <hr>
                         <div class="d-lg-flex d-md-flex d-sm-flex d-xl-flex flex-lg-column-reverse flex-md-column-reverse flex-xl-row justify-content-center pb-1 row">
-                            <div class="col-md-6 col-sm-6 pb-2 pr-4 pt-3" style="padding-left: 33px;">
+                            <div class="col-md-6 col-sm-6  pb-2 pr-4 pt-3" style="padding-left: 33px;">
                                 <textarea class="form-control text-area pinegrow-ui-helper-relative" placeholder="Descripción" rows="3" style="display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:100px;"></textarea>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-6 col-xl-6 d-md-flex d-sm-flex flex-md-row flex-sm-column justify-content-md-end pb-3 pr-4 pt-3">
                                 <h5 class="mr-4 p-pag"><b class="text-info">Subtotal:</b>&nbsp;&nbsp;$200.00</h5>
                                 <h5 class="mr-4 p-pag"><b class="text-success">Descuento:</b>&nbsp;&nbsp;$10.00</h5>
                                 <h5 class="mr-4 p-pag"><b class="text-danger">Impuesto:</b>&nbsp;&nbsp;$5.00</h5>
-                                <h5 class="p-pag" style="margin-right: 19px;"><b>Total:</b>&nbsp;&nbsp;$195.00</h5>
+                                <h5 class=" p-pag" style="margin-right: 19px;"><b>Total:</b>&nbsp;&nbsp;$195.00</h5>
                             </div>
                         </div>
                         <div class="ml-0 mr-0 pl-5 pl-md-3 pr-5 row"></div>
