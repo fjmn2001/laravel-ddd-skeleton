@@ -48,4 +48,11 @@ final class User
     {
         return $this->password;
     }
+
+    public function changeName(UserName $newName): void
+    {
+        if (false === ($this->name()->equals($newName))) {
+            $this->name = $newName;
+        }
+    }
 }
