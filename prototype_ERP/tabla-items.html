@@ -58,7 +58,7 @@
                                 <li class="dropdown">
                                     <a class="font-20 waves-effect waves-light pl-2 pr-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:void(0);"> <i class="fa fa-chevron-circle-down"></i> </a>
                                     <ul class="animated dropdown-menu dropdown-menu-left dropdown-tasks slideInUp" id="list02">
-                                    </ul>
+</ul>
                                 </li>
                             </ul>
                         </li>
@@ -190,7 +190,7 @@
                             <div class="align-items-center d-flex justify-content-between pt-3 row">
                                 <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column" style="padding-left: 27px;">
                                     <h5 class="xtitle-buscar" style="margin-left: 20px;">Buscar ítems</h5>
-                                    <p class="ml-3 ml-lg-0  xsubtitle-buscar">(Búsqueda avanzada)</p>
+                                    <p class="ml-3 ml-lg-0 xsubtitle-buscar">(Búsqueda avanzada)</p>
                                 </div>
                                 <a href="#des01" id="desplegar-busqueda" class="arrow-left icon mr-5" data-toggle="collapse"></a>
                             </div>
@@ -235,9 +235,8 @@
                                         <label>Estado</label>
                                         <select class="form-control inp-filter">
                                             <option value=""></option>
-                                            <option value="1">Aprobado</option>
-                                            <option value="2">Facturado</option>
-                                            <option value="3">Anulado</option>
+                                            <option value="2">Opcion01</option>
+                                            <option value="3">Opcion02</option>
                                         </select>
                                     </div>
                                 </div>
@@ -253,17 +252,23 @@
                             <div class="align-items-center d-flex justify-content-between mb-2 row">
                                 <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column" style="padding-left: 27px;">
                                     <h5 class="xtitle-buscar" style="margin-left: 20px;">Lista de ítems</h5>
-                                    <p class="ml-3 ml-lg-0  xsubtitle-buscar">(Tabla principal)</p>
+                                    <p class="ml-3 ml-lg-0 xsubtitle-buscar">(Tabla principal)</p>
                                 </div>
                                 <a href="#des02" class="arrow-left icon mr-5 desplegar-busqueda" data-toggle="collapse"></a>
                             </div>
                             <div id="des02" class="pl-4 pr-4">
                                 <div class="table-responsive">
+                                    <templete>
+</templete>
+                                    <templete>
+</templete>
+                                    <templete>
+</templete>
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th id="th-ini" style="padding-left: 39px;">&nbsp;
-                                                    <input type="checkbox" class="chk" style="margin-left: -32px;">
+                                                <th id="th-ini">&nbsp;
+                                                    <input type="checkbox" class="chk">
                                                 </th>
                                                 <th>No ítem</th>
                                                 <th>Nombre</th>
@@ -280,144 +285,138 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <templete>
-                                                <tr>
-                                                    <th class="align-items-center d-flex">
-                                                        <a href="#row01" class="btn  pb-0 pt-0" data-toggle="collapse"> <i class="des-row icon-arrow-right"></i></a>
-                                                        <input type="checkbox" class="chk">
-                                                    </th>
-                                                    <td>C12345</td>
-                                                    <td>Pollo</td>
-                                                    <td>Inventariado</td>
-                                                    <td><p class="borde-yellow1">$10.00</p></td>
-                                                    <td><p class="borde-blue1">$10.00</p></td>
-                                                    <td><a class="bg-green1 num-cicle">10</a></td>
-                                                    <td>5</td>
-                                                    <td>2</td>
-                                                    <td>0</td>
-                                                    <td><a class="bg-blue2 num-cicle">17</a></td>
-                                                    <td class=" td-btn-med">
-                                                        <button type="button" class="btn btn-green btn-sm btn-table">Activo</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           &nbsp;
-                                                    </td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="images/icons/3puntos_H.svg"> </a>
-                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                                                                <a class="dropdown-item" href="#">Duplicar</a>
-                                                                <a class="dropdown-item" href="#">Realizar pago</a>
-                                                                <a class="dropdown-item" href="#">Copiar</a>
-                                                                <a class="dropdown-item" href="#">Eliminar</a>
-                                                            </div>
+                                            <tr>
+                                                <th class="align-items-center d-flex">
+                                                    <a href="#row01" class="btn pb-0 pt-0" data-toggle="collapse"> <i class="des-row icon-arrow-right"></i></a>
+                                                    <input type="checkbox" class="chk">
+                                                </th>
+                                                <td>C12345</td>
+                                                <td>Pollo</td>
+                                                <td>Inventariado</td>
+                                                <td><p class="borde-yellow1">$10.00</p></td>
+                                                <td><p class="borde-blue1">$10.00</p></td>
+                                                <td><a class="bg-green1 num-cicle">10</a></td>
+                                                <td>5</td>
+                                                <td>2</td>
+                                                <td>0</td>
+                                                <td><a class="bg-blue2 num-cicle">5</a></td>
+                                                <td class="td-btn-med">
+                                                    <button type="button" class="btn btn-green btn-sm btn-table">Activo</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   &nbsp;
+                                                </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="images/icons/3puntos_H.svg"> </a>
+                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                                                            <a class="dropdown-item" href="#">Duplicar</a>
+                                                            <a class="dropdown-item" href="#">Realizar pago</a>
+                                                            <a class="dropdown-item" href="#">Copiar</a>
+                                                            <a class="dropdown-item" href="#">Eliminar</a>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                                <tr id="row01" class="collapse sub-row">
-                                                    <th xxxxxx="row">-</th>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                </tr>
-                                            </templete>
-                                            <templete>
-                                                <tr>
-                                                    <th class="align-items-center d-flex">
-                                                        <a href="#row01" class="btn  pb-0 pt-0" data-toggle="collapse"> <i class="des-row icon-arrow-right"></i></a>
-                                                        <input type="checkbox" class="chk">
-                                                    </th>
-                                                    <td>C12346</td>
-                                                    <td>Internet</td>
-                                                    <td>No inventariado</td>
-                                                    <td><p class="borde-yellow1">$10.00</p></td>
-                                                    <td><p class="borde-blue1">$10.00</p></td>
-                                                    <td><a class="bg-green1 num-cicle">0</a></td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td><a class="bg-blue2 num-cicle">0</a></td>
-                                                    <td class=" td-btn-med">
-                                                        <button type="button" class="btn btn-red btn-sm btn-table">Inactiva</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           &nbsp;
-                                                    </td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="images/icons/3puntos_H.svg"> </a>
-                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                                                                <a class="dropdown-item" href="#">Duplicar</a>
-                                                                <a class="dropdown-item" href="#">Realizar pago</a>
-                                                                <a class="dropdown-item" href="#">Copiar</a>
-                                                                <a class="dropdown-item" href="#">Eliminar</a>
-                                                            </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr id="row01" class="collapse sub-row">
+                                                <th xxxxxx="row">-</th>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-items-center d-flex">
+                                                    <a href="#row01" class="btn pb-0 pt-0" data-toggle="collapse"> <i class="des-row icon-arrow-right"></i></a>
+                                                    <input type="checkbox" class="chk">
+                                                </th>
+                                                <td>C12346</td>
+                                                <td>Internet</td>
+                                                <td>No inventariado</td>
+                                                <td><p class="borde-yellow1">$10.00</p></td>
+                                                <td><p class="borde-blue1">$10.00</p></td>
+                                                <td><a class="bg-green1 num-cicle">550</a></td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td><a class="bg-blue2 num-cicle">8000</a></td>
+                                                <td class="td-btn-med">
+                                                    <button type="button" class="btn btn-red btn-sm btn-table">Inactivo</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   &nbsp;
+                                                </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="images/icons/3puntos_H.svg"> </a>
+                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                                                            <a class="dropdown-item" href="#">Duplicar</a>
+                                                            <a class="dropdown-item" href="#">Realizar pago</a>
+                                                            <a class="dropdown-item" href="#">Copiar</a>
+                                                            <a class="dropdown-item" href="#">Eliminar</a>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                                <tr id="row01" class="collapse sub-row">
-                                                    <th xxxxxx="row">-</th>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                </tr>
-                                            </templete>
-                                            <templete>
-                                                <tr>
-                                                    <th class="align-items-center d-flex">
-                                                        <a href="#row01" class="btn  pb-0 pt-0" data-toggle="collapse"> <i class="des-row icon-arrow-right"></i></a>
-                                                        <input type="checkbox" class="chk">
-                                                    </th>
-                                                    <td>C12345</td>
-                                                    <td>Aceite</td>
-                                                    <td>Inventariado</td>
-                                                    <td><p class="borde-yellow1">$10.00</p></td>
-                                                    <td><p class="borde-blue1">$10.00</p></td>
-                                                    <td><a class="bg-green1 num-cicle">5</a></td>
-                                                    <td>5</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
-                                                    <td><a class="bg-blue2 num-cicle">10</a></td>
-                                                    <td class=" td-btn-med">
-                                                        <button type="button" class="btn btn-green btn-sm btn-table">Activo</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           &nbsp;
-                                                    </td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="images/icons/3puntos_H.svg"> </a>
-                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                                                                <a class="dropdown-item" href="#">Duplicar</a>
-                                                                <a class="dropdown-item" href="#">Realizar pago</a>
-                                                                <a class="dropdown-item" href="#">Copiar</a>
-                                                                <a class="dropdown-item" href="#">Eliminar</a>
-                                                            </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr id="row01" class="collapse sub-row">
+                                                <th xxxxxx="row">-</th>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="align-items-center d-flex">
+                                                    <a href="#row01" class="btn pb-0 pt-0" data-toggle="collapse"> <i class="des-row icon-arrow-right"></i></a>
+                                                    <input type="checkbox" class="chk">
+                                                </th>
+                                                <td>C12345</td>
+                                                <td>Aceite</td>
+                                                <td>Inventariado</td>
+                                                <td><p class="borde-yellow1">$10.00</p></td>
+                                                <td><p class="borde-blue1">$10.00</p></td>
+                                                <td><a class="bg-green1 num-cicle">5</a></td>
+                                                <td>5</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td><a class="bg-blue2 num-cicle">20</a></td>
+                                                <td class="td-btn-med">
+                                                    <button type="button" class="btn btn-green btn-sm btn-table">Activo</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   &nbsp;
+                                                </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="images/icons/3puntos_H.svg"> </a>
+                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                                                            <a class="dropdown-item" href="#">Duplicar</a>
+                                                            <a class="dropdown-item" href="#">Realizar pago</a>
+                                                            <a class="dropdown-item" href="#">Copiar</a>
+                                                            <a class="dropdown-item" href="#">Eliminar</a>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                                <tr id="row01" class="collapse sub-row">
-                                                    <th xxxxxx="row">-</th>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                    <td>xxxxxx</td>
-                                                </tr>
-                                            </templete>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr id="row01" class="collapse sub-row">
+                                                <th xxxxxx="row">-</th>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                                <td>xxxxxx</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
