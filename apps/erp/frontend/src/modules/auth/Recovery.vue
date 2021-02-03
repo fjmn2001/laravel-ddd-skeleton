@@ -12,11 +12,18 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text input-login"><img src="@/assets/images/icons/@.svg"></span>
                     </div>
-                    <input type="email" name="username" class="form-control input-login" aria-label="Username"
+                    <input type="email" name="username" required v-model="email" class="form-control input-login"
+                           aria-label="Username"
                            aria-describedby="basic-addon1" placeholder="Dirección de correo electrónico">
                 </div>
-                <button type="button" class="btn btn-block btn-sm font-weight-bold linear-btn mb-3 text-white">Enviar
+                <button type="submit" class="btn btn-block btn-sm font-weight-bold linear-btn mb-3 text-white">Enviar
                 </button>
+                <div v-show="errorMessage" class="alert alert-danger" role="alert">
+                    <p v-text="errorMessage"></p>
+                </div>
+                <div v-show="successMessage" class="alert alert-success" role="alert">
+                    <p v-text="successMessage"></p>
+                </div>
                 <div class="pt-3 text-left">
                     <router-link class="olvidar-clave" :to="{name: 'auth.login'}">Iniciar Sesión</router-link>
                 </div>
@@ -35,26 +42,24 @@ import {Component, Vue} from 'vue-property-decorator';
 
 @Component
 export default class Login extends Vue {
-    username = '';
-    password = '';
+    email = '';
     sending = false;
     errorMessage = '';
+    successMessage = '';
 
     submit() {
         this.sending = true;
-        this.$store.dispatch('retrieveToken', {
-            username: this.username,
-            password: this.password
+        this.$store.dispatch('auth/passwordRequest', {
+            email: this.email
         }).then(() => {
-            this.$router.push({name: 'home'});
+            this.errorMessage = '';
+            this.successMessage = `Se ha enviado un mensaje a ${this.email} para continuar con la recuperación de la contraseña.`;
         }).catch(error => {
             console.log(error)
             this.errorMessage = error.response.data;
-        }).finally(() => this.sending = false)
-    }
-
-    logout() {
-        this.$store.dispatch('destroyToken')
+            this.successMessage = '';
+            this.sending = false;
+        });
     }
 }
 </script>
