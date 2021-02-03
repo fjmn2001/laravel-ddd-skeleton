@@ -1,5 +1,9 @@
 /node_modules
 /public/hot
+/prototype_ERP/pinegrow.json
+/prototype_ERP/.idea
+/prototype_ERP/_pgbackup/*
+/prototype_ERP/css/_pgbackup
 /public/storage
 /storage/*.key
 /vendor
@@ -13,3 +17,5 @@ npm-debug.log
 yarn-error.log
 .idea
 /mysql/*
+/apps/erp/frontend/node_modules
+/apps/erp/frontend/dist

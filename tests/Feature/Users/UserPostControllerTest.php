@@ -7,6 +7,7 @@ namespace Tests\Feature\Users;
 use App\Models\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 

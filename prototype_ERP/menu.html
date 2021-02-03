@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" type="image/png" sizes="16x16" href="images/logo-M.svg">
+        <title>MEDINE ERP</title>
+        <!-- ===== Bootstrap CSS ===== -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/new-style.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <!-- ===== Color CSS ===== -->
+        <link href="ccs/default.css" id="theme" rel="stylesheet">
+    </head>
+    <body class="mini-sidebar">
+        <div id="wrapper">
+            <!-- ===== Top-Navigation ===== -->
+            <nav class="navbar navbar-default navbar-static-top m-b-0">
+                <div class="navbar-header">
+                    <div class="top-left-part">
+                        <a class="logo" href="javascript:void(0)"> <b> <img src="images/logo-M.svg" alt="home"> </b> <span> <img src="images/logo-text-erp.svg" alt="homepage" class="dark-logo" id="ima-logo-text"> </span> </a>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-left hidden-xs">
+                        <li class="icon-nav" style="margin-left: 5px;">
+                            <a href="javascript:void(0)" class="sidebartoggler font-20 waves-effect waves-light"><i class="icon-arrow-left-circle"></i></a>
+                        </li>
+                        <li class="icon-nav">
+                            <a href="javascript:void(0)" class="font-20"><i class="fa fa-home"></i></a>
+                        </li>
+                        <li style="padding-top: 3px;">
+                            <ul class="menu-horizontal" id="list01">
+                                <li>
+                                    <a class="nav-link menu-link-med" id="menu-compras" href="javascript:void(0)">Compras</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link menu-link-med" id="menu-ventas" href="javascript:void(0)">Ventas</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="#">Inventario</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="#">Contabilidad</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="#">Contratos</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" href="#">Empresas</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="iconList02">
+                            <ul class="nav navbar-top-links">
+                                <li class="dropdown">
+                                    <a class="font-20 waves-effect waves-light pl-2 pr-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:void(0);"> <i class="fa fa-chevron-circle-down"></i> </a>
+                                    <ul class="animated dropdown-menu dropdown-menu-left dropdown-tasks slideInUp" id="list02">
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-top-links navbar-right pull-right">
+                        <li class="dropdown">
+                            <a class="font-20 waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:void(0);"> <i class="icon-options"></i> </a>
+                            <ul class="animated dropdown-menu dropdown-menu-right dropdown-tasks slideInUp">
+                                <li>
+                                    <a href="javascript:void(0);"><i class="icon-user fa-fw"></i> Perfil</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);"><i class="icon-drawar fa-fw"></i> Bandeja de entrada</a>
+                                </li>
+                                <hr>
+                                <li class="right-side-toggle">
+                                    <a class="right-side-toggler waves-effect waves-light" href="javascript:void(0)"><i class="icon-settings fa-fw"></i> Ajuste de sistema</a>
+                                </li>
+                                <hr>
+                                <li>
+                                    <a href=""><i class="icon-power fa-fw"></i> Cerrar sesión </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- ===== Left-Sidebar ===== -->
+            <aside class="sidebar" role="navigation">
+                <div class="scroll-sidebar">
+                    <div class="user-profile">
+                        <div class="dropdown user-pro-body">
+                            <div class="profile-image">
+                                <img src="images/user.jpg" alt="user-img" class="img-circle">
+                            </div>
+                            <p class="profile-text m-t-15 font-16"><a href="javascript:void(0);">José Pereira</a></p>
+                        </div>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <ul id="side-menu" class="sub-menu-lateral sub-menu-compras" style="display: none;">
+                            <li>
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw icon-people"></i> <span class="hide-menu">Proveedores</span></a>
+                            </li>
+                            <li class="" style="padding-left: 0px;">
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="icon-basket-loaded fa-fw"></i> <span class="hide-menu">Compras<span class="label label-rounded label-info pull-right">4</span></span></a>
+                                <ul aria-expanded="false" style="height: 0px; margin-left: -30px;" class="collapse">
+                                    <li>
+                                        <a href="#">Proveedores</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Pedidos</a>
+                                        <ul aria-expanded="false" class="collapse" style="height: 0px;">
+                                            <li>
+                                                <a href="#">Dieacto</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">En linea</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">Compras</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Pagos</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw  icon-shield"></i> <span class="hide-menu">Seguros</span></a>
+                            </li>
+                            <li>
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw  icon-credit-card "></i> <span class="hide-menu">Transacciones</span></a>
+                            </li>
+                            <li>
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw   icon-docs"></i> <span class="hide-menu">Documentos</span></a>
+                            </li>
+                            <li>
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw  icon-chart "></i> <span class="hide-menu">Reportes</span></a>
+                            </li>
+                            <li>
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw  icon-settings "></i> <span class="hide-menu">Configuración</span></a>
+                            </li>
+                        </ul>
+                        <ul id="side-menu" class="sub-menu-lateral sub-menu-ventas" style="display: none">
+                            <li>
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw icon-people"></i> <span class="hide-menu">Clientes</span></a>
+                            </li>
+                            <li>
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw  icon-bag"></i> <span class="hide-menu">Ventas</span></a>
+                            </li>
+                            <li>
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw   icon-notebook "></i> <span class="hide-menu">Cobros</span></a>
+                            </li>
+                            <li>
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw   icon-docs"></i> <span class="hide-menu">Documentos</span></a>
+                            </li>
+                            <li>
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw  icon-chart "></i> <span class="hide-menu">Reportes</span></a>
+                            </li>
+                            <li>
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw  icon-settings "></i> <span class="hide-menu">Configuración</span></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+            <div class="page-wrapper">
+                <div class="container-fluid mt-lg-5 mt-md-5 pt-lg-4 pt-md-4">
+</div>
+            </div>
+        </div>
+        <footer class="footer t-a-c">&copy; 2021 Medine</footer>
+        <!-- jQuery -->
+        <script src="js/jquery.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Menu Plugin JavaScript -->
+        <script src="js/sidebarmenu.js"></script>
+        <!-- Custom Theme JavaScript -->
+        <script src="js/custom.js"></script>
+        <script src="js/myScript.js"></script>
+    </body>
+</html>
