@@ -2,7 +2,8 @@
 /public/hot
 /prototype_ERP/pinegrow.json
 /prototype_ERP/.idea
-/prototype_ERP/_pgbackup/
+/prototype_ERP/_pgbackup/*
+/prototype_ERP/css/_pgbackup
 /public/storage
 /storage/*.key
 /vendor

@@ -170,8 +170,8 @@
                 <div class="container-fluid mt-lg-5 mt-md-5 pt-lg-4 pt-md-4">
                     <div class="div-title-table justify-content-between mt-3 mt-lg-2 mt-md-3 row">
                         <div class="col-8 col-lg-9 col-md-8 d-flex d-lg-flex d-md-flex d-sm-flex flex-column flex-lg-row flex-md-column flex-sm-column pl-3 pl-lg-4 pl-md-3 pt-md-2">
-                            <h2 class="d-inline mb-md-0 xtitle-table" style="margin-left: 7px;">Órdenes de compras</h2>
-                            <p class="ml-lg-4 ml-md-0 navigation pt-lg-2 pt-md-1"><a href="">Compras</a> -&gt; <a href="" class="font-weight-bolder">Órdenes de compras</a></p>
+                            <h2 class="d-inline mb-md-0 xtitle-table" style="margin-left: 7px;">Órdenes de ventas</h2>
+                            <p class="ml-lg-4 ml-md-0 navigation pt-lg-2 pt-md-1"><a href="">Ventas</a> -&gt; <a href="" class="font-weight-bolder">Órdenes de ventas</a></p>
                         </div>
                         <div class="align-items-center btn-sm col-4 col-lg-3 col-md-4 col-sm-4 d-flex justify-content-end">
                             <a type="button" class="btn btn-blue-deg btn-sm mr-1 mr-lg-5" href="form.html" style="padding-left: 16px; padding-right: 16px;">Crear</a>
@@ -189,41 +189,59 @@
                         <div class="mt-4">
                             <div class="align-items-center d-flex justify-content-between pt-3 row">
                                 <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column" style="padding-left: 27px;">
-                                    <h5 class="xtitle-buscar" style="margin-left: 20px;">Buscar órdenes de compras</h5>
-                                    <p class="ml-3 ml-lg-0  xsubtitle-buscar">(Búsqueda avanzada)</p>
+                                    <h5 class="xtitle-buscar" style="margin-left: 20px;">Buscar órdenes de ventas</h5>
+                                    <p class="ml-3 ml-lg-0 xsubtitle-buscar">(Búsqueda avanzada)</p>
                                 </div>
                                 <a href="#des01" class="arrow-left icon mr-5 desplegar-busqueda" data-toggle="collapse"></a>
                             </div>
                             <div id="des01" class="des01 m-3">
                                 <div class="row pl-3 pr-3">
                                     <div class="col-lg-3 col-md-3 col-sm-12">
-                                        <label>Número de O/C</label>
+                                        <label>Número de O/V</label>
                                         <input type="text" class="form-control inp-filter">
                                     </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <label class="lbl-nombre">Fecha desde</label>
-                                        <input class="form-control inp-filter" type="text" onfocus="(this.type='date')" required="">
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <label class="lbl-nombre">Fecha hasta</label>
-                                        <input class="form-control inp-filter" type="text" onfocus="(this.type='date')" required="">
+                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                        <label>Nombre del cliente</label>
+                                        <input type="text" class="form-control inp-filter">
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-12">
-                                        <label>Proveedor</label>
+                                        <label>No. Orden de compra</label>
+                                        <input type="text" class="form-control inp-filter">
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                        <label>Provincia</label>
                                         <input type="text" class="form-control inp-filter">
                                     </div>
                                 </div>
                                 <div class="pl-3 pr-3 pt-3 row">
                                     <div class="col-lg-3 col-md-3 col-sm-12">
-                                        <label>Monto desde</label>
+                                        <label>Distrito</label>
                                         <input type="text" class="form-control inp-filter">
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-12">
-                                        <label>Monto hasta</label>
+                                        <label>Corregimiento</label>
+                                        <input type="text" class="form-control inp-filter">
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label class="lbl-nombre">Rango de fecha de emisión</label>
+                                        <input class="form-control inp-filter" type="text" onfocus="(this.type='date')" required="">
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label class="lbl-nombre">Rango de fecha de creación</label>
+                                        <input class="form-control inp-filter" type="text" onfocus="(this.type='date')" required="">
+                                    </div>
+                                </div>
+                                <div class="pl-3 pr-3 pt-3 row">
+                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                        <label>Vendedor</label>
+                                        <input type="text" class="form-control inp-filter">
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                        <label>Forma de entrega</label>
                                         <input type="text" class="form-control inp-filter">
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-12" style="margin-left: 0px;">
-                                        <label class="">Estado</label>
+                                        <label>Estado</label>
                                         <select class="form-control inp-filter">
                                             <option value=""></option>
                                             <option value="1">Aprobado</option>
@@ -243,186 +261,74 @@
                         <div>
                             <div class="align-items-center d-flex justify-content-between mb-2 row">
                                 <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column" style="padding-left: 27px;">
-                                    <h5 class="xtitle-buscar" style="margin-left: 20px;">Lista de órdenes de compras</h5>
-                                    <p class="ml-3 ml-lg-0  xsubtitle-buscar">(Tabla principal)</p>
+                                    <h5 class="xtitle-buscar" style="margin-left: 20px;">Lista de órdenes de ventas</h5>
+                                    <p class="ml-3 ml-lg-0 xsubtitle-buscar">(Tabla principal)</p>
                                 </div>
                                 <a href="#des02" class="arrow-left icon mr-5 desplegar-busqueda" data-toggle="collapse"></a>
                             </div>
                             <div class="pl-4 pr-4 table-responsive" id="des02">
+                                <templete>
+</templete>
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th id="th-ini" style="padding-left: 39px;">&nbsp;
                                                 <input type="checkbox" class="chk" style="margin-left: -33px;">
                                             </th>
-                                            <th>Número O/C</th>
-                                            <th>Fecha</th>
-                                            <th>Pago</th>
-                                            <th>Proveedor</th>
-                                            <th>Anticipo</th>
-                                            <th>Creado por</th>
+                                            <th>Número O/V</th>
+                                            <th>Cliente</th>
+                                            <th>Centro contable</th>
+                                            <th>Peso total</th>
+                                            <th>Fecha de emisión</th>
+                                            <th>Fecha de vencimiento</th>
+                                            <th>Monto</th>
+                                            <th>Vendedor</th>
+                                            <th>Ítems entregados</th>
                                             <th>Estado</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <templete>
-                                            <tr>
-                                                <th class="align-items-center d-flex">
-                                                    <a href="#row01" class="btn  pb-0 pt-0" data-toggle="collapse"> <i class="des-row icon-arrow-right"></i></a>
-                                                    <input type="checkbox" class="chk">
-                                                </th>
-                                                <td><a href="">ODC1000009</a></td>
-                                                <td>24/12/2020</td>
-                                                <td><p class="borde-yellow1">100.00</p></td>
-                                                <td>Lider. CA</td>
-                                                <td><a class="bg-yellow1 num-cicle">1</a></td>
-                                                <td>Jose pereira</td>
-                                                <td class=" td-btn-med">
-                                                    <button type="button" class="btn btn-blue2 btn-sm btn-table">Facturado</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           &nbsp;
-                                                </td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="images/icons/3puntos_H.svg"> </a>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                                                            <a class="dropdown-item" href="#">Duplicar</a>
-                                                            <a class="dropdown-item" href="#">Realizar pago</a>
-                                                            <a class="dropdown-item" href="#">Copiar</a>
-                                                            <a class="dropdown-item" href="#">Eliminar</a>
-                                                        </div>
+                                        <tr>
+                                            <th class="align-items-center d-flex">
+                                                <a href="#row01" class="btn pb-0 pt-0" data-toggle="collapse"> <i class="des-row icon-arrow-right"></i></a>
+                                                <input type="checkbox" class="chk">
+                                            </th>
+                                            <td><a href="">ODV1000014</a></td>
+                                            <td>FERRORIENTE</td>
+                                            <td style="">Lider caracas</td>
+                                            <td><span class="btn-sm bg-info">20%</span></td>
+                                            <td>01/02/2021</td>
+                                            <td>05/04/2022</td>
+                                            <td><p class="borde-yellow1">100.00</p></td>
+                                            <td style="">José Pereira</td>
+                                            <td><span class="btn-sm bg-success">50%</span></td>
+                                            <td>
+                                                <button type="button" class="btn btn-green btn-sm btn-table">Facturado</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               &nbsp;
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="images/icons/3puntos_H.svg"> </a>
+                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                                                        <a class="dropdown-item" href="#">Duplicar</a>
+                                                        <a class="dropdown-item" href="#">Realizar pago</a>
+                                                        <a class="dropdown-item" href="#">Copiar</a>
+                                                        <a class="dropdown-item" href="#">Eliminar</a>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                            <tr id="row01" class="collapse sub-row">
-                                                <th xxxxxx="row">-</th>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                            </tr>
-                                        </templete>
-                                        <templete>
-                                            <tr>
-                                                <th class="align-items-center d-flex">
-                                                    <a href="#row02" class="btn  pb-0 pt-0" data-toggle="collapse"> <i class="des-row icon-arrow-right"></i></a>
-                                                    <input type="checkbox" class="chk">
-                                                </th>
-                                                <td><a href="">ODC1000010</a></td>
-                                                <td>23/12/2020</td>
-                                                <td><p class="borde-green1">200</p></td>
-                                                <td>Lider. CA</td>
-                                                <td><a class="bg-red1 num-cicle">1</a></td>
-                                                <td>Jose pereira</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-green btn-sm btn-table">Pagado</button>
-                                                    &nbsp;
-                                                </td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="images/icons/3puntos_H.svg"> </a>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                                                            <a class="dropdown-item" href="#">Duplicar</a>
-                                                            <a class="dropdown-item" href="#">Realizar pago</a>
-                                                            <a class="dropdown-item" href="#">Copiar</a>
-                                                            <a class="dropdown-item" href="#">Eliminar</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr id="row02" class="collapse sub-row">
-                                                <th>-</th>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                            </tr>
-                                        </templete>
-                                        <templete>
-                                            <tr>
-                                                <th xxxxxx="row" class="align-items-center d-flex">
-                                                    <a href="#row03" class="btn  pb-0 pt-0" data-toggle="collapse"> <i class="des-row icon-arrow-right"></i></a>
-                                                    <input type="checkbox" class="chk">
-                                                </th>
-                                                <td><a href="">ODC1000010</a></td>
-                                                <td>23/12/2020</td>
-                                                <td><p class="borde-red1">200</p></td>
-                                                <td>Lider. CA</td>
-                                                <td><a class="bg-blue2 num-cicle">1</a></td>
-                                                <td>Jose pereira</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-red btn-sm btn-table">Cancelado</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 &nbsp;
-                                                </td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="images/icons/3puntos_H.svg"> </a>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu3">
-                                                            <a class="dropdown-item" href="#">Duplicar</a>
-                                                            <a class="dropdown-item" href="#">Realizar pago</a>
-                                                            <a class="dropdown-item" href="#">Copiar</a>
-                                                            <a class="dropdown-item" href="#">Eliminar</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr id="row03" class="collapse sub-row">
-                                                <th xxxxxx="row">-</th>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                            </tr>
-                                        </templete>
-                                        <templete>
-                                            <tr>
-                                                <th class="align-items-center d-flex">
-                                                    <a href="#row04" class="btn  pb-0 pt-0" data-toggle="collapse"> <i class="des-row icon-arrow-right"></i></a>
-                                                    <input type="checkbox" class="chk">
-                                                </th>
-                                                <td><a href="">ODC1000010</a></td>
-                                                <td>23/12/2020</td>
-                                                <td><p class="borde-blue2">200</p></td>
-                                                <td>Lider. CA</td>
-                                                <td><a class="bg-green1 num-cicle">1</a></td>
-                                                <td>Jose pereira</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-table btn-yellow">Aprobar</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              &nbsp;
-                                                </td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="images/icons/3puntos_H.svg"> </a>
-                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu4">
-                                                            <a class="dropdown-item" href="#">Duplicar</a>
-                                                            <a class="dropdown-item" href="#">Realizar pago</a>
-                                                            <a class="dropdown-item" href="#">Copiar</a>
-                                                            <a class="dropdown-item" href="#">Eliminar</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr id="row04" class="collapse sub-row">
-                                                <th xxxxxx="row">-</th>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                                <td>xxxxxx</td>
-                                            </tr>
-                                        </templete>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr id="row01" class="collapse sub-row">
+                                            <th xxxxxx="row">-</th>
+                                            <td>xxxxxx</td>
+                                            <td>xxxxxx</td>
+                                            <td>xxxxxx</td>
+                                            <td>xxxxxx</td>
+                                            <td>xxxxxx</td>
+                                            <td>xxxxxx</td>
+                                            <td>xxxxxx</td>
+                                            <td>xxxxxx</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <div class="justify-content-center mt-0 pt-0 row">
