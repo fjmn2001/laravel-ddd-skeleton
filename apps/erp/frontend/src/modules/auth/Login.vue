@@ -19,7 +19,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text "><img src="@/assets/images/icons/key.svg"></span>
                         </div>
-                        <input type="text" name="password" required class="form-control " aria-label="Username"
+                        <input type="password" name="password" required class="form-control " aria-label="Username"
                                aria-describedby="basic-addon1"
                                placeholder="Contraseña" v-model="password">
                     </div>
@@ -33,7 +33,8 @@
                         <p v-text="errorMessage"></p>
                     </div>
                     <div class="div-text pt-3">
-                        <a class="olvidar-clave" href="#">¿Olvidáste tu contraseña?</a>
+                        <router-link class="olvidar-clave" :to="{name: 'auth.recovery'}">¿Olvidáste tu contraseña?
+                        </router-link>
                     </div>
                     <div class="pt-5">
                         <p class="by mb-0">Diseñado y Desarrollado por &nbsp;<a class="olvidar-clave"
