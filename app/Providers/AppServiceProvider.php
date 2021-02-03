@@ -5,7 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Medine\ERP\Roles\Domain\MySqlRolRepository;
 use Medine\ERP\Roles\Domain\RolRepository;
+use Medine\ERP\Users\Domain\PasswordResetRepository;
 use Medine\ERP\Users\Domain\UserRepository;
+use Medine\ERP\Users\Infrastructure\MySqlPasswordResetRepository;
 use Medine\ERP\Users\Infrastructure\MySqlUserRepository;
 
 use Medine\ERP\Company\Domain\CompanyRepository;
@@ -22,7 +24,8 @@ class AppServiceProvider extends ServiceProvider
         UserRepository::class => MySqlUserRepository::class,
         CompanyRepository::class => MySqlCompanyRepository::class,
         CompanyHasUserRepository::class => MySqlCompanyHasUserRepository::class,
-        RolRepository::class => MySqlRolRepository::class
+        RolRepository::class => MySqlRolRepository::class,
+        PasswordResetRepository::class => MySqlPasswordResetRepository::class
     ];
 
     /**

@@ -4,24 +4,34 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Users\Application\Create;
 
+use Medine\ERP\Users\Domain\PasswordReset;
+use Medine\ERP\Users\Domain\PasswordResetRepository;
+use Medine\ERP\Users\Domain\Service\UserFinder;
+use Medine\ERP\Users\Domain\UserRepository;
+use Medine\ERP\Users\Domain\ValueObjects\UserEmail;
+
 final class PasswordResetTokenCreator
 {
+    private $repository;
+    private $finder;
+
+    public function __construct(PasswordResetRepository $repository, UserRepository $userRepository)
+    {
+        $this->repository = $repository;
+        $this->finder = new UserFinder($userRepository);
+    }
+
     public function __invoke(PasswordResetTokenCreatorRequest $request)
     {
-//        //You can add validation login here
-//        $user = DB::table('users')->where('email', '=', $request->email)
-//            ->first();
-////Check if the user exists
-//        if (count($user) < 1) {
-//            return redirect()->back()->withErrors(['email' => trans('User does not exist')]);
-//        }
-//
-////Create Password Reset Token
-//        DB::table('password_resets')->insert([
-//            'email' => $request->email,
-//            'token' => str_random(60),
-//            'created_at' => Carbon::now()
-//        ]);
+        $user = ($this->finder)(new UserEmail($request->email()));
+        $passwordReset = PasswordReset::create(
+            $user->email(),
+            $request->token()
+        );
+
+        $this->repository->save($passwordReset);
+        //todo: publish event PasswordResetCreated for send email
+
 ////Get the token just created above
 //        $tokenData = DB::table('password_resets')
 //            ->where('email', $request->email)->first();

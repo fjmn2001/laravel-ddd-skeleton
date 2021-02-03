@@ -25,6 +25,15 @@ final class User
         $this->password = $password;
     }
 
+    public static function fromDatabase(
+        UserName $name,
+        UserEmail $email,
+        UserPassword $password
+    ): self
+    {
+        return new self($name, $email, $password);
+    }
+
     public function name(): UserName
     {
         return $this->name;
