@@ -39,6 +39,11 @@ final class PasswordReset extends AggregateRoot
         return $passwordReset;
     }
 
+    public static function fromPrimitive(string $email, string $token, string $createdAt): self
+    {
+        return new self(new UserEmail($email), $token, new DateTimeValueObject($createdAt));
+    }
+
     public function email(): UserEmail
     {
         return $this->email;

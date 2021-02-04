@@ -4,17 +4,25 @@
             <form class="col-lg-7 col-md-9 col-sm-11 row-login text-center" @submit.prevent="submit">
                 <img src="@/assets/images/logo2_SF_1.svg" class="img-fluid mb-5">
                 <div class="div-text mb-5">
-                    <h4 class="font-italic font-weight-bold text-re"><b class="clr-text">Recuperar Contraseña</b></h4>
-                    <p class="mb-4 mt-4 text-in">Ingresa el correo electrónico para reiniciar la contraseña y enviarle
-                        una nueva.<br>Al ingresar la nueva contraseña deberás actualizarla</p>
+                    <h4 class="font-italic font-weight-bold text-re"><b class="clr-text">Nueva Contraseña</b></h4>
+                    <p class="mb-4 mt-4 text-in">Ingrese su nueva contraseña.</p>
                 </div>
-                <div class="input-group mb-4">
+                <div class="input-group mb-5">
                     <div class="input-group-prepend">
-                        <span class="input-group-text input-login"><img src="@/assets/images/icons/@.svg"></span>
+                        <span class="input-group-text "><img src="@/assets/images/icons/key.svg"></span>
                     </div>
-                    <input type="email" name="username" required v-model="email" class="form-control input-login"
+                    <input type="password" name="password" required class="form-control " aria-label="Username"
+                           aria-describedby="basic-addon1"
+                           placeholder="Contraseña" v-model="password">
+                </div>
+                <div class="input-group mb-5">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text "><img src="@/assets/images/icons/key.svg"></span>
+                    </div>
+                    <input type="password" name="password_confirmation" required class="form-control "
                            aria-label="Username"
-                           aria-describedby="basic-addon1" placeholder="Dirección de correo electrónico">
+                           aria-describedby="basic-addon1"
+                           placeholder="Confirmación de contraseña" v-model="passwordConfirmation">
                 </div>
                 <button type="submit" class="btn btn-block btn-sm font-weight-bold linear-btn mb-3 text-white">Enviar
                 </button>
@@ -23,9 +31,6 @@
                 </div>
                 <div v-show="successMessage" class="alert alert-success" role="alert">
                     <p v-text="successMessage"></p>
-                </div>
-                <div class="pt-3 text-left">
-                    <router-link class="olvidar-clave" :to="{name: 'auth.login'}">Iniciar Sesión</router-link>
                 </div>
                 <div class="pt-5">
                     <p class="by mb-0">Diseñado y Desarrollado por &nbsp;<a class="olvidar-clave"
@@ -41,22 +46,27 @@
 import {Component, Vue} from 'vue-property-decorator';
 
 @Component
-export default class Recovery extends Vue {
-    email = '';
+export default class PasswordReset extends Vue {
+    password = '';
+    passwordConfirmation = '';
     sending = false;
     errorMessage = '';
     successMessage = '';
 
     submit() {
         this.sending = true;
-        this.$store.dispatch('auth/passwordRequest', {
-            email: this.email
+        const urlParams = new URLSearchParams(window.location.search);
+        this.$store.dispatch('auth/resetRassword', {
+            password: this.password,
+            passwordConfirmation: this.passwordConfirmation,
+            email: urlParams.get('email'),
+            token: urlParams.get('token'),
         }).then(() => {
             this.errorMessage = '';
-            this.successMessage = `Se ha enviado un mensaje a ${this.email} para continuar con la recuperación de la contraseña.`;
+            this.$router.push({name: 'auth.login'});
         }).catch(error => {
             console.log(error)
-            this.errorMessage = error.response?.data?.message;
+            this.errorMessage = error.response?.data;
             this.successMessage = '';
             this.sending = false;
         });

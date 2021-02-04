@@ -55,4 +55,11 @@ final class User
             $this->name = $newName;
         }
     }
+
+    public function changePassword(UserPassword $newPassword)
+    {
+        if (false === ($this->password()->equals($newPassword))) {
+            $this->password = $newPassword;
+        }
+    }
 }
