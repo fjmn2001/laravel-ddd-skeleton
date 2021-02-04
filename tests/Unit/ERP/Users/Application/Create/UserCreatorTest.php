@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\ERP\Users;
+namespace Tests\Unit\ERP\Users\Application\Create;
 
 use Faker\Factory;
+use Medine\ERP\Shared\Domain\Exceptions\EmptyArgumentException;
 use Medine\ERP\Shared\Domain\Exceptions\InvalidEmailException;
 use Medine\ERP\Users\Application\UserCreator;
 use Medine\ERP\Users\Application\UserCreatorRequest;
@@ -50,6 +51,20 @@ final class UserCreatorTest extends TestCase
         ($this->creator)(new UserCreatorRequest(
             $this->faker->name,
             '@test.net',
+            $this->faker->password
+        ));
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_throw_empty_argument_exception()
+    {
+        $this->expectException(EmptyArgumentException::class);
+
+        $result = ($this->creator)(new UserCreatorRequest(
+            '',
+            $this->faker->email,
             $this->faker->password
         ));
     }

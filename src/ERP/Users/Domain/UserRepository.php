@@ -11,4 +11,6 @@ interface UserRepository
     public function save(User $user): void;
 
     public function find(UserEmail $email): ?User;
+
+    public function update(User $user): void;
 }

@@ -21,4 +21,9 @@ final class InMemoryUserRepository implements UserRepository
     {
         // TODO: Implement find() method.
     }
+
+    public function update(User $user): void
+    {
+        // TODO: Implement update() method.
+    }
 }
