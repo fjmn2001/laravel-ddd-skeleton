@@ -74,6 +74,8 @@ export default new Vuex.Store({
             actions: {
                 passwordRequest(context, credentials) {
                     return new Promise((resolve, reject) => {
+                        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+                        axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
                         axios.post(context.rootState.ERP_URL + '/api/auth/password_request', {
                             email: credentials.email
                         })
