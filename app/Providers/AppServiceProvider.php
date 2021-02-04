@@ -5,6 +5,10 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Medine\ERP\Roles\Domain\MySqlRolRepository;
 use Medine\ERP\Roles\Domain\RolRepository;
+use Medine\ERP\Shared\Domain\Bus\Event\DomainEventSubscriber;
+use Medine\ERP\Shared\Domain\Bus\Event\EventBus;
+use Medine\ERP\Shared\Domain\Bus\Event\SendEmailNotificationOnPasswordResetCreated;
+use Medine\ERP\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus;
 use Medine\ERP\Users\Domain\PasswordResetRepository;
 use Medine\ERP\Users\Domain\UserRepository;
 use Medine\ERP\Users\Infrastructure\MySqlPasswordResetRepository;
@@ -25,7 +29,9 @@ class AppServiceProvider extends ServiceProvider
         CompanyRepository::class => MySqlCompanyRepository::class,
         CompanyHasUserRepository::class => MySqlCompanyHasUserRepository::class,
         RolRepository::class => MySqlRolRepository::class,
-        PasswordResetRepository::class => MySqlPasswordResetRepository::class
+        PasswordResetRepository::class => MySqlPasswordResetRepository::class,
+        //shared
+        EventBus::class => InMemorySymfonyEventBus::class
     ];
 
     /**
