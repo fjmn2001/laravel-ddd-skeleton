@@ -17,7 +17,8 @@ final class SendEmailNotificationOnPasswordResetCreated implements DomainEventSu
     public function __invoke(PasswordResetCreatedDomainEvent $event)
     {
         dd(
-            $event
+            $event,
+            'TODO: SendEmailNotificationOnPasswordResetCreated'
         );
         ////Retrieve the user from the database
 //        $user = DB::table('users')->where('email', $email)->select('firstname', 'email')->first();

@@ -33,6 +33,6 @@ final class PasswordResetTokenCreator
         );
 
         $this->repository->save($passwordReset);
-        $this->bus->publish($passwordReset->pullDomainEvents());
+        $this->bus->publish(...$passwordReset->pullDomainEvents());
     }
 }
