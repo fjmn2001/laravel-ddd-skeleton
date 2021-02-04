@@ -36,4 +36,11 @@ final class MySqlPasswordResetRepository extends MySqlRepository implements Pass
             );
         })->toArray();
     }
+
+    public function delete(Criteria $criteria): void
+    {
+        $query = DB::table('password_resets');
+        $query = (new MySqlPasswordResetFilters($query))($criteria);
+        $query->delete();
+    }
 }

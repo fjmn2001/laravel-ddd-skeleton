@@ -11,4 +11,6 @@ interface PasswordResetRepository
     public function save(PasswordReset $passwordReset): void;
 
     public function matching(Criteria $criteria);
+
+    public function delete(Criteria $criteria): void;
 }
