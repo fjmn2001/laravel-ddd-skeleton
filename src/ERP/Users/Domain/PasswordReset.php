@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Users\Domain;
 
+use Medine\ERP\Shared\Domain\Aggregate\AggregateRoot;
 use Medine\ERP\Shared\Domain\ValueObjects\DateTimeValueObject;
+use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 use Medine\ERP\Users\Domain\ValueObjects\UserEmail;
 
-final class PasswordReset
+final class PasswordReset extends AggregateRoot
 {
     private $email;
     private $token;
@@ -24,9 +26,17 @@ final class PasswordReset
         $this->createdAt = $createdAt;
     }
 
-    public static function create(UserEmail $param, string $token): self
+    public static function create(UserEmail $email, string $token): self
     {
-        return new self($param, $token, DateTimeValueObject::now());
+        $passwordReset = new self($email, $token, DateTimeValueObject::now());
+
+        $passwordReset->record(new PasswordResetCreatedDomainEvent(
+            Uuid::random()->value(),
+            $email->value(),
+            $token
+        ));
+
+        return $passwordReset;
     }
 
     public function email(): UserEmail
