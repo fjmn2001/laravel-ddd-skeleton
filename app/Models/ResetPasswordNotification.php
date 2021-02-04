@@ -72,8 +72,8 @@ final class ResetPasswordNotification extends Notification
 //                'token' => $this->token,
 //                'email' => $notifiable->getEmailForPasswordReset(),
 //            ], false));
-            $url = env('ERP_FRONTEND_URL') . '/auth/password_reset/' . $notifiable->getEmailForPasswordReset()
-                . '/' . $this->token;
+            $url = env('ERP_FRONTEND_URL') . '/auth/password_reset?email=' . $notifiable->getEmailForPasswordReset()
+                . '&token=' . $this->token;
         }
 
         return $this->buildMailMessage($url);
