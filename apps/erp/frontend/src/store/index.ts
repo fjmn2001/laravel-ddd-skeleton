@@ -3,8 +3,6 @@ import Vuex from 'vuex'
 import axios from "axios"
 import * as types from './mutation-types'
 
-//import auth from './../modules/auth/router/index'
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({

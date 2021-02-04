@@ -56,7 +56,7 @@ export default class Login extends Vue {
             this.successMessage = `Se ha enviado un mensaje a ${this.email} para continuar con la recuperación de la contraseña.`;
         }).catch(error => {
             console.log(error)
-            this.errorMessage = error.response.data;
+            this.errorMessage = error.response?.data?.message;
             this.successMessage = '';
             this.sending = false;
         });
