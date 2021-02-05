@@ -1,177 +1,7 @@
 <template>
     <div id="wrapper">
-        <!-- ===== Top-Navigation ===== -->
-        <nav class="navbar navbar-default navbar-static-top m-b-0">
-            <div class="navbar-header">
-                <div class="top-left-part">
-                    <a class="logo" href="javascript:void(0)"> <b> <img src="@/assets/images/logo-M.svg" alt="home">
-                    </b> <span
-                        style=""> <img src="@/assets/images/logo-text-erp.svg" alt="homepage" class="dark-logo"
-                                       id="ima-logo-text"> </span> </a>
-                </div>
-                <ul class="nav navbar-top-links navbar-left hidden-xs">
-                    <li class="icon-nav" style="margin-left: 5px;">
-                        <a href="javascript:void(0)" class="sidebartoggler font-20 waves-effect waves-light"><i
-                            class="icon-arrow-left-circle"></i></a>
-                    </li>
-                    <li class="icon-nav">
-                        <a href="javascript:void(0)" class="font-20"><i class="fa fa-home"></i></a>
-                    </li>
-                    <li style="padding-top: 3px;">
-                        <ul class="menu-horizontal" id="list01">
-                            <li>
-                                <a class="nav-link menu-link-med" id="menu-compras"
-                                   href="javascript:void(0)">Compras</a>
-                            </li>
-                            <li>
-                                <a class="nav-link menu-link-med" id="menu-ventas" href="javascript:void(0)">Ventas</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="#">Inventario</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="#">Contabilidad</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="#">Contratos</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="#">Empresas</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li id="iconList02" style="display: none;">
-                        <ul class="nav navbar-top-links">
-                            <li class="dropdown">
-                                <a class="font-20 waves-effect waves-light pl-2 pr-2" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false" href="javascript:void(0);"> <i
-                                    class="fa fa-chevron-circle-down"></i> </a>
-                                <ul class="animated dropdown-menu dropdown-menu-left dropdown-tasks slideInUp"
-                                    id="list02">
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-top-links navbar-right pull-right">
-                    <li class="dropdown">
-                        <a class="font-20 waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true"
-                           aria-expanded="false" href="javascript:void(0);"> <i class="icon-options"></i> </a>
-                        <ul class="animated dropdown-menu dropdown-menu-right dropdown-tasks slideInUp">
-                            <li>
-                                <a href="javascript:void(0);"><i class="icon-user fa-fw"></i> Perfil</a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"><i class="icon-drawar fa-fw"></i> Bandeja de entrada</a>
-                            </li>
-                            <hr>
-                            <li class="right-side-toggle">
-                                <a class="right-side-toggler waves-effect waves-light" href="javascript:void(0)"><i
-                                    class="icon-settings fa-fw"></i> Ajuste de sistema</a>
-                            </li>
-                            <hr>
-                            <li>
-                                <a href=""><i class="icon-power fa-fw"></i> Cerrar sesión </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!-- ===== Left-Sidebar ===== -->
-        <aside class="sidebar" role="navigation" style="overflow: visible;">
-            <div class="scroll-sidebar" style="overflow: hidden;">
-                <div class="user-profile">
-                    <div class="dropdown user-pro-body">
-                        <div class="profile-image">
-                            <img src="@/assets/images/user.jpg" alt="user-img" class="img-circle">
-                        </div>
-                        <p class="profile-text m-t-15 font-16"><a href="javascript:void(0);">José Pereira</a></p>
-                    </div>
-                </div>
-                <nav class="sidebar-nav">
-                    <ul id="side-menu" class="sub-menu-lateral sub-menu-compras" style="display: block;">
-                        <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
-                                class="fa-fw icon-people"></i> <span class="hide-menu">Proveedores</span></a>
-                        </li>
-                        <li class="" style="padding-left: 0px;">
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
-                                class="icon-basket-loaded fa-fw"></i> <span class="hide-menu">Compras<span
-                                class="label label-rounded label-info pull-right">4</span></span></a>
-                            <ul aria-expanded="false" style="height: 0px; margin-left: -30px;" class="collapse">
-                                <li>
-                                    <a href="#">Proveedores</a>
-                                </li>
-                                <li>
-                                    <a href="#">Pedidos</a>
-                                    <ul aria-expanded="false" class="collapse" style="height: 0px;">
-                                        <li>
-                                            <a href="#">Directo</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">En línea</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Compras</a>
-                                </li>
-                                <li>
-                                    <a href="#">Pagos</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
-                                class="fa-fw  icon-shield"></i> <span class="hide-menu">Seguros</span></a>
-                        </li>
-                        <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
-                                class="fa-fw  icon-credit-card "></i> <span class="hide-menu">Transacciones</span></a>
-                        </li>
-                        <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
-                                class="fa-fw   icon-docs"></i> <span class="hide-menu">Documentos</span></a>
-                        </li>
-                        <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
-                                class="fa-fw  icon-chart "></i> <span class="hide-menu">Reportes</span></a>
-                        </li>
-                        <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
-                                class="fa-fw  icon-settings "></i> <span class="hide-menu">Configuración</span></a>
-                        </li>
-                    </ul>
-                    <ul id="side-menu" class="sub-menu-lateral sub-menu-ventas" style="display: none">
-                        <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
-                                class="fa-fw icon-people"></i> <span class="hide-menu">Clientes</span></a>
-                        </li>
-                        <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
-                                class="fa-fw  icon-bag"></i> <span class="hide-menu">Ventas</span></a>
-                        </li>
-                        <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
-                                class="fa-fw   icon-notebook "></i> <span class="hide-menu">Cobros</span></a>
-                        </li>
-                        <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
-                                class="fa-fw   icon-docs"></i> <span class="hide-menu">Documentos</span></a>
-                        </li>
-                        <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
-                                class="fa-fw  icon-chart "></i> <span class="hide-menu">Reportes</span></a>
-                        </li>
-                        <li>
-                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
-                                class="fa-fw  icon-settings "></i> <span class="hide-menu">Configuración</span></a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </aside>
+        <topbar></topbar>
+        <left-bar></left-bar>
         <div class="page-wrapper" style="min-height: 875px;">
             <div class="container-fluid mt-lg-5 mt-md-5 pt-lg-2 pt-md-2">
                 <div class="pl-1 pr-1">
@@ -211,7 +41,8 @@
                             <div class="des01 pb-2 pl-4 pr-4">
                                 <div class="mt-3 pl-3 pr-3 row">
                                     <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center">
-                                        <img src="@/assets/images/company.jpg" class="img-fluid img-thumbnail logo-empresa">
+                                        <img src="@/assets/images/company.jpg"
+                                             class="img-fluid img-thumbnail logo-empresa">
                                     </div>
                                     <div class="col-lg-9 col-md-6 col-sm-12 pt-4">
                                         <label>
@@ -318,8 +149,12 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
+import Topbar from "@/components/Topbar.vue";
+import LeftBar from "@/components/LeftBar.vue";
 
-@Component
+@Component({
+    components: {LeftBar, Topbar}
+})
 export default class Home extends Vue {
     logout() {
         this.$store.dispatch('destroyToken').then(() => {
