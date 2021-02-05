@@ -2,28 +2,7 @@
     <div class="page-wrapper" style="min-height: 875px;">
         <div class="container-fluid mt-lg-5 mt-md-5 pt-lg-2 pt-md-2">
             <div class="pl-1 pr-1">
-                <div class="div-title-table mt-4 row">
-                    <div
-                        class="align-items-center col-8 col-lg-9 col-md-8 col-sm-8 d-flex d-lg-flex d-md-flex d-sm-flex flex-column flex-lg-row flex-md-column flex-sm-column pl-2 pl-lg-4 pl-md-2">
-                        <h2 class="align-ítems-center d-flex d-inline mb-md-0 xtitle-table">Crear empresa</h2>
-                        <p class="ml-lg-4 ml-md-0 navigation pt-lg-2 pt-md-1">Empresas -&gt;&nbsp;<a href=""
-                                                                                                     class="font-weight-bolder">Crear</a>
-                        </p>
-                    </div>
-                    <div
-                        class="align-items-center btn-sm col-4 col-lg-3 col-md-4 col-sm-4 d-flex justify-content-end">
-                        <div class="dropdown">
-                            <a class="btn mr-lg-2" role="button" id="dropdownMenu0" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false" href="#"> <img
-                                src="@/assets/images/icons/3puntos_V.svg"> </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu0">
-                                <a class="dropdown-item" href="#">Pagar</a>
-                                <a class="dropdown-item" href="#">Copiar</a>
-                                <a class="dropdown-item" href="#">Eliminar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <breadcrums :breadcrumb_url="breadcrumb_url"></breadcrums>
                 <div class="div-title-table mt-3 pl-1 pr-1 pt-2 row" id="tags"
                      style="position: sticky; top: 3px; z-index: 2; border-right-style: none; border-right-color: #ffffff; border-left-style: none; border-left-color: #ffffff; margin-right: -16px; margin-left: -16px;">
                 </div>
@@ -146,10 +125,15 @@
 </template>
 
 <script lang="ts">
-import {Vue} from 'vue-property-decorator';
+import {Component, Vue} from 'vue-property-decorator';
+import Breadcrums from '@/components/Breadcrums.vue';
+
+@Component({
+    components: {Breadcrums}
+})
 
 export default class Home extends Vue {
-
+    breadcrumb_url = this.$store.state.ERP_URL + '/api/company/breadcrumbs'
 }
 </script>
 
