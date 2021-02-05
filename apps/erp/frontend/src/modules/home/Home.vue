@@ -1,7 +1,318 @@
 <template>
-    <div>
-        <h1>Hi there!!!</h1>
-        <button type="button" @click.prevent="logout">Logout</button>
+    <div id="wrapper">
+        <!-- ===== Top-Navigation ===== -->
+        <nav class="navbar navbar-default navbar-static-top m-b-0">
+            <div class="navbar-header">
+                <div class="top-left-part">
+                    <a class="logo" href="javascript:void(0)"> <b> <img src="@/assets/images/logo-M.svg" alt="home">
+                    </b> <span
+                        style=""> <img src="@/assets/images/logo-text-erp.svg" alt="homepage" class="dark-logo"
+                                       id="ima-logo-text"> </span> </a>
+                </div>
+                <ul class="nav navbar-top-links navbar-left hidden-xs">
+                    <li class="icon-nav" style="margin-left: 5px;">
+                        <a href="javascript:void(0)" class="sidebartoggler font-20 waves-effect waves-light"><i
+                            class="icon-arrow-left-circle"></i></a>
+                    </li>
+                    <li class="icon-nav">
+                        <a href="javascript:void(0)" class="font-20"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li style="padding-top: 3px;">
+                        <ul class="menu-horizontal" id="list01">
+                            <li>
+                                <a class="nav-link menu-link-med" id="menu-compras"
+                                   href="javascript:void(0)">Compras</a>
+                            </li>
+                            <li>
+                                <a class="nav-link menu-link-med" id="menu-ventas" href="javascript:void(0)">Ventas</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="#">Inventario</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="#">Contabilidad</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="#">Contratos</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="#">Empresas</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="iconList02" style="display: none;">
+                        <ul class="nav navbar-top-links">
+                            <li class="dropdown">
+                                <a class="font-20 waves-effect waves-light pl-2 pr-2" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false" href="javascript:void(0);"> <i
+                                    class="fa fa-chevron-circle-down"></i> </a>
+                                <ul class="animated dropdown-menu dropdown-menu-left dropdown-tasks slideInUp"
+                                    id="list02">
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-top-links navbar-right pull-right">
+                    <li class="dropdown">
+                        <a class="font-20 waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false" href="javascript:void(0);"> <i class="icon-options"></i> </a>
+                        <ul class="animated dropdown-menu dropdown-menu-right dropdown-tasks slideInUp">
+                            <li>
+                                <a href="javascript:void(0);"><i class="icon-user fa-fw"></i> Perfil</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);"><i class="icon-drawar fa-fw"></i> Bandeja de entrada</a>
+                            </li>
+                            <hr>
+                            <li class="right-side-toggle">
+                                <a class="right-side-toggler waves-effect waves-light" href="javascript:void(0)"><i
+                                    class="icon-settings fa-fw"></i> Ajuste de sistema</a>
+                            </li>
+                            <hr>
+                            <li>
+                                <a href=""><i class="icon-power fa-fw"></i> Cerrar sesión </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- ===== Left-Sidebar ===== -->
+        <aside class="sidebar" role="navigation" style="overflow: visible;">
+            <div class="scroll-sidebar" style="overflow: hidden;">
+                <div class="user-profile">
+                    <div class="dropdown user-pro-body">
+                        <div class="profile-image">
+                            <img src="@/assets/images/user.jpg" alt="user-img" class="img-circle">
+                        </div>
+                        <p class="profile-text m-t-15 font-16"><a href="javascript:void(0);">José Pereira</a></p>
+                    </div>
+                </div>
+                <nav class="sidebar-nav">
+                    <ul id="side-menu" class="sub-menu-lateral sub-menu-compras" style="display: block;">
+                        <li>
+                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
+                                class="fa-fw icon-people"></i> <span class="hide-menu">Proveedores</span></a>
+                        </li>
+                        <li class="" style="padding-left: 0px;">
+                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
+                                class="icon-basket-loaded fa-fw"></i> <span class="hide-menu">Compras<span
+                                class="label label-rounded label-info pull-right">4</span></span></a>
+                            <ul aria-expanded="false" style="height: 0px; margin-left: -30px;" class="collapse">
+                                <li>
+                                    <a href="#">Proveedores</a>
+                                </li>
+                                <li>
+                                    <a href="#">Pedidos</a>
+                                    <ul aria-expanded="false" class="collapse" style="height: 0px;">
+                                        <li>
+                                            <a href="#">Directo</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">En línea</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Compras</a>
+                                </li>
+                                <li>
+                                    <a href="#">Pagos</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
+                                class="fa-fw  icon-shield"></i> <span class="hide-menu">Seguros</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
+                                class="fa-fw  icon-credit-card "></i> <span class="hide-menu">Transacciones</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
+                                class="fa-fw   icon-docs"></i> <span class="hide-menu">Documentos</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
+                                class="fa-fw  icon-chart "></i> <span class="hide-menu">Reportes</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
+                                class="fa-fw  icon-settings "></i> <span class="hide-menu">Configuración</span></a>
+                        </li>
+                    </ul>
+                    <ul id="side-menu" class="sub-menu-lateral sub-menu-ventas" style="display: none">
+                        <li>
+                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
+                                class="fa-fw icon-people"></i> <span class="hide-menu">Clientes</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
+                                class="fa-fw  icon-bag"></i> <span class="hide-menu">Ventas</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
+                                class="fa-fw   icon-notebook "></i> <span class="hide-menu">Cobros</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
+                                class="fa-fw   icon-docs"></i> <span class="hide-menu">Documentos</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
+                                class="fa-fw  icon-chart "></i> <span class="hide-menu">Reportes</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i
+                                class="fa-fw  icon-settings "></i> <span class="hide-menu">Configuración</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <div class="page-wrapper" style="min-height: 875px;">
+            <div class="container-fluid mt-lg-5 mt-md-5 pt-lg-2 pt-md-2">
+                <div class="pl-1 pr-1">
+                    <div class="div-title-table mt-4 row">
+                        <div
+                            class="align-items-center col-8 col-lg-9 col-md-8 col-sm-8 d-flex d-lg-flex d-md-flex d-sm-flex flex-column flex-lg-row flex-md-column flex-sm-column pl-2 pl-lg-4 pl-md-2">
+                            <h2 class="align-ítems-center d-flex d-inline mb-md-0 xtitle-table">Crear empresa</h2>
+                            <p class="ml-lg-4 ml-md-0 navigation pt-lg-2 pt-md-1">Empresas -&gt;&nbsp;<a href=""
+                                                                                                         class="font-weight-bolder">Crear</a>
+                            </p>
+                        </div>
+                        <div
+                            class="align-items-center btn-sm col-4 col-lg-3 col-md-4 col-sm-4 d-flex justify-content-end">
+                            <div class="dropdown">
+                                <a class="btn mr-lg-2" role="button" id="dropdownMenu0" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false" href="#"> <img
+                                    src="@/assets/images/icons/3puntos_V.svg"> </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu0">
+                                    <a class="dropdown-item" href="#">Pagar</a>
+                                    <a class="dropdown-item" href="#">Copiar</a>
+                                    <a class="dropdown-item" href="#">Eliminar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="div-title-table mt-3 pl-1 pr-1 pt-2 row" id="tags"
+                         style="position: sticky; top: 3px; z-index: 2; border-right-style: none; border-right-color: #ffffff; border-left-style: none; border-left-color: #ffffff; margin-right: -16px; margin-left: -16px;">
+                    </div>
+                    <div class="d-datos-principal ml-n3 mr-n3">
+                        <div class="pb-4">
+                            <div class="align-items-center d-flex justify-content-between pt-sm-3 row">
+                                <div class="d-flex pl-md-3">
+                                    <h4 class="ml-5 ml-md-4 pb-md-0" style="padding-left: 12px;">Detalles de la
+                                        empresa</h4>
+                                </div>
+                            </div>
+                            <div class="des01 pb-2 pl-4 pr-4">
+                                <div class="mt-3 pl-3 pr-3 row">
+                                    <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center">
+                                        <img src="@/assets/images/company.jpg" class="img-fluid img-thumbnail logo-empresa">
+                                    </div>
+                                    <div class="col-lg-9 col-md-6 col-sm-12 pt-4">
+                                        <label>
+                                            <label>Nombre de la empresa</label>
+                                        </label>
+                                        <input type="text" required="" class="form-control inp-filter">
+                                        <div class="mt-3 row">
+                                            <div class="col-lg-6 col-md-12">
+                                                <label>Tipo de empresa</label>
+                                                <input type="text" required="" class="form-control inp-filter">
+                                            </div>
+                                            <div class="col-lg-6 col-md-12">
+                                                <label>Estado</label>
+                                                <select required="" class="form-control inp-filter">
+                                                    <option value=""></option>
+                                                    <option value="1">option1</option>
+                                                    <option value="3">option2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 pl-3 pr-3 row">
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label>Dirección</label>
+                                        <input type="text" required="" class="form-control inp-filter">
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label>Teléfono</label>
+                                        <input type="text" required="" class="form-control inp-filter">
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label>Unidad de peso</label>
+                                        <select class="form-control inp-filter">
+                                            <option value=""></option>
+                                            <option value="1">option1</option>
+                                            <option value="2">option2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label>Retiene impuestos</label>
+                                        <select class="form-control inp-filter">
+                                            <option value=""></option>
+                                            <option value="1">option1</option>
+                                            <option value="2">option2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mt-3 pl-3 pr-3 row">
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label>Código patronal</label>
+                                        <input type="text" required="" class="form-control inp-filter">
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label>Permitir crear facturas en periodos cerrados: </label>
+                                        <input type="text" required="" class="form-control inp-filter">
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <label>Referencia&nbsp;</label>
+                                        <input type="text" required="" class="form-control inp-filter">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-datos-principal ml-n3 mr-n3">
+                        <div class="mt-3 pt-3">
+                            <h4 class="ml-5 ml-md-4 pb-md-0" style="padding-left: 14px;">Políticas de cobros</h4>
+                            <div class="des01 pb-3 pl-4 pr-4">
+                                <div class="mt-3 pl-3 pr-3 row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <label class="font-weight-bold">Permitir crear facturas en periodos cerrados&nbsp;</label>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control">
+                                                <div class="input-group-addon" style="border-right: 1px solid #e5ebec;">
+                                                    <span>Días</span>
+                                                </div>
+                                            </div>
+                                            <span class="help-block text-navy"><i><i>*Deje 0 si no quiere incluir un límite.</i></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pb-4 pr-0 pr-md-3 pt-3 row">
+                    <div class="col-6 col-md-2 col-sm-6 offset-md-8">
+                        <button type="button" class="btn btn-block btn-outline-secondary mr-5 pl-3 pr-3"
+                                style="margin: 10px 10px 10px 0px;">Cancelar
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-2 col-sm-6" style="margin-top: 3px;">
+                        <button type="button" class="btn btn-block btn-blue-deg mb-2 mr-0 mr-md-5 mt-2"
+                                style="height: 38px;">Guardar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
