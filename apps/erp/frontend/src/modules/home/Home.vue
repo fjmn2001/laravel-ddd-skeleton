@@ -1,7 +1,7 @@
 <template>
     <div id="wrapper">
         <topbar></topbar>
-        <left-bar></left-bar>
+        <leftbar></leftbar>
         <div class="page-wrapper" style="min-height: 875px;">
             <div class="container-fluid mt-lg-5 mt-md-5 pt-lg-2 pt-md-2">
                 <div class="pl-1 pr-1">
@@ -150,10 +150,10 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import Topbar from "@/components/Topbar.vue";
-import LeftBar from "@/components/LeftBar.vue";
+import Leftbar from "@/components/Leftbar.vue";
 
 @Component({
-    components: {LeftBar, Topbar}
+    components: {Leftbar, Topbar}
 })
 export default class Home extends Vue {
     logout() {

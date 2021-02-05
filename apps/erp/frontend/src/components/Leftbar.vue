@@ -96,7 +96,7 @@
 
 <script>
 export default {
-    name: "LeftBar"
+    name: "Leftbar"
 }
 </script>
 
