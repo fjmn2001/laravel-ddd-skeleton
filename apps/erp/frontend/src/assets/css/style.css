@@ -1,5 +1,4 @@
-/* Fonts ----------------------------------*/
-
+/* Fonts ---------------------------------- */
 @font-face {
     font-family: 'Poppins-Bold';
     src: url(../fonts/Poppins-Bold.ttf);
@@ -30,8 +29,7 @@
     src: url(../fonts/Poppins-MediumItalic.ttf);
 }
 
-/* End fonts ----------------------------------*/
-
+/* End fonts ---------------------------------- */
 * {
     padding: 0px;
     margin: 0px;
@@ -39,14 +37,14 @@
 
 th {
     color: #576984;
-    text-align: center;
+    text-align: left;
     font-weight: 700;
 }
 
 td {
     color: #576984;
     font-weight: 500;
-    text-align: center;
+    text-align: left;
 }
 
 thead {
@@ -305,20 +303,20 @@ body {
 }
 
 .num-cicle {
-    width: 23px;
-    height: 23px;
-    border-radius: 15px;
-    padding: 2px 2px 2px 1px;
-    margin-right: 6px;
-    margin-left: 5px;
+    border-radius: 25px;
+    padding: 2px 5px;
     display: inline-flex;
     text-align: center;
     justify-content: center;
     color: #ffffff;
+    min-width: 23px;
+    min-height: 23px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 .borde-yellow1 {
-    border-radius: 7px;
+    border-radius: 4px;
     text-align: center;
     font-weight: bold;
     padding: 0px;
@@ -348,7 +346,7 @@ body {
 }
 
 .borde-blue1 {
-    border-radius: 7px;
+    border-radius: 4px;
     text-align: center;
     font-weight: bold;
     padding: 0px;
@@ -409,7 +407,7 @@ body {
 }
 
 #th-ini {
-    padding: 8px 0px 0px 22px;
+    padding: 8px 0px 0px 31px;
     width: 77px;
 }
 
@@ -881,7 +879,6 @@ select {
 
 select::-ms-expand {
     display: none;
-
 }
 
 .table tbody tr {
@@ -898,8 +895,7 @@ select::-ms-expand {
     width: 320px;
 }
 
-/* login ----------------------------------------------------------------------------------------------------*/
-
+/* login ---------------------------------------------------------------------------------------------------- */
 .center-login-med {
     display: flex;
     align-items: center;
@@ -920,11 +916,7 @@ select::-ms-expand {
     border-radius: 16.6291px;
 }
 
-
 .olvidar-clave {
-    font-family: Arial;
-    font-style: italic;
-    font-size: 15px;
     color: #1ca3fa;
 }
 
@@ -935,11 +927,8 @@ select::-ms-expand {
 }
 
 .by {
-    font-family: Arial;
-    font-style: italic;
-    font-size: 13px;
     align-items: center;
-    color: #8F8F8F;
+    color: #6c757d;
 }
 
 .text-in {
@@ -962,11 +951,12 @@ select::-ms-expand {
 
 .clr-text {
     color: #486075;
+    font-style: normal;
 }
 
 .linear-btn {
     background: linear-gradient(269.85deg, #0FBAF2 -16.5%, #0F95F2 111.4%);
-    height: 32px;
+    height: 38px;
 }
 
 .linear-btn:hover {
@@ -983,8 +973,9 @@ select::-ms-expand {
 
 .btn-outline-info-med {
     background: #fffdfd;
-    color: #0fbaf2;
-    border: 1px solid #0fbaf2;
+    color: #1ca3fa;
+    border: 1px solid #1ca3fa;
+    height: 32px;
 }
 
 .btn-outline-info-med:hover {
@@ -1001,4 +992,12 @@ select::-ms-expand {
     background-color: white;
 }
 
-/* Fin login ----------------------------------------------------------------------------------------------------*/
+/* Fin login ---------------------------------------------------------------------------------------------------- */
+.tabla-des {
+    padding-left: 39px;
+    padding-right: 39px;
+}
+
+.pad-l29 {
+    padding-top: 29px;
+}
