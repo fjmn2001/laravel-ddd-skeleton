@@ -45,6 +45,15 @@ class DateTimeValueObject
         return $date;
     }
 
+    public static function now()
+    {
+        $dateTimeImmutable = new \DateTimeImmutable;
+
+        return new self(
+            $dateTimeImmutable->format('Y-m-d H:s:i')
+        );
+    }
+
     public function value(): string
     {
         return $this->date;

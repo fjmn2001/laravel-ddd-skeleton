@@ -25,6 +25,15 @@ final class User
         $this->password = $password;
     }
 
+    public static function fromDatabase(
+        UserName $name,
+        UserEmail $email,
+        UserPassword $password
+    ): self
+    {
+        return new self($name, $email, $password);
+    }
+
     public function name(): UserName
     {
         return $this->name;
@@ -38,5 +47,19 @@ final class User
     public function password(): UserPassword
     {
         return $this->password;
+    }
+
+    public function changeName(UserName $newName): void
+    {
+        if (false === ($this->name()->equals($newName))) {
+            $this->name = $newName;
+        }
+    }
+
+    public function changePassword(UserPassword $newPassword)
+    {
+        if (false === ($this->password()->equals($newPassword))) {
+            $this->password = $newPassword;
+        }
     }
 }

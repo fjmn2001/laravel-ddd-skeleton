@@ -5,24 +5,29 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Medine\ERP\Roles\Domain\MySqlRolRepository;
 use Medine\ERP\Roles\Domain\RolRepository;
+use Medine\ERP\Shared\Domain\Bus\Event\EventBus;
+use Medine\ERP\Shared\Domain\Bus\Event\SendEmailNotificationOnPasswordResetCreated;
+use Medine\ERP\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus;
+use Medine\ERP\Users\Domain\PasswordResetRepository;
 use Medine\ERP\Users\Domain\UserRepository;
+use Medine\ERP\Users\Infrastructure\MySqlPasswordResetRepository;
 use Medine\ERP\Users\Infrastructure\MySqlUserRepository;
-
 use Medine\ERP\Company\Domain\CompanyRepository;
 use Medine\ERP\Company\Infrastructure\MySqlCompanyRepository;
-
 use Medine\ERP\Company\Domain\CompanyHasUserRepository;
 use Medine\ERP\Company\Infrastructure\MySqlCompanyHasUserRepository;
-
 use function Lambdish\Phunctional\each;
 
 class AppServiceProvider extends ServiceProvider
 {
+    private const TAGGED_SUBSCRIBERS = 'subscribers';
+
     private $wiringObjects = [
         UserRepository::class => MySqlUserRepository::class,
         CompanyRepository::class => MySqlCompanyRepository::class,
         CompanyHasUserRepository::class => MySqlCompanyHasUserRepository::class,
-        RolRepository::class => MySqlRolRepository::class
+        RolRepository::class => MySqlRolRepository::class,
+        PasswordResetRepository::class => MySqlPasswordResetRepository::class
     ];
 
     /**
@@ -48,5 +53,20 @@ class AppServiceProvider extends ServiceProvider
                 $concrete
             );
         }, $this->wiringObjects);
+
+        $this->app->bind(EventBus::class, function () {
+            $subscribers = [];
+            each(function ($row) use (&$subscribers) {
+                $subscribers[] = $row;
+            }, $this->app->tagged(self::TAGGED_SUBSCRIBERS));
+            return new InMemorySymfonyEventBus($subscribers);
+        });
+
+        $this->app->tag(
+            [
+                SendEmailNotificationOnPasswordResetCreated::class
+            ],
+            [self::TAGGED_SUBSCRIBERS]
+        );
     }
 }
