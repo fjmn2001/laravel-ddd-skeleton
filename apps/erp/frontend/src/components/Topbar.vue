@@ -69,7 +69,7 @@
                         </li>
                         <hr>
                         <li>
-                            <a href=""><i class="icon-power fa-fw"></i> Cerrar sesión </a>
+                            <a href="#" @click.prevent="logout"><i class="icon-power fa-fw"></i> Cerrar sesión </a>
                         </li>
                     </ul>
                 </li>
@@ -80,7 +80,14 @@
 
 <script>
 export default {
-    name: "Topbar"
+    name: "Topbar",
+    methods: {
+        logout() {
+            this.$store.dispatch('destroyToken').then(() => {
+                this.$router.push({name: 'landing'});
+            })
+        }
+    }
 }
 </script>
 
