@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Medine\ERP\Roles\Application\Find;
 
 use Medine\ERP\Roles\Application\RolResponse;
-use Medine\ERP\Roles\Application\Update\RolNotExistsException;
 use Medine\ERP\Roles\Domain\RolRepository;
 use Medine\ERP\Roles\Domain\ValueObjects\RolId;
 
@@ -27,7 +26,7 @@ final class RolFinder
             $rol->name()->value(),
             $rol->description()->value(),
             $rol->superuser()->value(),
-            $rol->status()->value()
+            $rol->state()->value()
         );
     }
 }

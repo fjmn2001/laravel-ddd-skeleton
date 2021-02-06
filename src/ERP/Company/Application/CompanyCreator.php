@@ -12,7 +12,7 @@ use Medine\ERP\Company\Domain\ValueObjects\CompanyAddress;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyId;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyLogo;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyName;
-use Medine\ERP\Company\Domain\ValueObjects\CompanyStatus;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyState;
 use Medine\ERP\Roles\Domain\Rol;
 use Medine\ERP\Roles\Domain\RolRepository;
 use Medine\ERP\Roles\Domain\ValueObjects\RolCompanyId;
@@ -45,7 +45,7 @@ final class CompanyCreator
             new CompanyId($request->id()),
             new CompanyName($request->name()),
             new CompanyAddress($request->address()),
-            new CompanyStatus($request->status()),
+            new CompanyState($request->state()),
             new CompanyLogo($request->logo())
         );
 
