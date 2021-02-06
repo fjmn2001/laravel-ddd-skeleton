@@ -5,6 +5,7 @@ import store from "../store";
 import auth from '../modules/auth/router/index';
 import home from '../modules/home/router/index';
 import landing from '../modules/landing/router/index';
+import companies from '../modules/companies/router/index';
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,7 @@ const routes: Array<RouteConfig> = [
     ...auth,
     ...home,
     ...landing,
+    ...companies
     // {
     //     path: '/',
     //     name: 'Home',

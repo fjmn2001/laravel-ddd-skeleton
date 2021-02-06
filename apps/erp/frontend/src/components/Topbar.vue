@@ -34,7 +34,7 @@
                             <a class="nav-link" href="#">Contratos</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="#">Empresas</a>
+                            <router-link :to="{name: 'companies'}" class="nav-link">Empresas</router-link>
                         </li>
                     </ul>
                 </li>
