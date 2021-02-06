@@ -10,6 +10,12 @@
             </div>
             <form-buttons @cancel="cancel" :disabledSave="sending"></form-buttons>
         </form>
+        <pre>
+            {{ $store.state.companies.company }}
+        </pre>
+        <pre>
+            {{ company }}
+        </pre>
     </div>
 </template>
 
@@ -18,6 +24,8 @@ import {Component, Vue} from 'vue-property-decorator';
 import Breadcrums from '@/components/Breadcrums.vue';
 import GeneralsDetails from "@/modules/companies/form/GeneralsDetails.vue";
 import FormButtons from "@/modules/shared/Infrastructure/FormButtons.vue";
+import CompanyCreator from "@/modules/companies/Application/CompanyCreator";
+import CompanyCreatorRequest from "@/modules/companies/Application/CompanyCreatorRequest";
 
 @Component({
     components: {FormButtons, GeneralsDetails, Breadcrums}
@@ -26,16 +34,22 @@ import FormButtons from "@/modules/shared/Infrastructure/FormButtons.vue";
 export default class Create extends Vue {
     breadcrumb_url: string = this.$store.state.ERP_URL + '/api/company/breadcrumbs'
     sending = false
+    company = this.$store.state.companies.company
 
     cancel(): void {
-        console.log('cancel')
+        this.$router.push({name: 'companies'});
     }
 
-    submit(): void {
+    async submit() {
         this.sending = true
-        console.log('submit')
-
-        setTimeout(() => this.sending = false, 2000)
+        const creator = new CompanyCreator();
+        await creator.__invoke(new CompanyCreatorRequest(
+            this.company.name,
+            this.company.state,
+            this.company.address,
+            this.company.phone
+        ));
+        this.sending = false
     }
 }
 </script>

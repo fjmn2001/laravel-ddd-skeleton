@@ -15,20 +15,19 @@
                     </div>
                     <div class="col-lg-9 col-md-6 col-sm-12 pt-4">
                         <label>
-                            <label>Nombre de la empresa</label>
+                            <label>Nombre de la empresa *</label>
                         </label>
-                        <input type="text" name="name" required="" class="form-control inp-filter">
+                        <input type="text" name="name" required="" v-model="name" class="form-control inp-filter">
                         <div class="mt-3 row">
                             <div class="col-lg-6 col-md-12">
                                 <label>Tipo de empresa</label>
-                                <input type="text" required="" class="form-control inp-filter">
+                                <input type="text" required="" class="form-control inp-filter" disabled>
                             </div>
                             <div class="col-lg-6 col-md-12">
-                                <label>Estado</label>
-                                <select required="" class="form-control inp-filter">
-                                    <option value=""></option>
-                                    <option value="1">option1</option>
-                                    <option value="3">option2</option>
+                                <label>Estado *</label>
+                                <select name="state" required="" v-model="state" class="form-control inp-filter">
+                                    <option value="">Seleccione</option>
+                                    <option value="active">Activo</option>
                                 </select>
                             </div>
                         </div>
@@ -36,16 +35,16 @@
                 </div>
                 <div class="mt-3 pl-3 pr-3 row">
                     <div class="col-lg-3 col-md-6 col-sm-12">
-                        <label>Dirección</label>
-                        <input type="text" required="" class="form-control inp-filter">
+                        <label>Dirección *</label>
+                        <input type="text" name="address" required="" v-model="address" class="form-control inp-filter">
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
-                        <label>Teléfono</label>
-                        <input type="text" required="" class="form-control inp-filter">
+                        <label>Teléfono *</label>
+                        <input type="text" required="" v-model="phone" class="form-control inp-filter">
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <label>Unidad de peso</label>
-                        <select class="form-control inp-filter">
+                        <select class="form-control inp-filter" disabled>
                             <option value=""></option>
                             <option value="1">option1</option>
                             <option value="2">option2</option>
@@ -53,7 +52,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <label>Retiene impuestos</label>
-                        <select class="form-control inp-filter">
+                        <select class="form-control inp-filter" disabled>
                             <option value=""></option>
                             <option value="1">option1</option>
                             <option value="2">option2</option>
@@ -63,15 +62,15 @@
                 <div class="mt-3 pl-3 pr-3 row">
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <label>Código patronal</label>
-                        <input type="text" required="" class="form-control inp-filter">
+                        <input type="text" class="form-control inp-filter" disabled>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <label>Permitir crear facturas en periodos cerrados: </label>
-                        <input type="text" required="" class="form-control inp-filter">
+                        <input type="text" required="" class="form-control inp-filter" disabled>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <label>Referencia&nbsp;</label>
-                        <input type="text" required="" class="form-control inp-filter">
+                        <input type="text" required="" class="form-control inp-filter" disabled>
                     </div>
                 </div>
             </div>
@@ -79,9 +78,35 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: "Details"
+<script lang="ts">
+import {Component, Vue, Watch} from "vue-property-decorator";
+
+@Component
+export default class GeneralsDetails extends Vue {
+    name = ''
+    state = 'active'
+    address = ''
+    phone = ''
+
+    @Watch('name')
+    onNameChanged(val: string) {
+        this.$store.state.companies.company.name = val;
+    }
+
+    @Watch('state')
+    onStateChanged(val: string) {
+        this.$store.state.companies.company.state = val;
+    }
+
+    @Watch('address')
+    onAddressChanged(val: string) {
+        this.$store.state.companies.company.address = val;
+    }
+
+    @Watch('phone')
+    onPhoneChanged(val: string) {
+        this.$store.state.companies.company.phone = val;
+    }
 }
 </script>
 
