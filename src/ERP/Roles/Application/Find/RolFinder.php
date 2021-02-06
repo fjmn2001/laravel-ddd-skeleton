@@ -27,7 +27,7 @@ final class RolFinder
             $rol->name()->value(),
             $rol->description()->value(),
             $rol->superuser()->value(),
-            $rol->status()->value()
+            $rol->state()->value()
         );
     }
 }

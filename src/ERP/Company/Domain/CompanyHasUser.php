@@ -16,7 +16,7 @@ final class CompanyHasUser
     private $companyId;
     private $userId;
     private $rolId;
-    private $status;
+    private $state;
     private $createdAt;
     private $updatedAt;
 
@@ -25,7 +25,7 @@ final class CompanyHasUser
         CompanyId $companyId,
         string $userId,
         RolId $rolId,
-        string $status,
+        string $state,
         \DateTimeImmutable $createdAt,
         \DateTimeImmutable $updatedAt
     )
@@ -34,7 +34,7 @@ final class CompanyHasUser
         $this->companyId = $companyId;
         $this->userId = $userId;
         $this->rolId = $rolId;
-        $this->status = $status;
+        $this->state = $state;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
     }
@@ -75,9 +75,9 @@ final class CompanyHasUser
         return $this->rolId;
     }
 
-    public function status(): string
+    public function state(): string
     {
-        return $this->status;
+        return $this->state;
     }
 
     public function createdAt(): \DateTimeImmutable

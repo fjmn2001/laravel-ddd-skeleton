@@ -9,21 +9,21 @@ final class CompanyResponse
     private $id;
     private $name;
     private $address;
-    private $status;
+    private $state;
     private $logo;
 
     public function __construct(
         $id,
         $name,
         $address,
-        $status,
+        $state,
         $logo
     )
     {
         $this->id = $id;
         $this->name = $name;
         $this->address = $address;
-        $this->status = $status;
+        $this->state = $state;
         $this->logo = $logo;
     }
 
@@ -42,9 +42,9 @@ final class CompanyResponse
         return $this->address;
     }
 
-    public function status(): string
+    public function state(): string
     {
-        return $this->status;
+        return $this->state;
     }
 
     public function logo()

@@ -6,7 +6,7 @@ namespace Medine\ERP\Roles\Domain\ValueObjects;
 
 use Medine\ERP\Shared\Domain\ValueObjects\StringValueObject;
 
-final class RolStatus extends StringValueObject
+final class RolState extends StringValueObject
 {
 
 }
