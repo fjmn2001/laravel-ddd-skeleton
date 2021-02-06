@@ -71,8 +71,6 @@
                         </div>
                         <div id="des02" class="pl-4 pr-4">
                             <div class="table-responsive">
-                                <templete>
-                                </templete>
                                 <table class="table">
                                     <thead>
                                     <tr>
