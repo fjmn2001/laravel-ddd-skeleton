@@ -10,14 +10,16 @@
             </p>
         </div>
         <div class="align-items-center btn-sm col-4 col-lg-3 col-md-4 col-sm-4 d-flex justify-content-end">
+            <router-link class="btn btn-blue-deg btn-sm mr-1 mr-lg-5" :to="{name: menu.name}"
+                         style="padding-left: 16px; padding-right: 16px;" v-if="menu.name">{{ menu.title }}
+            </router-link>
             <div class="dropdown" v-if="menu.options && menu.options.length">
                 <a class="btn mr-lg-2" role="button" id="dropdownMenu0" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" href="#"> <img
                     src="@/assets/images/icons/3puntos_V.svg"> </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu0">
-                    <a class="dropdown-item" href="#">Pagar</a>
-                    <a class="dropdown-item" href="#">Copiar</a>
-                    <a class="dropdown-item" href="#">Eliminar</a>
+                    <a class="dropdown-item" href="#" :id="option.id" v-for="option in menu.options"
+                       :key="option.id">{{ option.title }}</a>
                 </div>
             </div>
         </div>
