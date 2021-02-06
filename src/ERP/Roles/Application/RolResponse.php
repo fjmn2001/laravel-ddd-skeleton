@@ -10,21 +10,21 @@ final class RolResponse
     private $name;
     private $description;
     private $superuser;
-    private $status;
+    private $state;
 
     public function __construct(
         string $id,
         string $name,
         string $description,
         string $superuser,
-        string $status
+        string $state
     )
     {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
         $this->superuser = $superuser;
-        $this->status = $status;
+        $this->state = $state;
     }
 
     public function id(): string
@@ -47,8 +47,8 @@ final class RolResponse
         return $this->superuser;
     }
 
-    public function status(): string
+    public function state(): string
     {
-        return $this->status;
+        return $this->state;
     }
 }
