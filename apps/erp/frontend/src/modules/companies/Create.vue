@@ -132,8 +132,8 @@ import Breadcrums from '@/components/Breadcrums.vue';
     components: {Breadcrums}
 })
 
-export default class Home extends Vue {
-    breadcrumb_url = this.$store.state.ERP_URL + '/api/company/breadcrumbs'
+export default class Create extends Vue {
+    breadcrumb_url: string = this.$store.state.ERP_URL + '/api/company/breadcrumbs'
 }
 </script>
 
