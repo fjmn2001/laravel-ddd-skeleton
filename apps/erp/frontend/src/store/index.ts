@@ -94,6 +94,17 @@ export default new Vuex.Store({
                     });
                 }
             },
+        },
+        companies: {
+            namespaced: true,
+            state: {
+                company: {
+                    name: '',
+                    state: 'active',
+                    address: '',
+                    phone: ''
+                }
+            }
         }
     }
 })

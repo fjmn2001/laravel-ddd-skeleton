@@ -34,16 +34,9 @@ export default {
     props: ['breadcrumb_url'],
     data() {
         return {
-            title: 'Crear empresa',
-            routes: [
-                {url: '#', title: 'Empresa'},
-                {url: '#', title: 'Crear'}
-            ],
-            menu: {
-                name: 'ddd',
-                url: '',
-                options: []
-            }
+            title: '',
+            routes: [],
+            menu: {}
         };
     },
     mounted() {
