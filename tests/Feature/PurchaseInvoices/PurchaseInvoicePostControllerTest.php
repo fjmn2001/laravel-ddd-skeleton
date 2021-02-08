@@ -34,11 +34,11 @@ final class PurchaseInvoicePostControllerTest extends TestCase
         );
         $response = $this->postJson('/api/purchase_invoices', [
             'id' => Uuid::uuid4()->toString(),
-            'provider_id' => Uuid::uuid4()->toString(),
-            'payment_term' => 'cash',
+            'providerId' => Uuid::uuid4()->toString(),
+            'paymentTerm' => 'cash',
             'code' => $this->faker->postcode,
-            'issue date' => '25/10/2021',
-            'accounts_pay_id' => Uuid::uuid4()->toString(),
+            'issueDate' => '25/10/2021',
+            'accountsPayId' => Uuid::uuid4()->toString(),
             'reference' => $this->faker->text(15),
             'state' => 'to_be_approved',
             'observations' => $this->faker->text(255),
@@ -46,20 +46,20 @@ final class PurchaseInvoicePostControllerTest extends TestCase
             'discount' => 10,
             'tax' => 6.30,
             'total' => 96.30,
-            'company_id' => Uuid::uuid4()->toString(),
+            'companyId' => Uuid::uuid4()->toString(),
             'items' => [
                 [
-                    'category_id' => Uuid::uuid4()->toString(),
-                    'item_id' => Uuid::uuid4()->toString(),
+                    'categoryId' => Uuid::uuid4()->toString(),
+                    'itemId' => Uuid::uuid4()->toString(),
                     'quantity' => 1,
-                    'unit_id' => Uuid::uuid4()->toString(),
-                    'unit_price' => 100,
+                    'unitId' => Uuid::uuid4()->toString(),
+                    'unitPrice' => 100,
                     'subtotal' => 100,
-                    'tax_id' => Uuid::uuid4()->toString(),
-                    'discount rate' => 10,
-                    'accounting_center_id' => Uuid::uuid4()->toString(),
-                    'account_id' => Uuid::uuid4()->toString(),
-                    'location_id' => Uuid::uuid4()->toString()
+                    'taxId' => Uuid::uuid4()->toString(),
+                    'discountRate' => 10,
+                    'accountingCenterId' => Uuid::uuid4()->toString(),
+                    'accountId' => Uuid::uuid4()->toString(),
+                    'locationId' => Uuid::uuid4()->toString()
                 ]
             ]
         ]);
