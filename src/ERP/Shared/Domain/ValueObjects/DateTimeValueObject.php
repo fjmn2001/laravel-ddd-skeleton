@@ -70,4 +70,9 @@ class DateTimeValueObject
 
         return $dateTimeImmutable->format($format);
     }
+
+    public function __toString()
+    {
+        return (string)$this->value();
+    }
 }

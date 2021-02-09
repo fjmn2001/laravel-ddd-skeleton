@@ -40,7 +40,6 @@ final class PurchaseInvoicePostControllerTest extends TestCase
             'issueDate' => '25/10/2021',
             'accountsPayId' => Uuid::uuid4()->toString(),
             'reference' => $this->faker->text(15),
-            'state' => 'to_be_approved',
             'observations' => $this->faker->text(255),
             'subtotal' => 100,
             'discount' => 10,

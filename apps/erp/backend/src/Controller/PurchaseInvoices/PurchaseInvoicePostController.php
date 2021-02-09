@@ -29,7 +29,6 @@ final class PurchaseInvoicePostController extends Controller
             $request->issueDate,
             $request->accountsPayId,
             $request->reference,
-            $request->state,
             $request->observations,
             $request->subtotal,
             $request->discount,
