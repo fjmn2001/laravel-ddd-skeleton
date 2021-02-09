@@ -1,0 +1,389 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <meta charset="utf-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <meta name="keywords" content=""> 
+        <meta name="description" content=""> 
+        <meta name="author" content=""> 
+        <link rel="icon" type="image/png" sizes="16x16" href="images/logo-M.svg"> 
+        <title>MEDINE ERP</title>         
+        <!-- ===== Bootstrap CSS ===== -->         
+        <link href="css/bootstrap.min.css" rel="stylesheet"> 
+        <link href="css/new-style.css" rel="stylesheet"> 
+        <link href="css/style.css" rel="stylesheet"> 
+        <!-- ===== Color CSS ===== -->         
+        <link href="ccs/default.css" id="theme" rel="stylesheet"> 
+    </head>     
+    <body class="mini-sidebar"> 
+        <div id="wrapper"> 
+            <!-- ===== Top-Navigation ===== -->             
+            <nav class="navbar navbar-default navbar-static-top m-b-0"> 
+                <div class="navbar-header"> 
+                    <div class="top-left-part"> 
+                        <a class="logo" href="javascript:void(0)"> <b> <img src="images/logo-M.svg" alt="home"> </b> <span> <img src="images/logo-text-erp.svg" alt="homepage" class="dark-logo" id="ima-logo-text"> </span> </a> 
+                    </div>                     
+                    <ul class="nav navbar-top-links navbar-left hidden-xs"> 
+                        <li class="icon-nav" style="margin-left: 5px;"> 
+                            <a href="javascript:void(0)" class="sidebartoggler font-20 waves-effect waves-light"><i class="icon-arrow-left-circle"></i></a> 
+                        </li>                         
+                        <li class="icon-nav"> 
+                            <a href="javascript:void(0)" class="font-20"><i class="fa fa-home"></i></a> 
+                        </li>                         
+                        <li style="padding-top: 3px;"> 
+                            <ul class="menu-horizontal" id="list01"> 
+                                <li> 
+                                    <a class="nav-link menu-link-med" id="menu-compras" href="javascript:void(0)">Compras</a> 
+                                </li>                                 
+                                <li> 
+                                    <a class="nav-link menu-link-med" id="menu-ventas" href="javascript:void(0)">Ventas</a> 
+                                </li>                                 
+                                <li> 
+                                    <a class="nav-link" href="#">Inventario</a> 
+                                </li>                                 
+                                <li> 
+                                    <a class="nav-link" href="#">Contabilidad</a> 
+                                </li>                                 
+                                <li> 
+                                    <a class="nav-link" href="#">Contratos</a> 
+                                </li>                                 
+                                <li> 
+                                    <a class="nav-link" href="#">Empresas</a> 
+                                </li>                                 
+                            </ul>                             
+                        </li>                         
+                        <li id="iconList02"> 
+                            <ul class="nav navbar-top-links"> 
+                                <li class="dropdown"> 
+                                    <a class="font-20 waves-effect waves-light pl-2 pr-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:void(0);"> <i class="fa fa-chevron-circle-down"></i> </a> 
+                                    <ul class="animated dropdown-menu dropdown-menu-left dropdown-tasks slideInUp" id="list02"> 
+</ul>                                     
+                                </li>                                 
+                            </ul>                             
+                        </li>                         
+                    </ul>                     
+                    <ul class="nav navbar-top-links navbar-right pull-right"> 
+                        <li class="dropdown"> 
+                            <a class="font-20 waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:void(0);"> <i class="icon-options"></i> </a> 
+                            <ul class="animated dropdown-menu dropdown-menu-right dropdown-tasks slideInUp"> 
+                                <li> 
+                                    <a href="javascript:void(0);"><i class="icon-user fa-fw"></i> Perfil</a> 
+                                </li>                                 
+                                <li> 
+                                    <a href="javascript:void(0);"><i class="icon-drawar fa-fw"></i> Bandeja de entrada</a> 
+                                </li>                                 
+                                <hr> 
+                                <li class="right-side-toggle"> 
+                                    <a class="right-side-toggler waves-effect waves-light" href="javascript:void(0)"><i class="icon-settings fa-fw"></i> Ajuste de sistema</a> 
+                                </li>                                 
+                                <hr> 
+                                <li> 
+                                    <a href=""><i class="icon-power fa-fw"></i> Cerrar sesión </a> 
+                                </li>                                 
+                            </ul>                             
+                        </li>                         
+                    </ul>                     
+                </div>                 
+            </nav>             
+            <!-- ===== Left-Sidebar ===== -->             
+            <aside class="sidebar" role="navigation"> 
+                <div class="scroll-sidebar"> 
+                    <div class="user-profile"> 
+                        <div class="dropdown user-pro-body"> 
+                            <div class="profile-image"> 
+                                <img src="images/user.jpg" alt="user-img" class="img-circle"> 
+                            </div>                             
+                            <p class="profile-text m-t-15 font-16"><a href="javascript:void(0);">José Pereira</a></p> 
+                        </div>                         
+                    </div>                     
+                    <nav class="sidebar-nav"> 
+                        <ul id="side-menu" class="sub-menu-lateral sub-menu-compras" style="display: none;"> 
+                            <li> 
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw icon-people"></i> <span class="hide-menu">Proveedores</span></a> 
+                            </li>                             
+                            <li class="" style="padding-left: 0px;"> 
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="icon-basket-loaded fa-fw"></i> <span class="hide-menu">Compras<span class="label label-rounded label-info pull-right">4</span></span></a> 
+                                <ul aria-expanded="false" style="height: 0px; margin-left: -30px;" class="collapse"> 
+                                    <li> 
+                                        <a href="#">Proveedores</a> 
+                                    </li>                                     
+                                    <li> 
+                                        <a href="#">Pedidos</a> 
+                                        <ul aria-expanded="false" class="collapse" style="height: 0px;"> 
+                                            <li> 
+                                                <a href="#">Dieacto</a> 
+                                            </li>                                             
+                                            <li> 
+                                                <a href="#">En linea</a> 
+                                            </li>                                             
+                                        </ul>                                         
+                                    </li>                                     
+                                    <li> 
+                                        <a href="#">Compras</a> 
+                                    </li>                                     
+                                    <li> 
+                                        <a href="#">Pagos</a> 
+                                    </li>                                     
+                                </ul>                                 
+                            </li>                             
+                            <li> 
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw  icon-shield"></i> <span class="hide-menu">Seguros</span></a> 
+                            </li>                             
+                            <li> 
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw  icon-credit-card "></i> <span class="hide-menu">Transacciones</span></a> 
+                            </li>                             
+                            <li> 
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw   icon-docs"></i> <span class="hide-menu">Documentos</span></a> 
+                            </li>                             
+                            <li> 
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw  icon-chart "></i> <span class="hide-menu">Reportes</span></a> 
+                            </li>                             
+                            <li> 
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw  icon-settings "></i> <span class="hide-menu">Configuración</span></a> 
+                            </li>                             
+                        </ul>                         
+                        <ul id="side-menu" class="sub-menu-lateral sub-menu-ventas" style="display: none"> 
+                            <li> 
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw icon-people"></i> <span class="hide-menu">Clientes</span></a> 
+                            </li>                             
+                            <li> 
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw  icon-bag"></i> <span class="hide-menu">Ventas</span></a> 
+                            </li>                             
+                            <li> 
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw   icon-notebook "></i> <span class="hide-menu">Cobros</span></a> 
+                            </li>                             
+                            <li> 
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw   icon-docs"></i> <span class="hide-menu">Documentos</span></a> 
+                            </li>                             
+                            <li> 
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw  icon-chart "></i> <span class="hide-menu">Reportes</span></a> 
+                            </li>                             
+                            <li> 
+                                <a class="waves-effect" href="javascript:void(0);" aria-expanded="false"><i class="fa-fw  icon-settings "></i> <span class="hide-menu">Configuración</span></a> 
+                            </li>                             
+                        </ul>                         
+                    </nav>                     
+                </div>                 
+            </aside>             
+            <div class="page-wrapper"> 
+                <div class="container-fluid mt-lg-5 mt-md-5 pl-md-3 pr-md-3 pt-lg-4 pt-md-4">
+                    <div class="div-title-table justify-content-between mb-3 mb-lg-3 ml-0 mr-0 mt-4 mt-lg-0 row"> 
+                        <div class="col-8 col-lg-9 col-md-8 d-flex d-lg-flex d-md-flex d-sm-flex flex-column flex-lg-row flex-md-column flex-sm-column pl-md-4 pt-md-2"> 
+                            <h2 class="d-inline mb-md-0 xtitle-table" style="margin-left: 0px;">Configuración de impuestos</h2> 
+                            <p class="ml-lg-4 ml-md-0 navigation pt-lg-2 pt-md-1"><a href="">Contabilidad</a> -&gt; <a href="">Configuración</a> -&gt; I<a href="" class="font-weight-bolder">mpuestos</a></p> 
+                        </div>                         
+                        <div class="align-items-center btn-sm col-4 col-lg-3 col-md-4 col-sm-4 d-flex justify-content-end"> 
+                            <div class="dropdown"> 
+                                <a class="btn mr-lg-2" role="button" id="dropdownMenu0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"> <img src="images/icons/3puntos_V.svg"> </a> 
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu0"> 
+                                    <a class="dropdown-item" href="#">Pagar</a> 
+                                    <a class="dropdown-item" href="#">Copiar</a> 
+                                    <a class="dropdown-item" href="#">Eliminar</a> 
+                                </div>                                 
+                            </div>                             
+                        </div>                         
+                    </div>                     
+                    <div class="xcontainer"> 
+                        <div class="row" id="config01"> 
+                            <div class="config-div01 pl-4"> 
+                                <button type="button" id="menu-config-collapse" class="bnt-config btn ml-2 mt-3" style=""> 
+                                    <i class="icon-settings" style="color: #576984;"></i> 
+                                    <span>Menu de configuraciones</span> 
+                                </button>                                 
+                                <div id="menu-config"> 
+                                    <ul class="list-unstyled components"> 
+                                        <li class="active"> 
+                                            <a href="javascript:void(0)">Impuestos</a> 
+                                        </li>                                         
+                                        <li> 
+                                            <a href="javascript:void(0)">Inventarios</a> 
+                                        </li>                                         
+                                        <li> 
+                                            <a href="javascript:void(0)">Crédito a favor</a> 
+                                        </li>                                         
+                                    </ul>                                     
+                                </div>                                 
+                            </div>                             
+                            <div class="config-div02 pb-sm-3 pl-md-2 pl-sm-5 pt-sm-3"> 
+                                <div class="pl-3 pl-md-2"> 
+                                    <div class="d-flex pt-2 row"> 
+                                        <div style="padding-left: 0px;" class="align-items-center col-md-12 d-flex"> 
+                                            <h5 class="d-inline ml-4 ml-lg-3 ml-md-3 xtitle-buscar" style="padding-bottom: 0px;" id="new01">Buscar y guardar&nbsp; impuestos</h5> 
+                                        </div>                                         
+                                    </div>                                     
+                                    <div id="des01" class="des01 mb-3 ml-0 mr-3 mt-2"> 
+                                        <div class="pl-md-3 row"> 
+                                            <div class="col-lg-3 col-md-3 col-sm-12 pl-3 pl-md-0"> 
+                                                <label>Nombre</label>                                                 
+                                                <input type="text" class="form-control inp-filter"> 
+                                            </div>                                             
+                                            <div class="col-lg-3 col-md-6 col-sm-12"> 
+                                                <label>Tasa de impuesto</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">$</span>
+                                                    </div>
+                                                </div>                                                 
+                                            </div>                                             
+                                            <div class="col-lg-3 col-md-3 col-sm-12"> 
+                                                <label>Cuentas</label>                                                 
+                                                <select class="form-control inp-filter"> 
+                                                    <option value="0"></option>
+                                                    <option value="1">Opcion01</option>
+                                                    <option value="2">Opcion02</option>
+                                                </select>                                                 
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-sm-12 pr-3 pr-md-0">
+                                                <label>Centro contable</label>
+                                                <select class="form-control inp-filter"> 
+                                                    <option value="0"></option>
+                                                    <option value="1">Opcion01</option>
+                                                    <option value="2">Opcion02</option>
+                                                </select>
+                                            </div>                                             
+                                        </div>
+                                        <div class="pl-md-3 pt-md-3 row"> 
+                                            <div class="col-lg-3 col-md-3 col-sm-12 pl-3 pl-md-0"> 
+                                                <label>Retiene impuestos</label>                                                 
+                                                <select class="form-control inp-filter"> 
+                                                    <option value="0"></option>
+                                                    <option value="1">Opcion01</option>
+                                                    <option value="2">Opcion02</option>
+                                                </select>                                                 
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12"> 
+                                                <label>Porcentaje de retención</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">$</span>
+                                                    </div>
+                                                </div>                                                 
+                                            </div>                                             
+                                            <div class="col-lg-3 col-md-3 col-sm-12"> 
+                                                <label>Cuenta para retención</label>                                                 
+                                                <select class="form-control inp-filter"> 
+                                                    <option value="0"></option>
+                                                    <option value="1">Opcion01</option>
+                                                    <option value="2">Opcion02</option>
+                                                </select>                                                 
+                                            </div>
+                                            <div class="col-lg-3 col-md-3 col-sm-12 pr-3 pr-md-0"> 
+                                                <label>Centro contable para retención</label>                                                 
+                                                <select class="form-control inp-filter"> 
+                                                    <option value="0"></option>
+                                                    <option value="1">Opcion01</option>
+                                                    <option value="2">Opcion02</option>
+                                                </select>                                                 
+                                            </div>                                             
+                                        </div>
+                                        <div class="pl-md-3 pt-md-3 row"> 
+                                            <div class="col-lg-6 col-md-3 col-sm-12 pl-3 pl-md-0"> 
+                                                <label>Cuenta para retención</label>                                                 
+                                                <select class="form-control inp-filter"> 
+                                                    <option value="0"></option>
+                                                    <option value="1">Opcion01</option>
+                                                    <option value="2">Opcion02</option>
+                                                </select>                                                 
+                                            </div>
+                                            <div class="col-lg-6 col-md-3 col-sm-12 pr-3 pr-md-0"> 
+                                                <label>Descripción</label>                                                 
+                                                <input type="text" class="form-control inp-filter"> 
+                                            </div>                                             
+                                        </div>                                         
+                                        <div class="collapse depreciar-categoria pl-md-3 pt-md-2 row"> 
+                                            <div class="col-lg-3 col-md-3 col-sm-12 pl-3 pl-md-0"> 
+                                                <label>Depreciación</label>                                                 
+                                                <input type="text" class="form-control inp-filter"> 
+                                            </div>                                             
+                                            <div class="col-lg-3 col-md-6 col-sm-12"> 
+                                                <label>Meses</label>                                                 
+                                                <input type="text" class="form-control inp-filter"> 
+                                            </div>                                             
+                                            <div class="col-lg-3 col-md-3 col-sm-12 pr-3 pr-md-0"> 
+                                                <label>Porcentaje %</label>                                                 
+                                                <input type="text" class="form-control inp-filter" placeholder="%"> 
+                                            </div>                                             
+                                            <div class="col-lg-3 col-md-3 col-sm-12 pr-3 pr-md-0"> 
+                                                <label>Valor de rescate</label>                                                 
+                                                <input type="text" class="form-control inp-filter" placeholder="0"> 
+                                            </div>                                             
+                                        </div>                                         
+                                        <div class="mt-2 row" style="width: 100%;"> 
+                                            <div class="col-lg-6 col-md-7 col-xl-5 d-flex justify-content-around offset-lg-6 offset-md-5 offset-xl-7"> 
+                                                <button type="button" class="btn btn-blue2-deg btn-sm pl-3 pr-3">Buscar</button>                                                 
+                                                <button type="button" class="btn btn-outline-secondary btn-sm mr-0 pl-3 pr-3" style="margin: 10px 0px; min-width: 100px;">Cancelar
+</button>                                                 
+                                                <button type="button" class="btn btn-blue-deg btn-sm pl-3 pr-3">Guardar</button>                                                 
+                                            </div>                                             
+                                        </div>                                         
+                                    </div>                                     
+                                    <div class="d-flex pt-2 row"> 
+                                        <div style="padding-left: 0px;" class="align-items-center col-md-12 d-flex mb-2"> 
+                                            <h5 class="d-inline ml-4 ml-lg-3 ml-md-3 xtitle-buscar" style="padding-bottom: 0px;">Lista de impuestos</h5> 
+                                        </div>                                         
+                                    </div>                                     
+                                </div>                                 
+                                <div class="pl-3 pl-md-2 table-responsive"> 
+                                    <table class="table"> 
+                                        <thead> 
+                                            <tr> 
+                                                <th>Nombre</th> 
+                                                <th>Descripción</th> 
+                                                <th>Tasa de impuesto</th>
+                                                <th>Cuenta contable</th>
+                                                <th>Retiene impuestos</th> 
+                                                <th>Objeto de retención</th> 
+                                                <th>Estado</th> 
+                                            </tr>                                             
+                                        </thead>                                         
+                                        <tbody> 
+                                            <tr> 
+                                                <td>ITMS 7%</td> 
+                                                <td>ITMS</td> 
+                                                <td>7%</td> 
+                                                <td>2.201245 POR PAGAR</td> 
+                                                <td>NO</td> 
+                                                <td>4</td> 
+                                                <td> 
+                                                    <button type="button" class="btn btn-green btn-sm btn-table">Activo</button>                                                     
+                                                    &nbsp;
+                                                </td>                                                 
+                                            </tr>                                             
+                                        </tbody>                                         
+                                    </table>                                     
+                                </div>                                 
+                                <div class="justify-content-center mt-0 pt-0 row"> 
+                                    <div class="align-items-center col-md-6 d-flex justify-content-center offset-md-3 pb-3 pt-3"> 
+                                        <div class="d-flex"> 
+                                            <a class="btn btn-cicle"><img src="images/icons/two-arrow-left.svg"></a> 
+                                            <a class="btn btn-cicle"><img src="images/icons/one-arrow-left.svg"></a> 
+                                            <p class="p-pag">página <input type="text" value="1" class="inp-pag">&nbsp;de 6</p> 
+                                            <a class="btn btn-cicle"><img src="images/icons/one-arrow-right.svg"></a> 
+                                            <a class="btn btn-cicle"><img src="images/icons/two-arrow-right.svg"></a> 
+                                        </div>                                         
+                                    </div>                                     
+                                    <div class="align-items-center col-md-3 d-flex justify-content-end pb-3 pt-3"> 
+                                        <p class="mr-4 p-pag">Mostrando 1 - 10 de 20</p> 
+                                    </div>                                     
+                                </div>                                 
+                            </div>                             
+                        </div>                         
+                    </div>
+                </div>                 
+            </div>             
+        </div>         
+        <footer class="footer t-a-c">&copy; 2021 Medine</footer>         
+        <!-- jQuery -->         
+        <script src="js/jquery.min.js"></script>         
+        <!-- Bootstrap Core JavaScript -->         
+        <script src="js/bootstrap.min.js"></script>         
+        <!-- Menu Plugin JavaScript -->         
+        <script src="js/sidebarmenu.js"></script>         
+        <!-- Custom Theme JavaScript -->         
+        <script src="js/custom.js"></script>         
+        <script src="js/myScript.js"></script>         
+    </body>     
+</html>
