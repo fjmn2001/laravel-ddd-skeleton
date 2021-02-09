@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Roles\Domain;
 
+
 use Illuminate\Support\Facades\DB;
 use Medine\ERP\Roles\Domain\ValueObjects\RolCompanyId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolCreatedAt;
