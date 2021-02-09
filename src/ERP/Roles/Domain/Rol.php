@@ -9,7 +9,7 @@ use Medine\ERP\Roles\Domain\ValueObjects\RolCreatedAt;
 use Medine\ERP\Roles\Domain\ValueObjects\RolDescription;
 use Medine\ERP\Roles\Domain\ValueObjects\RolId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolName;
-use Medine\ERP\Roles\Domain\ValueObjects\RolStatus;
+use Medine\ERP\Roles\Domain\ValueObjects\RolState;
 use Medine\ERP\Roles\Domain\ValueObjects\RolSuperuser;
 use Medine\ERP\Roles\Domain\ValueObjects\RolUpdatedAt;
 
@@ -21,7 +21,7 @@ final class Rol
     private $name;
     private $description;
     private $superuser;
-    private $status;
+    private $state;
     private $companyId;
     private $createdAt;
     private $updatedAt;
@@ -31,7 +31,7 @@ final class Rol
         RolName $name,
         ?RolDescription $description,
         RolSuperuser $superuser,
-        RolStatus $status,
+        RolState $state,
         RolCompanyId $companyId,
         RolCreatedAt $createdAt,
         RolUpdatedAt $updatedAt
@@ -41,7 +41,7 @@ final class Rol
         $this->name = $name;
         $this->description = $description;
         $this->superuser = $superuser;
-        $this->status = $status;
+        $this->state = $state;
         $this->companyId = $companyId;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
@@ -60,7 +60,7 @@ final class Rol
             $name,
             $description,
             $superuser,
-            new RolStatus(self::STATUS_ACTIVE),
+            new RolState(self::STATUS_ACTIVE),
             $companyId,
             new RolCreatedAt(),
             new RolUpdatedAt(),
@@ -72,7 +72,7 @@ final class Rol
         RolName $name,
         ?RolDescription $description,
         RolSuperuser $superuser,
-        RolStatus $status,
+        RolState $state,
         RolCompanyId $companyId,
         RolCreatedAt $createdAt,
         RolUpdatedAt $updatedAt
@@ -83,7 +83,7 @@ final class Rol
             $name,
             $description,
             $superuser,
-            $status,
+            $state,
             $companyId,
             $createdAt,
             $updatedAt
@@ -110,9 +110,9 @@ final class Rol
         return $this->superuser;
     }
 
-    public function status(): RolStatus
+    public function state(): RolState
     {
-        return $this->status;
+        return $this->state;
     }
 
     public function companyId(): RolCompanyId
@@ -154,10 +154,10 @@ final class Rol
         }
     }
 
-    public function changeStatus(RolStatus $newValue)
+    public function changeState(RolState $newValue)
     {
-        if (false === ($this->status()->equals($newValue))) {
-            $this->status = $newValue;
+        if (false === ($this->state()->equals($newValue))) {
+            $this->state = $newValue;
             $this->updatedAt = new RolUpdatedAt();
         }
     }

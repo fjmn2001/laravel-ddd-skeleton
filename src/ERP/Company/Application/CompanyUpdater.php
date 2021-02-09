@@ -9,7 +9,7 @@ use Medine\ERP\Company\Domain\Service\CompanyFinder;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyId;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyLogo;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyName;
-use Medine\ERP\Company\Domain\ValueObjects\CompanyStatus;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyState;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyAddress;
 
 class CompanyUpdater
@@ -31,7 +31,7 @@ class CompanyUpdater
 
         $company->changeName(new CompanyName($request->name()));
         $company->changeAddress(new CompanyAddress($request->address()));
-        $company->changeStatus(new CompanyStatus($request->status()));
+        $company->changeState(new CompanyState($request->state()));
         $company->changeLogo(new CompanyLogo($request->logo()));
 
         $this->repository->update($company);

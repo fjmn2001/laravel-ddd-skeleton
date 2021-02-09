@@ -33,9 +33,13 @@ final class ResetPasswordController extends Controller
 
     private function validateRequest(Request $request): void
     {
+        if ($request->password != $request->passwordConfirmation) {
+            throw new \Exception("The password confirmation does not match.");
+        }
+
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|confirmed',
+            'password' => 'required',
             'token' => 'required'
         ]);
     }

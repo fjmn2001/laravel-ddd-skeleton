@@ -13,5 +13,5 @@ Route::middleware('auth:api')->group(function () {
 });
 
 Route::post('/auth/password_request', PasswordRequestController::class);
-Route::put('/auth/reset_password', ResetPasswordController::class);
+Route::post('/auth/reset_password', ResetPasswordController::class);
 Route::put('/usersRename/{email}', RenameUserController::class);

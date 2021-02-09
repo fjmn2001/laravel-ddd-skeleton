@@ -12,21 +12,21 @@ final class CompanyUpdaterRequest
     private $id;
     private $name;
     private $address;
-    private $status;
+    private $state;
     private $logo;
 
     public function __construct(
         string $id,
         string $name,
         string $address,
-        string $status,
+        string $state,
         string $logo
     )
     {
         $this->id = $id;
         $this->name = $name;
         $this->address = $address;
-        $this->status = $status;
+        $this->state = $state;
         $this->logo = $logo;
     }
 
@@ -45,9 +45,9 @@ final class CompanyUpdaterRequest
         return $this->address;
     }
 
-    public function status(): string
+    public function state(): string
     {
-        return $this->status;
+        return $this->state;
     }
 
     public function logo(): string

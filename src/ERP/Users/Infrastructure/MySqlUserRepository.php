@@ -37,7 +37,8 @@ final class MySqlUserRepository implements UserRepository
     public function update(User $user): void
     {
         DB::table('users')->where('users.email', $user->email()->value())->take(1)->update([
-            'name' => $user->name()->value()
+            'name' => $user->name()->value(),
+            'password' => $user->password()->value()
         ]);
     }
 }

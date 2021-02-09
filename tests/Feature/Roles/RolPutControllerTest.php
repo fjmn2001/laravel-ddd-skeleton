@@ -49,7 +49,7 @@ final class RolPutControllerTest extends TestCase
             'name' => $NEW_NAME,
             'description' => $this->faker->text(25),
             'superuser' => 'no',
-            'status' => 'active'
+            'state' => 'active'
         ]);
 
         $response->assertJson([]);

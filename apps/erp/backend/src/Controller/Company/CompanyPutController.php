@@ -24,10 +24,10 @@ final class CompanyPutController extends Controller
     {
         ($this->updater)(new CompanyUpdaterRequest(
             $id,
-            $request->input('name', ''),
-            $request->input('address', ''),
-            $request->input('status', ''),
-            $request->input('logo', ''),
+            $request->name,
+            $request->address,
+            $request->state,
+            $request->logo
         ));
 
         return response()->json([], JsonResponse::HTTP_OK);
