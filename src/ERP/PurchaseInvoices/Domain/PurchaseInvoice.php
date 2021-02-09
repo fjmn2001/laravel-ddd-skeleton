@@ -10,6 +10,17 @@ use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceCompanyId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceDiscount;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceIssueDate;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemAccountId;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemAccountingCenterId;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemCategoryId;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemDiscountRate;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemItemId;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemLocationId;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemQuantity;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemSubtotal;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemTaxId;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemUnitId;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemUnitPrice;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceObservations;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoicePaymentTerm;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceProviderId;
@@ -38,6 +49,7 @@ final class PurchaseInvoice
     private $companyId;
     private $createdAt;
     private $updatedAt;
+    private $items;
 
     public function __construct(
         PurchaseInvoiceId $id,
@@ -110,5 +122,121 @@ final class PurchaseInvoice
             DateTimeValueObject::now(),
             DateTimeValueObject::now()
         );
+    }
+
+    public function addPurchaseInvoiceItem(
+        string $categoryId,
+        string $itemId,
+        float $quantity,
+        string $unitId,
+        float $unitPrice,
+        float $subtotal,
+        string $taxId,
+        float $discountRate,
+        string $accountingCenterId,
+        string $accountId,
+        string $locationId,
+        PurchaseInvoiceId $purchaseInvoiceId
+    ): void
+    {
+        $this->items[] = PurchaseInvoiceItem::create(
+            new PurchaseInvoiceItemCategoryId($categoryId),
+            new PurchaseInvoiceItemItemId($itemId),
+            new PurchaseInvoiceItemQuantity($quantity),
+            new PurchaseInvoiceItemUnitId($unitId),
+            new PurchaseInvoiceItemUnitPrice($unitPrice),
+            new PurchaseInvoiceItemSubtotal($subtotal),
+            new PurchaseInvoiceItemTaxId($taxId),
+            new PurchaseInvoiceItemDiscountRate($discountRate),
+            new PurchaseInvoiceItemAccountingCenterId($accountingCenterId),
+            new PurchaseInvoiceItemAccountId($accountId),
+            new PurchaseInvoiceItemLocationId($locationId),
+            $purchaseInvoiceId
+        );
+    }
+
+    public function id(): PurchaseInvoiceId
+    {
+        return $this->id;
+    }
+
+    public function providerId(): PurchaseInvoiceProviderId
+    {
+        return $this->providerId;
+    }
+
+    public function paymentTerm(): PurchaseInvoicePaymentTerm
+    {
+        return $this->paymentTerm;
+    }
+
+    public function code(): PurchaseInvoiceCode
+    {
+        return $this->code;
+    }
+
+    public function issueDate(): PurchaseInvoiceIssueDate
+    {
+        return $this->issueDate;
+    }
+
+    public function accountsPayId(): PurchaseInvoiceAccountsPayId
+    {
+        return $this->accountsPayId;
+    }
+
+    public function reference(): PurchaseInvoiceReference
+    {
+        return $this->reference;
+    }
+
+    public function state(): PurchaseInvoiceState
+    {
+        return $this->state;
+    }
+
+    public function observations(): PurchaseInvoiceObservations
+    {
+        return $this->observations;
+    }
+
+    public function subtotal(): PurchaseInvoiceSubtotal
+    {
+        return $this->subtotal;
+    }
+
+    public function discount(): PurchaseInvoiceDiscount
+    {
+        return $this->discount;
+    }
+
+    public function tax(): PurchaseInvoiceTax
+    {
+        return $this->tax;
+    }
+
+    public function total(): PurchaseInvoiceTotal
+    {
+        return $this->total;
+    }
+
+    public function companyId(): PurchaseInvoiceCompanyId
+    {
+        return $this->companyId;
+    }
+
+    public function createdAt(): DateTimeValueObject
+    {
+        return $this->createdAt;
+    }
+
+    public function updatedAt(): DateTimeValueObject
+    {
+        return $this->updatedAt;
+    }
+
+    public function items(): array
+    {
+        return $this->items;
     }
 }
