@@ -9,6 +9,7 @@ use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemAccountId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemAccountingCenterId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemCategoryId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemDiscountRate;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemItemId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemLocationId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemQuantity;
@@ -17,9 +18,11 @@ use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemTaxId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemUnitId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemUnitPrice;
 use Medine\ERP\Shared\Domain\ValueObjects\DateTimeValueObject;
+use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 
 final class PurchaseInvoiceItem
 {
+    private $id;
     private $categoryId;
     private $itemId;
     private $quantity;
@@ -36,6 +39,7 @@ final class PurchaseInvoiceItem
     private $updatedAt;
 
     private function __construct(
+        PurchaseInvoiceItemId $id,
         PurchaseInvoiceItemCategoryId $categoryId,
         PurchaseInvoiceItemItemId $itemId,
         PurchaseInvoiceItemQuantity $quantity,
@@ -52,6 +56,7 @@ final class PurchaseInvoiceItem
         DateTimeValueObject $updatedAt
     )
     {
+        $this->id = $id;
         $this->categoryId = $categoryId;
         $this->itemId = $itemId;
         $this->quantity = $quantity;
@@ -84,6 +89,7 @@ final class PurchaseInvoiceItem
     ): self
     {
         return new self(
+            new PurchaseInvoiceItemId(Uuid::random()->value()),
             $categoryId,
             $itemId,
             $quantity,
@@ -99,6 +105,11 @@ final class PurchaseInvoiceItem
             DateTimeValueObject::now(),
             DateTimeValueObject::now()
         );
+    }
+
+    public function id(): PurchaseInvoiceItemId
+    {
+        return $this->id;
     }
 
     public function categoryId(): PurchaseInvoiceItemCategoryId

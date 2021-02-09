@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Medine\ERP\PurchaseInvoices\Application\Create;
 
 use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoice;
+use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoiceRepository;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceAccountsPayId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceCode;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceCompanyId;
@@ -22,6 +23,13 @@ use function Lambdish\Phunctional\each;
 
 final class PurchaseInvoiceCreator
 {
+    private $repository;
+
+    public function __construct(PurchaseInvoiceRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function __invoke(PurchaseInvoiceCreatorRequest $request)
     {
         $purchaseInvoice = PurchaseInvoice::create(
@@ -40,7 +48,14 @@ final class PurchaseInvoiceCreator
             new PurchaseInvoiceCompanyId($request->companyId()),
         );
 
-        each(function (array $item) use ($purchaseInvoice) {
+        each($this->addPurchaseInvoiceItem($purchaseInvoice), $request->items());
+
+        $this->repository->save($purchaseInvoice);
+    }
+
+    private function addPurchaseInvoiceItem(PurchaseInvoice $purchaseInvoice): \Closure
+    {
+        return function (array $item) use ($purchaseInvoice) {
             $purchaseInvoice->addPurchaseInvoiceItem(
                 $item['categoryId'],
                 $item['itemId'],
@@ -55,6 +70,6 @@ final class PurchaseInvoiceCreator
                 $item['locationId'],
                 $purchaseInvoice->id()
             );
-        }, $request->items());
+        };
     }
 }
