@@ -57,8 +57,8 @@ final class MySqlPurchaseInvoiceRepository extends MySqlRepository implements Pu
     public function find(PurchaseInvoiceId $id): ?PurchaseInvoice
     {
         $row = DB::table('purchase_invoices')->where('purchase_invoices.id', $id->value())->first();
-
-        return !empty($row) ? PurchaseInvoice::fromDatabase(
+        $rows = DB::table('purchase_invoice_items')->where('purchase_invoice_id', $id->value())->get();
+        $purchaseInvoice = PurchaseInvoice::fromDatabase(
             new PurchaseInvoiceId($row->id),
             new PurchaseInvoiceProviderId($row->provider_id),
             new PurchaseInvoicePaymentTerm($row->payment_term),
@@ -75,7 +75,27 @@ final class MySqlPurchaseInvoiceRepository extends MySqlRepository implements Pu
             new PurchaseInvoiceCompanyId($row->company_id),
             new DateTimeValueObject($row->created_at),
             new DateTimeValueObject($row->updated_at)
-        ) : null;
+        );
+
+        $rows->each(function ($item) use ($purchaseInvoice) {
+            $purchaseInvoice->addPurchaseInvoiceItem(
+                $item->id,
+                $item->category_id,
+                $item->item_id,
+                $item->quantity,
+                $item->unit_id,
+                $item->unit_price,
+                $item->subtotal,
+                $item->tax_id,
+                $item->discount_rate,
+                $item->accounting_center_id,
+                $item->account_id,
+                $item->location_id,
+                $purchaseInvoice->id()
+            );
+        });
+
+        return !empty($row) ? $purchaseInvoice : null;
     }
 
     private function retrieveItem(): \Closure

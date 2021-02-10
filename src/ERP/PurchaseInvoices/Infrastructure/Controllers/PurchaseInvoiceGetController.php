@@ -29,7 +29,7 @@ final class PurchaseInvoiceGetController extends Controller
             'providerId' => $purchaseInvoice->providerId(),
             'paymentTerm' => $purchaseInvoice->paymentTerm(),
             'code' => $purchaseInvoice->code(),
-            'issueDate' => $purchaseInvoice->issueDate(),
+            'issueDate' => (new \DateTimeImmutable($purchaseInvoice->issueDate()))->format('d/m/Y'),
             'accountsPayId' => $purchaseInvoice->accountsPayId(),
             'reference' => $purchaseInvoice->reference(),
             'observations' => $purchaseInvoice->observations(),
@@ -38,6 +38,7 @@ final class PurchaseInvoiceGetController extends Controller
             'tax' => $purchaseInvoice->tax(),
             'total' => $purchaseInvoice->total(),
             'companyId' => $purchaseInvoice->companyId(),
+            'items' => $purchaseInvoice->items()
         ], JsonResponse::HTTP_OK);
     }
 }

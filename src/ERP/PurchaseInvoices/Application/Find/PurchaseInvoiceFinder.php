@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Medine\ERP\PurchaseInvoices\Application\Find;
 
 use Medine\ERP\PurchaseInvoices\Application\PurchaseInvoiceResponse;
+use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoiceItem;
 use Medine\ERP\PurchaseInvoices\Domain\Service\PurchaseInvoiceFinder as Finder;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceId;
+use function Lambdish\Phunctional\map;
 
 final class PurchaseInvoiceFinder
 {
@@ -35,7 +37,27 @@ final class PurchaseInvoiceFinder
             $purchaseInvoice->tax()->value(),
             $purchaseInvoice->total()->value(),
             $purchaseInvoice->companyId()->value(),
-            []
+            map($this->retrieveItem(), $purchaseInvoice->items())
         );
+    }
+
+    private function retrieveItem(): \Closure
+    {
+        return function (PurchaseInvoiceItem $item) {
+            return [
+                'id' => $item->id()->value(),
+                'categoryId' => $item->categoryId()->value(),
+                'itemId' => $item->itemId()->value(),
+                'quantity' => $item->quantity()->value(),
+                'unitId' => $item->unitId()->value(),
+                'unitPrice' => $item->unitPrice()->value(),
+                'subtotal' => $item->subtotal()->value(),
+                'taxId' => $item->taxId()->value(),
+                'discountRate' => $item->discountRate()->value(),
+                'accountingCenterId' => $item->accountingCenterId()->value(),
+                'accountId' => $item->accountId()->value(),
+                'locationId' => $item->locationId()->value()
+            ];
+        };
     }
 }
