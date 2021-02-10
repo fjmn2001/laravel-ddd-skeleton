@@ -11,12 +11,13 @@ export default class CompanyCreator {
 
     __invoke(request: CompanyCreatorRequest) {
         const $Company = new Company(
+            request.id,
             request.name,
             request.state,
             request.address,
             request.phone
         );
         //
-        this.repository.save($Company);
+        return this.repository.save($Company);
     }
 }

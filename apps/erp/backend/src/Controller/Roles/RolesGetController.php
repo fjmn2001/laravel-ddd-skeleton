@@ -37,7 +37,7 @@ final class RolesGetController extends Controller
                 'name' => $rolResponse->name(),
                 'description' => $rolResponse->description(),
                 'superuser' => $rolResponse->superuser(),
-                'status' => $rolResponse->status()
+                'state' => $rolResponse->state()
             ];
         }, $response->roles()), JsonResponse::HTTP_OK);
     }

@@ -19,7 +19,7 @@ final class MySqlCompanyHasUserRepository implements CompanyHasUserRepository
             'company_id' => $companyHasUser->companyId()->value(),
             'user_id' => $companyHasUser->userId(),
             'rol_id' => $companyHasUser->rolId()->value(),
-            'status' => $companyHasUser->status(),
+            'status' => $companyHasUser->state(),
             'created_at' => $companyHasUser->createdAt(),
             'updated_at' => $companyHasUser->updatedAt()
         ]);

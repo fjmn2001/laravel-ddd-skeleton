@@ -37,7 +37,7 @@ final class CompanyPostControllerTest extends TestCase
             'id' => Uuid::uuid4(),
             'name' => $this->faker->company,
             'address' => $this->faker->address,
-            'status' => 'activo',
+            'state' => 'activo',
             'logo' => "coca-cola.jpg",
         ]);
 

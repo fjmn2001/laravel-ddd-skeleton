@@ -25,9 +25,9 @@ final class CompanyFinder
         return new CompanyResponse(
             $rol->id()->value(),
             $rol->name()->value(),
-            $rol->status()->value(),
+            $rol->state()->value(),
             $rol->address()->value(),
-            $rol->status()->value()
+            $rol->logo()->value()
         );
     }
 }

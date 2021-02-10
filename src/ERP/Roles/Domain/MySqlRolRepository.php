@@ -10,7 +10,7 @@ use Medine\ERP\Roles\Domain\ValueObjects\RolCreatedAt;
 use Medine\ERP\Roles\Domain\ValueObjects\RolDescription;
 use Medine\ERP\Roles\Domain\ValueObjects\RolId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolName;
-use Medine\ERP\Roles\Domain\ValueObjects\RolStatus;
+use Medine\ERP\Roles\Domain\ValueObjects\RolState;
 use Medine\ERP\Roles\Domain\ValueObjects\RolSuperuser;
 use Medine\ERP\Roles\Domain\ValueObjects\RolUpdatedAt;
 use Medine\ERP\Shared\Domain\Criteria;
@@ -38,7 +38,7 @@ final class MySqlRolRepository extends MySqlRepository implements RolRepository
             'name' => $rol->name()->value(),
             'description' => $rol->description()->value(),
             'superuser' => $rol->superuser()->value(),
-            'status' => $rol->status()->value(),
+            'status' => $rol->state()->value(),
             'updated_at' => $rol->updatedAt()->value(),
         ]);
     }
@@ -52,7 +52,7 @@ final class MySqlRolRepository extends MySqlRepository implements RolRepository
             new RolName($row->name),
             new RolDescription($row->description),
             new RolSuperuser($row->superuser),
-            new RolStatus($row->status),
+            new RolState($row->status),
             new RolCompanyId($row->company_id),
             new RolCreatedAt($row->created_at),
             new RolUpdatedAt($row->updated_at),
@@ -71,7 +71,7 @@ final class MySqlRolRepository extends MySqlRepository implements RolRepository
                 new RolName($row->name),
                 new RolDescription($row->description),
                 new RolSuperuser($row->superuser),
-                new RolStatus($row->status),
+                new RolState($row->status),
                 new RolCompanyId($row->company_id),
                 new RolCreatedAt($row->created_at),
                 new RolUpdatedAt($row->updated_at),

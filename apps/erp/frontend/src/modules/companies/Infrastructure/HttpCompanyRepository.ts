@@ -5,6 +5,7 @@ export default class HttpCompanyRepository extends HttpRepository {
     save(company: Company) {
         return new Promise((resolve, reject) => {
             super.post(process.env.VUE_APP_ERP_URL + '/api/company', {
+                id: company.id,
                 name: company.name,
                 state: company.state,
                 address: company.address,

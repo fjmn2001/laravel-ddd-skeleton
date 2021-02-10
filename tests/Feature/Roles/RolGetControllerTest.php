@@ -54,7 +54,7 @@ final class RolGetControllerTest extends TestCase
             'name' => $NAME,
             'description' => $DESCRIPTION,
             'superuser' => $SUPERUSER,
-            'status' => 'active'
+            'state' => 'active'
         ]);
         $response->assertStatus(200);
     }

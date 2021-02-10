@@ -24,10 +24,10 @@ final class RolPutController extends Controller
         $this->validateRequest($request);
         ($this->updater)(new RolUpdaterRequest(
             $id,
-            $request->input('name'),
-            $request->input('description'),
-            $request->input('superuser'),
-            $request->input('status')
+            $request->name,
+            $request->description,
+            $request->superuser,
+            $request->state
         ));
 
         return new JsonResponse([], JsonResponse::HTTP_OK);
@@ -39,7 +39,7 @@ final class RolPutController extends Controller
             'name' => 'required|max:25',
             'description' => 'max:25',
             'superuser' => 'required|max:3',
-            'status' => 'required|max:25'
+            'state' => 'required|max:25'
         ]);
     }
 }

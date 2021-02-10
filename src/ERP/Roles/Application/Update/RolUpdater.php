@@ -9,7 +9,7 @@ use Medine\ERP\Roles\Domain\Service\RolFinder;
 use Medine\ERP\Roles\Domain\ValueObjects\RolDescription;
 use Medine\ERP\Roles\Domain\ValueObjects\RolId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolName;
-use Medine\ERP\Roles\Domain\ValueObjects\RolStatus;
+use Medine\ERP\Roles\Domain\ValueObjects\RolState;
 use Medine\ERP\Roles\Domain\ValueObjects\RolSuperuser;
 
 final class RolUpdater
@@ -30,7 +30,7 @@ final class RolUpdater
         $rol->changeName(new RolName($request->name()));
         $rol->changeDescription(new RolDescription($request->description()));
         $rol->changeSuperuser(new RolSuperuser($request->superuser()));
-        $rol->changeStatus(new RolStatus($request->status()));
+        $rol->changeState(new RolState($request->state()));
 
         $this->repository->update($rol);
     }
