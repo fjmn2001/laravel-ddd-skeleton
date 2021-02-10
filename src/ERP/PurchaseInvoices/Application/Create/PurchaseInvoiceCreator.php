@@ -37,7 +37,9 @@ final class PurchaseInvoiceCreator
             new PurchaseInvoiceProviderId($request->providerId()),
             new PurchaseInvoicePaymentTerm($request->paymentTerm()),
             new PurchaseInvoiceCode($request->code()),
-            new PurchaseInvoiceIssueDate($request->issueDate()),
+            new PurchaseInvoiceIssueDate(
+                \DateTimeImmutable::createFromFormat('d/m/Y', $request->issueDate())->format('Y-m-d H:i:s')
+            ),
             new PurchaseInvoiceAccountsPayId($request->accountsPayId()),
             new PurchaseInvoiceReference($request->reference()),
             new PurchaseInvoiceObservations($request->observations()),

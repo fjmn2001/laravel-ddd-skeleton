@@ -8,6 +8,21 @@ use Illuminate\Support\Facades\DB;
 use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoice;
 use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoiceItem;
 use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoiceRepository;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceAccountsPayId;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceCode;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceCompanyId;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceDiscount;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceId;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceIssueDate;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceObservations;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoicePaymentTerm;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceProviderId;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceReference;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceState;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceSubtotal;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceTax;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceTotal;
+use Medine\ERP\Shared\Domain\ValueObjects\DateTimeValueObject;
 use Medine\ERP\Shared\Infrastructure\MySqlRepository;
 use function Lambdish\Phunctional\map;
 
@@ -37,6 +52,30 @@ final class MySqlPurchaseInvoiceRepository extends MySqlRepository implements Pu
 
         $items = map($this->retrieveItem(), $invoice->items());
         DB::table('purchase_invoice_items')->insert($items);
+    }
+
+    public function find(PurchaseInvoiceId $id): ?PurchaseInvoice
+    {
+        $row = DB::table('purchase_invoices')->where('purchase_invoices.id', $id->value())->first();
+
+        return !empty($row) ? PurchaseInvoice::fromDatabase(
+            new PurchaseInvoiceId($row->id),
+            new PurchaseInvoiceProviderId($row->provider_id),
+            new PurchaseInvoicePaymentTerm($row->payment_term),
+            new PurchaseInvoiceCode($row->code),
+            new PurchaseInvoiceIssueDate($row->issue_date),
+            new PurchaseInvoiceAccountsPayId($row->accounts_pay_id),
+            new PurchaseInvoiceReference($row->reference),
+            new PurchaseInvoiceState($row->state),
+            new PurchaseInvoiceObservations($row->observations),
+            new PurchaseInvoiceSubtotal($row->subtotal),
+            new PurchaseInvoiceDiscount($row->discount),
+            new PurchaseInvoiceTax($row->tax),
+            new PurchaseInvoiceTotal($row->total),
+            new PurchaseInvoiceCompanyId($row->company_id),
+            new DateTimeValueObject($row->created_at),
+            new DateTimeValueObject($row->updated_at)
+        ) : null;
     }
 
     private function retrieveItem(): \Closure

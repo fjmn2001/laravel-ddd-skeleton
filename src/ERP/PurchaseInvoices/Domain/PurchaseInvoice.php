@@ -125,6 +125,45 @@ final class PurchaseInvoice
         );
     }
 
+    public static function fromDatabase(
+        PurchaseInvoiceId $id,
+        PurchaseInvoiceProviderId $providerId,
+        PurchaseInvoicePaymentTerm $paymentTerm,
+        PurchaseInvoiceCode $code,
+        PurchaseInvoiceIssueDate $issueDate,
+        PurchaseInvoiceAccountsPayId $accountsPayId,
+        PurchaseInvoiceReference $reference,
+        PurchaseInvoiceState $state,
+        PurchaseInvoiceObservations $observations,
+        PurchaseInvoiceSubtotal $subtotal,
+        PurchaseInvoiceDiscount $discount,
+        PurchaseInvoiceTax $tax,
+        PurchaseInvoiceTotal $total,
+        PurchaseInvoiceCompanyId $companyId,
+        DateTimeValueObject $createdAt,
+        DateTimeValueObject $updatedAt
+    ): self
+    {
+        return new self(
+            $id,
+            $providerId,
+            $paymentTerm,
+            $code,
+            $issueDate,
+            $accountsPayId,
+            $reference,
+            $state,
+            $observations,
+            $subtotal,
+            $discount,
+            $tax,
+            $total,
+            $companyId,
+            $createdAt,
+            $updatedAt
+        );
+    }
+
     public function addPurchaseInvoiceItem(
         string $id,
         string $categoryId,
