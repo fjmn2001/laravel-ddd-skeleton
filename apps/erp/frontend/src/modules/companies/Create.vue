@@ -26,6 +26,7 @@ import GeneralsDetails from "@/modules/companies/form/GeneralsDetails.vue";
 import FormButtons from "@/modules/shared/Infrastructure/FormButtons.vue";
 import CompanyCreator from "@/modules/companies/Application/CompanyCreator";
 import CompanyCreatorRequest from "@/modules/companies/Application/CompanyCreatorRequest";
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
     components: {FormButtons, GeneralsDetails, Breadcrums}
@@ -44,11 +45,16 @@ export default class Create extends Vue {
         this.sending = true
         const creator = new CompanyCreator();
         await creator.__invoke(new CompanyCreatorRequest(
+            uuidv4(),
             this.company.name,
             this.company.state,
             this.company.address,
             this.company.phone
-        ));
+        )).then(response => {
+            console.log('1', response);
+        }).catch(e => {
+            console.log('2', e);
+        });
         this.sending = false
     }
 }

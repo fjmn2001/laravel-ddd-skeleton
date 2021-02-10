@@ -39,14 +39,14 @@ final class CompanyPutControllerTest extends TestCase
             'id' => $ROL_ID,
             'name' => $this->faker->company,
             'address' => $this->faker->address,
-            'status' => 'activo',
+            'state' => 'activo',
             'logo' => "coca-cola.jpg",
         ]);
 
         $response = $this->putJson('/api/company/'. $ROL_ID, [
             'name' => $this->faker->company,
             'address' => $this->faker->address,
-            'status' => 'activo',
+            'state' => 'activo',
             'logo' => "coca-cola.jpg",
         ]);
 

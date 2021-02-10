@@ -11,7 +11,7 @@ use Medine\ERP\Company\Domain\ValueObjects\CompanyCreatedAt;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyId;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyLogo;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyName;
-use Medine\ERP\Company\Domain\ValueObjects\CompanyStatus;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyState;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyUpdatedAt;
 
 final class Company
@@ -20,7 +20,7 @@ final class Company
     private $id;
     private $name;
     private $address;
-    private $status;
+    private $state;
     private $logo;
     private $createdAt;
     private $updatedAt;
@@ -29,7 +29,7 @@ final class Company
         CompanyId $id,
         CompanyName $name,
         CompanyAddress $address,
-        CompanyStatus $status,
+        CompanyState $state,
         CompanyLogo $logo,
         CompanyCreatedAt $createdAt,
         CompanyUpdatedAt $updatedAt
@@ -38,7 +38,7 @@ final class Company
         $this->id = $id;
         $this->name = $name;
         $this->address = $address;
-        $this->status = $status;
+        $this->state = $state;
         $this->logo = $logo;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
@@ -48,7 +48,7 @@ final class Company
         CompanyId $id,
         CompanyName $name,
         CompanyAddress $address,
-        CompanyStatus $status,
+        CompanyState $state,
         CompanyLogo $logo
     ): self
     {
@@ -56,7 +56,7 @@ final class Company
             $id,
             $name,
             $address,
-            $status,
+            $state,
             $logo,
             new CompanyCreatedAt(),
             new CompanyUpdatedAt()
@@ -67,7 +67,7 @@ final class Company
         CompanyId $id,
         CompanyName $name,
         CompanyAddress $address,
-        CompanyStatus $status,
+        CompanyState $state,
         CompanyLogo $logo,
         CompanyCreatedAt $createdAt,
         CompanyUpdatedAt $updatedAt
@@ -77,7 +77,7 @@ final class Company
             $id,
             $name,
             $address,
-            $status,
+            $state,
             $logo,
             $createdAt,
             $updatedAt
@@ -99,9 +99,9 @@ final class Company
         return $this->address;
     }
 
-    public function status(): CompanyStatus
+    public function state(): CompanyState
     {
-        return $this->status;
+        return $this->state;
     }
 
     public function logo(): CompanyLogo
@@ -135,10 +135,10 @@ final class Company
         }
     }
 
-    public function changeStatus(CompanyStatus $newStatus): void
+    public function changeState(CompanyState $newState): void
     {
-        if (false === ($this->status()->equals($newStatus))) {
-            $this->status = $newStatus;
+        if (false === ($this->state()->equals($newState))) {
+            $this->state = $newState;
             $this->updatedAt = new CompanyUpdatedAt();
         }
     }
