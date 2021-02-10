@@ -26,7 +26,7 @@ final class PurchaseInvoiceGetControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_should_create_a_ndddew_purchase_invoice2()
+    public function it_should_get_an_existing_invoice()
     {
         Passport::actingAs(
             User::factory()->create()
@@ -61,6 +61,7 @@ final class PurchaseInvoiceGetControllerTest extends TestCase
             'companyId' => Uuid::uuid4()->toString(),
             'items' => [
                 [
+                    'id' => Uuid::uuid4()->toString(),
                     'categoryId' => Uuid::uuid4()->toString(),
                     'itemId' => Uuid::uuid4()->toString(),
                     'quantity' => 1,
