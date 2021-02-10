@@ -35,4 +35,17 @@ class DateTimeValueObjectTest extends TestCase
         $date_time->createFromFormat('d/m/Y', '01-03-2021');
 
     }
+
+    /**
+     * @test
+     */
+    public function it_should_return_today()
+    {
+        $today = (new \DateTime())->format('Y-m-d H:s:i');
+        $todayFromConstruct = new DateTimeValueObject();
+        $todayFromStaticMethod = DateTimeValueObject::now();
+
+        $this->assertEquals($today, $todayFromConstruct->value());
+        $this->assertEquals($today, $todayFromStaticMethod->value());
+    }
 }

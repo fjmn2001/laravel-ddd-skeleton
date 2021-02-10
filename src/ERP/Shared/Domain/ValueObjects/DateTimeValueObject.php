@@ -45,7 +45,7 @@ class DateTimeValueObject
         return $date;
     }
 
-    public static function now()
+    public static function now(): self
     {
         $dateTimeImmutable = new \DateTimeImmutable;
 
