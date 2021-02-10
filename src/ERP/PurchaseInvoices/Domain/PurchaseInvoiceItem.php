@@ -18,7 +18,6 @@ use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemTaxId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemUnitId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemUnitPrice;
 use Medine\ERP\Shared\Domain\ValueObjects\DateTimeValueObject;
-use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 
 final class PurchaseInvoiceItem
 {
@@ -74,6 +73,7 @@ final class PurchaseInvoiceItem
     }
 
     public static function create(
+        PurchaseInvoiceItemId $id,
         PurchaseInvoiceItemCategoryId $categoryId,
         PurchaseInvoiceItemItemId $itemId,
         PurchaseInvoiceItemQuantity $quantity,
@@ -89,7 +89,7 @@ final class PurchaseInvoiceItem
     ): self
     {
         return new self(
-            new PurchaseInvoiceItemId(Uuid::random()->value()),
+            $id,
             $categoryId,
             $itemId,
             $quantity,

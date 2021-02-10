@@ -57,6 +57,7 @@ final class PurchaseInvoiceCreator
     {
         return function (array $item) use ($purchaseInvoice) {
             $purchaseInvoice->addPurchaseInvoiceItem(
+                $item['id'],
                 $item['categoryId'],
                 $item['itemId'],
                 $item['quantity'],

@@ -14,6 +14,7 @@ use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemAccountId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemAccountingCenterId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemCategoryId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemDiscountRate;
+use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemItemId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemLocationId;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceItemQuantity;
@@ -125,6 +126,7 @@ final class PurchaseInvoice
     }
 
     public function addPurchaseInvoiceItem(
+        string $id,
         string $categoryId,
         string $itemId,
         float $quantity,
@@ -140,6 +142,7 @@ final class PurchaseInvoice
     ): void
     {
         $this->items[] = PurchaseInvoiceItem::create(
+            new PurchaseInvoiceItemId($id),
             new PurchaseInvoiceItemCategoryId($categoryId),
             new PurchaseInvoiceItemItemId($itemId),
             new PurchaseInvoiceItemQuantity($quantity),

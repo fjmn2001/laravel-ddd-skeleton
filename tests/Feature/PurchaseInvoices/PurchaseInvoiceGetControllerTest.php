@@ -7,12 +7,11 @@ namespace Tests\Feature\PurchaseInvoices;
 use App\Models\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Passport\Passport;
 use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 
-final class PurchaseInvoicePostControllerTest extends TestCase
+final class PurchaseInvoiceGetControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -27,12 +26,26 @@ final class PurchaseInvoicePostControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_should_create_a_new_purchase_invoice()
+    public function it_should_create_a_ndddew_purchase_invoice2()
     {
         Passport::actingAs(
             User::factory()->create()
         );
-        $response = $this->postJson('/api/purchase_invoices', [
+        $purchaseInvoice = $this->purchaseInvoice();
+        $response = $this->postJson('/api/purchase_invoices', $purchaseInvoice);
+
+        $response->assertJson([]);
+        $response->assertStatus(201);
+
+        $response = $this->getJson('/api/purchase_invoices/' . $purchaseInvoice['id']);
+
+        $response->assertJson($purchaseInvoice);
+        $response->assertStatus(200);
+    }
+
+    private function purchaseInvoice(): array
+    {
+        return [
             'id' => Uuid::uuid4()->toString(),
             'providerId' => Uuid::uuid4()->toString(),
             'paymentTerm' => 'cash',
@@ -48,7 +61,6 @@ final class PurchaseInvoicePostControllerTest extends TestCase
             'companyId' => Uuid::uuid4()->toString(),
             'items' => [
                 [
-                    'id' => Uuid::uuid4()->toString(),
                     'categoryId' => Uuid::uuid4()->toString(),
                     'itemId' => Uuid::uuid4()->toString(),
                     'quantity' => 1,
@@ -62,9 +74,6 @@ final class PurchaseInvoicePostControllerTest extends TestCase
                     'locationId' => Uuid::uuid4()->toString()
                 ]
             ]
-        ]);
-
-        $response->assertJson([]);
-        $response->assertStatus(201);
+        ];
     }
 }
