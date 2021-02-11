@@ -9,8 +9,7 @@ use Medine\ERP\Roles\Application\Update\RolUpdaterRequest;
 use Medine\ERP\Roles\Domain\MySqlRolRepository;
 use Medine\ERP\Roles\Domain\Service\RolNotExistsException;
 use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
-use PHPUnit\Framework\TestCase;
-
+use Tests\TestCase;
 
 final class RolUpdaterTest extends TestCase
 {

@@ -73,7 +73,6 @@ export default new Vuex.Store({
             axios.get(context.state.ERP_URL + '/api/user').catch(() => {
                 localStorage.removeItem('access_token');
                 context.commit(types.DESTROY_TOKEN, null);
-                value.this.$router.push('auth.login');
             });
         }
     },
