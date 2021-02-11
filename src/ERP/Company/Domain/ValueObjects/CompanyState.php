@@ -6,7 +6,7 @@ namespace Medine\ERP\Company\Domain\ValueObjects;
 
 use Medine\ERP\Shared\Domain\ValueObjects\StringValueObject;
 
-final class CompanyStatus extends StringValueObject
+final class CompanyState extends StringValueObject
 {
     protected $exceptionMessage = "Company name can't be empty";
     protected $exceptionCode = 404;

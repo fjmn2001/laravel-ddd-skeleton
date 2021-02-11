@@ -24,11 +24,11 @@ final class CompanyPostController extends Controller
     public function __invoke(Request $request): JsonResponse
     {
         ($this->creator)(new CompanyCreatorRequest(
-            $request->input('id', ''),
-            $request->input('name', ''),
-            $request->input('address', ''),
-            $request->input('status', ''),
-            $request->input('logo', ''),
+            $request->id,
+            $request->name,
+            $request->address,
+            $request->state,
+            $request->logo,
             (string)Auth::user()->id
         ));
 

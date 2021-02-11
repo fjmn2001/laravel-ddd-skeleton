@@ -184,6 +184,12 @@ body {
     padding: 0px;
 }
 
+.xtitle-buscar-guardar {
+    font-family: "Poppins-Bold";
+    color: #576984;
+    font-size: 15px;
+}
+
 .xtitle-buscar {
     font-family: "Poppins-Bold";
     color: #576984;
@@ -407,8 +413,8 @@ body {
 }
 
 #th-ini {
-    padding: 8px 0px 0px 31px;
     width: 77px;
+    padding: 8px 0px 0px 30px;
 }
 
 option {
@@ -727,7 +733,7 @@ a:focus {
 }
 
 #menu-config ul.components {
-    padding: 20px 0;
+    padding: 20px;
     height: 100%;
     border-right: 1px solid #c2c8d2;
 }
@@ -746,7 +752,6 @@ a:focus {
 }
 
 #menu-config > ul > li.active > a {
-    color: #3468b6;
     border: 1px solid #c2c8d2;
     border-top-left-radius: 5px;
     font-weight: 700;
@@ -754,6 +759,7 @@ a:focus {
     border-bottom-left-radius: 5px;
     left: 2px;
     position: relative;
+    color: #0078bc;
 }
 
 #menu-config-collapse {
@@ -813,7 +819,54 @@ a:focus {
     }
 
     #new01 {
-        padding-left: 9px;
+        padding-left: 7px;
+    }
+
+    #menu-config-collapse {
+        display: block;
+    }
+}
+
+@media (max-width: 640px) {
+    #menu-config {
+        display: none;
+        background: white;
+        position: absolute;
+        width: 50%;
+        height: 30%;
+        z-index: 1;
+    }
+
+    .config-div01 {
+        width: 100%;
+    }
+
+    .config-div02 {
+        width: 100%;
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+
+    #menu-config > ul > li > a {
+        border: 0px ;
+        border-radius: 0px;
+    }
+
+    #menu-config > ul > li.active > a {
+        border: 0px ;
+        border-radius: 0px;
+    }
+
+    #menu-config > ul.components {
+        border-right: 0px solid #c2c8d2;
+    }
+
+    #menu-config.active {
+        margin-left: 0;
+    }
+
+    #new01 {
+        margin-left: 16px;
     }
 
     #menu-config-collapse {
@@ -1000,4 +1053,14 @@ select::-ms-expand {
 
 .pad-l29 {
     padding-top: 29px;
+}
+
+td-ini-sd {
+    width: 77px;
+    padding: 8px 0pc 0px 16px;
+}
+
+#th-ini-sd {
+    padding: 8px 0px 0px 16px;
+    width: 77px;
 }

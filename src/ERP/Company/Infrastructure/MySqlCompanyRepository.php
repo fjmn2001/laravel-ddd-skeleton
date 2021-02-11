@@ -13,7 +13,7 @@ use Medine\ERP\Company\Domain\ValueObjects\CompanyCreatedAt;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyId;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyLogo;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyName;
-use Medine\ERP\Company\Domain\ValueObjects\CompanyStatus;
+use Medine\ERP\Company\Domain\ValueObjects\CompanyState;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyUpdatedAt;
 
 final class MySqlCompanyRepository implements CompanyRepository
@@ -25,7 +25,7 @@ final class MySqlCompanyRepository implements CompanyRepository
             'id' => $company->id()->value(),
             'name' => $company->name()->value(),
             'address' => $company->address()->value(),
-            'status' => $company->status()->value(),
+            'status' => $company->state()->value(),
             'logo' => $company->logo()->value(),
             'created_at' => $company->createdAt()->value(),
             'updated_at' => $company->updatedAt()->value()
@@ -37,7 +37,7 @@ final class MySqlCompanyRepository implements CompanyRepository
         DB::table('companies')->where('companies.id', $company->id()->value())->take(1)->update([
             'name' => $company->name()->value(),
             'address' => $company->address()->value(),
-            'status' => $company->status()->value(),
+            'status' => $company->state()->value(),
             'logo' => $company->logo()->value(),
             'updated_at' => $company->updatedAt()->value(),
         ]);
@@ -51,7 +51,7 @@ final class MySqlCompanyRepository implements CompanyRepository
             new CompanyId($row->id),
             new CompanyName($row->name),
             new CompanyAddress($row->address),
-            new CompanyStatus($row->status),
+            new CompanyState($row->status),
             new CompanyLogo($row->logo),
             new CompanyCreatedAt($row->created_at),
             new CompanyUpdatedAt($row->updated_at)
