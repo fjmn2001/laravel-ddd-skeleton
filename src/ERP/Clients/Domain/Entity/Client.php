@@ -158,23 +158,13 @@ final class Client
         ClientHasPhone $phone
     ): void
     {
-        $this->phones[] = [
-            $phone->id(),
-            $phone->number(),
-            $phone->numberType(),
-            $phone->clientId()
-        ];
+        $this->phones[] = $phone;
     }
 
     public function addClientEmail(
         ClientHasEmail $email
     ): void
     {
-        $this->emails[] = [
-            $email->id(),
-            $email->email(),
-            $email->emailType(),
-            $email->clientId()
-        ];
+        $this->emails[] = $email;
     }
 }

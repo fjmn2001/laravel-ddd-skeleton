@@ -14,7 +14,7 @@ use Tests\TestCase;
 final class ClientPostControllerTest extends TestCase
 {
 
-    use DatabaseTransactions;
+//    use DatabaseTransactions;
 
     private $faker;
 
@@ -55,7 +55,7 @@ final class ClientPostControllerTest extends TestCase
             'emails' => [
                 [
                     'id' => Uuid::random()->value(),
-                    'email' => 'admin@gmail.com',
+                    'email' => $this->faker->email,
                     'email_type' => 'work',
                 ],
             ]

@@ -60,7 +60,6 @@ final class ClientCreator
         each($this->addClientPhone($client), $request->phones());
         each($this->addClientEmail($client), $request->emails());
 
-        dd($client);
         $this->repository->save($client);
     }
 
