@@ -6,7 +6,7 @@ namespace Medine\ERP\Shared\Domain\ValueObjects;
 
 use Medine\ERP\Shared\Domain\Exceptions\EmptyArgumentException;
 
-final class FloatValueObject
+class FloatValueObject
 {
     private $value;
 
