@@ -26,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
 
     private $wiringObjects = [
         UserRepository::class => MySqlUserRepository::class,
+        RolRepository::class => MySqlRolRepository::class,
         CompanyRepository::class => MySqlCompanyRepository::class,
         CompanyHasUserRepository::class => MySqlCompanyHasUserRepository::class,
-        RolRepository::class => MySqlRolRepository::class,
         PasswordResetRepository::class => MySqlPasswordResetRepository::class,
         ClientRepository::class => MySqlClientRepository::class,
     ];
