@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Medine\ERP\Clients\Domain\Contracts\ClientRepository;
 use Medine\ERP\Clients\Infrastructure\Repository\MySqlClientRepository;
+use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoiceRepository;
+use Medine\ERP\PurchaseInvoices\Infrastructure\Persistence\MySqlPurchaseInvoiceRepository;
 use Medine\ERP\Roles\Domain\MySqlRolRepository;
 use Medine\ERP\Roles\Domain\RolRepository;
 use Medine\ERP\Shared\Domain\Bus\Event\EventBus;
@@ -26,11 +28,12 @@ class AppServiceProvider extends ServiceProvider
 
     private $wiringObjects = [
         UserRepository::class => MySqlUserRepository::class,
-        RolRepository::class => MySqlRolRepository::class,
         CompanyRepository::class => MySqlCompanyRepository::class,
         CompanyHasUserRepository::class => MySqlCompanyHasUserRepository::class,
+        RolRepository::class => MySqlRolRepository::class,
         PasswordResetRepository::class => MySqlPasswordResetRepository::class,
         ClientRepository::class => MySqlClientRepository::class,
+        PurchaseInvoiceRepository::class => MySqlPurchaseInvoiceRepository::class
     ];
 
     /**
