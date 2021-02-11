@@ -24,6 +24,8 @@ class CreateClients extends Migration
             $table->string('frequent_client_number')->nullable(true);
             $table->string('state');
             $table->timestamps();
+
+            $table->primary('id');
         });
     }
 

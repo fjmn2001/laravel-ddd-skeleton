@@ -33,8 +33,10 @@ final class ClientPostControllerTest extends TestCase
             User::factory()->create()
         );
 
+        $clientId = Uuid::random()->value();
+
         $response = $this->postJson('/api/client', [
-            'id' => Uuid::random()->value(),
+            'id' => $clientId,
             'name' => $this->faker->name,
             'lastname' => $this->faker->lastName,
             'dni' => '336-225-55',
@@ -45,14 +47,16 @@ final class ClientPostControllerTest extends TestCase
             'state' => 'activo',
             'phones' => [
                 [
+                    'id' => Uuid::random()->value(),
                     'number' => '111-222-333-5555',
                     'number_type' => 'work',
                 ],
             ],
             'emails' => [
                 [
+                    'id' => Uuid::random()->value(),
                     'email' => 'admin@gmail.com',
-                    'number_type' => 'work',
+                    'email_type' => 'work',
                 ],
             ]
         ]);

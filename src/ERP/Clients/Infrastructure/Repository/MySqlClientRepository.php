@@ -24,8 +24,8 @@ final class MySqlClientRepository implements ClientRepository
             'client_category' => $client->clientCategory()->value(),
             'frequent_client_number' => $client->frequentClientNumber()->value(),
             'state' => $client->state()->value(),
-            'created_at' => $client->CreatedAt()->value(),
-            'updated_at' => $client->UpdatedAt()->value(),
+            'created_at' => $client->createdAt()->value(),
+            'updated_at' => $client->updatedAt()->value(),
         ]);
     }
 

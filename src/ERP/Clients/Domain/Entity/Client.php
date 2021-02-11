@@ -32,6 +32,9 @@ final class Client
     private $createdAt;
     private $updatedAt;
 
+    private $phones;
+    private $emails;
+
     private function __construct(
         ClientId $id,
         ClientName $name,
@@ -131,13 +134,47 @@ final class Client
         return $this->state;
     }
 
-    public function CreatedAt(): ClientCreatedAt
+    public function createdAt(): ClientCreatedAt
     {
         return $this->createdAt;
     }
 
-    public function UpdatedAt(): ClientUpdatedAt
+    public function updatedAt(): ClientUpdatedAt
     {
         return $this->updatedAt;
+    }
+
+    public function phones(): array
+    {
+        return $this->phones;
+    }
+
+    public function emails(): array
+    {
+        return $this->emails;
+    }
+
+    public function addClientPhone(
+        ClientHasPhone $phone
+    ): void
+    {
+        $this->phones[] = [
+            $phone->id(),
+            $phone->number(),
+            $phone->numberType(),
+            $phone->clientId()
+        ];
+    }
+
+    public function addClientEmail(
+        ClientHasEmail $email
+    ): void
+    {
+        $this->emails[] = [
+            $email->id(),
+            $email->email(),
+            $email->emailType(),
+            $email->clientId()
+        ];
     }
 }
