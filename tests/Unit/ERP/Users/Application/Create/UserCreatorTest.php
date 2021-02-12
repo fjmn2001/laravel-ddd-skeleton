@@ -9,7 +9,7 @@ use Medine\ERP\Shared\Domain\Exceptions\EmptyArgumentException;
 use Medine\ERP\Shared\Domain\Exceptions\InvalidEmailException;
 use Medine\ERP\Users\Application\UserCreator;
 use Medine\ERP\Users\Application\UserCreatorRequest;
-use Medine\ERP\Users\Infrastructure\InMemoryUserRepository;
+use Tests\Unit\ERP\Users\Infrastructure\InMemoryUserRepository;
 use PHPUnit\Framework\TestCase;
 
 final class UserCreatorTest extends TestCase

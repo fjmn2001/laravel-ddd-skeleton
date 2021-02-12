@@ -49,7 +49,7 @@ class DateTimeValueObject
         }
     }
 
-    public static function parse(string $isoDatetime)
+    public static function parse(string $isoDatetime): self
     {
         $dateTimeImmutable = new \DateTimeImmutable($isoDatetime);
 
@@ -58,7 +58,7 @@ class DateTimeValueObject
         );
     }
 
-    public static function now()
+    public static function now(): self
     {
         $dateTimeImmutable = new \DateTimeImmutable;
 
@@ -84,7 +84,7 @@ class DateTimeValueObject
         return $dateTimeImmutable->format($format);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string)$this->value();
     }
