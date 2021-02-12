@@ -24,7 +24,7 @@ class ProviderPostControllerTest extends TestCase
             'name' => 'Gabriel',
         ]);
 
-       dd($respost->getContent());
+//       dd($respost->getContent());
         $respost->assertJson([]);
         $respost->assertStatus(201);
     }
