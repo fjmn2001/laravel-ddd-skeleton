@@ -281,4 +281,44 @@ final class PurchaseInvoice
     {
         return $this->items;
     }
+
+    public function changeProviderId(PurchaseInvoiceProviderId $providerId)
+    {
+        if (false === ($this->providerId()->equals($providerId))) {
+            $this->providerId = $providerId;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changePaymentTerm(PurchaseInvoicePaymentTerm $paymentTerm)
+    {
+        if (false === ($this->paymentTerm()->equals($paymentTerm))) {
+            $this->paymentTerm = $paymentTerm;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changeCode(PurchaseInvoiceCode $code)
+    {
+        if (false === ($this->code()->equals($code))) {
+            $this->code = $code;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changeIssueDate(PurchaseInvoiceIssueDate $issueDate)
+    {
+        if (false === ($this->issueDate()->equals($issueDate))) {
+            $this->issueDate = $issueDate;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changeAccountsPayId(PurchaseInvoiceAccountsPayId $accountsPayId)
+    {
+        if (false === ($this->accountsPayId()->equals($accountsPayId))) {
+            $this->accountsPayId = $accountsPayId;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
 }
