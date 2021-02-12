@@ -11,4 +11,6 @@ interface PurchaseInvoiceRepository
     public function save(PurchaseInvoice $invoice): void;
 
     public function find(PurchaseInvoiceId $id): ?PurchaseInvoice;
+
+    public function update(PurchaseInvoice $purchaseInvoice): void;
 }

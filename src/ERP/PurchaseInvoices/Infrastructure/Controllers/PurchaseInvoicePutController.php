@@ -2,27 +2,29 @@
 
 declare(strict_types=1);
 
-namespace Medine\Apps\ERP\Backend\Controller\PurchaseInvoices;
+namespace Medine\ERP\PurchaseInvoices\Infrastructure\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Medine\ERP\PurchaseInvoices\Application\Create\PurchaseInvoiceCreator;
 use Medine\ERP\PurchaseInvoices\Application\Create\PurchaseInvoiceCreatorRequest;
+use Medine\ERP\PurchaseInvoices\Application\Update\PurchaseInvoiceUpdater;
+use Medine\ERP\PurchaseInvoices\Application\Update\PurchaseInvoiceUpdaterRequest;
 
-final class PurchaseInvoicePostController extends Controller
+final class PurchaseInvoicePutController extends Controller
 {
-    private $creator;
+    private $updater;
 
-    public function __construct(PurchaseInvoiceCreator $creator)
+    public function __construct(PurchaseInvoiceUpdater $updater)
     {
-        $this->creator = $creator;
+        $this->updater = $updater;
     }
 
-    public function __invoke(Request $request)
+    public function __invoke(string $id, Request $request)
     {
-        ($this->creator)(new PurchaseInvoiceCreatorRequest(
-            $request->id,
+        ($this->updater)(new PurchaseInvoiceUpdaterRequest(
+            $id,
             $request->providerId,
             $request->paymentTerm,
             $request->code,
@@ -38,6 +40,6 @@ final class PurchaseInvoicePostController extends Controller
             $request->items
         ));
 
-        return new JsonResponse([], JsonResponse::HTTP_CREATED);
+        return new JsonResponse([], JsonResponse::HTTP_OK);
     }
 }
