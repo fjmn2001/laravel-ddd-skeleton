@@ -42,13 +42,13 @@ final class PurchaseInvoiceUpdater
             \DateTimeImmutable::createFromFormat('d/m/Y', $request->issueDate())->format('Y-m-d H:i:s')
         ));
         $purchaseInvoice->changeAccountsPayId(new PurchaseInvoiceAccountsPayId($request->accountsPayId()));
-//        $purchaseInvoice->changeReference(new PurchaseInvoiceReference($request->reference()));
-//        //todo: $purchaseInvoice->changeState(new PurchaseInvoiceState($request->state()));
-//        $purchaseInvoice->changeObservations(new PurchaseInvoiceObservations($request->observations()));
-//        $purchaseInvoice->changeSubtotal(new PurchaseInvoiceSubtotal($request->subtotal()));
-//        $purchaseInvoice->changeDiscount(new PurchaseInvoiceDiscount($request->discount()));
-//        $purchaseInvoice->changeTax(new PurchaseInvoiceTax($request->tax()));
-//        $purchaseInvoice->changeTotal(new PurchaseInvoiceTotal($request->total()));
+        $purchaseInvoice->changeReference(new PurchaseInvoiceReference($request->reference()));
+        //todo: $purchaseInvoice->changeState(new PurchaseInvoiceState($request->state()));
+        $purchaseInvoice->changeObservations(new PurchaseInvoiceObservations($request->observations()));
+        $purchaseInvoice->changeSubtotal(new PurchaseInvoiceSubtotal($request->subtotal()));
+        $purchaseInvoice->changeDiscount(new PurchaseInvoiceDiscount($request->discount()));
+        $purchaseInvoice->changeTax(new PurchaseInvoiceTax($request->tax()));
+        $purchaseInvoice->changeTotal(new PurchaseInvoiceTotal($request->total()));
 //        $purchaseInvoice->changeItems($request->items());
         $this->repository->update($purchaseInvoice);
     }
