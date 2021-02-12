@@ -6,6 +6,8 @@ namespace Medine\ERP\Provider\Application;
 
 
 use Medine\ERP\Provider\Domain\Entity\Provider;
+use Medine\ERP\Provider\Domain\ValueObjects\ProviderId;
+use Medine\ERP\Provider\Domain\ValueObjects\ProviderName;
 use Medine\ERP\Provider\Infrastructure\ProviderRepository;
 
 class ProviderCreator
@@ -20,8 +22,8 @@ class ProviderCreator
     public function __invoke(ProviderCreatorRequest $request)
     {
         $provider = Provider::create(
-            $request->id(),
-            $request->name()
+            new ProviderId($request->id()),
+            new ProviderName($request->name())
         );
 
         $this->repository->save($provider);
