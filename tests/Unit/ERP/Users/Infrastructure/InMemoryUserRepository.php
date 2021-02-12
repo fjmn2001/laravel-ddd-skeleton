@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Medine\ERP\Users\Infrastructure;
+namespace Tests\Unit\ERP\Users\Infrastructure;
 
 
 use Medine\ERP\Users\Domain\User;
