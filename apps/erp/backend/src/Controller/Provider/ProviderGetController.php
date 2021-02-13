@@ -20,7 +20,7 @@ class ProviderGetController extends Controller
     public function __invoke(string $id)
     {
         $response = ($this->providerFinder)(new ProviderFinderRequest($id));
-
+        dd($response);
         return response()->json($response, JsonResponse::HTTP_OK);
     }
 }
