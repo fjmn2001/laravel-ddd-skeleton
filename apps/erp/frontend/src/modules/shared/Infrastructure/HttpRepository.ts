@@ -5,9 +5,10 @@ export default class HttpRepository {
 
     constructor() {
         this.axios = axios;
+        this.axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
     }
 
     async post(url: string, data: object) {
-        this.axios.post(url, data);
+        return await this.axios.post(url, data);
     }
 }
