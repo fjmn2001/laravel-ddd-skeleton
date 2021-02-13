@@ -4,12 +4,14 @@
 namespace Medine\Apps\ERP\Backend\Controller\Provider;
 
 
+use App\Http\Controllers\Controller;
+
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Medine\ERP\Provider\Application\ProviderCreator;
 use Medine\ERP\Provider\Application\ProviderCreatorRequest;
 
-class ProviderPostController
+class ProviderPostController extends Controller
 {
     private $providerCreator;
 

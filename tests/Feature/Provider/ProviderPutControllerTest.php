@@ -33,7 +33,7 @@ class ProviderPutControllerTest extends TestCase
             'name' => $PROVIDER_NAME,
         ]);
 
-        $respost = $this->putJson('/api/provider' . $PROVIDER_ID,
+        $respost = $this->putJson('/api/provider/' . $PROVIDER_ID,
         [
             'name' => $NEW_NAME
         ]);

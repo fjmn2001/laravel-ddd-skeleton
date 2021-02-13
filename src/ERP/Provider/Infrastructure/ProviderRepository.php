@@ -20,7 +20,7 @@ class ProviderRepository implements ProviderRepositoy
 
     public function find(ProviderId $id): ?Provider
     {
-        return (new Provider($id , new ProviderName('name'), new ProviderCreatedAt(),new ProviderUpdatedAt()));
+        return (new Provider($id , new ProviderName('NAME'), new ProviderCreatedAt(),new ProviderUpdatedAt()));
     }
 
     public function update(Provider $provider): void

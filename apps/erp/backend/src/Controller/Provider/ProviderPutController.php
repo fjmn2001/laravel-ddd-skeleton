@@ -4,12 +4,14 @@
 namespace Medine\Apps\ERP\Backend\Controller\Provider;
 
 
+use App\Http\Controllers\Controller;
+
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Medine\ERP\Provider\Application\ProviderUpdater;
 use Medine\ERP\Provider\Application\ProviderUpdateRequest;
 
-class ProviderPutController
+class ProviderPutController extends Controller
 {
     private $providerUpdate;
 
