@@ -11,4 +11,10 @@ export default class HttpCompanyRepository extends HttpRepository {
             phone: company.phone,
         });
     }
+
+    async matching() {
+        return await super.get(process.env.VUE_APP_ERP_URL + '/api/company', {
+            //...
+        });
+    }
 }

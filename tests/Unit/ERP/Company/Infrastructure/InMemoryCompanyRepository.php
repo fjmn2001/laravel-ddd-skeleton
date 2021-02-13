@@ -7,6 +7,7 @@ namespace Tests\Unit\ERP\Company\Infrastructure;
 use Medine\ERP\Company\Domain\Company;
 use Medine\ERP\Company\Domain\CompanyRepository;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyId;
+use Medine\ERP\Shared\Domain\Criteria;
 use function Lambdish\Phunctional\search;
 
 final class InMemoryCompanyRepository implements CompanyRepository
@@ -28,5 +29,10 @@ final class InMemoryCompanyRepository implements CompanyRepository
     public function update(Company $rol): void
     {
         // TODO: Implement update() method.
+    }
+
+    public function matching(Criteria $criteria)
+    {
+        // TODO: Implement matching() method.
     }
 }
