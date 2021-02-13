@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Medine\ERP\PurchaseInvoices\Infrastructure\Persistence;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoice;
 use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoiceItem;
 use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoiceRepository;
@@ -77,23 +78,13 @@ final class MySqlPurchaseInvoiceRepository extends MySqlRepository implements Pu
             new DateTimeValueObject($row->updated_at)
         );
 
-        $rows->each(function ($item) use ($purchaseInvoice) {
-            $purchaseInvoice->addPurchaseInvoiceItem(
-                $item->id,
-                $item->category_id,
-                $item->item_id,
-                $item->quantity,
-                $item->unit_id,
-                $item->unit_price,
-                $item->subtotal,
-                $item->tax_id,
-                $item->discount_rate,
-                $item->accounting_center_id,
-                $item->account_id,
-                $item->location_id,
-                $purchaseInvoice->id()
-            );
-        });
+        $purchaseInvoice->changeItems($rows->map(function ($item) {
+            $itemLikeArray = [];
+            foreach ($item as $key => $value) {
+                $itemLikeArray[Str::camel($key)] = $value;
+            }
+            return $itemLikeArray;
+        })->toArray());
 
         return !empty($row) ? $purchaseInvoice : null;
     }

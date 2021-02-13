@@ -31,6 +31,7 @@ use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceSubtotal;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceTax;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceTotal;
 use Medine\ERP\Shared\Domain\ValueObjects\DateTimeValueObject;
+use function Lambdish\Phunctional\map;
 
 final class PurchaseInvoice
 {
@@ -161,39 +162,6 @@ final class PurchaseInvoice
             $companyId,
             $createdAt,
             $updatedAt
-        );
-    }
-
-    public function addPurchaseInvoiceItem(
-        string $id,
-        string $categoryId,
-        string $itemId,
-        float $quantity,
-        string $unitId,
-        float $unitPrice,
-        float $subtotal,
-        string $taxId,
-        float $discountRate,
-        string $accountingCenterId,
-        string $accountId,
-        string $locationId,
-        PurchaseInvoiceId $purchaseInvoiceId
-    ): void
-    {
-        $this->items[] = PurchaseInvoiceItem::create(
-            new PurchaseInvoiceItemId($id),
-            new PurchaseInvoiceItemCategoryId($categoryId),
-            new PurchaseInvoiceItemItemId($itemId),
-            new PurchaseInvoiceItemQuantity($quantity),
-            new PurchaseInvoiceItemUnitId($unitId),
-            new PurchaseInvoiceItemUnitPrice($unitPrice),
-            new PurchaseInvoiceItemSubtotal($subtotal),
-            new PurchaseInvoiceItemTaxId($taxId),
-            new PurchaseInvoiceItemDiscountRate($discountRate),
-            new PurchaseInvoiceItemAccountingCenterId($accountingCenterId),
-            new PurchaseInvoiceItemAccountId($accountId),
-            new PurchaseInvoiceItemLocationId($locationId),
-            $purchaseInvoiceId
         );
     }
 
@@ -330,6 +298,14 @@ final class PurchaseInvoice
         }
     }
 
+    public function changeState(PurchaseInvoiceState $state)
+    {
+        if (false === ($this->state()->equals($state))) {
+            $this->state = $state;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
     public function changeObservations(PurchaseInvoiceObservations $observations)
     {
         if (false === ($this->observations()->equals($observations))) {
@@ -368,5 +344,26 @@ final class PurchaseInvoice
             $this->total = $total;
             $this->updatedAt = DateTimeValueObject::now();
         }
+    }
+
+    public function changeItems(array $items)
+    {
+        $this->items = map(function (array $item) {
+            return PurchaseInvoiceItem::create(
+                new PurchaseInvoiceItemId($item['id']),
+                new PurchaseInvoiceItemCategoryId($item['categoryId']),
+                new PurchaseInvoiceItemItemId($item['itemId']),
+                new PurchaseInvoiceItemQuantity($item['quantity']),
+                new PurchaseInvoiceItemUnitId($item['unitId']),
+                new PurchaseInvoiceItemUnitPrice($item['unitPrice']),
+                new PurchaseInvoiceItemSubtotal($item['subtotal']),
+                new PurchaseInvoiceItemTaxId($item['taxId']),
+                new PurchaseInvoiceItemDiscountRate($item['discountRate']),
+                new PurchaseInvoiceItemAccountingCenterId($item['accountingCenterId']),
+                new PurchaseInvoiceItemAccountId($item['accountId']),
+                new PurchaseInvoiceItemLocationId($item['locationId']),
+                $this->id
+            );
+        }, $items);
     }
 }

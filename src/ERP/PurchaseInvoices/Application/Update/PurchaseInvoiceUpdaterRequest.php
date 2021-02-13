@@ -13,6 +13,7 @@ final class PurchaseInvoiceUpdaterRequest
     private $issueDate;
     private $accountsPayId;
     private $reference;
+    private $state;
     private $observations;
     private $subtotal;
     private $discount;
@@ -29,6 +30,7 @@ final class PurchaseInvoiceUpdaterRequest
         string $issueDate,
         string $accountsPayId,
         string $reference,
+        string $state,
         string $observations,
         float $subtotal,
         float $discount,
@@ -45,6 +47,7 @@ final class PurchaseInvoiceUpdaterRequest
         $this->issueDate = $issueDate;
         $this->accountsPayId = $accountsPayId;
         $this->reference = $reference;
+        $this->state = $state;
         $this->observations = $observations;
         $this->subtotal = $subtotal;
         $this->discount = $discount;
@@ -87,6 +90,11 @@ final class PurchaseInvoiceUpdaterRequest
     public function reference(): string
     {
         return $this->reference;
+    }
+
+    public function state(): string
+    {
+        return $this->state;
     }
 
     public function observations(): string

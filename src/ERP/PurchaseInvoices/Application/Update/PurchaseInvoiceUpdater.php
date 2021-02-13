@@ -43,13 +43,15 @@ final class PurchaseInvoiceUpdater
         ));
         $purchaseInvoice->changeAccountsPayId(new PurchaseInvoiceAccountsPayId($request->accountsPayId()));
         $purchaseInvoice->changeReference(new PurchaseInvoiceReference($request->reference()));
-        //todo: $purchaseInvoice->changeState(new PurchaseInvoiceState($request->state()));
+        $purchaseInvoice->changeState(new PurchaseInvoiceState($request->state()));
         $purchaseInvoice->changeObservations(new PurchaseInvoiceObservations($request->observations()));
         $purchaseInvoice->changeSubtotal(new PurchaseInvoiceSubtotal($request->subtotal()));
         $purchaseInvoice->changeDiscount(new PurchaseInvoiceDiscount($request->discount()));
         $purchaseInvoice->changeTax(new PurchaseInvoiceTax($request->tax()));
         $purchaseInvoice->changeTotal(new PurchaseInvoiceTotal($request->total()));
-//        $purchaseInvoice->changeItems($request->items());
+        $purchaseInvoice->changeItems($request->items());
+
+        //...
         $this->repository->update($purchaseInvoice);
     }
 }
