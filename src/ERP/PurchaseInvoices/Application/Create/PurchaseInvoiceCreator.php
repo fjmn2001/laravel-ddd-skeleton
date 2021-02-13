@@ -19,7 +19,6 @@ use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceReference;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceSubtotal;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceTax;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceTotal;
-use function Lambdish\Phunctional\each;
 
 final class PurchaseInvoiceCreator
 {
@@ -50,29 +49,8 @@ final class PurchaseInvoiceCreator
             new PurchaseInvoiceCompanyId($request->companyId()),
         );
 
-        each($this->addPurchaseInvoiceItem($purchaseInvoice), $request->items());
+        $purchaseInvoice->changeItems($request->items());
 
         $this->repository->save($purchaseInvoice);
-    }
-
-    private function addPurchaseInvoiceItem(PurchaseInvoice $purchaseInvoice): \Closure
-    {
-        return function (array $item) use ($purchaseInvoice) {
-            $purchaseInvoice->addPurchaseInvoiceItem(
-                $item['id'],
-                $item['categoryId'],
-                $item['itemId'],
-                $item['quantity'],
-                $item['unitId'],
-                $item['unitPrice'],
-                $item['subtotal'],
-                $item['taxId'],
-                $item['discountRate'],
-                $item['accountingCenterId'],
-                $item['accountId'],
-                $item['locationId'],
-                $purchaseInvoice->id()
-            );
-        };
     }
 }
