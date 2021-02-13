@@ -7,6 +7,7 @@ namespace Tests\Unit\ERP\Product\Application\Update;
 use Faker\Factory;
 use Medine\ERP\Product\Application\Create\CreateProductRequest;
 use Medine\ERP\Product\Application\Create\ProductCreator;
+use Medine\ERP\Product\Application\Update\ProductUpdater;
 use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 use Tests\Unit\ERP\Product\Infrastructure\InMemoryProductRepository;
