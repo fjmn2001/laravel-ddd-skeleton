@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\ERP\Product\Application\Create;
 
 use Faker\Factory;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Medine\ERP\Product\Application\Create\CreateProductRequest;
 use Medine\ERP\Product\Application\Create\ProductCreator;
 use PHPUnit\Framework\TestCase;
@@ -13,6 +14,8 @@ use Tests\Unit\ERP\Product\Infrastructure\InMemoryProductRepository;
 
 final class ProductCreatorTest extends TestCase
 {
+    use DatabaseTransactions;
+
     protected $creator;
     protected $faker;
 

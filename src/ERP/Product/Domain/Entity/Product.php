@@ -10,6 +10,7 @@ use Medine\ERP\Product\Domain\ValueObjects\ProductCreatedAt;
 use Medine\ERP\Product\Domain\ValueObjects\ProductDescription;
 use Medine\ERP\Product\Domain\ValueObjects\ProductId;
 use Medine\ERP\Product\Domain\ValueObjects\ProductName;
+use Medine\ERP\Product\Domain\ValueObjects\ProductState;
 use Medine\ERP\Product\Domain\ValueObjects\ProductType;
 use Medine\ERP\Product\Domain\ValueObjects\ProductUpdatedAt;
 
@@ -21,6 +22,7 @@ final class Product
     private $categoryId;
     private $description;
     private $typeId;
+    private $state;
     private $createdAt;
     private $updatedAt;
 
@@ -31,6 +33,7 @@ final class Product
         ProductCategory $category,
         ProductDescription $description,
         ProductType $type,
+        ProductState $state,
         ProductCreatedAt $createAt,
         ProductUpdatedAt $updatedAt
     )
@@ -41,6 +44,7 @@ final class Product
         $this->categoryId = $category;
         $this->description = $description;
         $this->typeId = $type;
+        $this->state = $state;
         $this->createdAt = $createAt;
         $this->updatedAt = $updatedAt;
     }
@@ -61,6 +65,7 @@ final class Product
             $category,
             $description,
             $type,
+            new ProductState('activo'),
             new ProductCreatedAt(),
             new ProductUpdatedAt()
         );
@@ -94,6 +99,11 @@ final class Product
     public function typeId(): ProductType
     {
         return $this->typeId;
+    }
+
+    public function state(): ProductState
+    {
+        return $this->state;
     }
 
     public function createdAt(): ProductCreatedAt

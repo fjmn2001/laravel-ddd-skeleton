@@ -20,6 +20,7 @@ final class MySqlProductRepository implements ProductRepository
             'category_id' => $product->categoryId()->value(),
             'description' => $product->description()->value(),
             'type_id' => $product->typeId()->value(),
+            'state' => $product->state()->value(),
             'created_at' => $product->createdAt()->value(),
             'updated_at' => $product->updatedAt()->value()
         ]);
