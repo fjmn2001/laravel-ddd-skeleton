@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Medine\ERP\Product\Application\Update;
 
 use Medine\ERP\Product\Domain\Contracts\ProductRepository;
+use Medine\ERP\Product\Domain\Service\ProductFinder;
 use Medine\ERP\Product\Domain\ValueObjects\ProductCategory;
 use Medine\ERP\Product\Domain\ValueObjects\ProductCode;
 use Medine\ERP\Product\Domain\ValueObjects\ProductDescription;
@@ -18,10 +19,10 @@ final class ProductUpdater
     private $repository;
     private $finder;
 
-    public function __construct(ProductRepository $repository, ProductFinder $finder)
+    public function __construct(ProductRepository $repository)
     {
         $this->repository = $repository;
-        $this->finder = $finder;
+        $this->finder = new ProductFinder($repository);
     }
 
     public function __invoke(UpdateProductRequest $request)

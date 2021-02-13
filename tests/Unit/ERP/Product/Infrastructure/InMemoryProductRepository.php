@@ -18,7 +18,7 @@ final class InMemoryProductRepository implements ProductRepository
 
     public function find(ProductId $productId): ?Product
     {
-        // TODO: Implement find() method.
+        return null;
     }
 
     public function update(Product $product): void

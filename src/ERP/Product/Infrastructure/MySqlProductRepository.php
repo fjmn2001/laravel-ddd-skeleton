@@ -37,7 +37,7 @@ final class MySqlProductRepository implements ProductRepository
 
     public function find(ProductId $productId): ?Product
     {
-        $row = DB::table('productos')->where('productos.id', $productId->value())->first();
+        $row = DB::table('products')->where('products.id', $productId->value())->first();
 
         return !empty($row) ? Product::fromValues(
             new ProductId($row->id),
@@ -47,7 +47,7 @@ final class MySqlProductRepository implements ProductRepository
             new ProductDescription($row->description),
             new ProductType($row->type_id),
             new ProductState($row->state),
-            new ProductCreatedAt($row->create_at),
+            new ProductCreatedAt($row->created_at),
             new ProductUpdatedAt($row->updated_at)
         ) : null;
     }

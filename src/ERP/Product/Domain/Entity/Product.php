@@ -168,7 +168,7 @@ final class Product
     public function changeDescription(ProductDescription $newDescription): void
     {
         if (false === ($this->description()->equals($newDescription))) {
-            $this->name = $newDescription;
+            $this->description = $newDescription;
             $this->updatedAt = new ProductUpdatedAt();
         }
     }
@@ -183,8 +183,8 @@ final class Product
 
     public function changeState(ProductState $newState): void
     {
-        if (false === ($this->name()->equals($newState))) {
-            $this->description = $newState;
+        if (false === ($this->state()->equals($newState))) {
+            $this->state = $newState;
             $this->updatedAt = new ProductUpdatedAt();
         }
     }

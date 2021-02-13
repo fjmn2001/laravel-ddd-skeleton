@@ -9,6 +9,7 @@ use Medine\ERP\Product\Application\Create\CreateProductRequest;
 use Medine\ERP\Product\Application\Create\ProductCreator;
 use Medine\ERP\Product\Application\Update\ProductUpdater;
 use Medine\ERP\Product\Application\Update\UpdateProductRequest;
+use Medine\ERP\Product\Infrastructure\MySqlProductRepository;
 use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 use Tests\Unit\ERP\Product\Infrastructure\InMemoryProductRepository;
@@ -22,10 +23,10 @@ final class ProductUpdaterTest extends TestCase
     protected function setUp(): void
     {
         $this->creator = new ProductCreator(
-            new InMemoryProductRepository()
+            new MySqlProductRepository()
         );
         $this->updater = new ProductUpdater(
-            new InMemoryProductRepository()
+            new MySqlProductRepository()
         );
         $this->faker = Factory::create();
 
@@ -53,7 +54,7 @@ final class ProductUpdaterTest extends TestCase
 
         $response = ($this->updater)(new UpdateProductRequest(
             $UUID,
-            'CODE-1',
+            $this->faker->text(6),
             'NAME TEST',
             $new_category_id,
             'TEST DESCRIPTION',
