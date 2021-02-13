@@ -38,9 +38,8 @@ class ProviderPutControllerTest extends TestCase
             'name' => $NEW_NAME
         ]);
 
-        dd($respost->getContent());
         $respost->assertJson([]);
-        $respost->assertStatus(201);
+        $respost->assertStatus(200);
     }
 
 }

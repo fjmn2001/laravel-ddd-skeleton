@@ -6,6 +6,10 @@ namespace Medine\ERP\Provider\Infrastructure;
 
 use Medine\ERP\Provider\Domain\Entity\Provider;
 use Medine\ERP\Provider\Domain\ProviderRepositoy;
+use Medine\ERP\Provider\Domain\ValueObjects\ProviderCreatedAt;
+use Medine\ERP\Provider\Domain\ValueObjects\ProviderId;
+use Medine\ERP\Provider\Domain\ValueObjects\ProviderName;
+use Medine\ERP\Provider\Domain\ValueObjects\ProviderUpdatedAt;
 
 class ProviderRepository implements ProviderRepositoy
 {
@@ -14,9 +18,9 @@ class ProviderRepository implements ProviderRepositoy
 
     }
 
-    public function find(Provider $provider): ?Provider
+    public function find(ProviderId $id): ?Provider
     {
-        return (new Provider('1', 'name'));
+        return (new Provider($id , new ProviderName('name'), new ProviderCreatedAt(),new ProviderUpdatedAt()));
     }
 
     public function update(Provider $provider): void

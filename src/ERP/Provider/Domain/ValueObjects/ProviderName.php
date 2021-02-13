@@ -4,17 +4,18 @@
 namespace Medine\ERP\Provider\Domain\ValueObjects;
 
 
-class ProviderName
+use Medine\ERP\Shared\Domain\ValueObjects\StringValueObject;
+
+class ProviderName extends StringValueObject
 {
-    private $name;
+    protected  $exceptionMessage = "Provider name can't be empty";
+    protected $exceptionCode = 400;
 
     public function __construct(string $name)
     {
-        $this->name = $name;
+        $this->notEmpty($name);
+
+        parent::__construct($name);
     }
 
-    public function value()
-    {
-        $this->name;
-    }
 }
