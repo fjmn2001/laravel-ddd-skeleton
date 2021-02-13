@@ -6,12 +6,15 @@ namespace Tests\Feature\Product;
 
 use App\Models\User;
 use Faker\Factory;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Laravel\Passport\Passport;
 use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 
 final class ProductPostControllerTest extends TestCase
 {
+    use DatabaseTransactions;
+
     protected $faker;
 
     protected function setUp(): void
@@ -32,7 +35,7 @@ final class ProductPostControllerTest extends TestCase
 
         $response = $this->postJson('/api/product', [
             'id' => Uuid::uuid4()->toString(),
-            'code' => $this->faker->text(6),
+            'code' => $this->faker->randomElement(['qwertz']),
             'name' => $this->faker->name,
             'category_id' => Uuid::uuid4()->toString(),
             'description' => $this->faker->realText(255),

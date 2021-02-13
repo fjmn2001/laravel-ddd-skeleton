@@ -13,7 +13,7 @@
                         class="icon-arrow-left-circle"></i></a>
                 </li>
                 <li class="icon-nav">
-                    <a href="javascript:void(0)" class="font-20"><i class="fa fa-home"></i></a>
+                    <router-link :to="{name: 'home'}" class="font-20"><i class="fa fa-home"/></router-link>
                 </li>
                 <li style="padding-top: 3px;">
                     <ul class="menu-horizontal" id="list01">
