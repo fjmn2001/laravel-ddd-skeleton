@@ -35,8 +35,8 @@
                                         <th class="align-items-center d-flex">
                                             <input type="checkbox" class="chk ml-4">
                                         </th>
-                                        <td v-html="company.name"></td>
-                                        <td>Lider.C.A</td>
+                                        <td v-html="company.name" @click="goToDetails(company.id)"></td>
+                                        <td v-html="company.name">Lider.C.A</td>
                                         <td>01/01/2021</td>
                                         <td>3</td>
                                         <td class=" td-btn-med">
@@ -107,6 +107,10 @@ export default class List extends Vue {
             new CompanySearcherRequest([], 'created_at', 'desc', 10, 0)
         )
         this.companies = response.data;
+    }
+
+    goToDetails(id: string) {
+        this.$router.push({name: 'companies.edit', params: {id}});
     }
 }
 </script>
