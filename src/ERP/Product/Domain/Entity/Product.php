@@ -71,6 +71,31 @@ final class Product
         );
     }
 
+    public static function fromValues(
+        ProductId $id,
+        ProductCode $code,
+        ProductName $name,
+        ProductCategory $category,
+        ProductDescription $description,
+        ProductType $type,
+        ProductState $state,
+        ProductCreatedAt $createAt,
+        ProductUpdatedAt $updatedAt
+    ): self
+    {
+        return new self(
+            $id,
+            $code,
+            $name,
+            $category,
+            $description,
+            $type,
+            $state,
+            $createAt,
+            $updatedAt
+        );
+    }
+
     public function id(): ProductId
     {
         return $this->id;
@@ -115,4 +140,53 @@ final class Product
     {
         return $this->updatedAt;
     }
+
+    public function changeCode(ProductCode $newCode): void
+    {
+        if (false === ($this->code()->equals($newCode))) {
+            $this->code = $newCode;
+            $this->updatedAt = new ProductUpdatedAt();
+        }
+    }
+
+    public function changeName(ProductName $newName): void
+    {
+        if (false === ($this->name()->equals($newName))) {
+            $this->name = $newName;
+            $this->updatedAt = new ProductUpdatedAt();
+        }
+    }
+
+    public function changeCategoryId(ProductCategory $newCategoryId): void
+    {
+        if (false === ($this->categoryId()->equals($newCategoryId))) {
+            $this->categoryId = $newCategoryId;
+            $this->updatedAt = new ProductUpdatedAt();
+        }
+    }
+
+    public function changeDescription(ProductDescription $newDescription): void
+    {
+        if (false === ($this->description()->equals($newDescription))) {
+            $this->name = $newDescription;
+            $this->updatedAt = new ProductUpdatedAt();
+        }
+    }
+
+    public function changeTypeId(ProductType $newTypeId): void
+    {
+        if (false === ($this->typeId()->equals($newTypeId))) {
+            $this->typeId = $newTypeId;
+            $this->updatedAt = new ProductUpdatedAt();
+        }
+    }
+
+    public function changeState(ProductState $newState): void
+    {
+        if (false === ($this->name()->equals($newState))) {
+            $this->description = $newState;
+            $this->updatedAt = new ProductUpdatedAt();
+        }
+    }
+
 }

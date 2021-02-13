@@ -8,6 +8,7 @@ use Faker\Factory;
 use Medine\ERP\Product\Application\Create\CreateProductRequest;
 use Medine\ERP\Product\Application\Create\ProductCreator;
 use Medine\ERP\Product\Application\Update\ProductUpdater;
+use Medine\ERP\Product\Application\Update\UpdateProductRequest;
 use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 use Tests\Unit\ERP\Product\Infrastructure\InMemoryProductRepository;
