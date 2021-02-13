@@ -27,7 +27,8 @@ final class LocationCreator
 
     public function __invoke(LocationCreatorRequest $request)
     {
-        $location = Location::create( new LocationId($request->id()),
+        $location = Location::create(
+            new LocationId($request->id()),
             new LocationCode($request->code()),
             new LocationName($request->name()),
             new LocationMainContact($request->mainContact()),
