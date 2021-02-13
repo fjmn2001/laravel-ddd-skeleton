@@ -17,4 +17,8 @@ export default class HttpCompanyRepository extends HttpRepository {
             //...
         });
     }
+
+    async find(id: string) {
+        return await super.get(process.env.VUE_APP_ERP_URL + '/api/company/' + id, {});
+    }
 }

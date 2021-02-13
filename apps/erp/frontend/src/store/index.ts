@@ -107,6 +107,7 @@ export default new Vuex.Store({
             namespaced: true,
             state: {
                 company: {
+                    id: '',
                     name: '',
                     state: 'active',
                     address: '',
