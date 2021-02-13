@@ -19,7 +19,7 @@ final class LocationsPostController extends Controller
         $this->creator = $creator;
     }
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): JsonResponse
     {
         ($this->creator)(new LocationCreatorRequest(
             $request->id,

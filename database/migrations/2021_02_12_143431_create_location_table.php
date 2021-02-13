@@ -21,7 +21,7 @@ class CreateLocationTable extends Migration
             $table->string('barcode')->unique();
             $table->string('state');
             $table->string('direction');
-            $table->string('company_id');
+            $table->uuid('company_id');
             $table->string('item_State');
             $table->timestamps();
 
