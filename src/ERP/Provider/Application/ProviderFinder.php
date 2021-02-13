@@ -21,8 +21,8 @@ class ProviderFinder
         $provider = $this->repository->find(new ProviderId($request->id()));
 
         return new ProviderResponse(
-            $provider->id(),
-            $provider->name()
+            $provider->id()->value(),
+            $provider->name()->value()
         );
     }
 

@@ -29,11 +29,11 @@ class ProviderGetControllerTest extends TestCase
         ]);
 
         $respont = $this->get('/api/provider/'.$ID );
-
-        $respont->assertJson([[
+//dd($respont->getContent());
+        $respont->assertJson([
             'id' => $ID,
             'name' => $NAME
-        ]]);
+        ]);
         $respont->assertStatus(200);
     }
 }

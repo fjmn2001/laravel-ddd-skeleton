@@ -26,7 +26,7 @@ class ProviderPutController extends Controller
             $request->name
         ));
 
-        return response()->json([], JsonResponse::HTTP_OK);
+        return new JsonResponse([], JsonResponse::HTTP_OK);
     }
 
 }
