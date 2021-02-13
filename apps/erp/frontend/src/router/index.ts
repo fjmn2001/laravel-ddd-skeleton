@@ -6,14 +6,24 @@ import auth from '../modules/auth/router/index';
 import home from '../modules/home/router/index';
 import landing from '../modules/landing/router/index';
 import companies from '../modules/companies/router/index';
+import Container from './../components/Container.vue';
 
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
     ...auth,
-    ...home,
-    ...landing,
-    ...companies
+    {
+        path: '/',
+        redirect: '/home',
+        name: 'home',
+        component: Container,
+        children: [
+            ...home,
+            ...landing,
+            ...companies
+        ]
+    },
+
     // {
     //     path: '/',
     //     name: 'Home',

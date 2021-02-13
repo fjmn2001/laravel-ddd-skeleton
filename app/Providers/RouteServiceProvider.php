@@ -13,10 +13,13 @@ class RouteServiceProvider extends ServiceProvider
 {
     private $myCustomRouteFiles = [
         'apps/erp/backend/routes/auth.php',
+        'src/ERP/Clients/Infrastructure/config/routes/index.php',
         'src/ERP/Users/Infrastructure/config/routes/index.php',
         'src/ERP/Company/Infrastructure/config/routes/index.php',
         'src/ERP/Roles/Infrastructure/config/routes/index.php',
         'src/ERP/Provider/Infrastructure/config/routes/index.php',
+        'src/ERP/Product/Infrastructure/config/routes/index.php',
+        'src/ERP/PurchaseInvoices/Infrastructure/config/routes/index.php',
         'apps/erp/backend/routes/petty_cash.php',
         'routes/api.php'
     ];

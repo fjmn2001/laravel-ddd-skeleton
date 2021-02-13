@@ -11,7 +11,6 @@ use Medine\ERP\Roles\Domain\Service\RolNotExistsException;
 use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 use Tests\TestCase;
 
-
 final class RolUpdaterTest extends TestCase
 {
     /**

@@ -29,23 +29,36 @@ class DateTimeValueObject
 
     private function setDate(string $date): string
     {
-        $date = $date != 'now'
-            ? $date
-            : date('Y-m-d H:s:i');
+        try {
+            $date = $date != 'now'
+                ? $date
+                : date('Y-m-d H:s:i');
 
-        $explodedDate = explode('-', $date);
+            $explodedDate = explode('-', $date);
 
-        if (!checkdate(
-            (int)$explodedDate[1],
-            (int)$explodedDate[2],
-            (int)$explodedDate[0]
-        ))
-            throw new InvalidDateException('The given date time is invalid', 400);
+            if (!checkdate(
+                (int)$explodedDate[1],
+                (int)$explodedDate[2],
+                (int)$explodedDate[0]
+            ))
+                throw new InvalidDateException('The given date time is invalid', 400);
 
-        return $date;
+            return $date;
+        } catch (\Exception $e) {
+            throw new InvalidDateException("The given date time {$date} is invalid", 400);
+        }
     }
 
-    public static function now()
+    public static function parse(string $isoDatetime): self
+    {
+        $dateTimeImmutable = new \DateTimeImmutable($isoDatetime);
+
+        return new self(
+            $dateTimeImmutable->format('Y-m-d H:s:i')
+        );
+    }
+
+    public static function now(): self
     {
         $dateTimeImmutable = new \DateTimeImmutable;
 
@@ -69,5 +82,10 @@ class DateTimeValueObject
         $dateTimeImmutable = new \DateTimeImmutable($this->date);
 
         return $dateTimeImmutable->format($format);
+    }
+
+    public function __toString(): string
+    {
+        return (string)$this->value();
     }
 }

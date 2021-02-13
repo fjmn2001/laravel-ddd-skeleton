@@ -3,6 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Medine\ERP\Product\Domain\Contracts\ProductRepository;
+use Medine\ERP\Product\Infrastructure\MySqlProductRepository;
+use Medine\ERP\Clients\Domain\Contracts\ClientRepository;
+use Medine\ERP\Clients\Infrastructure\Repository\MySqlClientRepository;
+use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoiceRepository;
+use Medine\ERP\PurchaseInvoices\Infrastructure\Persistence\MySqlPurchaseInvoiceRepository;
 use Medine\ERP\Roles\Domain\MySqlRolRepository;
 use Medine\ERP\Roles\Domain\RolRepository;
 use Medine\ERP\Shared\Domain\Bus\Event\EventBus;
@@ -27,7 +33,10 @@ class AppServiceProvider extends ServiceProvider
         CompanyRepository::class => MySqlCompanyRepository::class,
         CompanyHasUserRepository::class => MySqlCompanyHasUserRepository::class,
         RolRepository::class => MySqlRolRepository::class,
-        PasswordResetRepository::class => MySqlPasswordResetRepository::class
+        PasswordResetRepository::class => MySqlPasswordResetRepository::class,
+        ProductRepository::class => MySqlProductRepository::class,
+        ClientRepository::class => MySqlClientRepository::class,
+        PurchaseInvoiceRepository::class => MySqlPurchaseInvoiceRepository::class
     ];
 
     /**
