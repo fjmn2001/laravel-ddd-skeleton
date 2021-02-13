@@ -13,6 +13,7 @@ class RouteServiceProvider extends ServiceProvider
 {
     private $myCustomRouteFiles = [
         'apps/erp/backend/routes/auth.php',
+        'src/ERP/Clients/Infrastructure/config/routes/index.php',
         'src/ERP/Users/Infrastructure/config/routes/index.php',
         'src/ERP/Company/Infrastructure/config/routes/index.php',
         'src/ERP/Roles/Infrastructure/config/routes/index.php',
