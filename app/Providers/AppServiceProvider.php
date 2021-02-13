@@ -7,6 +7,8 @@ use Medine\ERP\Locations\Domain\LocationRepository;
 use Medine\ERP\Locations\Infrastructure\MySqlLocationRepository;
 use Medine\ERP\Product\Domain\Contracts\ProductRepository;
 use Medine\ERP\Product\Infrastructure\MySqlProductRepository;
+use Medine\ERP\Clients\Domain\Contracts\ClientRepository;
+use Medine\ERP\Clients\Infrastructure\Repository\MySqlClientRepository;
 use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoiceRepository;
 use Medine\ERP\PurchaseInvoices\Infrastructure\Persistence\MySqlPurchaseInvoiceRepository;
 use Medine\ERP\Roles\Domain\MySqlRolRepository;
@@ -37,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
         PurchaseInvoiceRepository::class => MySqlPurchaseInvoiceRepository::class,
         LocationRepository::class => MySqlLocationRepository::class,
         ProductRepository::class => MySqlProductRepository::class,
+        ClientRepository::class => MySqlClientRepository::class,
     ];
 
     /**

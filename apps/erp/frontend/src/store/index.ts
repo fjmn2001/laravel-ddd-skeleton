@@ -67,6 +67,14 @@ export default new Vuex.Store({
                 }).catch(e => reject(e));
             });
         },
+        validationToken(context, value) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token;
+
+            axios.get(context.state.ERP_URL + '/api/user').catch(() => {
+                localStorage.removeItem('access_token');
+                context.commit(types.DESTROY_TOKEN, null);
+            });
+        }
     },
     modules: {
         auth: {

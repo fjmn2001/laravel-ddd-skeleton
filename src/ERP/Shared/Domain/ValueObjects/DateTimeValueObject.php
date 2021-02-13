@@ -29,20 +29,24 @@ class DateTimeValueObject
 
     private function setDate(string $date): string
     {
-        $date = $date != 'now'
-            ? $date
-            : date('Y-m-d H:s:i');
+        try {
+            $date = $date != 'now'
+                ? $date
+                : date('Y-m-d H:s:i');
 
-        $explodedDate = explode('-', $date);
+            $explodedDate = explode('-', $date);
 
-        if (!checkdate(
-            (int)$explodedDate[1],
-            (int)$explodedDate[2],
-            (int)$explodedDate[0]
-        ))
-            throw new InvalidDateException('The given date time is invalid', 400);
+            if (!checkdate(
+                (int)$explodedDate[1],
+                (int)$explodedDate[2],
+                (int)$explodedDate[0]
+            ))
+                throw new InvalidDateException('The given date time is invalid', 400);
 
-        return $date;
+            return $date;
+        } catch (\Exception $e) {
+            throw new InvalidDateException("The given date time {$date} is invalid", 400);
+        }
     }
 
     public static function parse(string $isoDatetime): self

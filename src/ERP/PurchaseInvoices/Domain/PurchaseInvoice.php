@@ -31,6 +31,7 @@ use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceSubtotal;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceTax;
 use Medine\ERP\PurchaseInvoices\Domain\ValueObject\PurchaseInvoiceTotal;
 use Medine\ERP\Shared\Domain\ValueObjects\DateTimeValueObject;
+use function Lambdish\Phunctional\map;
 
 final class PurchaseInvoice
 {
@@ -164,39 +165,6 @@ final class PurchaseInvoice
         );
     }
 
-    public function addPurchaseInvoiceItem(
-        string $id,
-        string $categoryId,
-        string $itemId,
-        float $quantity,
-        string $unitId,
-        float $unitPrice,
-        float $subtotal,
-        string $taxId,
-        float $discountRate,
-        string $accountingCenterId,
-        string $accountId,
-        string $locationId,
-        PurchaseInvoiceId $purchaseInvoiceId
-    ): void
-    {
-        $this->items[] = PurchaseInvoiceItem::create(
-            new PurchaseInvoiceItemId($id),
-            new PurchaseInvoiceItemCategoryId($categoryId),
-            new PurchaseInvoiceItemItemId($itemId),
-            new PurchaseInvoiceItemQuantity($quantity),
-            new PurchaseInvoiceItemUnitId($unitId),
-            new PurchaseInvoiceItemUnitPrice($unitPrice),
-            new PurchaseInvoiceItemSubtotal($subtotal),
-            new PurchaseInvoiceItemTaxId($taxId),
-            new PurchaseInvoiceItemDiscountRate($discountRate),
-            new PurchaseInvoiceItemAccountingCenterId($accountingCenterId),
-            new PurchaseInvoiceItemAccountId($accountId),
-            new PurchaseInvoiceItemLocationId($locationId),
-            $purchaseInvoiceId
-        );
-    }
-
     public function id(): PurchaseInvoiceId
     {
         return $this->id;
@@ -280,5 +248,122 @@ final class PurchaseInvoice
     public function items(): array
     {
         return $this->items;
+    }
+
+    public function changeProviderId(PurchaseInvoiceProviderId $providerId)
+    {
+        if (false === ($this->providerId()->equals($providerId))) {
+            $this->providerId = $providerId;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changePaymentTerm(PurchaseInvoicePaymentTerm $paymentTerm)
+    {
+        if (false === ($this->paymentTerm()->equals($paymentTerm))) {
+            $this->paymentTerm = $paymentTerm;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changeCode(PurchaseInvoiceCode $code)
+    {
+        if (false === ($this->code()->equals($code))) {
+            $this->code = $code;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changeIssueDate(PurchaseInvoiceIssueDate $issueDate)
+    {
+        if (false === ($this->issueDate()->equals($issueDate))) {
+            $this->issueDate = $issueDate;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changeAccountsPayId(PurchaseInvoiceAccountsPayId $accountsPayId)
+    {
+        if (false === ($this->accountsPayId()->equals($accountsPayId))) {
+            $this->accountsPayId = $accountsPayId;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changeReference(PurchaseInvoiceReference $reference)
+    {
+        if (false === ($this->reference()->equals($reference))) {
+            $this->reference = $reference;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changeState(PurchaseInvoiceState $state)
+    {
+        if (false === ($this->state()->equals($state))) {
+            $this->state = $state;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changeObservations(PurchaseInvoiceObservations $observations)
+    {
+        if (false === ($this->observations()->equals($observations))) {
+            $this->observations = $observations;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changeSubtotal(PurchaseInvoiceSubtotal $subtotal)
+    {
+        if (false === ($this->subtotal()->equals($subtotal))) {
+            $this->subtotal = $subtotal;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changeDiscount(PurchaseInvoiceDiscount $discount)
+    {
+        if (false === ($this->discount()->equals($discount))) {
+            $this->discount = $discount;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changeTax(PurchaseInvoiceTax $tax)
+    {
+        if (false === ($this->tax()->equals($tax))) {
+            $this->tax = $tax;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changeTotal(PurchaseInvoiceTotal $total)
+    {
+        if (false === ($this->total()->equals($total))) {
+            $this->total = $total;
+            $this->updatedAt = DateTimeValueObject::now();
+        }
+    }
+
+    public function changeItems(array $items)
+    {
+        $this->items = map(function (array $item) {
+            return PurchaseInvoiceItem::create(
+                new PurchaseInvoiceItemId($item['id']),
+                new PurchaseInvoiceItemCategoryId($item['categoryId']),
+                new PurchaseInvoiceItemItemId($item['itemId']),
+                new PurchaseInvoiceItemQuantity($item['quantity']),
+                new PurchaseInvoiceItemUnitId($item['unitId']),
+                new PurchaseInvoiceItemUnitPrice($item['unitPrice']),
+                new PurchaseInvoiceItemSubtotal($item['subtotal']),
+                new PurchaseInvoiceItemTaxId($item['taxId']),
+                new PurchaseInvoiceItemDiscountRate($item['discountRate']),
+                new PurchaseInvoiceItemAccountingCenterId($item['accountingCenterId']),
+                new PurchaseInvoiceItemAccountId($item['accountId']),
+                new PurchaseInvoiceItemLocationId($item['locationId']),
+                $this->id
+            );
+        }, $items);
     }
 }
