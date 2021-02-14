@@ -21,7 +21,7 @@ export default {
     },
     methods: {
         validation() {
-            this.$store.dispatch('validationToken',{vue: this});
+            this.$store.dispatch('validationToken');
         }
     }
 }

@@ -67,7 +67,7 @@ export default new Vuex.Store({
                 }).catch(e => reject(e));
             });
         },
-        validationToken(context, value) {
+        validationToken(context) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token;
 
             axios.get(context.state.ERP_URL + '/api/user').catch(() => {
@@ -107,6 +107,7 @@ export default new Vuex.Store({
             namespaced: true,
             state: {
                 company: {
+                    id: '',
                     name: '',
                     state: 'active',
                     address: '',

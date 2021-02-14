@@ -31,12 +31,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
+                                    <tr v-for="company in companies" :key="company.id">
                                         <th class="align-items-center d-flex">
                                             <input type="checkbox" class="chk ml-4">
                                         </th>
-                                        <td>EM1002</td>
-                                        <td>Lider.C.A</td>
+                                        <td v-html="company.name" @click="goToDetails(company.id)"></td>
+                                        <td v-html="company.name">Lider.C.A</td>
                                         <td>01/01/2021</td>
                                         <td>3</td>
                                         <td class=" td-btn-med">
@@ -90,13 +90,28 @@
 import {Component, Vue} from 'vue-property-decorator';
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/companies/Infrastructure/SearchForm.vue";
+import CompanySearcherRequest from "@/modules/companies/Application/Searcher/CompanySearcherRequest";
+import CompanySearcher from "@/modules/companies/Application/Searcher/CompanySearcher";
 
 @Component({
     components: {SearchForm, Breadcrums}
 })
 
 export default class List extends Vue {
+    companies = []
     breadcrumb_url: string = this.$store.state.ERP_URL + '/api/company/breadcrumbs'
+
+    async mounted() {
+        const searcher = new CompanySearcher();
+        const response = await searcher.__invoke(
+            new CompanySearcherRequest([], 'created_at', 'desc', 10, 0)
+        )
+        this.companies = response.data;
+    }
+
+    goToDetails(id: string) {
+        this.$router.push({name: 'companies.edit', params: {id}});
+    }
 }
 </script>
 
