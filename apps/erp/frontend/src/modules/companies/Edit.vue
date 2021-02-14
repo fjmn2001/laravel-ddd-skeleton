@@ -20,6 +20,8 @@ import GeneralsDetails from "@/modules/companies/form/GeneralsDetails.vue";
 import FormButtons from "@/modules/shared/Infrastructure/FormButtons.vue";
 import CompanyFinder from "@/modules/companies/Application/Find/CompanyFinder";
 import CompanyFinderRequest from "@/modules/companies/Application/Find/CompanyFinderRequest";
+import CompanyUpdaterRequest from "@/modules/companies/Application/Update/CompanyUpdaterRequest";
+import CompanyUpdater from "@/modules/companies/Application/Update/CompanyUpdater";
 
 @Component({
     components: {FormButtons, GeneralsDetails, Breadcrums}
@@ -53,25 +55,24 @@ export default class Edit extends Vue {
     }
 
     async submit() {
-        console.log('todo:');
-        // try {
-        //     this.sending = true
-        //     const creator = new CompanyCreator();
-        //     await creator.__invoke(new CompanyCreatorRequest(
-        //         uuidv4(),
-        //         this.company.name,
-        //         this.company.state,
-        //         this.company.address,
-        //         this.company.phone
-        //     ))
-        //     //todo: add toast
-        //     this.$router.push({name: 'companies'});
-        // } catch (e) {
-        //     //todo: add toast
-        //     console.log('2', e);
-        // } finally {
-        //     this.sending = false
-        // }
+        try {
+            this.sending = true
+            const updater = new CompanyUpdater();
+            await updater.__invoke(new CompanyUpdaterRequest(
+                this.company.id,
+                this.company.name,
+                this.company.state,
+                this.company.address,
+                this.company.phone
+            ))
+            //todo: add toast
+            this.$router.push({name: 'companies'});
+        } catch (e) {
+            //todo: add toast
+            console.log('2', e);
+        } finally {
+            this.sending = false
+        }
     }
 }
 </script>

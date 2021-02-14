@@ -15,4 +15,8 @@ export default class HttpRepository {
     async get(url: string, data: object) {
         return await this.axios.get(url + '?' + JSON.stringify(data));
     }
+
+    async put(url: string, data: object) {
+        return await this.axios.put(url, data);
+    }
 }
