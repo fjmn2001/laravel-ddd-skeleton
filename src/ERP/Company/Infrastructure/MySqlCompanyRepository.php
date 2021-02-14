@@ -62,7 +62,7 @@ final class MySqlCompanyRepository extends MySqlRepository implements CompanyRep
     public function matching(Criteria $criteria)
     {
         $query = DB::table('companies');
-        //todo: $query = (new MySqlRolFilters($query))($criteria);
+        $query = (new MySqlCompanyFilters($query))($criteria);
         $query = $this->completeBuilder($criteria, $query);
 
         return $query->get()->map(function ($row) {

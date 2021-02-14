@@ -1,5 +1,6 @@
 import HttpRepository from "@/modules/shared/Infrastructure/HttpRepository";
 import Company from "@/modules/companies/Domain/Company";
+import CompanySearcherRequest from "@/modules/companies/Application/Searcher/CompanySearcherRequest";
 
 export default class HttpCompanyRepository extends HttpRepository {
     async save(company: Company) {
@@ -12,10 +13,8 @@ export default class HttpCompanyRepository extends HttpRepository {
         });
     }
 
-    async matching() {
-        return await super.get(process.env.VUE_APP_ERP_URL + '/api/company', {
-            //...
-        });
+    async matching(request: CompanySearcherRequest) {
+        return await super.get(process.env.VUE_APP_ERP_URL + '/api/company', request);
     }
 
     async find(id: string) {

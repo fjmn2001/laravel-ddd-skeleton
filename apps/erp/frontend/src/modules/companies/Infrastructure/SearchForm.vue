@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <label>Nombre de la empresa</label>
-                    <input type="text" class="form-control inp-filter">
+                    <input type="text" class="form-control inp-filter" v-model="name">
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12" style="margin-left: 0px;">
                     <label>Cantidad de usuarios</label>
@@ -47,9 +47,11 @@
             <div class="row pt-3">
                 <div
                     class="col-lg-3 col-md-4 col-sm-12 d-flex justify-content-center offset-lg-9 offset-md-8 offset-sm-0">
-                    <button type="button" class="btn btn-blue-deg btn-sm mr-5 pl-3 pr-3">Buscar</button>
+                    <button type="button" class="btn btn-blue-deg btn-sm mr-5 pl-3 pr-3" :disabled="loading"
+                            @click.prevent="search">Buscar
+                    </button>
                     <button type="button" class="btn btn-outline-secondary btn-sm mr-0 pl-3 pr-3"
-                            style="margin: 10px 10px 10px 0px; min-width: 100px;">Limpiar
+                            style="margin: 10px 10px 10px 0px; min-width: 100px;" @click.prevent="clean">Limpiar
                     </button>
                 </div>
             </div>
@@ -59,10 +61,32 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
+import CompanySearcher from "@/modules/companies/Application/Searcher/CompanySearcher";
+import CompanySearcherRequest from "@/modules/companies/Application/Searcher/CompanySearcherRequest";
 
 @Component
 export default class SearchForm extends Vue {
+    name = ''
+    loading = false
 
+    async search() {
+        this.loading = true;
+        const searcher = new CompanySearcher();
+        const response = await searcher.__invoke(
+            new CompanySearcherRequest([
+                {field: 'name', value: this.name}
+            ], 'created_at', 'desc', 10, 0)
+        )
+        this.$store.state.companies.list = response.data;
+        this.loading = false;
+    }
+
+    async clean() {
+        this.name = ''
+        Vue.nextTick(() => {
+            this.search();
+        });
+    }
 }
 </script>
 
