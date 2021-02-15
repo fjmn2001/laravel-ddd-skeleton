@@ -5,12 +5,15 @@ namespace Tests\Feature\Provider;
 
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Laravel\Passport\Passport;
 use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 
 class ProviderGetControllerTest extends TestCase
 {
+
+    use DatabaseTransactions;
     /**
      * @test
      */

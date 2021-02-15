@@ -42,6 +42,21 @@ final class Provider
         );
     }
 
+    public static function fromDatabase(
+        ProviderId $id,
+        ProviderName $name,
+        ProviderCreatedAt $createdAt,
+        ProviderUpdatedAt $updatedAt
+    )
+    {
+        return new self(
+            $id,
+            $name,
+            $createdAt,
+            $updatedAt
+        );
+    }
+
     public function id(): ProviderId
     {
         return $this->id;
