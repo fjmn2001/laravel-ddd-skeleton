@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Medine\ERP\Provider\Application;
+namespace Medine\ERP\Provider\Application\Update;
 
 
 class ProviderUpdateRequest

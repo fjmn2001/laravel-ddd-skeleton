@@ -1,15 +1,15 @@
 <?php
 
 
-namespace Medine\Apps\ERP\Backend\Controller\Provider;
+namespace Medine\ERP\Provider\Infrastructure\Controllers;
 
 
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Medine\ERP\Provider\Application\ProviderCreator;
-use Medine\ERP\Provider\Application\ProviderCreatorRequest;
+use Medine\ERP\Provider\Application\Create\ProviderCreator;
+use Medine\ERP\Provider\Application\Create\ProviderCreatorRequest;
 
 class ProviderPostController extends Controller
 {

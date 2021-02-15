@@ -1,13 +1,12 @@
 <?php
 
 
-namespace Medine\Apps\ERP\Backend\Controller\Provider;
-
+namespace Medine\ERP\Provider\Infrastructure\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
-use Medine\ERP\Provider\Application\ProviderFinder;
-use Medine\ERP\Provider\Application\ProviderFinderRequest;
+use Medine\ERP\Provider\Application\Find\ProviderFinder;
+use Medine\ERP\Provider\Application\Find\ProviderFinderRequest;
 
 class ProviderGetController extends Controller
 {

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Medine\ERP\Provider\Infrastructure;
+namespace Medine\ERP\Provider\Infrastructure\Persistence;
 
 
 use Medine\ERP\Provider\Domain\Entity\Provider;
@@ -11,7 +11,7 @@ use Medine\ERP\Provider\Domain\ValueObjects\ProviderId;
 use Medine\ERP\Provider\Domain\ValueObjects\ProviderName;
 use Medine\ERP\Provider\Domain\ValueObjects\ProviderUpdatedAt;
 
-class ProviderRepository implements ProviderRepositoy
+class MySqlProviderRepository implements ProviderRepositoy
 {
     public function save(Provider $provider): void
     {

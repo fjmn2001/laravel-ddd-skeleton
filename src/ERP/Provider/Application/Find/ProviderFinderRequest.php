@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Medine\ERP\Provider\Application;
+namespace Medine\ERP\Provider\Application\Find;
 
 
 class ProviderFinderRequest
