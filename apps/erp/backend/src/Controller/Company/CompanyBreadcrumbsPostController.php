@@ -62,4 +62,20 @@ final class CompanyBreadcrumbsPostController extends Controller
             ]
         ];
     }
+
+    private function companies_edit(): array
+    {
+        return [
+            'title' => 'Editar empresa',
+            'routes' => [
+                ['title' => 'Empresas', 'name' => 'companies'],
+                ['title' => 'Editar', 'name' => 'companies.edit'],
+            ],
+            'menu' => [
+                'options' => [
+                    ['id' => 'help', 'title' => 'Ayuda']
+                ]
+            ]
+        ];
+    }
 }

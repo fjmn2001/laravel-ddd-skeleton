@@ -1,15 +1,15 @@
-import CompanyCreatorRequest from "@/modules/companies/Application/CompanyCreatorRequest";
 import HttpCompanyRepository from "@/modules/companies/Infrastructure/HttpCompanyRepository";
 import Company from "@/modules/companies/Domain/Company";
+import CompanyUpdaterRequest from "@/modules/companies/Application/Update/CompanyUpdaterRequest";
 
-export default class CompanyCreator {
+export default class CompanyUpdater {
     repository: HttpCompanyRepository
 
     constructor() {
         this.repository = new HttpCompanyRepository();
     }
 
-    async __invoke(request: CompanyCreatorRequest) {
+    async __invoke(request: CompanyUpdaterRequest) {
         const $Company = new Company(
             request.id,
             request.name,
@@ -18,6 +18,6 @@ export default class CompanyCreator {
             request.phone
         );
         //
-        return await this.repository.save($Company);
+        return await this.repository.update($Company);
     }
 }
