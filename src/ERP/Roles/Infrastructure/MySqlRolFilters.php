@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Medine\ERP\Roles\Domain;
+namespace Medine\ERP\Roles\Infrastructure;
 
 use Medine\ERP\Shared\Domain\Criteria\FilterValue;
 use Medine\ERP\Shared\Infrastructure\Filters;

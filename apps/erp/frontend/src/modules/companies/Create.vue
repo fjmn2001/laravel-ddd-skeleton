@@ -21,6 +21,7 @@ import FormButtons from "@/modules/shared/Infrastructure/FormButtons.vue";
 import CompanyCreator from "@/modules/companies/Application/CompanyCreator";
 import CompanyCreatorRequest from "@/modules/companies/Application/CompanyCreatorRequest";
 import {v4 as uuidv4} from 'uuid';
+import * as toastr from "toastr";
 
 @Component({
     components: {FormButtons, GeneralsDetails, Breadcrums}
@@ -47,6 +48,7 @@ export default class Create extends Vue {
                 this.company.phone
             ))
             //todo: add toast
+            toastr.success('hola', 'exito');
             this.$router.push({name: 'companies'});
         } catch (e) {
             //todo: add toast
