@@ -14,7 +14,7 @@
                             </div>
                             <a href="#des02" class="arrow-left icon mr-5 desplegar-busqueda" data-toggle="collapse"></a>
                         </div>
-                        <div id="des02" class="pl-4 pr-4">
+                        <div id="des02" class="pl-4 pr-4" v-if="hasData() && !loading()">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -31,7 +31,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr v-for="company in companies" :key="company.id">
+                                    <tr v-for="company in $store.state.companies.list" :key="company.id">
                                         <th class="align-items-center d-flex">
                                             <input type="checkbox" class="chk ml-4">
                                         </th>
@@ -79,6 +79,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="pl-4 pr-4" v-if="!hasData() && !loading()">
+                            <div class="alert alert-danger">
+                                <p>TODO: design when do not has data</p>
+                            </div>
+                        </div>
+                        <div class="pl-4 pr-4" v-if="loading()">
+                            <div class="alert alert-info">
+                                <p>TODO: design when is loading</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -98,15 +108,26 @@ import CompanySearcher from "@/modules/companies/Application/Searcher/CompanySea
 })
 
 export default class List extends Vue {
-    companies = []
     breadcrumb_url: string = this.$store.state.ERP_URL + '/api/company/breadcrumbs'
+    loaded = false
 
     async mounted() {
+        //this.loading = true;
         const searcher = new CompanySearcher();
         const response = await searcher.__invoke(
             new CompanySearcherRequest([], 'created_at', 'desc', 10, 0)
         )
-        this.companies = response.data;
+        this.$store.state.companies.list = response.data;
+        //this.loading = false;
+        this.loaded = true;
+    }
+
+    loading(): boolean {
+        return this.$store.state.companies.loading;
+    }
+
+    hasData() {
+        return this.$store.state.companies.list.length > 0 && this.loaded;
     }
 
     goToDetails(id: string) {

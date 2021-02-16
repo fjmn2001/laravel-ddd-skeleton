@@ -27,10 +27,9 @@ final class CompanySearcher
         $criteria = new Criteria(
             Filters::fromValues($request->filters()),
             Order::fromValues($request->orderBy(), $request->order()),
-            $request->limit(),
-            $request->offset()
+            $request->offset(),
+            $request->limit()
         );
-
         return new CompaniesResponse(...map(
             $this->toResponse(),
             $this->repository->matching($criteria)
