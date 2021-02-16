@@ -47,7 +47,7 @@
             <div class="row pt-3">
                 <div
                     class="col-lg-3 col-md-4 col-sm-12 d-flex justify-content-center offset-lg-9 offset-md-8 offset-sm-0">
-                    <button type="button" class="btn btn-blue-deg btn-sm mr-5 pl-3 pr-3" :disabled="loading"
+                    <button type="button" class="btn btn-blue-deg btn-sm mr-5 pl-3 pr-3" :disabled="loading()"
                             @click.prevent="search">Buscar
                     </button>
                     <button type="button" class="btn btn-outline-secondary btn-sm mr-0 pl-3 pr-3"
@@ -67,10 +67,9 @@ import CompanySearcherRequest from "@/modules/companies/Application/Searcher/Com
 @Component
 export default class SearchForm extends Vue {
     name = ''
-    loading = false
 
     async search() {
-        this.loading = true;
+        this.$store.dispatch('companies/changeLoading', true);
         const searcher = new CompanySearcher();
         const response = await searcher.__invoke(
             new CompanySearcherRequest([
@@ -78,7 +77,7 @@ export default class SearchForm extends Vue {
             ], 'created_at', 'desc', 10, 0)
         )
         this.$store.state.companies.list = response.data;
-        this.loading = false;
+        this.$store.dispatch('companies/changeLoading', false);
     }
 
     async clean() {
@@ -86,6 +85,10 @@ export default class SearchForm extends Vue {
         Vue.nextTick(() => {
             this.search();
         });
+    }
+
+    loading(): boolean {
+        return this.$store.state.companies.loading;
     }
 }
 </script>
