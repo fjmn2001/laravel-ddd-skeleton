@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Medine\ERP\Roles\Domain;
+namespace Medine\ERP\Roles\Infrastructure;
 
 
 use Illuminate\Support\Facades\DB;
+use Medine\ERP\Roles\Domain\Rol;
+use Medine\ERP\Roles\Domain\RolRepository;
 use Medine\ERP\Roles\Domain\ValueObjects\RolCompanyId;
 use Medine\ERP\Roles\Domain\ValueObjects\RolCreatedAt;
 use Medine\ERP\Roles\Domain\ValueObjects\RolDescription;
