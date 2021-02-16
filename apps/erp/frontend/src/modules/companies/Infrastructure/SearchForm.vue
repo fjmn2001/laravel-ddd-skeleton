@@ -12,36 +12,15 @@
         <div id="des01" class="des01 m-3 collapse" style="">
             <div class="pb-1 pl-3 pr-3 pt-2 row">
                 <div class="col-lg-3 col-md-3 col-sm-12">
-                    <label>Código</label>
-                    <input type="text" class="form-control inp-filter">
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-12">
                     <label>Nombre de la empresa</label>
                     <input type="text" class="form-control inp-filter" v-model="name">
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12" style="margin-left: 0px;">
-                    <label>Cantidad de usuarios</label>
-                    <input type="number" class="form-control inp-filter">
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-12" style="margin-left: 0px;">
                     <label>Estado</label>
-                    <select class="form-control inp-filter">
+                    <select class="form-control inp-filter" v-model="state">
                         <option value=""></option>
-                        <option value="1">Kilos</option>
-                        <option value="2">Litros</option>
+                        <option value="active">Active</option>
                     </select>
-                </div>
-            </div>
-            <div class="pl-3 pr-3 pt-2 row">
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <label class="lbl-nombre">Fecha de inicio</label>
-                    <input class="form-control inp-filter" type="text" onfocus="(this.type='date')"
-                           required="">
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <label class="lbl-nombre">Fecha de hasta</label>
-                    <input class="form-control inp-filter" type="text" onfocus="(this.type='date')"
-                           required="">
                 </div>
             </div>
             <div class="row pt-3">
