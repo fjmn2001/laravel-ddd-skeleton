@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\ERP\Product\Application\Update;
 
 use Faker\Factory;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Medine\ERP\Product\Application\Create\CreateProductRequest;
 use Medine\ERP\Product\Application\Create\ProductCreator;
 use Medine\ERP\Product\Application\Update\ProductUpdater;
@@ -16,6 +17,8 @@ use Tests\Unit\ERP\Product\Infrastructure\InMemoryProductRepository;
 
 final class ProductUpdaterTest extends TestCase
 {
+    use DatabaseTransactions;
+
     protected $creator;
     protected $updater;
     protected $faker;
