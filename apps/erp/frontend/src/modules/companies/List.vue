@@ -12,7 +12,6 @@
                                 <h5 class="xtitle-buscar" style="margin-left: 20px;">Lista de empresas</h5>
                                 <p class="ml-3 ml-lg-0  xsubtitle-buscar">(Tabla principal)</p>
                             </div>
-                            <a href="#des02" class="arrow-left icon mr-5 desplegar-busqueda" data-toggle="collapse"></a>
                         </div>
                         <div id="des02" class="pl-4 pr-4" v-if="hasData() && !loading()">
                             <div class="table-responsive">
@@ -112,13 +111,13 @@ export default class List extends Vue {
     loaded = false
 
     async mounted() {
-        //this.loading = true;
+        this.$store.dispatch('companies/changeLoading', true);
         const searcher = new CompanySearcher();
         const response = await searcher.__invoke(
             new CompanySearcherRequest([], 'created_at', 'desc', 10, 0)
         )
         this.$store.state.companies.list = response.data;
-        //this.loading = false;
+        this.$store.dispatch('companies/changeLoading', false);
         this.loaded = true;
     }
 

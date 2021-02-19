@@ -1,5 +1,13 @@
 import * as types from './mutation-types'
 
+interface VuexContext {
+    commit(type: string, value: boolean): void;
+}
+
+interface VuexState {
+    loading: boolean;
+}
+
 export default function () {
     return {
         namespaced: true,
@@ -15,12 +23,12 @@ export default function () {
             }
         },
         mutations: {
-            [types.CHANGE_LOADING](state, value: boolean) {
-                state.companies.loading = value;
+            [types.CHANGE_LOADING](state: VuexState, value: boolean) {
+                state.loading = value;
             }
         },
         actions: {
-            changeLoading(context, value: boolean) {
+            changeLoading(context: VuexContext, value: boolean) {
                 context.commit(types.CHANGE_LOADING, value);
             }
         }
