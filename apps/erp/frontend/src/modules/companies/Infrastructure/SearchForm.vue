@@ -39,8 +39,6 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator'
-import CompanySearcher from "@/modules/companies/Application/Searcher/CompanySearcher";
-import CompanySearcherRequest from "@/modules/companies/Application/Searcher/CompanySearcherRequest";
 
 @Component
 export default class SearchForm extends Vue {
@@ -48,16 +46,11 @@ export default class SearchForm extends Vue {
     state = []
 
     async search() {
-        this.$store.dispatch('companies/changeLoading', true);
-        const searcher = new CompanySearcher();
-        const response = await searcher.__invoke(
-            new CompanySearcherRequest([
-                {field: 'name', value: this.name},
-                {field: 'state', value: this.state}
-            ], 'created_at', 'desc', 10, 0)
-        )
-        this.$store.state.companies.list = response.data;
-        this.$store.dispatch('companies/changeLoading', false);
+        await this.$store.dispatch('companies/changeFilters', [
+            {field: 'name', value: this.name},
+            {field: 'state', value: this.state}
+        ]);
+        await this.$store.dispatch('companies/companySearcher');
     }
 
     async clean() {

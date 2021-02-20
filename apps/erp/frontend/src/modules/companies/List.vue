@@ -99,8 +99,6 @@
 import {Component, Vue} from 'vue-property-decorator';
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/companies/Infrastructure/SearchForm.vue";
-import CompanySearcherRequest from "@/modules/companies/Application/Searcher/CompanySearcherRequest";
-import CompanySearcher from "@/modules/companies/Application/Searcher/CompanySearcher";
 
 @Component({
     components: {SearchForm, Breadcrums}
@@ -111,13 +109,7 @@ export default class List extends Vue {
     loaded = false
 
     async mounted() {
-        this.$store.dispatch('companies/changeLoading', true);
-        const searcher = new CompanySearcher();
-        const response = await searcher.__invoke(
-            new CompanySearcherRequest([], 'created_at', 'desc', 10, 0)
-        )
-        this.$store.state.companies.list = response.data;
-        this.$store.dispatch('companies/changeLoading', false);
+        await this.$store.dispatch('companies/companySearcher');
         this.loaded = true;
     }
 
