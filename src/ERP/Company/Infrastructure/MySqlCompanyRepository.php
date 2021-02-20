@@ -28,7 +28,7 @@ final class MySqlCompanyRepository extends MySqlRepository implements CompanyRep
             'id' => $company->id()->value(),
             'name' => $company->name()->value(),
             'address' => $company->address()->value(),
-            'status' => $company->state()->value(),
+            'state' => $company->state()->value(),
             'logo' => $company->logo()->value(),
             'created_at' => $company->createdAt()->value(),
             'updated_at' => $company->updatedAt()->value()
@@ -72,7 +72,7 @@ final class MySqlCompanyRepository extends MySqlRepository implements CompanyRep
                 new CompanyId($row->id),
                 new CompanyName($row->name),
                 new CompanyAddress($row->address),
-                new CompanyState($row->status),
+                new CompanyState($row->state),
                 new CompanyLogo($row->logo),
                 new CompanyCreatedAt($row->created_at),
                 new CompanyUpdatedAt($row->updated_at)
