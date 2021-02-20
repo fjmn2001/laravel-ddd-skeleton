@@ -89,6 +89,15 @@ final class Client
         );
     }
 
+    public static function fromDatabase(
+
+    ): self
+    {
+        return new self(
+
+        );
+    }
+
     public function id(): ClientId
     {
         return $this->id;

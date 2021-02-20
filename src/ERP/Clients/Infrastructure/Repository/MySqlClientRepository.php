@@ -47,9 +47,17 @@ final class MySqlClientRepository implements ClientRepository
 
     public function find(ClientId $id): ?Client
     {
+        $row = DB::table('clients')->where('clients.id', '=', $id->value())->first();
+        dd($row);
+        if(empty($row))
+            return null;
+
+        $client = Client::fromDatabase(
+
+        );
+
+        return $client;
     }
-
-
 
 
     private function retrieveEmail(): \Closure

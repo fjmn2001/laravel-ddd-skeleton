@@ -14,7 +14,7 @@ use Tests\TestCase;
 final class ClientPostControllerTest extends TestCase
 {
 
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 
     private $faker;
 
