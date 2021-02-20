@@ -1,6 +1,6 @@
 <template>
     <div class="page-wrapper" style="min-height: 875px;">
-        <form class="container-fluid mt-lg-5 mt-md-5 pt-lg-2 pt-md-2" @submit.prevent="submit">
+        <form class="container-fluid mt-lg-5 mt-md-5 pt-lg-2 pt-md-2" autocomplete="off" @submit.prevent="submit">
             <div class="pl-1 pr-1">
                 <breadcrums :breadcrumb_url="breadcrumb_url"></breadcrums>
                 <div class="div-title-table mt-3 pl-1 pr-1 pt-2 row" id="tags"
@@ -10,12 +10,6 @@
             </div>
             <form-buttons @cancel="cancel" :disabledSave="sending"></form-buttons>
         </form>
-        <pre>
-            {{ $store.state.companies.company }}
-        </pre>
-        <pre>
-            {{ company }}
-        </pre>
     </div>
 </template>
 
@@ -26,7 +20,7 @@ import GeneralsDetails from "@/modules/companies/form/GeneralsDetails.vue";
 import FormButtons from "@/modules/shared/Infrastructure/FormButtons.vue";
 import CompanyCreator from "@/modules/companies/Application/CompanyCreator";
 import CompanyCreatorRequest from "@/modules/companies/Application/CompanyCreatorRequest";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
     components: {FormButtons, GeneralsDetails, Breadcrums}
@@ -42,20 +36,25 @@ export default class Create extends Vue {
     }
 
     async submit() {
-        this.sending = true
-        const creator = new CompanyCreator();
-        await creator.__invoke(new CompanyCreatorRequest(
-            uuidv4(),
-            this.company.name,
-            this.company.state,
-            this.company.address,
-            this.company.phone
-        )).then(response => {
-            console.log('1', response);
-        }).catch(e => {
+        try {
+            this.sending = true
+            const creator = new CompanyCreator();
+            await creator.__invoke(new CompanyCreatorRequest(
+                uuidv4(),
+                this.company.name,
+                this.company.state,
+                this.company.address,
+                this.company.phone
+            ))
+            //todo: add toast
+            //toastr.success('hola', 'exito');
+            this.$router.push({name: 'companies'});
+        } catch (e) {
+            //todo: add toast
             console.log('2', e);
-        });
-        this.sending = false
+        } finally {
+            this.sending = false
+        }
     }
 }
 </script>

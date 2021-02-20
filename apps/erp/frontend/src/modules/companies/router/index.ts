@@ -15,4 +15,13 @@ export default [
             requiresAuth: true
         }
     },
+    {
+        path: '/companies/edit/:id',
+        name: 'companies.edit',
+        component: () => import('../Edit.vue'),
+        props: true,
+        meta: {
+            requiresAuth: true
+        }
+    },
 ];

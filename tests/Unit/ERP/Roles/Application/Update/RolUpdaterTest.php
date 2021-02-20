@@ -6,7 +6,7 @@ namespace Tests\Unit\ERP\Roles\Application\Update;
 
 use Medine\ERP\Roles\Application\Update\RolUpdater;
 use Medine\ERP\Roles\Application\Update\RolUpdaterRequest;
-use Medine\ERP\Roles\Domain\MySqlRolRepository;
+use Medine\ERP\Roles\Infrastructure\MySqlRolRepository;
 use Medine\ERP\Roles\Domain\Service\RolNotExistsException;
 use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 use Tests\TestCase;

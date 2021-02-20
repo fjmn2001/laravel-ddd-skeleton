@@ -12,9 +12,8 @@
                                 <h5 class="xtitle-buscar" style="margin-left: 20px;">Lista de empresas</h5>
                                 <p class="ml-3 ml-lg-0  xsubtitle-buscar">(Tabla principal)</p>
                             </div>
-                            <a href="#des02" class="arrow-left icon mr-5 desplegar-busqueda" data-toggle="collapse"></a>
                         </div>
-                        <div id="des02" class="pl-4 pr-4">
+                        <div id="des02" class="pl-4 pr-4" v-if="hasData() && !loading()">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -31,12 +30,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
+                                    <tr v-for="company in $store.state.companies.list" :key="company.id">
                                         <th class="align-items-center d-flex">
                                             <input type="checkbox" class="chk ml-4">
                                         </th>
-                                        <td>EM1002</td>
-                                        <td>Lider.C.A</td>
+                                        <td v-html="company.name" @click="goToDetails(company.id)"></td>
+                                        <td v-html="company.name">Lider.C.A</td>
                                         <td>01/01/2021</td>
                                         <td>3</td>
                                         <td class=" td-btn-med">
@@ -79,6 +78,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="pl-4 pr-4" v-if="!hasData() && !loading()">
+                            <div class="alert alert-danger">
+                                <p>TODO: design when do not has data</p>
+                            </div>
+                        </div>
+                        <div class="pl-4 pr-4" v-if="loading()">
+                            <div class="alert alert-info">
+                                <p>TODO: design when is loading</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,6 +99,8 @@
 import {Component, Vue} from 'vue-property-decorator';
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/companies/Infrastructure/SearchForm.vue";
+import CompanySearcherRequest from "@/modules/companies/Application/Searcher/CompanySearcherRequest";
+import CompanySearcher from "@/modules/companies/Application/Searcher/CompanySearcher";
 
 @Component({
     components: {SearchForm, Breadcrums}
@@ -97,6 +108,30 @@ import SearchForm from "@/modules/companies/Infrastructure/SearchForm.vue";
 
 export default class List extends Vue {
     breadcrumb_url: string = this.$store.state.ERP_URL + '/api/company/breadcrumbs'
+    loaded = false
+
+    async mounted() {
+        this.$store.dispatch('companies/changeLoading', true);
+        const searcher = new CompanySearcher();
+        const response = await searcher.__invoke(
+            new CompanySearcherRequest([], 'created_at', 'desc', 10, 0)
+        )
+        this.$store.state.companies.list = response.data;
+        this.$store.dispatch('companies/changeLoading', false);
+        this.loaded = true;
+    }
+
+    loading(): boolean {
+        return this.$store.state.companies.loading;
+    }
+
+    hasData() {
+        return this.$store.state.companies.list.length > 0 && this.loaded;
+    }
+
+    goToDetails(id: string) {
+        this.$router.push({name: 'companies.edit', params: {id}});
+    }
 }
 </script>
 

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Medine\ERP\Roles\Domain;
+namespace Medine\ERP\Roles\Infrastructure;
 
-use Medine\ERP\Shared\Domain\Criteria;
+use Medine\ERP\Shared\Domain\Criteria\FilterValue;
 use Medine\ERP\Shared\Infrastructure\Filters;
 
 final class MySqlRolFilters extends Filters
 {
-    protected function name(Criteria\FilterValue $value)
+    protected function name(FilterValue $value)
     {
         $this->builder->where('roles.name', 'like', "%{$value->value()}%");
     }

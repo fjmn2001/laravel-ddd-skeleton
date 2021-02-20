@@ -33,9 +33,6 @@ logs-nginx:
 login-nginx:
 	docker-compose -f docker-compose.yml exec nginx /bin/bash
 
-composer-install:
-	docker run --rm --interactive --tty --volume $PWD:/app composer install
-
 test:
 	docker-compose exec php php vendor/bin/phpunit
 

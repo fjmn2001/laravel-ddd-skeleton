@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Medine\ERP\PurchaseInvoices\Infrastructure\Persistence;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoice;
 use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoiceItem;
 use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoiceRepository;
@@ -31,6 +32,8 @@ final class MySqlPurchaseInvoiceRepository extends MySqlRepository implements Pu
 
     public function save(PurchaseInvoice $invoice): void
     {
+        $items = map($this->retrieveItem(), $invoice->items());
+
         DB::table('purchase_invoices')->insert([
             'id' => $invoice->id()->value(),
             'provider_id' => $invoice->providerId()->value(),
@@ -49,8 +52,6 @@ final class MySqlPurchaseInvoiceRepository extends MySqlRepository implements Pu
             'created_at' => $invoice->createdAt()->value(),
             'updated_at' => $invoice->updatedAt()->value(),
         ]);
-
-        $items = map($this->retrieveItem(), $invoice->items());
         DB::table('purchase_invoice_items')->insert($items);
     }
 
@@ -77,23 +78,13 @@ final class MySqlPurchaseInvoiceRepository extends MySqlRepository implements Pu
             new DateTimeValueObject($row->updated_at)
         );
 
-        $rows->each(function ($item) use ($purchaseInvoice) {
-            $purchaseInvoice->addPurchaseInvoiceItem(
-                $item->id,
-                $item->category_id,
-                $item->item_id,
-                $item->quantity,
-                $item->unit_id,
-                $item->unit_price,
-                $item->subtotal,
-                $item->tax_id,
-                $item->discount_rate,
-                $item->accounting_center_id,
-                $item->account_id,
-                $item->location_id,
-                $purchaseInvoice->id()
-            );
-        });
+        $purchaseInvoice->changeItems($rows->map(function ($item) {
+            $itemLikeArray = [];
+            foreach ($item as $key => $value) {
+                $itemLikeArray[Str::camel($key)] = $value;
+            }
+            return $itemLikeArray;
+        })->toArray());
 
         return !empty($row) ? $purchaseInvoice : null;
     }
@@ -119,5 +110,36 @@ final class MySqlPurchaseInvoiceRepository extends MySqlRepository implements Pu
                 'updated_at' => $item->updatedAt()->value()
             ];
         };
+    }
+
+    public function update(PurchaseInvoice $invoice): void
+    {
+        $items = map($this->retrieveItem(), $invoice->items());
+
+        $id = $invoice->id()->value();
+        DB::table('purchase_invoices')->where('purchase_invoices.id', $id)->update([
+            'id' => $id,
+            'provider_id' => $invoice->providerId()->value(),
+            'payment_term' => $invoice->paymentTerm()->value(),
+            'code' => $invoice->code()->value(),
+            'issue_date' => $invoice->issueDate()->value(),
+            'accounts_pay_id' => $invoice->accountsPayId()->value(),
+            'reference' => $invoice->reference()->value(),
+            'state' => $invoice->state()->value(),
+            'observations' => $invoice->observations()->value(),
+            'subtotal' => $invoice->subtotal()->value(),
+            'discount' => $invoice->discount()->value(),
+            'tax' => $invoice->tax()->value(),
+            'total' => $invoice->total()->value(),
+            'company_id' => $invoice->companyId()->value(),
+            'created_at' => $invoice->createdAt()->value(),
+            'updated_at' => $invoice->updatedAt()->value(),
+        ]);
+
+
+        DB::table('purchase_invoice_items')
+            ->where('purchase_invoice_id', $id)
+            ->delete();
+        DB::table('purchase_invoice_items')->insert($items);
     }
 }

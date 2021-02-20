@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from "axios"
 import * as types from './mutation-types'
+import companies from './../modules/companies/Infrastructure/store'
 
 Vue.use(Vuex)
 
@@ -67,7 +68,7 @@ export default new Vuex.Store({
                 }).catch(e => reject(e));
             });
         },
-        validationToken(context, value) {
+        validationToken(context) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.token;
 
             axios.get(context.state.ERP_URL + '/api/user').catch(() => {
@@ -103,16 +104,6 @@ export default new Vuex.Store({
                 }
             },
         },
-        companies: {
-            namespaced: true,
-            state: {
-                company: {
-                    name: '',
-                    state: 'active',
-                    address: '',
-                    phone: ''
-                }
-            }
-        }
+        companies: companies()
     }
 })
