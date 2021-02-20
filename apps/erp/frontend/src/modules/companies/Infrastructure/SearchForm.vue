@@ -17,10 +17,9 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12" style="margin-left: 0px;">
                     <label>Estado</label>
-                    <select class="form-control inp-filter" v-model="state">
-                        <option value=""></option>
-                        <option value="active">Active</option>
-                    </select>
+                    <v-select multiple :options="[{label: 'Activa', id: 'active'}, {label: 'Inactiva', id: 'inactive'}]"
+                              v-model="state"
+                              :reduce="option => option.id"></v-select>
                 </div>
             </div>
             <div class="row pt-3">
@@ -46,13 +45,15 @@ import CompanySearcherRequest from "@/modules/companies/Application/Searcher/Com
 @Component
 export default class SearchForm extends Vue {
     name = ''
+    state = []
 
     async search() {
         this.$store.dispatch('companies/changeLoading', true);
         const searcher = new CompanySearcher();
         const response = await searcher.__invoke(
             new CompanySearcherRequest([
-                {field: 'name', value: this.name}
+                {field: 'name', value: this.name},
+                {field: 'state', value: this.state}
             ], 'created_at', 'desc', 10, 0)
         )
         this.$store.state.companies.list = response.data;
@@ -61,6 +62,7 @@ export default class SearchForm extends Vue {
 
     async clean() {
         this.name = ''
+        this.state = []
         Vue.nextTick(() => {
             this.search();
         });

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@types/toastr": "^2.1.38",
+    "@types/vue-select": "^3.11.1",
     "core-js": "^3.6.5",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",

@@ -13,4 +13,9 @@ final class MySqlCompanyFilters extends Filters
     {
         $this->builder->where('companies.name', 'like', "%{$value->value()}%");
     }
+
+    protected function state(FilterValue $value)
+    {
+        $this->builder->whereIn('companies.state', $value->value());
+    }
 }
