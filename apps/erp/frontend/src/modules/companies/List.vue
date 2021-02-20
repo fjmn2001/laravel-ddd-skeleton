@@ -46,7 +46,7 @@
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu1"
                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <img src="images/icons/3puntos_H.svg"> </a>
+                                                    <img src="@/assets/images/icons/3puntos_H.svg"> </a>
                                                 <div class="dropdown-menu dropdown-menu-right"
                                                      aria-labelledby="dropdownMenu1">
                                                     <a class="dropdown-item" href="#">Duplicar</a>
@@ -65,12 +65,12 @@
                                 <div
                                     class="align-items-center col-md-6 d-flex justify-content-center offset-md-3 pb-3 pt-3">
                                     <div class="d-flex">
-                                        <a class="btn btn-cicle"><img src="images/icons/two-arrow-left.svg"></a>
-                                        <a class="btn btn-cicle"><img src="images/icons/one-arrow-left.svg"></a>
+                                        <a class="btn btn-cicle"><img src="@/assets/images/icons/two-arrow-left.svg"></a>
+                                        <a class="btn btn-cicle"><img src="@/assets/images/icons/one-arrow-left.svg"></a>
                                         <p class="p-pag">página <input type="text" value="1" class="inp-pag">&nbsp;de 6
                                         </p>
-                                        <a class="btn btn-cicle"><img src="images/icons/one-arrow-right.svg"></a>
-                                        <a class="btn btn-cicle"><img src="images/icons/two-arrow-right.svg"></a>
+                                        <a class="btn btn-cicle"><img src="@/assets/images/icons/one-arrow-right.svg"></a>
+                                        <a class="btn btn-cicle"><img src="@/assets/images/icons/two-arrow-right.svg"></a>
                                     </div>
                                 </div>
                                 <div class="align-items-center col-md-3 d-flex justify-content-end pb-3 pt-3">
@@ -99,8 +99,6 @@
 import {Component, Vue} from 'vue-property-decorator';
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/companies/Infrastructure/SearchForm.vue";
-import CompanySearcherRequest from "@/modules/companies/Application/Searcher/CompanySearcherRequest";
-import CompanySearcher from "@/modules/companies/Application/Searcher/CompanySearcher";
 
 @Component({
     components: {SearchForm, Breadcrums}
@@ -111,13 +109,7 @@ export default class List extends Vue {
     loaded = false
 
     async mounted() {
-        this.$store.dispatch('companies/changeLoading', true);
-        const searcher = new CompanySearcher();
-        const response = await searcher.__invoke(
-            new CompanySearcherRequest([], 'created_at', 'desc', 10, 0)
-        )
-        this.$store.state.companies.list = response.data;
-        this.$store.dispatch('companies/changeLoading', false);
+        await this.$store.dispatch('companies/companySearcher');
         this.loaded = true;
     }
 
