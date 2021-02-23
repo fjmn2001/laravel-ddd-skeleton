@@ -12,6 +12,7 @@ final class CompanyResponse
     private $state;
     private $logo;
     private $createdAt;
+    private $usersQuantity;
 
     public function __construct(
         $id,
@@ -19,7 +20,8 @@ final class CompanyResponse
         $address,
         $state,
         $logo,
-        string $createdAt
+        string $createdAt,
+        int $usersQuantity
     )
     {
         $this->id = $id;
@@ -28,6 +30,7 @@ final class CompanyResponse
         $this->state = $state;
         $this->logo = $logo;
         $this->createdAt = $createdAt;
+        $this->usersQuantity = $usersQuantity;
     }
 
     public function id(): string
@@ -58,5 +61,10 @@ final class CompanyResponse
     public function createdAt(): string
     {
         return $this->createdAt;
+    }
+
+    public function usersQuantity()
+    {
+        return $this->usersQuantity;
     }
 }

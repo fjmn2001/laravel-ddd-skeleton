@@ -40,10 +40,9 @@
                                             </router-link>
                                         </td>
                                         <td v-text="company.createdAt"></td>
-                                        <td>3</td>
+                                        <td v-text="company.usersQuantity"></td>
                                         <td class=" td-btn-med">
                                             <button type="button" class="btn btn-green btn-sm btn-table">Activo</button>
-                                            &nbsp;
                                         </td>
                                         <td>
                                             <div class="dropdown">
@@ -94,9 +93,6 @@
                                 <p>TODO: design when is loading</p>
                             </div>
                         </div>
-                        <pre>
-                            {{$store.state.companies.list}}
-                        </pre>
                     </div>
                 </div>
             </div>
