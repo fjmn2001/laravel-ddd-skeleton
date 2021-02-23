@@ -19,3 +19,5 @@ yarn-error.log
 /mysql/*
 /apps/erp/frontend/node_modules
 /apps/erp/frontend/dist
+apps/erp/frontend/src/assets/less/icons/material-design-iconic-font/css/_pgbackup
+apps/erp/frontend/src/assets/css/_pgbackup
