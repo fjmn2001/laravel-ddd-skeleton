@@ -83,14 +83,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pl-4 pr-4" v-if="!hasData() && !loading()">
-                            <div class="alert alert-danger">
-                                <p>TODO: design when do not has data</p>
+                        <div class="pb-4 pl-4 pr-4" v-if="!hasData() && !loading()">
+                            <div class="no-resul">
+                                <i class="icon-close red"></i>
+                                <h2>No se encontró ningún registro.</h2>
                             </div>
                         </div>
-                        <div class="pl-4 pr-4" v-if="loading()">
-                            <div class="alert alert-info">
-                                <p>TODO: design when is loading</p>
+                        <div class="pb-4 pl-4 pr-4" v-if="loading()">
+                            <div class="no-resul">
+                                <img src="@/assets/images/icons/log.gif" class="log-git">
+                                <h2>Cargando...</h2>
                             </div>
                         </div>
                     </div>

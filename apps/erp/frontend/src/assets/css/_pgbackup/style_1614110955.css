@@ -16426,16 +16426,15 @@ body {
 
 .xcontainer {
     background-color: white;
-    margin-left: -1rem;
-    margin-right: -1rem;
-    margin-top: 1rem;
+    margin: 0px;
+    padding: 0px;
 }
 
 .xtitle-buscar {
     font-family: "Poppins-Bold";
     color: #576984;
+    margin-left: 25px;
     font-size: 15px;
-    margin-bottom: 0px;
 }
 
 .xsubtitle-buscar {
@@ -16613,7 +16612,7 @@ body {
 }
 
 .icon {
-    padding: 11px;
+    padding: 12px 12px;
     text-decoration: none;
     background-size: 18px;
     background-position: 2px 2px;
@@ -17274,7 +17273,6 @@ select::-ms-expand {
     margin: 0px;
     color: #576984;
     font-weight: 600;
-    font-size: 20px;
 }
 
 .red {
@@ -17288,11 +17286,4 @@ select::-ms-expand {
 .log-git {
     width: 29px;
     margin: 0px 10px 0px 0px;
-}
-
-.div-title-card {
-    border-bottom: 1px solid #edeff1;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding: 16px 2rem;
 }

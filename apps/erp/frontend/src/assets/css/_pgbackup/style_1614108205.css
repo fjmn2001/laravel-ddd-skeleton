@@ -1557,8 +1557,7 @@ hr {
 
 .custom-select {
     padding: 9px 45px 9px 20px;
-
-    /* background: url(../../plugins/images/arrow-down.png) right 16px center no-repeat #f4f8f9; */
+    /*background: url(../../plugins/images/arrow-down.png) right 16px center no-repeat #f4f8f9;*/
     border: none;
     margin-left: 8px;
     font-size: 15px;
@@ -6834,7 +6833,7 @@ ul.list-icons li i {
 }
 
 .carousel-widget {
-    /* background: url(../../plugins/images/flowers.jpg) -140px; */
+    /*background: url(../../plugins/images/flowers.jpg) -140px;*/
     background-size: cover;
     position: relative;
     text-align: center;
@@ -13527,15 +13526,13 @@ a.mytooltip {
     margin: -7px 0 0 -15px;
     width: 30px;
     height: 20px;
-
-    /* background: url(../../plugins/images/tooltip/tooltip1.svg) center center no-repeat; */
+    /*background: url(../../plugins/images/tooltip/tooltip1.svg) center center no-repeat;*/
     background-size: 100%;
 }
 
 .tooltip-content3 {
     position: absolute;
-
-    /* background: url(../../plugins/images/tooltip/shape1.svg) center bottom no-repeat; */
+    /*background: url(../../plugins/images/tooltip/shape1.svg) center bottom no-repeat;*/
     background-size: 100% 100%;
     z-index: 9999;
     width: 200px;
@@ -16426,16 +16423,15 @@ body {
 
 .xcontainer {
     background-color: white;
-    margin-left: -1rem;
-    margin-right: -1rem;
-    margin-top: 1rem;
+    margin: 0px;
+    padding: 0px;
 }
 
 .xtitle-buscar {
     font-family: "Poppins-Bold";
     color: #576984;
+    margin-left: 25px;
     font-size: 15px;
-    margin-bottom: 0px;
 }
 
 .xsubtitle-buscar {
@@ -16613,7 +16609,7 @@ body {
 }
 
 .icon {
-    padding: 11px;
+    padding: 12px 12px;
     text-decoration: none;
     background-size: 18px;
     background-position: 2px 2px;
@@ -17247,52 +17243,4 @@ select::-ms-expand {
 
 .pad-l29 {
     padding-top: 29px;
-}
-
-.no-data > tbody > tr > td > h2 {
-    color: #576984;
-    font-weight: 700;
-}
-
-.no-resul {
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    border: 1px solid #dde3eb;
-    align-items: center;
-}
-
-.no-resul {
-}
-
-.no-resul > i {
-    font-size: 29px;
-    margin-right: 14px;
-}
-
-.no-resul > h2 {
-    margin: 0px;
-    color: #576984;
-    font-weight: 600;
-    font-size: 20px;
-}
-
-.red {
-    color: #ee2424;
-}
-
-.blu-cl {
-    color: #05aff3;
-}
-
-.log-git {
-    width: 29px;
-    margin: 0px 10px 0px 0px;
-}
-
-.div-title-card {
-    border-bottom: 1px solid #edeff1;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding: 16px 2rem;
 }
