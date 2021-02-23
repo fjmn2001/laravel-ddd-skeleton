@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Company\Infrastructure;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Medine\ERP\Company\Domain\Company;
-use Medine\ERP\Company\Domain\CompanyCode;
 use Medine\ERP\Company\Domain\CompanyRepository;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyAddress;
 use Medine\ERP\Company\Domain\ValueObjects\CompanyCreatedAt;
@@ -57,7 +55,8 @@ final class MySqlCompanyRepository extends MySqlRepository implements CompanyRep
             new CompanyState($row->state),
             new CompanyLogo($row->logo),
             new CompanyCreatedAt($row->created_at),
-            new CompanyUpdatedAt($row->updated_at)
+            new CompanyUpdatedAt($row->updated_at),
+            $row->users_quantity
         ) : null;
     }
 
@@ -75,7 +74,8 @@ final class MySqlCompanyRepository extends MySqlRepository implements CompanyRep
                 new CompanyState($row->state),
                 new CompanyLogo($row->logo),
                 new CompanyCreatedAt($row->created_at),
-                new CompanyUpdatedAt($row->updated_at)
+                new CompanyUpdatedAt($row->updated_at),
+                $row->users_quantity
             );
         })->toArray();
     }

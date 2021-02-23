@@ -48,7 +48,8 @@ export default {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.$store.state.token;
             axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
             axios.post(this.breadcrumb_url, {
-                name: this.$route.name
+                name: this.$route.name,
+                params: this.$route.params
             }).then((response) => {
                 this.title = response.data.title;
                 this.routes = response.data.routes;
