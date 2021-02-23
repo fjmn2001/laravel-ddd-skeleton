@@ -21,7 +21,6 @@
                                         <th id="th-ini" style="padding-left: 39px;text-align: center;">&nbsp;
                                             <input type="checkbox" class="chk" style="margin-left: -58px;">
                                         </th>
-                                        <th>Código</th>
                                         <th>Nombre</th>
                                         <th>Fecha de creación</th>
                                         <th>Cantidad de usuario</th>
@@ -34,8 +33,12 @@
                                         <th class="align-items-center d-flex">
                                             <input type="checkbox" class="chk ml-4">
                                         </th>
-                                        <td v-html="company.name" @click="goToDetails(company.id)"></td>
-                                        <td v-html="company.name">Lider.C.A</td>
+                                        <td>
+                                            <router-link
+                                                :to="{name: 'companies.edit', params:{id: company.id}}">
+                                                {{ company.name }}
+                                            </router-link>
+                                        </td>
                                         <td>01/01/2021</td>
                                         <td>3</td>
                                         <td class=" td-btn-med">
@@ -57,7 +60,6 @@
                                             </div>
                                         </td>
                                     </tr>
-
                                     </tbody>
                                 </table>
                             </div>
@@ -65,12 +67,16 @@
                                 <div
                                     class="align-items-center col-md-6 d-flex justify-content-center offset-md-3 pb-3 pt-3">
                                     <div class="d-flex">
-                                        <a class="btn btn-cicle"><img src="@/assets/images/icons/two-arrow-left.svg"></a>
-                                        <a class="btn btn-cicle"><img src="@/assets/images/icons/one-arrow-left.svg"></a>
+                                        <a class="btn btn-cicle"><img
+                                            src="@/assets/images/icons/two-arrow-left.svg"></a>
+                                        <a class="btn btn-cicle"><img
+                                            src="@/assets/images/icons/one-arrow-left.svg"></a>
                                         <p class="p-pag">página <input type="text" value="1" class="inp-pag">&nbsp;de 6
                                         </p>
-                                        <a class="btn btn-cicle"><img src="@/assets/images/icons/one-arrow-right.svg"></a>
-                                        <a class="btn btn-cicle"><img src="@/assets/images/icons/two-arrow-right.svg"></a>
+                                        <a class="btn btn-cicle"><img
+                                            src="@/assets/images/icons/one-arrow-right.svg"></a>
+                                        <a class="btn btn-cicle"><img
+                                            src="@/assets/images/icons/two-arrow-right.svg"></a>
                                     </div>
                                 </div>
                                 <div class="align-items-center col-md-3 d-flex justify-content-end pb-3 pt-3">

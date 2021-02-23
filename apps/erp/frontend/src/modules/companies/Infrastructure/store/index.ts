@@ -2,8 +2,10 @@ import * as types from './mutation-types'
 import CompanySearcher from "@/modules/companies/Application/Searcher/CompanySearcher";
 import CompanySearcherRequest from "@/modules/companies/Application/Searcher/CompanySearcherRequest";
 
+type CommitValue = boolean | [];
+
 interface VuexContext {
-    commit(type: string, value): void;
+    commit(type: string, value: CommitValue): void;
     state: VuexState;
 }
 
