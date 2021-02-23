@@ -38,7 +38,8 @@ final class CompaniesGetController
                 'name' => $companyResponse->name(),
                 'address' => $companyResponse->address(),
                 'state' => $companyResponse->state(),
-                'logo' => $companyResponse->logo()
+                'logo' => $companyResponse->logo(),
+                'createdAt' => $companyResponse->createdAt()
             ];
         }, $response->companies()), JsonResponse::HTTP_OK);
     }

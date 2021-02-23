@@ -11,13 +11,15 @@ final class CompanyResponse
     private $address;
     private $state;
     private $logo;
+    private $createdAt;
 
     public function __construct(
         $id,
         $name,
         $address,
         $state,
-        $logo
+        $logo,
+        string $createdAt
     )
     {
         $this->id = $id;
@@ -25,6 +27,7 @@ final class CompanyResponse
         $this->address = $address;
         $this->state = $state;
         $this->logo = $logo;
+        $this->createdAt = $createdAt;
     }
 
     public function id(): string
@@ -50,5 +53,10 @@ final class CompanyResponse
     public function logo()
     {
         return $this->logo;
+    }
+
+    public function createdAt(): string
+    {
+        return $this->createdAt;
     }
 }

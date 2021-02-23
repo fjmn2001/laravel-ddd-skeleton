@@ -39,7 +39,7 @@
                                                 {{ company.name }}
                                             </router-link>
                                         </td>
-                                        <td>01/01/2021</td>
+                                        <td v-text="company.createdAt"></td>
                                         <td>3</td>
                                         <td class=" td-btn-med">
                                             <button type="button" class="btn btn-green btn-sm btn-table">Activo</button>
@@ -94,6 +94,9 @@
                                 <p>TODO: design when is loading</p>
                             </div>
                         </div>
+                        <pre>
+                            {{$store.state.companies.list}}
+                        </pre>
                     </div>
                 </div>
             </div>
