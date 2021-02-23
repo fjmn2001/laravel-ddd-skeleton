@@ -12,6 +12,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./assets/css/new-style.css";
 @import "./assets/css/style.css";
 </style>

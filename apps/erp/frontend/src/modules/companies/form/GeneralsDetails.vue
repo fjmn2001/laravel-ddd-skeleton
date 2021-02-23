@@ -89,7 +89,6 @@ export default class GeneralsDetails extends Vue {
     phone = ''
 
     mounted() {
-        console.log(this.$store.state.companies.company.name, 'hi there!');
         this.name = this.$store.state.companies.company.name;
         this.state = this.$store.state.companies.company.state;
         this.address = this.$store.state.companies.company.address;

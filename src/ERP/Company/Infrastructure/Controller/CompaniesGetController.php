@@ -23,11 +23,13 @@ final class CompaniesGetController
     public function __invoke(Request $request)
     {
         $response = ($this->searcher)(new CompanySearcherRequest(
-            $request->get('filters', []),
+            map(function ($filter) {
+                return is_array($filter) ? $filter : json_decode($filter, true);
+            }, $request->get('filters', [])),
             $request->get('order_by'),
             $request->get('order'),
-            $request->get('limit'),
-            $request->get('offset')
+            (int)$request->get('limit'),
+            (int)$request->get('offset')
         ));
 
         return new JsonResponse(map(function (CompanyResponse $companyResponse) {
@@ -36,7 +38,9 @@ final class CompaniesGetController
                 'name' => $companyResponse->name(),
                 'address' => $companyResponse->address(),
                 'state' => $companyResponse->state(),
-                'logo' => $companyResponse->logo()
+                'logo' => $companyResponse->logo(),
+                'createdAt' => $companyResponse->createdAt(),
+                'usersQuantity' => $companyResponse->usersQuantity()
             ];
         }, $response->companies()), JsonResponse::HTTP_OK);
     }

@@ -21,8 +21,10 @@ abstract class Filters
     {
         each(function (Criteria\Filter $filter) {
             $method = $filter->field()->value();
-            if (method_exists($this, $method)) {
-                call_user_func_array([$this, $method], array_filter([$filter->value()]));
+            $value = array_filter([$filter->value()->value()]);
+
+            if (method_exists($this, $method) && !empty($value)) {
+                call_user_func_array([$this, $method], [$filter->value()]);
             }
         }, $criteria->filters()->filters());
 

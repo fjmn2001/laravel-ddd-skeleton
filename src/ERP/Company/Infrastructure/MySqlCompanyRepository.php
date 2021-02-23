@@ -26,7 +26,7 @@ final class MySqlCompanyRepository extends MySqlRepository implements CompanyRep
             'id' => $company->id()->value(),
             'name' => $company->name()->value(),
             'address' => $company->address()->value(),
-            'status' => $company->state()->value(),
+            'state' => $company->state()->value(),
             'logo' => $company->logo()->value(),
             'created_at' => $company->createdAt()->value(),
             'updated_at' => $company->updatedAt()->value()
@@ -38,7 +38,7 @@ final class MySqlCompanyRepository extends MySqlRepository implements CompanyRep
         DB::table('companies')->where('companies.id', $company->id()->value())->take(1)->update([
             'name' => $company->name()->value(),
             'address' => $company->address()->value(),
-            'status' => $company->state()->value(),
+            'state' => $company->state()->value(),
             'logo' => $company->logo()->value(),
             'updated_at' => $company->updatedAt()->value(),
         ]);
@@ -52,17 +52,18 @@ final class MySqlCompanyRepository extends MySqlRepository implements CompanyRep
             new CompanyId($row->id),
             new CompanyName($row->name),
             new CompanyAddress($row->address),
-            new CompanyState($row->status),
+            new CompanyState($row->state),
             new CompanyLogo($row->logo),
             new CompanyCreatedAt($row->created_at),
-            new CompanyUpdatedAt($row->updated_at)
+            new CompanyUpdatedAt($row->updated_at),
+            $row->users_quantity
         ) : null;
     }
 
     public function matching(Criteria $criteria)
     {
         $query = DB::table('companies');
-        //todo: $query = (new MySqlRolFilters($query))($criteria);
+        $query = (new MySqlCompanyFilters($query))($criteria);
         $query = $this->completeBuilder($criteria, $query);
 
         return $query->get()->map(function ($row) {
@@ -70,10 +71,11 @@ final class MySqlCompanyRepository extends MySqlRepository implements CompanyRep
                 new CompanyId($row->id),
                 new CompanyName($row->name),
                 new CompanyAddress($row->address),
-                new CompanyState($row->status),
+                new CompanyState($row->state),
                 new CompanyLogo($row->logo),
                 new CompanyCreatedAt($row->created_at),
-                new CompanyUpdatedAt($row->updated_at)
+                new CompanyUpdatedAt($row->updated_at),
+                $row->users_quantity
             );
         })->toArray();
     }

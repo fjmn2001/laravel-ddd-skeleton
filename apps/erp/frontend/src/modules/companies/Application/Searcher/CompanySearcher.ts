@@ -9,7 +9,6 @@ export default class CompanySearcher {
     }
 
     async __invoke(request: CompanySearcherRequest) {
-        console.log(request);
-        return await this.repository.matching();
+        return await this.repository.matching(request);
     }
 }

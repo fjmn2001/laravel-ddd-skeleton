@@ -11,7 +11,7 @@ use Medine\ERP\Clients\Domain\Contracts\ClientRepository;
 use Medine\ERP\Clients\Infrastructure\Repository\MySqlClientRepository;
 use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoiceRepository;
 use Medine\ERP\PurchaseInvoices\Infrastructure\Persistence\MySqlPurchaseInvoiceRepository;
-use Medine\ERP\Roles\Domain\MySqlRolRepository;
+use Medine\ERP\Roles\Infrastructure\MySqlRolRepository;
 use Medine\ERP\Roles\Domain\RolRepository;
 use Medine\ERP\Shared\Domain\Bus\Event\EventBus;
 use Medine\ERP\Shared\Domain\Bus\Event\SendEmailNotificationOnPasswordResetCreated;
