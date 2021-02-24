@@ -17366,8 +17366,9 @@ select::-ms-expand {
     padding-right: 1rem;
 }
 
-.vs__dropdown-menu li{
-    color: #f5fc06; font-size: 14px
+.vs__dropdown-menu li {
+    color: #f5fc06;
+    font-size: 14px;
 }
 
 .vs__dropdown-toggle {
@@ -17379,5 +17380,38 @@ select::-ms-expand {
     background: none;
     border: 1px solid #ff0000;
     white-space: normal;
+}
+
+.pre-loader .table thead tr th p {
+    background-color: #c3d9e9;
+    width: 100%;
+    height: 100%;
+}
+
+.pre-loader .table thead tr th {
+}
+
+.l-hear {
+    background-color: #cef0fa;
+    display: flex;
+    padding: 11px;
+    border-bottom-color: #000000;
+}
+
+.l-hear div {
+    width: 20%;
+    margin: 4px 10px 4px 11px;
+    height: 17px;
+    background-color: #f1f4f4;
+}
+
+.l-bod {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.pre-loader > div > div > p {
+    color: rgba(235, 191, 191, 0);
+    background-color: #f1f4f4;
 }
 
