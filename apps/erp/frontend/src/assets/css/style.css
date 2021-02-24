@@ -1608,6 +1608,7 @@ ul.list-inline li h6 {
 
 label {
     color: #576984;
+    font-weight: 500;
 }
 
 .form-control {
@@ -16451,6 +16452,7 @@ body {
     font-size: 12px;
     color: #576984;
     margin-bottom: 0px;
+    font-weight: 500;
 }
 
 .btn-cicle {
@@ -17362,5 +17364,20 @@ select::-ms-expand {
     padding-top: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
+}
+
+.vs__dropdown-menu li{
+    color: #f5fc06; font-size: 14px
+}
+
+.vs__dropdown-toggle {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: flex;
+    padding: 0 0 20px;
+    background: none;
+    border: 1px solid #ff0000;
+    white-space: normal;
 }
 
