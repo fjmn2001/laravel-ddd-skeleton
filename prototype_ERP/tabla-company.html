@@ -146,11 +146,11 @@
                 </div>
             </aside>
             <div class="page-wrapper">
-                <div class="container-fluid mt-lg-5 mt-md-5 pt-lg-4 pt-md-4">
-                    <div class="div-title-table justify-content-between mt-3 mt-lg-2 mt-md-3 row">
+                <div class="container-fluid main-conta">
+                    <div class="div-title-table justify-content-between row">
                         <div class="col-8 col-lg-9 col-md-8 d-flex d-lg-flex d-md-flex d-sm-flex flex-column flex-lg-row flex-md-column flex-sm-column pl-3 pl-lg-4 pl-md-3 pt-md-2">
                             <h2 class="d-inline mb-md-0 xtitle-table" style="margin-left: 7px;">Empresas</h2>
-                            <p class="ml-lg-4 ml-md-0 navigation pt-lg-2 pt-md-1"><a href="" class="font-weight-bolder">Empresas</a></p>
+                            <p class="ml-lg-4 ml-md-2 ml-sm-2 navigation pt-lg-2 pt-md-1"><a href="" class="font-weight-bolder ml-2 ml-sm-0">Empresas</a><i class="fa fa-long-arrow-right"></i></p>
                         </div>
                         <div class="align-items-center btn-sm col-4 col-lg-3 col-md-4 col-sm-4 d-flex justify-content-end">
                             <a type="button" class="btn btn-blue-deg btn-sm mr-1 mr-lg-5" href="form.html" style="padding-left: 16px; padding-right: 16px;">Crear</a>
@@ -168,11 +168,11 @@
                         <div class="align-items-center d-flex div-title-card justify-content-between row">
                             <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column">
                                 <h5 class="xtitle-buscar">Buscar empresa</h5>
-                                <p class="ml-3 ml-lg-0 xsubtitle-buscar">(Búsqueda avanzada)</p>
+                                <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 xsubtitle-buscar">(Búsqueda avanzada)</p>
                             </div>
-                            <a href="#des01" id="desplegar-busqueda" class="arrow-left icon" data-toggle="collapse"></a>
+                            <a href="#des01" id="desplegar-busqueda" data-toggle="collapse"><i class="fa fa-chevron-down"></i></a>
                         </div>
-                        <div id="des01" class="des01 m-3">
+                        <div id="des01" class="des01 m-3 pb-3">
                             <div class="pb-1 pl-3 pr-3 pt-2 row">
                                 <div class="col-lg-3 col-md-3 col-sm-12">
                                     <label>Código</label>
@@ -207,46 +207,46 @@
                             </div>
                             <div class="row pt-3">
                                 <div class="col-lg-3 col-md-4 col-sm-12 d-flex justify-content-center offset-lg-8 offset-md-7 offset-sm-0">
-                                    <button type="button" class="btn btn-blue-deg btn-sm mr-5 pl-3 pr-3">Buscar</button>
-                                    <button type="button" class="btn btn-outline-secondary btn-sm mr-0 pl-3 pr-3" style="margin: 10px 10px 10px 0px; min-width: 100px;">Limpiar</button>
+                                    <a type="button" class="btn btn-blue-deg btn-sm disabled mr-1 mr-lg-5" href="form.html">Buscar</a>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm limpia mr-0 pl-3 pr-3">Limpiar</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="xcontainer">
                         <div>
                             <div class="align-items-center d-flex div-title-card justify-content-between row">
                                 <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column">
                                     <h5 class="xtitle-buscar">Lista de empresas</h5>
-                                    <p class="ml-3 ml-lg-0 xsubtitle-buscar">(Tabla principai)</p>
+                                    <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 xsubtitle-buscar">(Tabla principai)</p>
                                 </div>
-                                <a href="#des01" id="desplegar-busqueda" class="arrow-left icon" data-toggle="collapse"></a>
+                                <a href="#des02" id="desplegar-busqueda1" data-toggle="collapse"><i class="fa fa-chevron-up"></i></a>
                             </div>
                             <div id="des02" class="pb-3 pl-4 pr-4 pt-3">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th id="th-ini-sd">&nbsp;
+                                                <th id="th-ini-sd">
                                                     <input type="checkbox" class="chk">
                                                 </th>
-                                                <th>Código</th>
-                                                <th>Nombre</th>
-                                                <th>Fecha de creación</th>
-                                                <th>Cantidad de usuario</th>
-                                                <th>Estado</th>
+                                                <th>Nombre<i class="fa fa-sort thead-i"></i></th>
+                                                <th>Fecha de creación<i class="fa fa-sort thead-i"></i></th>
+                                                <th>Cantidad de usuario<i class="fa fa-caret-down thead-i"></i></th>
+                                                <th>Estado<i class="fa fa-caret-up thead-i"></i></th>
                                                 <th>Opciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <th class="align-items-center d-flex">
-                                                    <input type="checkbox" class="chk ml-4">
+                                                <th>
+                                                    <input type="checkbox" class="chk">
                                                 </th>
-                                                <td>EM1002</td>
-                                                <td>Lider.C.A</td>
+                                                <td><a href="#">Lider.C.A</a></td>
                                                 <td>01/01/2021</td>
                                                 <td>3</td>
                                                 <td class="td-btn-med">
-                                                    <button type="button" class="btn btn-green btn-sm btn-table">Activo</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       &nbsp;
+                                                    <button type="button" class="btn btn-green btn-sm btn-table">Activo</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               &nbsp;
                                                 </td>
                                                 <td>
                                                     <div class="dropdown">
@@ -264,14 +264,19 @@
                                     </table>
                                 </div>
                                 <div class="justify-content-center mt-0 pt-0 row">
-                                    <div class="align-items-center col-md-6 d-flex justify-content-center offset-md-3 pb-3 pt-3">
-                                        <div class="d-flex">
-                                            <a class="btn btn-cicle"><img src="images/icons/two-arrow-left.svg"></a>
-                                            <a class="btn btn-cicle"><img src="images/icons/one-arrow-left.svg"></a>
-                                            <p class="p-pag">Página <input type="text" value="1" class="inp-pag">&nbsp;de 6</p>
-                                            <a class="btn btn-cicle"><img src="images/icons/one-arrow-right.svg"></a>
-                                            <a class="btn btn-cicle"><img src="images/icons/two-arrow-right.svg"></a>
-                                        </div>
+                                    <div class="align-items-center col-md-6 d-flex justify-content-center offset-md-3 pb-3 pt-3 pagination">
+                                        <a class="btn btn-cicle"><img src="images/icons/two-arrow-left.svg"></a>
+                                        <a class="btn btn-cicle"><img src="images/icons/one-arrow-left.svg" style="width: 0.4rem;"></a>
+                                        <p class="p-pag">Página <input type="text" value="1" class="inp-pag">&nbsp;de 6</p>
+                                        <a class="btn btn-cicle"><img src="images/icons/one-arrow-right.svg" style="width: 0.4rem;"></a>
+                                        <a class="btn btn-cicle"><img src="images/icons/two-arrow-right.svg"></a>
+                                        <select class="inp-pag sel-pag">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
                                     </div>
                                     <div class="align-items-center col-md-3 d-flex justify-content-end pb-3 pt-3">
                                         <p class="mr-4 p-pag">Mostrando 1 - 10 de 20</p>
@@ -279,16 +284,18 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="xcontainer">
                         <div>
                             <div id="des03" class="pb-4 pl-4 pr-4">
-                                <div class="no-resul">
-                                    <i class="icon-close red"></i>
+                                <div class="color-blue1 no-resul">
+                                    <i class="icon-doc color-blue1"><br></i>
                                     <h2>No se encontró ningún registro.</h2>
                                 </div>
                             </div>
                             <div class="pb-4 pl-4 pr-4">
                                 <div class="no-resul">
-                                    <img src="images/icons/log.gif" class="log-git">
+                                    <img src="images/icons/" class="log-git">
                                     <h2>Cargando...</h2>
                                 </div>
                             </div>

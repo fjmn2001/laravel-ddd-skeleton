@@ -1,40 +1,35 @@
 <template>
-    <div class="mt-4">
-        <div class="align-items-center d-flex justify-content-between pt-3 row">
-            <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column"
-                 style="padding-left: 27px;">
-                <h5 class="xtitle-buscar" style="margin-left: 20px;">Buscar empresa</h5>
-                <p class="ml-3 ml-lg-0 xsubtitle-buscar">(Búsqueda avanzada)</p>
-            </div>
-            <a href="#des01" id="desplegar-busqueda" class="arrow-left icon mr-5 collapsed"
-               data-toggle="collapse" aria-expanded="false"></a>
+
+<div>
+    <div class="align-items-center d-flex div-title-card justify-content-between row">
+        <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column">
+            <h5 class="xtitle-buscar">Buscar empresa</h5>
+            <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 xsubtitle-buscar">(Búsqueda avanzada)</p>
         </div>
-        <div id="des01" class="des01 m-3 collapse" style="">
-            <div class="pb-1 pl-3 pr-3 pt-2 row">
-                <div class="col-lg-3 col-md-3 col-sm-12">
-                    <label>Nombre de la empresa</label>
-                    <input type="text" class="form-control inp-filter" v-model="name">
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-12" style="margin-left: 0px;">
-                    <label>Estado</label>
-                    <v-select multiple :options="[{label: 'Activa', id: 'active'}, {label: 'Inactiva', id: 'inactive'}]"
-                              v-model="state"
-                              :reduce="option => option.id"></v-select>
-                </div>
+        <a href="#des01" id="desplegar-busqueda" data-toggle="collapse"><i class="fa fa-chevron-down"></i></a>
+    </div>
+    <div id="des01" class="des01 m-3 pb-3 collapse">
+        <div class="pb-1 pl-3 pr-3 pt-2 row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <label>Nombre de la empresa</label>
+                <input type="text" class="form-control inp-filter" v-model="name">
             </div>
-            <div class="row pt-3">
-                <div
-                    class="col-lg-3 col-md-4 col-sm-12 d-flex justify-content-center offset-lg-9 offset-md-8 offset-sm-0">
-                    <button type="button" class="btn btn-blue-deg btn-sm mr-5 pl-3 pr-3" :disabled="loading()"
-                            @click.prevent="search">Buscar
-                    </button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm mr-0 pl-3 pr-3"
-                            style="margin: 10px 10px 10px 0px; min-width: 100px;" @click.prevent="clean">Limpiar
-                    </button>
-                </div>
+            <div class="col-lg-3 col-md-3 col-sm-12" style="margin-left: 0px;">
+                <label>Estado</label>
+                <v-select multiple :options="[{label: 'Activa', id: 'active'}, {label: 'Inactiva', id: 'inactive'}]"
+                          v-model="state"
+                          :reduce="option => option.id">
+                </v-select>
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div class="col-lg-3 col-md-4 col-sm-12 d-flex justify-content-center offset-lg-8 offset-md-7 offset-sm-0">
+                <a type="button" class="btn btn-blue-deg btn-sm disabled mr-1 mr-lg-5" :disabled="loading()" @click.prevent="search" >Buscar</a>
+                <button type="button" class="btn btn-outline-secondary btn-sm mr-0 pl-3 pr-3 limpia" @click.prevent="clean">Limpiar</button>
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script lang="ts">

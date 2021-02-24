@@ -1584,10 +1584,13 @@ ul.list-inline li h6 {
     border: 1px solid rgba(255, 255, 255, .2);
     border-radius: 0;
     box-shadow: 0 3px 12px rgba(0, 0, 0, .05) !important;
-    -webkit-box-shadow: 0 !important;
     -moz-box-shadow: 0 !important;
     padding-bottom: 8px;
     margin-top: 0;
+}
+
+.dropdown-menu {
+    -webkit-box-shadow: 0 !important;
 }
 
 .dropdown-menu > li > a {
@@ -2849,7 +2852,9 @@ ul.common li a:hover {
 }
 
 .table > tbody > tr > th:first-child {
-    padding-left: 0px;
+    padding: 0px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .table > tbody > tr > td,
@@ -2857,20 +2862,23 @@ ul.common li a:hover {
     font-size: 14px;
     padding-top: 8px;
     padding-bottom: 8px;
+    vertical-align: middle;
 }
 
-.table-bordered > tbody > tr > td,
-.table-bordered > tbody > tr > th,
-.table-bordered > tfoot > tr > td,
-.table-bordered > tfoot > tr > th,
-.table-bordered > thead > tr > td,
-.table-bordered > thead > tr > th {
-    border: 1px solid #e5ebec;
+.table > tbody > tr > td:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table > thead > tr > th:first-child {
+    text-align: center;
+    vertical-align: middle;
+    padding: 0px 6px;
 }
 
 .table > thead > tr > th {
     vertical-align: middle;
-    border-bottom: 1px solid #e5ebec;
 }
 
 th {
@@ -12858,7 +12866,7 @@ ul.list-icons li i {
     overflow: visible;
     color: #2b2b2b;
     font-weight: 500;
-    font-size: 14;
+    font-size: 14px;
     line-height: 1.1;
     -webkit-transition: color .3s cubic-bezier(.7, 0, .3, 1);
     transition: color .3s cubic-bezier(.7, 0, .3, 1);
@@ -13547,7 +13555,7 @@ a.mytooltip {
     color: #fff;
     opacity: 0;
     cursor: default;
-    font-size: 14;
+    font-size: 14pt;
     line-height: 27px;
     pointer-events: none;
     -webkit-transform: scale3d(.1, .2, 1);
@@ -16309,6 +16317,9 @@ body {
 
 .div-title-table {
     background: #ffffff;
+    margin-left: 0px;
+    margin-right: 0px;
+    min-height: 54px;
 }
 
 .xtitle-table {
@@ -16405,7 +16416,7 @@ body {
 
 .navigation {
     font-size: 13px;
-    font-family: "Poppins-Italic";
+    font-family: "Poppins-medium";
     color: #8090a2;
     display: inline;
     margin-top: 0px;
@@ -16426,8 +16437,6 @@ body {
 
 .xcontainer {
     background-color: white;
-    margin-left: -1rem;
-    margin-right: -1rem;
     margin-top: 1rem;
 }
 
@@ -16440,7 +16449,6 @@ body {
 
 .xsubtitle-buscar {
     font-size: 12px;
-    text-indent: 7px;
     color: #576984;
     margin-bottom: 0px;
 }
@@ -16450,13 +16458,13 @@ body {
     height: 26px;
     text-align: center;
     border-radius: 15px;
-    background-color: #EAEDF1;
     padding: 0px;
     margin-right: 6px;
-    margin-left: 5px;
+    margin-left: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.21);
 }
 
 .btn-cicle:hover {
@@ -16492,6 +16500,7 @@ body {
     height: 16px;
     background-color: #ffffff;
     border-top-color: #000000;
+    vertical-align: middle;
 }
 
 .inp02 {
@@ -17296,3 +17305,62 @@ select::-ms-expand {
     margin-right: 0px;
     padding: 16px 2rem;
 }
+
+.color-blue1 {
+    color: #0f9bf2;
+}
+
+.pagination div a img {
+    width: 0.71rem;
+}
+
+.pagination {
+}
+
+.sel-pag {
+    font-size: 13px;
+    width: 60px;
+    padding-right: 0px;
+    margin-left: 8px;
+}
+
+.thead-i {
+    color: #8097ac;
+    font-size: 13px;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 13px;
+    height: 13px;
+}
+
+.table > tbody > tr > td > a:hover {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.table > tbody > tr > td > a {
+    color: #0096c9;
+    font-weight: 600;
+}
+
+.navigation > i {
+    font-size: 13px;
+    width: 13px;
+    height: 13px;
+    color: #bbced3;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.btn-outline-secondary.limpia {
+    margin: 10px 10px 10px 0px;
+    min-width: 100px;
+}
+
+.main-conta {
+    margin-top: 65px;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
