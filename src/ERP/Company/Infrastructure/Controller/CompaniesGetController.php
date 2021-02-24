@@ -23,8 +23,8 @@ final class CompaniesGetController
     public function __invoke(Request $request)
     {
         $response = ($this->searcher)(new CompanySearcherRequest(
-            map(function (string $filter) {
-                return json_decode($filter, true);
+            map(function ($filter) {
+                return is_array($filter) ? $filter : json_decode($filter, true);
             }, $request->get('filters', [])),
             $request->get('order_by'),
             $request->get('order'),
@@ -38,7 +38,9 @@ final class CompaniesGetController
                 'name' => $companyResponse->name(),
                 'address' => $companyResponse->address(),
                 'state' => $companyResponse->state(),
-                'logo' => $companyResponse->logo()
+                'logo' => $companyResponse->logo(),
+                'createdAt' => $companyResponse->createdAt(),
+                'usersQuantity' => $companyResponse->usersQuantity()
             ];
         }, $response->companies()), JsonResponse::HTTP_OK);
     }

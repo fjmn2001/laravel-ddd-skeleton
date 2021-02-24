@@ -44,7 +44,9 @@ final class CompanySearcher
                 $company->name()->value(),
                 $company->address()->value(),
                 $company->state()->value(),
-                $company->logo()->value()
+                $company->logo()->value(),
+                $company->createdAt()->format('d/m/Y'),
+                $company->usersQuantity()
             );
         };
     }
