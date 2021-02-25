@@ -5,7 +5,7 @@
       <h2 class="d-inline mb-md-0 xtitle-table" style="margin-left: 7px;">{{ title }}</h2>
       <p class="ml-lg-4 ml-md-2 ml-sm-2 navigation pt-lg-2 pt-md-1">
         <router-link :to="{name: route.name}" class="font-weight-bolder" v-for="(route, i) in routes" :key="i">
-          <i class="fa fa-long-arrow-right" v-if="i > 0"></i>{{ route.title }}
+          <i class="fa fa-long-arrow-right i-navigation" v-if="i > 0"></i>{{ route.title }}
         </router-link>
       </p>
     </div>

@@ -17285,7 +17285,7 @@ select::-ms-expand {
     margin: 0px;
     color: #576984;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .red {
@@ -17336,8 +17336,8 @@ select::-ms-expand {
 }
 
 .table > tbody > tr > td > a:hover {
-    font-weight: 700;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .table > tbody > tr > td > a {
@@ -17367,19 +17367,36 @@ select::-ms-expand {
 }
 
 .vs__dropdown-menu li {
-    color: #f5fc06;
-    font-size: 14px;
+    color: #576984 !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+.vs__dropdown-menu li:hover {
+    color: white !important;
+    background-color: #0fa3f2;
+}
+
+.vs__dropdown-menu li:focus {
+    color: white !important;
+    background-color: #0fa3f2;
 }
 
 .vs__dropdown-toggle {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    display: flex;
-    padding: 0 0 20px;
-    background: none;
-    border: 1px solid #ff0000;
-    white-space: normal;
+    border: 1px solid #e5ebec !important;
+    border-radius: 0px !important;
+}
+
+.vs__search,
+.vs__search:focus {
+    height: 28px !important;
+}
+
+.vs__selected {
+    background-color: #e9f0f3 !important;
+    border: 0px solid !important;
+    color: #576984 !important;
+    border-radius: 2px !important;
 }
 
 .pre-loader .table thead tr th p {
@@ -17413,5 +17430,14 @@ select::-ms-expand {
 .pre-loader > div > div > p {
     color: rgba(235, 191, 191, 0);
     background-color: #f1f4f4;
+}
+
+.i-navigation {
+    margin-left: 6px;
+    margin-right: 6px;
+    font-size: 13px;
+    width: 13px;
+    height: 13px;
+    color: #bbced3;
 }
 
