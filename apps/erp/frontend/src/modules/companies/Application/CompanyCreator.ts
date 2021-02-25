@@ -9,7 +9,7 @@ export default class CompanyCreator {
         this.repository = new HttpCompanyRepository();
     }
 
-    __invoke(request: CompanyCreatorRequest) {
+    async __invoke(request: CompanyCreatorRequest) {
         const $Company = new Company(
             request.id,
             request.name,
@@ -18,6 +18,6 @@ export default class CompanyCreator {
             request.phone
         );
         //
-        return this.repository.save($Company);
+        return await this.repository.save($Company);
     }
 }

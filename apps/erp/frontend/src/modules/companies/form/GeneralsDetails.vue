@@ -88,6 +88,13 @@ export default class GeneralsDetails extends Vue {
     address = ''
     phone = ''
 
+    mounted() {
+        this.name = this.$store.state.companies.company.name;
+        this.state = this.$store.state.companies.company.state;
+        this.address = this.$store.state.companies.company.address;
+        this.phone = this.$store.state.companies.company.phone;
+    }
+
     @Watch('name')
     onNameChanged(val: string) {
         this.$store.state.companies.company.name = val;

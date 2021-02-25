@@ -7,9 +7,18 @@ namespace Medine\Apps\ERP\Backend\Controller\Company;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Medine\ERP\Company\Application\Find\CompanyFinder;
+use Medine\ERP\Company\Application\Find\CompanyFinderRequest;
 
 final class CompanyBreadcrumbsPostController extends Controller
 {
+    private $finder;
+
+    public function __construct(CompanyFinder $finder)
+    {
+        $this->finder = $finder;
+    }
+
     /**
      * @method void home()
      */
@@ -18,7 +27,7 @@ final class CompanyBreadcrumbsPostController extends Controller
         $name = str_replace('.', '_', $request->name);
 
         if (method_exists($this, $name)) {
-            $response = call_user_func_array([$this, $name], array_filter([]));
+            $response = call_user_func_array([$this, $name], array_filter([$request->params]));
             return new JsonResponse($response, JsonResponse::HTTP_OK);
         }
 
@@ -54,6 +63,23 @@ final class CompanyBreadcrumbsPostController extends Controller
             'routes' => [
                 ['title' => 'Empresas', 'name' => 'companies'],
                 ['title' => 'Crear', 'name' => 'companies.create'],
+            ],
+            'menu' => [
+                'options' => [
+                    ['id' => 'help', 'title' => 'Ayuda']
+                ]
+            ]
+        ];
+    }
+
+    private function companies_edit(array $params): array
+    {
+        $company = ($this->finder)(new CompanyFinderRequest($params['id']));
+        return [
+            'title' => 'Editar empresa',
+            'routes' => [
+                ['title' => 'Empresas', 'name' => 'companies'],
+                ['title' => $company->name(), 'name' => 'companies.edit'],
             ],
             'menu' => [
                 'options' => [

@@ -20,14 +20,16 @@ final class CompanyFinder
 
     public function __invoke(CompanyFinderRequest $request): CompanyResponse
     {
-        $rol = ($this->finder)(new CompanyId($request->id()));
+        $company = ($this->finder)(new CompanyId($request->id()));
 
         return new CompanyResponse(
-            $rol->id()->value(),
-            $rol->name()->value(),
-            $rol->state()->value(),
-            $rol->address()->value(),
-            $rol->logo()->value()
+            $company->id()->value(),
+            $company->name()->value(),
+            $company->address()->value(),
+            $company->state()->value(),
+            $company->logo()->value(),
+            $company->createdAt()->format('d/m/Y'),
+            $company->usersQuantity()
         );
     }
 }

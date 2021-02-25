@@ -28,7 +28,7 @@ final class CompanyPostController extends Controller
             $request->name,
             $request->address,
             $request->state,
-            $request->logo,
+            'https://www.google.com/url?sa=i&url=https%3A%2F%2Fvuejs.org%2F&psig=AOvVaw2iwaicA5-fgsHJgOFWwde7&ust=1613311099724000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPik6qyC5-4CFQAAAAAdAAAAABAD',
             (string)Auth::user()->id
         ));
 
