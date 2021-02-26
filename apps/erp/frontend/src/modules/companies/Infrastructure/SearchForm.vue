@@ -33,12 +33,22 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+
+});
+
 import {Component, Vue} from 'vue-property-decorator'
 
 @Component
-export default class SearchForm extends Vue {
+export class SearchForm extends Vue {
     name = ''
     state = []
+
+    setup() {
+
+    }
 
     async search() {
         await this.$store.dispatch('companies/changeFilters', [

@@ -32,10 +32,10 @@
                     <div v-show="errorMessage" class="alert alert-danger" role="alert">
                         <p v-text="errorMessage"></p>
                     </div>
-                    <div class="div-text pt-3">
-                        <router-link class="olvidar-clave" :to="{name: 'auth.recovery'}">¿Olvidáste tu contraseña?
-                        </router-link>
-                    </div>
+                    <!--                    <div class="div-text pt-3">-->
+                    <!--                        <router-link class="olvidar-clave" :to="{name: 'auth.recovery'}">¿Olvidáste tu contraseña?-->
+                    <!--                        </router-link>-->
+                    <!--                    </div>-->
                     <div class="pt-5">
                         <p class="by mb-0">Diseñado y Desarrollado por &nbsp;<a class="olvidar-clave"
                                                                                 href="https://medine.dev/"
@@ -49,32 +49,43 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
+import {defineComponent, ref} from 'vue'
+import {useRouter} from 'vue-router'
+import {useStore} from 'vuex'
 
-@Component
-export default class Login extends Vue {
-    username = '';
-    password = '';
-    sending = false;
-    errorMessage = '';
+export default defineComponent({
+    setup() {
+        const router = useRouter();
+        const store = useStore();
 
-    submit() {
-        this.sending = true;
-        this.$store.dispatch('retrieveToken', {
-            username: this.username,
-            password: this.password
-        }).then(() => {
-            this.$router.push({name: 'home'});
-        }).catch(error => {
-            console.log(error)
-            this.errorMessage = error.response.data;
-        }).finally(() => this.sending = false)
+        const username = ref('');
+        const password = ref('');
+        const sending = ref(false);
+        const errorMessage = ref('');
+
+        function submit() {
+            console.log('submit');
+            sending.value = true;
+            store.dispatch('retrieveToken', {
+                username: username.value,
+                password: password.value
+            }).then(() => {
+                router.push({name: 'home'});
+            }).catch(error => {
+                console.log(error)
+                errorMessage.value = error.response.data;
+            }).finally(() => sending.value = false)
+        }
+
+        return {
+            username,
+            password,
+            sending,
+            errorMessage,
+            submit
+        };
     }
-
-    logout() {
-        this.$store.dispatch('destroyToken')
-    }
-}
+})
 </script>
 
 <style scoped>
