@@ -38,30 +38,42 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
+import {defineComponent, ref} from 'vue'
+import {useStore} from 'vuex'
 
-@Component
-export default class Recovery extends Vue {
-    email = '';
-    sending = false;
-    errorMessage = '';
-    successMessage = '';
+export default defineComponent({
+    setup() {
+        const store = useStore();
 
-    submit() {
-        this.sending = true;
-        this.$store.dispatch('auth/passwordRequest', {
-            email: this.email
-        }).then(() => {
-            this.errorMessage = '';
-            this.successMessage = `Se ha enviado un mensaje a ${this.email} para continuar con la recuperación de la contraseña.`;
-        }).catch(error => {
-            console.log(error)
-            this.errorMessage = error.response?.data?.message;
-            this.successMessage = '';
-            this.sending = false;
-        });
+        const email = ref('');
+        const sending = ref(false);
+        const errorMessage = ref('');
+        const successMessage = ref('');
+
+        function submit() {
+            sending.value = true;
+            store.dispatch('auth/passwordRequest', {
+                email: email.value
+            }).then(() => {
+                errorMessage.value = '';
+                successMessage.value = `Se ha enviado un mensaje a ${email.value} para continuar con la recuperación de la contraseña.`;
+            }).catch(error => {
+                console.log(error)
+                errorMessage.value = error.response?.data?.message;
+                successMessage.value = '';
+                sending.value = false;
+            });
+        }
+
+        return {
+            email,
+            sending,
+            errorMessage,
+            successMessage,
+            submit
+        };
     }
-}
+});
 </script>
 
 <style scoped>

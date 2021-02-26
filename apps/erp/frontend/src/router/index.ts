@@ -1,16 +1,12 @@
-import Vue from 'vue'
-import VueRouter, {RouteConfig} from 'vue-router'
-import store from "../store";
-//import Home from '../views/Home.vue'
-import auth from '../modules/auth/router/index';
-import home from '../modules/home/router/index';
-import landing from '../modules/landing/router/index';
-import companies from '../modules/companies/router/index';
+import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
+//import {useStore} from 'vuex'
 import Container from './../components/Container.vue';
+import auth from '../modules/auth/router/index';
+import home from "../modules/home/router";
+import landing from "../modules/landing/router";
+import companies from "../modules/companies/router";
 
-Vue.use(VueRouter)
-
-const routes: Array<RouteConfig> = [
+const routes: Array<RouteRecordRaw> = [
     ...auth,
     {
         path: '/',
@@ -22,50 +18,40 @@ const routes: Array<RouteConfig> = [
             ...landing,
             ...companies
         ]
-    },
-
+    }
     // {
-    //     path: '/',
-    //     name: 'Home',
-    //     component: Home
-    // },
-    // {
-    //     path: '/about',
-    //     name: 'About',
+    //     path: "/about",
+    //     name: "About",
     //     // route level code-splitting
     //     // this generates a separate chunk (about.[hash].js) for this route
     //     // which is lazy-loaded when the route is visited.
-    //     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-    // },
-    // {
-    //     path: '/todos',
-    //     name: 'Todos',
-    //     component: () => import('../views/TodoList.vue')
+    //     component: () =>
+    //         import(/* webpackChunkName: "about" */ "../views/About.vue")
     // }
-]
+];
 
-const router = new VueRouter({
-    mode: 'history',
-    base: process.env.BASE_URL,
+const router = createRouter({
+    history: createWebHistory(process.env.BASE_URL),
     routes
-})
-
-router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (!store.getters.isLogged) {
-            next({name: 'auth.login'})
-        } else {
-            next();
-        }
-    } else if (to.matched.some(record => record.meta.requiresVisitor)) {
-        if (store.getters.isLogged) {
-            next({name: 'home'})
-        } else {
-            next();
-        }
-    } else {
-        next();
-    }
 });
+// const store = useStore();
+//
+// router.beforeEach((to, from, next) => {
+//     if (to.matched.some(record => record.meta.requiresAuth)) {
+//         if (!store.getters.isLogged) {
+//             next({name: 'auth.login'})
+//         } else {
+//             next();
+//         }
+//     } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+//         if (store.getters.isLogged) {
+//             next({name: 'home'})
+//         } else {
+//             next();
+//         }
+//     } else {
+//         next();
+//     }
+// });
 
-export default router
+export default router;

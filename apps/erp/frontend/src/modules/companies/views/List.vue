@@ -2,7 +2,7 @@
     <div class="page-wrapper" style="min-height: 875px;">
         <div class="container-fluid main-conta">
             <div class="pl-1 pr-1">
-                <breadcrums :breadcrumb_url="breadcrumb_url"></breadcrums>
+                <breadcrums :breadcrumbUrl="breadcrumbUrl"></breadcrums>
 
                 <div class=" xcontainer">
                     <search-form></search-form>
@@ -14,7 +14,8 @@
                                 <h5 class="xtitle-buscar">Lista de empresas</h5>
                                 <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 xsubtitle-buscar">(Tabla principai)</p>
                             </div>
-                            <a href="#des02" id="desplegar-busqueda1" data-toggle="collapse"><i class="fa fa-chevron-up"></i></a>
+                            <a href="#des02" id="desplegar-busqueda1" data-toggle="collapse"><i
+                                class="fa fa-chevron-up"></i></a>
                         </div>
 
                         <div id="des02" class="pb-3 pl-4 pr-4 pt-3" v-if="hasData() && !loading()">
@@ -33,7 +34,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr v-for="company in $store.state.companies.list" :key="company.id">
+                                    <tr v-for="company in store.state.companies.list" :key="company.id">
                                         <th>
                                             <input type="checkbox" class="chk">
                                         </th>
@@ -66,11 +67,14 @@
                                 </table>
                             </div>
                             <div class="justify-content-center mt-0 pt-0 row">
-                                <div class="align-items-center col-md-6 d-flex justify-content-center offset-md-3 pb-3 pt-3 pagination">
+                                <div
+                                    class="align-items-center col-md-6 d-flex justify-content-center offset-md-3 pb-3 pt-3 pagination">
                                     <a class="btn btn-cicle"><img src="@/assets/images/icons/two-arrow-left.svg"></a>
-                                    <a class="btn btn-cicle"><img src="@/assets/images/icons/one-arrow-left.svg" style="width: 0.4rem;"></a>
+                                    <a class="btn btn-cicle"><img src="@/assets/images/icons/one-arrow-left.svg"
+                                                                  style="width: 0.4rem;"></a>
                                     <p class="p-pag">Página <input type="text" value="1" class="inp-pag">&nbsp;de 6</p>
-                                    <a class="btn btn-cicle"><img src="@/assets/images/icons/one-arrow-right.svg" style="width: 0.4rem;"></a>
+                                    <a class="btn btn-cicle"><img src="@/assets/images/icons/one-arrow-right.svg"
+                                                                  style="width: 0.4rem;"></a>
                                     <a class="btn btn-cicle"><img src="@/assets/images/icons/two-arrow-right.svg"></a>
                                     <select class="inp-pag sel-pag">
                                         <option value="5">5</option>
@@ -110,7 +114,8 @@
                                     </div>
                                 </div>
                                 <div class="justify-content-center mt-0 pt-0 row">
-                                    <div class="align-items-center col-md-6 d-flex justify-content-center offset-md-3 pb-3 pt-3 pagination">
+                                    <div
+                                        class="align-items-center col-md-6 d-flex justify-content-center offset-md-3 pb-3 pt-3 pagination">
                                         <a class="btn btn-cicle"></a>
                                         <a class="btn btn-cicle"></a>
                                         <p class="p-pag">Página &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
@@ -132,35 +137,48 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
+import {defineComponent, ref, onMounted} from 'vue'
+import {useRouter} from 'vue-router'
+import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
-import SearchForm from "@/modules/companies/Infrastructure/SearchForm.vue";
+import SearchForm from "@/modules/companies/components/SearchForm.vue";
 
-@Component({
-    components: {SearchForm, Breadcrums}
+export default defineComponent({
+    components: {SearchForm, Breadcrums},
+    setup() {
+        const store = useStore()
+        const router = useRouter()
+
+        const breadcrumbUrl: string = store.state.ERP_URL + '/api/company/breadcrumbs'
+        const loaded = ref(false)
+
+        onMounted(async () => {
+            await store.dispatch('companies/companySearcher');
+            loaded.value = true;
+        })
+
+        function loading(): boolean {
+            return store.state.companies.loading;
+        }
+
+        function hasData() {
+            return store.state.companies.list.length > 0 && loaded;
+        }
+
+        function goToDetails(id: string) {
+            router.push({name: 'companies.edit', params: {id}});
+        }
+
+        return {
+            store,
+            breadcrumbUrl,
+            loaded,
+            loading,
+            hasData,
+            goToDetails
+        }
+    }
 })
-
-export default class List extends Vue {
-    breadcrumb_url: string = this.$store.state.ERP_URL + '/api/company/breadcrumbs'
-    loaded = false
-
-    async mounted() {
-        await this.$store.dispatch('companies/companySearcher');
-        this.loaded = true;
-    }
-
-    loading(): boolean {
-        return this.$store.state.companies.loading;
-    }
-
-    hasData() {
-        return this.$store.state.companies.list.length > 0 && this.loaded;
-    }
-
-    goToDetails(id: string) {
-        this.$router.push({name: 'companies.edit', params: {id}});
-    }
-}
 </script>
 
 <style scoped>

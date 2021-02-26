@@ -6,12 +6,9 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
+import {defineComponent} from 'vue'
 
-@Component
-export default class Landing extends Vue {
-
-}
+export default defineComponent({});
 </script>
 
 <style scoped>
