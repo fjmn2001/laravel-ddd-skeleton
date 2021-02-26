@@ -6,7 +6,7 @@ import store from "../store";
 import home from '../modules/home/router/index';
 import landing from '../modules/landing/router/index';
 import companies from '../modules/companies/router/index';
-import Container from './../components/Container.vue';
+
 
 Vue.use(VueRouter)
 

@@ -1,32 +1,32 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
-import Home from "../views/Home.vue";
-import Login from "../modules/auth/views/Login.vue";
+import Container from './../components/Container.vue';
 import auth from '../modules/auth/router/index';
+import home from "../../../vue3/src/modules/home/router";
+// import landing from "../../../vue3/src/modules/landing/router";
+import companies from "../../../vue3/src/modules/companies/router";
 
 const routes: Array<RouteRecordRaw> = [
     ...auth,
     {
-        path: "/auth/login",
-        name: "auth.login",
-        component: Login,
-        meta: {
-            requiresVisitor: true
-        }
-    },
-    {
-        path: "/",
-        name: "home",
-        component: Home
-    },
-    {
-        path: "/about",
-        name: "About",
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-            import(/* webpackChunkName: "about" */ "../views/About.vue")
+        path: '/',
+        redirect: '/home',
+        name: 'home',
+        component: Container,
+        children: [
+            ...home,
+            // ...landing,
+            ...companies
+        ]
     }
+    // {
+    //     path: "/about",
+    //     name: "About",
+    //     // route level code-splitting
+    //     // this generates a separate chunk (about.[hash].js) for this route
+    //     // which is lazy-loaded when the route is visited.
+    //     component: () =>
+    //         import(/* webpackChunkName: "about" */ "../views/About.vue")
+    // }
 ];
 
 const router = createRouter({
