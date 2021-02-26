@@ -1,4 +1,5 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
+//import {useStore} from 'vuex'
 import Container from './../components/Container.vue';
 import auth from '../modules/auth/router/index';
 import home from "../../../vue3/src/modules/home/router";
@@ -33,5 +34,24 @@ const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes
 });
+// const store = useStore();
+//
+// router.beforeEach((to, from, next) => {
+//     if (to.matched.some(record => record.meta.requiresAuth)) {
+//         if (!store.getters.isLogged) {
+//             next({name: 'auth.login'})
+//         } else {
+//             next();
+//         }
+//     } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+//         if (store.getters.isLogged) {
+//             next({name: 'home'})
+//         } else {
+//             next();
+//         }
+//     } else {
+//         next();
+//     }
+// });
 
 export default router;
