@@ -43,35 +43,50 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
+import {defineComponent, ref} from 'vue'
+import {useRouter} from 'vue-router'
+import {useStore} from 'vuex'
 
-@Component
-export default class PasswordReset extends Vue {
-    password = '';
-    passwordConfirmation = '';
-    sending = false;
-    errorMessage = '';
-    successMessage = '';
+export default defineComponent({
+    setup() {
+        const router = useRouter();
+        const store = useStore();
 
-    submit() {
-        this.sending = true;
-        const urlParams = new URLSearchParams(window.location.search);
-        this.$store.dispatch('auth/resetRassword', {
-            password: this.password,
-            passwordConfirmation: this.passwordConfirmation,
-            email: urlParams.get('email'),
-            token: urlParams.get('token'),
-        }).then(() => {
-            this.errorMessage = '';
-            this.$router.push({name: 'auth.login'});
-        }).catch(error => {
-            console.log(error)
-            this.errorMessage = error.response?.data;
-            this.successMessage = '';
-            this.sending = false;
-        });
+        const password = ref('');
+        const passwordConfirmation = ref('');
+        const sending = ref(false);
+        const errorMessage = ref('');
+        const successMessage = ref('');
+
+        function submit() {
+            sending.value = true;
+            const urlParams = new URLSearchParams(window.location.search);
+            store.dispatch('auth/resetRassword', {
+                password: password.value,
+                passwordConfirmation: passwordConfirmation.value,
+                email: urlParams.get('email'),
+                token: urlParams.get('token'),
+            }).then(() => {
+                errorMessage.value = '';
+                router.push({name: 'auth.login'});
+            }).catch(error => {
+                console.log(error)
+                errorMessage.value = error.response?.data;
+                successMessage.value = '';
+                sending.value = false;
+            });
+        }
+
+        return {
+            password,
+            passwordConfirmation,
+            sending,
+            errorMessage,
+            successMessage,
+            submit
+        }
     }
-}
+});
 </script>
 
 <style scoped>

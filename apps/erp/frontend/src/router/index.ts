@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter, {RouteConfig} from 'vue-router'
 import store from "../store";
 //import Home from '../views/Home.vue'
-import auth from '../modules/auth/router/index';
+
 import home from '../modules/home/router/index';
 import landing from '../modules/landing/router/index';
 import companies from '../modules/companies/router/index';
