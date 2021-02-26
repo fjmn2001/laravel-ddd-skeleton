@@ -16470,7 +16470,7 @@ body {
 }
 
 .btn-cicle:hover {
-    background-color: #d6dde6;
+    background-color: #e8f1f4;
 }
 
 .p-pag {
@@ -17441,3 +17441,98 @@ select::-ms-expand {
     color: #bbced3;
 }
 
+.pre-loader > div > div.btn {
+    width: 100px;
+    height: 32px;
+    background-color: #f1f4f4;
+}
+
+.pre-loader > div > div > a.btn {
+    background-color: #f1f4f4;
+    width: 26px;
+    height: 26px;
+}
+
+.pre-loader > div > p.navigation {
+    background-color: #f1f4f4;
+    height: 16px;
+    margin-top: 11px;
+    width: 140px;
+}
+
+.pre-loader > div > h2.xtitle-table {
+    background-color: #f1f4f4;
+    height: 31px;
+    width: 151px;
+    margin-top: 3px;
+    margin-left: 7px;
+}
+
+.pre-loader-form div > div > div.pg-empty-placeholder {
+    background-color: #ebeeee;
+    width: 100%;
+    height: 180px;
+}
+
+.pre-loader-form div div label {
+    background-color: #ebeeee;
+    color: #0fa3f2;
+    width: 100%;
+    height: 18px;
+}
+
+.pre-loader-form > div > div > div {
+    background-color: #ebeeee;
+    height: 38px;
+    width: 100%;
+}
+
+.pre-loader-form > div > div > div > div > div {
+    background-color: #ebeeee;
+    height: 38px;
+    width: 100%;
+}
+
+.pre-loader-form > div > div > div > div > label {
+    color: rgba(0, 0, 0, 0);
+    background-color: #ebeeee;
+    height: 21px;
+    width: 100%;
+}
+
+.inp-preloader {
+    height: 38px;
+    width: 100%;
+    background-color: #f2f5f7;
+}
+
+.label-preloader {
+    background-color: #f2f5f7;
+    height: 18px;
+    width: 70px;
+}
+
+.ima-preloader {
+    height: 180px;
+    width: 100%;
+    background-color: #f2f5f7;
+}
+
+.stitle-preloader {
+    background-color: #f2f5f7;
+    width: 120px;
+    height: 24px;
+}
+
+.st-des-preloader {
+    height: 14px;
+    width: 70px;
+    background-color: #f2f5f7;
+}
+
+.icon-preloader {
+    background-color: #f2f5f7;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+}

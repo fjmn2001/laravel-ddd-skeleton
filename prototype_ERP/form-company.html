@@ -11,8 +11,7 @@
         <title>MEDINE ERP</title>
         <!-- ===== Bootstrap CSS ===== -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/new-style.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
+        <link href="../apps/erp/frontend/src/assets/css/style.css" rel="stylesheet">
         <!-- ===== Color CSS ===== -->
         <link href="ccs/default.css" id="theme" rel="stylesheet">
     </head>
@@ -167,9 +166,9 @@
                 </div>
             </aside>
             <div class="page-wrapper">
-                <div class="container-fluid mt-lg-5 mt-md-5 pt-lg-2 pt-md-2">
+                <div class="container-fluid main-conta">
                     <div class="pl-1 pr-1">
-                        <div class="div-title-table mt-4 row">
+                        <div class="div-title-table  row">
                             <div class="align-items-center col-8 col-lg-9 col-md-8 col-sm-8 d-flex d-lg-flex d-md-flex d-sm-flex flex-column flex-lg-row flex-md-column flex-sm-column pl-2 pl-lg-4 pl-md-2">
                                 <h2 class="align-ítems-center d-flex d-inline mb-md-0 xtitle-table">Crear empresa</h2>
                                 <p class="ml-lg-4 ml-md-0 navigation pt-lg-2 pt-md-1"><a href="">Empresas</a> <span><i class="fa fa-long-arrow-right"></i></span>&nbsp;<a href="" class="font-weight-bolder">Crear</a></p>
@@ -185,107 +184,175 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="div-title-table mt-3 pl-1 pr-1 pt-2 row" id="tags" style="position: sticky; top: 3px; z-index: 2; border-right-style: none; border-right-color: #ffffff; border-left-style: none; border-left-color: #ffffff; margin-right: -16px; margin-left: -16px;">
-</div>
-                        <div class="d-datos-principal ml-n3 mr-n3">
-                            <div class="pb-4">
-                                <div class="align-items-center d-flex justify-content-between pt-sm-3 row">
-                                    <div class="d-flex pl-md-3">
-                                        <h4 class="ml-5 ml-md-4 pb-md-0" style="padding-left: 12px;">Detalles de la empresa</h4>
-                                    </div>
+                        <div class="xcontainer">
+                            <div class="align-items-center d-flex div-title-card justify-content-between row">
+                                <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column">
+                                    <h5 class="xtitle-buscar">Detalles de la empresa</h5>
+                                    <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 xsubtitle-buscar">(Formulario)</p>
                                 </div>
-                                <div class="des01 pb-2 pl-4 pr-4">
-                                    <div class="mt-3 pl-3 pr-3 row">
-                                        <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center">
-                                            <img src="images/company.jpg" class="img-fluid img-thumbnail logo-empresa">
-                                        </div>
-                                        <div class="col-lg-9 col-md-6 col-sm-12 pt-4">
-                                            <label>
-                                                <label>Nombre de la empresa </label>
+                                <a href="#des01" id="desplegar-busqueda" data-toggle="collapse"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                            <div id="des01" class="des01 m-3 pb-3">
+                                <div class="mt-3 pl-3 pr-3 row">
+                                    <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center">
+                                        <img src="images/company.jpg" class="img-fluid img-thumbnail logo-empresa">
+                                    </div>
+                                    <div class="col-lg-9 col-md-6 col-sm-12 pt-4">
+                                        <label>
+                                            <label>Nombre de la empresa </label>
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" required="" class="form-control inp-filter">
+                                        <div class="mt-3 row">
+                                            <div class="col-lg-6 col-md-12">
+                                                <label>Tipo de empresa </label>
                                                 <span class="text-danger">*</span>
-                                            </label>
-                                            <input type="text" required="" class="form-control inp-filter">
-                                            <div class="mt-3 row">
-                                                <div class="col-lg-6 col-md-12">
-                                                    <label>Tipo de empresa </label>
-                                                    <span class="text-danger">*</span>
-                                                    <input type="text" required="" class="form-control inp-filter">
-                                                </div>
-                                                <div class="col-lg-6 col-md-12">
-                                                    <label>Estado</label>
-                                                    <select required="" class="form-control inp-filter">
-                                                        <option value=""></option>
-                                                        <option value="1">option1</option>
-                                                        <option value="3">option2</option>
-                                                    </select>
-                                                </div>
+                                                <input type="text" required="" class="form-control inp-filter">
+                                            </div>
+                                            <div class="col-lg-6 col-md-12">
+                                                <label>Estado</label>
+                                                <select required="" class="form-control inp-filter">
+                                                    <option value=""></option>
+                                                    <option value="1">option1</option>
+                                                    <option value="3">option2</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mt-3 pl-3 pr-3 row">
-                                        <div class="col-lg-3 col-md-6 col-sm-12">
-                                            <label>Dirección </label>
-                                            <span class="text-danger">*</span>
-                                            <input type="text" required="" class="form-control inp-filter">
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-sm-12">
-                                            <label>Teléfono </label>
-                                            <span class="text-danger">*</span>
-                                            <input type="text" required="" class="form-control inp-filter">
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-sm-12">
-                                            <label>Peso por defecto</label>
-                                            <span class="text-danger">*</span>
-                                            <select class="form-control inp-filter">
-                                                <option value=""></option>
-                                                <option value="1">option1</option>
-                                                <option value="2">option2</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-sm-12">
-                                            <label>Retiene impuestos </label>
-                                            <span class="text-danger">*</span>
-                                            <select class="form-control inp-filter">
-                                                <option value=""></option>
-                                                <option value="1">option1</option>
-                                                <option value="2">option2</option>
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="mt-3 pl-3 pr-3 row">
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label>Dirección </label>
+                                        <span class="text-danger">*</span>
+                                        <input type="text" required="" class="form-control inp-filter">
                                     </div>
-                                    <div class="mt-3 pl-3 pr-3 row">
-                                        <div class="col-lg-3 col-md-6 col-sm-12">
-                                            <label>Código patronal</label>
-                                            <input type="text" required="" class="form-control inp-filter">
-                                        </div>
-                                        <div class="col-lg-3 col-md-6 col-sm-12">
-                                            <label>Permitir crear facturas en periodos cerrados:</label>
-                                            <span class="text-danger">*</span>
-                                            <input type="text" required="" class="form-control inp-filter">
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <label>Referencia&nbsp;</label>
-                                            <input type="text" required="" class="form-control inp-filter">
-                                        </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label>Teléfono </label>
+                                        <span class="text-danger">*</span>
+                                        <input type="text" required="" class="form-control inp-filter">
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label>Peso por defecto</label>
+                                        <span class="text-danger">*</span>
+                                        <select class="form-control inp-filter">
+                                            <option value=""></option>
+                                            <option value="1">option1</option>
+                                            <option value="2">option2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label>Retiene impuestos </label>
+                                        <span class="text-danger">*</span>
+                                        <select class="form-control inp-filter">
+                                            <option value=""></option>
+                                            <option value="1">option1</option>
+                                            <option value="2">option2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mt-3 pl-3 pr-3 row">
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label>Código patronal</label>
+                                        <input type="text" required="" class="form-control inp-filter">
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label>Permitir crear facturas en periodos cerrados:</label>
+                                        <span class="text-danger">*</span>
+                                        <input type="text" required="" class="form-control inp-filter">
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <label>Referencia&nbsp;</label>
+                                        <input type="text" required="" class="form-control inp-filter">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="d-datos-principal ml-n3 mr-n3">
-                            <div class="mt-3 pt-3">
-                                <h4 class="ml-5 ml-md-4 pb-md-0" style="padding-left: 14px;">Políticas de cobros</h4>
-                                <div class="des01 pb-3 pl-4 pr-4">
-                                    <div class="mt-3 pl-3 pr-3 row">
-                                        <div class="col-lg-6 col-md-6 col-sm-12">
-                                            <label class="font-weight-bold">Permitir crear facturas en periodos cerrados&nbsp;</label>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control">
-                                                    <div class="input-group-addon" style="border-right: 1px solid #e5ebec;">
-                                                        <span>Días</span>
-                                                    </div>
-                                                </div>
-                                                <span class="help-block text-navy"><i><i>*Deje 0 si no quiere incluir un límite.</i></i></span>
+                        <div class="xcontainer">
+                            <div class="align-items-center d-flex div-title-card justify-content-between row">
+                                <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column">
+                                    <h5 class="stitle-preloader xtitle-buscar"></h5>
+                                    <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 st-des-preloader xsubtitle-buscar"></p>
+                                </div>
+                                <div href="#des011" data-toggle="collapse" class="icon-preloader"></div>
+                            </div>
+                            <div id="des011" class="des01 m-3 pb-3">
+                                <div class="mt-3 pl-3 pr-3 row">
+                                    <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center">
+                                        <div class="ima-preloader"></div>
+                                    </div>
+                                    <div class="col-lg-9 col-md-6 col-sm-12 pt-4">
+                                        <label class="label-preloader"></label>
+                                        <div class="inp-preloader"></div>
+                                        <div class="mt-3 row">
+                                            <div class="col-lg-6 col-md-12">
+                                                <label class="label-preloader"></label>
+                                                <div class="inp-preloader"></div>
                                             </div>
+                                            <div class="col-lg-6 col-md-12">
+                                                <label class="label-preloader"></label>
+                                                <div class="inp-preloader"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 pl-3 pr-3 row">
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label class="label-preloader"></label>
+                                        <div class="inp-preloader"></div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label class="label-preloader"></label>
+                                        <div class="inp-preloader"></div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label class="label-preloader"></label>
+                                        <div class="inp-preloader"></div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label class="label-preloader"></label>
+                                        <div class="inp-preloader"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 pl-3 pr-3 row">
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label class="label-preloader"></label>
+                                        <div class="inp-preloader"></div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label class="label-preloader"></label>
+                                        <div class="inp-preloader"></div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label class="label-preloader"></label>
+                                        <div class="inp-preloader"></div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <label class="label-preloader"></label>
+                                        <div class="inp-preloader"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="xcontainer">
+                            <div class="align-items-center d-flex div-title-card justify-content-between row">
+                                <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column">
+                                    <h5 class="xtitle-buscar">Detalles de la empresa</h5>
+                                    <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 xsubtitle-buscar">(Formulario)</p>
+                                </div>
+                                <a href="#des03" data-toggle="collapse"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                            <div id="des03" class="des01 m-3 pb-3">
+                                <div class="mt-3 pl-3 pr-3 row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <label class="font-weight-bold">Permitir crear facturas en periodos cerrados&nbsp;</label>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control">
+                                                <div class="input-group-addon" style="border-right: 1px solid #e5ebec;">
+                                                    <span>Días</span>
+                                                </div>
+                                            </div>
+                                            <span class="help-block text-navy"><i><i>*Deje 0 si no quiere incluir un límite.</i></i></span>
                                         </div>
                                     </div>
                                 </div>
