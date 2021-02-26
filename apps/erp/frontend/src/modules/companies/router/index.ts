@@ -2,7 +2,7 @@ export default [
     {
         path: '/companies',
         name: 'companies',
-        component: () => import('../List.vue'),
+        component: () => import('../views/List.vue'),
         meta: {
             requiresAuth: true
         }
@@ -10,7 +10,7 @@ export default [
     {
         path: '/companies/create',
         name: 'companies.create',
-        component: () => import('../Create.vue'),
+        component: () => import('../views/Create.vue'),
         meta: {
             requiresAuth: true
         }
@@ -18,7 +18,7 @@ export default [
     {
         path: '/companies/edit/:id',
         name: 'companies.edit',
-        component: () => import('../Edit.vue'),
+        component: () => import('../views/Edit.vue'),
         props: true,
         meta: {
             requiresAuth: true

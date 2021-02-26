@@ -79,42 +79,53 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from "vue-property-decorator";
+import {defineComponent, ref, onMounted} from 'vue'
+import {useStore} from 'vuex'
 
-@Component
-export default class GeneralsDetails extends Vue {
-    name = ''
-    state = 'active'
-    address = ''
-    phone = ''
+export default defineComponent({
+    setup() {
+        const store = useStore();
 
-    mounted() {
-        this.name = this.$store.state.companies.company.name;
-        this.state = this.$store.state.companies.company.state;
-        this.address = this.$store.state.companies.company.address;
-        this.phone = this.$store.state.companies.company.phone;
+        const name = ref('')
+        const state = ref('active')
+        const address = ref('')
+        const phone = ref('')
+
+        onMounted(() => {
+            name.value = store.state.companies.company.name;
+            state.value = store.state.companies.company.state;
+            address.value = store.state.companies.company.address;
+            phone.value = store.state.companies.company.phone;
+        })
+
+        // @Watch('name')
+        //     onNameChanged(val: string) {
+        //         this.$store.state.companies.company.name = val;
+        //     }
+        //
+        // @Watch('state')
+        //     onStateChanged(val: string) {
+        //         this.$store.state.companies.company.state = val;
+        //     }
+        //
+        // @Watch('address')
+        //     onAddressChanged(val: string) {
+        //         this.$store.state.companies.company.address = val;
+        //     }
+        //
+        // @Watch('phone')
+        //     onPhoneChanged(val: string) {
+        //         this.$store.state.companies.company.phone = val;
+        //     }
+
+        return {
+            name,
+            state,
+            address,
+            phone
+        }
     }
-
-    @Watch('name')
-    onNameChanged(val: string) {
-        this.$store.state.companies.company.name = val;
-    }
-
-    @Watch('state')
-    onStateChanged(val: string) {
-        this.$store.state.companies.company.state = val;
-    }
-
-    @Watch('address')
-    onAddressChanged(val: string) {
-        this.$store.state.companies.company.address = val;
-    }
-
-    @Watch('phone')
-    onPhoneChanged(val: string) {
-        this.$store.state.companies.company.phone = val;
-    }
-}
+});
 </script>
 
 <style scoped>
