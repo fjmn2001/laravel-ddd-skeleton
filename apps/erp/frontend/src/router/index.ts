@@ -2,9 +2,9 @@ import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
 //import {useStore} from 'vuex'
 import Container from './../components/Container.vue';
 import auth from '../modules/auth/router/index';
-import home from "../../../vue3/src/modules/home/router";
-import landing from "../../../vue3/src/modules/landing/router";
-import companies from "../../../vue3/src/modules/companies/router";
+import home from "../modules/home/router";
+import landing from "../modules/landing/router";
+import companies from "../modules/companies/router";
 
 const routes: Array<RouteRecordRaw> = [
     ...auth,
