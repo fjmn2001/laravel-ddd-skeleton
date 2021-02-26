@@ -18,8 +18,6 @@ ps:
 logs:
 	docker-compose -f docker-compose.yml logs --tail=100 -f
 
-logs-php:
-	docker-compose -f docker-compose.yml logs --tail=100 -f php
 login-php:
 	docker-compose -f docker-compose.yml exec php sh
 
@@ -27,6 +25,9 @@ logs-mysql:
 	docker-compose -f docker-compose.yml logs --tail=100 -f mysql
 login-mysql:
 	docker-compose -f docker-compose.yml exec mysql /bin/bash
+
+logs-php:
+	docker-compose -f docker-compose.yml logs --tail=100 -f php
 
 logs-nginx:
 	docker-compose -f docker-compose.yml logs --tail=100 -f nginx
