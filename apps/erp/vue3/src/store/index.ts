@@ -1,6 +1,7 @@
 import {createStore} from "vuex";
 import axios from "axios"
 import * as types from './mutation-types'
+import companies from './../modules/companies/store'
 
 export default createStore({
     state: {
@@ -72,5 +73,7 @@ export default createStore({
             });
         }
     },
-    modules: {}
+    modules: {
+        companies: companies()
+    }
 });

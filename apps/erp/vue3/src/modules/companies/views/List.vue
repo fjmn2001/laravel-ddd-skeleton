@@ -34,7 +34,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr v-for="company in $store.state.companies.list" :key="company.id">
+                                    <tr v-for="company in store.state.companies.list" :key="company.id">
                                         <th>
                                             <input type="checkbox" class="chk">
                                         </th>
@@ -137,7 +137,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, onMounted, nextTick} from 'vue'
+import {defineComponent, ref, onMounted} from 'vue'
 import {useRouter} from 'vue-router'
 import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
@@ -170,6 +170,7 @@ export default defineComponent({
         }
 
         return {
+            store,
             breadcrumbUrl,
             loaded,
             loading,

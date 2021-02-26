@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from "axios"
-import companies from './../modules/companies/Infrastructure/store'
+
 
 Vue.use(Vuex)
 

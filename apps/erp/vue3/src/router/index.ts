@@ -2,7 +2,7 @@ import {createRouter, createWebHistory, RouteRecordRaw} from "vue-router";
 import Container from './../components/Container.vue';
 import auth from '../modules/auth/router/index';
 import home from "../../../vue3/src/modules/home/router";
-// import landing from "../../../vue3/src/modules/landing/router";
+import landing from "../../../vue3/src/modules/landing/router";
 import companies from "../../../vue3/src/modules/companies/router";
 
 const routes: Array<RouteRecordRaw> = [
@@ -14,7 +14,7 @@ const routes: Array<RouteRecordRaw> = [
         component: Container,
         children: [
             ...home,
-            // ...landing,
+            ...landing,
             ...companies
         ]
     }
