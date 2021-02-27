@@ -40,16 +40,21 @@
 <script>
 import {defineComponent, ref, nextTick} from 'vue'
 import {useCompanies} from "@/modules/companies/use/useCompanies";
+import {useFilters} from "@/modules/companies/use/useFilters";
 
 export default defineComponent({
     emits: ['search'],
     setup() {
+        const {setFilters} = useFilters()
         const {loading, getCompanies} = useCompanies();
 
         const name = ref('')
         const state = ref([])
 
-        function search() {
+        async function search() {
+            await setFilters([
+                {field: 'name', value: name.value}
+            ])
             getCompanies();
         }
 
