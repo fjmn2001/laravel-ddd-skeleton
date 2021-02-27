@@ -10,7 +10,7 @@ import store from "./store";
 
 //css overwrite
 import 'bootstrap'
-//import 'vue-select/dist/vue-select.css'
+import 'vue-select/dist/vue-select.css'
 
 createApp(App)
     .use(store)

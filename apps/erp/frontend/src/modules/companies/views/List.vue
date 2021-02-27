@@ -34,7 +34,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr v-for="company in store.state.companies.list" :key="company.id">
+                                    <tr v-for="company in companies" :key="company.id">
                                         <th>
                                             <input type="checkbox" class="chk">
                                         </th>
@@ -137,25 +137,30 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, onMounted} from 'vue'
-import {useRouter} from 'vue-router'
+import {defineComponent, ref} from 'vue'
 import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/companies/components/SearchForm.vue";
+import {useCompanies} from "@/modules/companies/use/useCompanies";
+import {useFilters} from "@/modules/companies/use/useFilters";
+import useSearch from "@/modules/companies/use/useSearch";
 
 export default defineComponent({
     components: {SearchForm, Breadcrums},
     setup() {
         const store = useStore()
-        const router = useRouter()
+
+        //const response = await api.getCompanies({id, page, perPage})
+        //companies.value = response.data
+
+        const {companies} = useCompanies();
+        const {setFilters} = useFilters();
+        const {setSearchQuery} = useSearch();
+
 
         const breadcrumbUrl: string = store.state.ERP_URL + '/api/company/breadcrumbs'
         const loaded = ref(false)
 
-        onMounted(async () => {
-            await store.dispatch('companies/companySearcher');
-            loaded.value = true;
-        })
 
         function loading(): boolean {
             return store.state.companies.loading;
@@ -165,17 +170,15 @@ export default defineComponent({
             return store.state.companies.list.length > 0 && loaded;
         }
 
-        function goToDetails(id: string) {
-            router.push({name: 'companies.edit', params: {id}});
-        }
-
         return {
+            companies,
             store,
             breadcrumbUrl,
             loaded,
             loading,
             hasData,
-            goToDetails
+            setFilters,
+            setSearchQuery
         }
     }
 })
