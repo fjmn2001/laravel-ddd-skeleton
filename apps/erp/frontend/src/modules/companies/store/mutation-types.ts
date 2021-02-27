@@ -1,3 +1,0 @@
-export const CHANGE_LOADING = 'CHANGE_LOADING';
-export const CHANGE_LIST = 'CHANGE_LIST';
-export const CHANGE_FILTERS = 'CHANGE_FILTERS';

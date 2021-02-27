@@ -2,7 +2,6 @@ import {createStore} from "vuex";
 import axios from "axios"
 import * as types from './mutation-types'
 import auth from './../modules/auth/store'
-import companies from './../modules/companies/store'
 
 export default createStore({
     state: {
@@ -75,7 +74,6 @@ export default createStore({
         }
     },
     modules: {
-        auth: auth(),
-        companies: companies()
+        auth: auth()
     }
 });
