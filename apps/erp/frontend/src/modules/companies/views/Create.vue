@@ -11,13 +11,14 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from 'vue'
+import {defineComponent, ref, onMounted} from 'vue'
 import {useRouter} from 'vue-router'
 import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
 import GeneralsDetails from "@/modules/companies/components/GeneralsDetails.vue";
 import FormButtons from "@/components/FormButtons.vue";
 import {useCompany} from "@/modules/companies/use/useCompany";
+import {useCatalog} from "@/modules/companies/use/useCatalog";
 
 export default defineComponent({
     components: {FormButtons, GeneralsDetails, Breadcrums},
@@ -28,6 +29,12 @@ export default defineComponent({
         const breadcrumbUrl: string = store.state.ERP_URL + '/api/company/breadcrumbs'
         const sending = ref(false)
         const {create} = useCompany()
+        const {getCatalog} = useCatalog();
+
+        onMounted(async () => {
+            await getCatalog();
+            await console.log('get default values');
+        })
 
         function cancel(): void {
             router.push({name: 'companies'});
