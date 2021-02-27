@@ -14,16 +14,26 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from 'vue-property-decorator';
+import {defineComponent} from 'vue'
 
-@Component
-export default class FormButtons extends Vue {
-    @Prop(Boolean) readonly disabledSave: boolean | undefined
+export default defineComponent({
+    props: {
+        disabledSave: {
+            type: Boolean,
+            required: true
+        }
+    },
+    setup(props, {emit}) {
+        function cancel() {
+            emit('cancel');
+        }
 
-    cancel() {
-        this.$emit('cancel');
+        return {
+            //disabledSave: props.disabledSave,
+            cancel
+        }
     }
-}
+});
 </script>
 
 <style scoped>
