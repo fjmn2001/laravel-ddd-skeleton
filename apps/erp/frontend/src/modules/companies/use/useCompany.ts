@@ -16,8 +16,18 @@ export function useCompany() {
         await api.createCompany()
     }
 
+    async function update() {
+        await api.updateCompany()
+    }
+
+    async function find(id: string) {
+        company.value = await api.findCompany(id)
+    }
+
     return {
         company: company,
-        create
+        create,
+        update,
+        find
     }
 }
