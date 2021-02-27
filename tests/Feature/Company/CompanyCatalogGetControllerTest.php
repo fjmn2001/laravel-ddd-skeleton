@@ -29,17 +29,17 @@ final class CompanyCatalogGetControllerTest extends TestCase
      */
     public function it_should_get_the_company_catalogs()
     {
-        $this->markTestSkipped('backlog');
-//        Passport::actingAs(
-//            User::factory()->create()
-//        );
-//        $response = $this->json('GET', '/api/company/catalogs');
-//
-//        $response->assertJson([
-//            'states' => [
-//                ['id' => 'active', 'title' => 'Activo']
-//            ]
-//        ]);
-//        $response->assertStatus(200);
+        Passport::actingAs(
+            User::factory()->create()
+        );
+        $response = $this->json('GET', '/api/company/catalog');
+
+        $response->assertJson([
+            'states' => [
+                ['id' => 'active', 'title' => 'Active'],
+                ['id' => 'inactive', 'title' => 'Inactive']
+            ]
+        ]);
+        $response->assertStatus(200);
     }
 }
