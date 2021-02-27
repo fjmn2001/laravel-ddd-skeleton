@@ -18,7 +18,7 @@
                                 class="fa fa-chevron-up"></i></a>
                         </div>
 
-                        <div id="des02" class="pb-3 pl-4 pr-4 pt-3" v-if="hasData() && !loading()">
+                        <div id="des02" class="pb-3 pl-4 pr-4 pt-3" v-if="hasData() && !loading">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -34,7 +34,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr v-for="company in store.state.companies.list" :key="company.id">
+                                    <tr v-for="company in companies" :key="company.id">
                                         <th>
                                             <input type="checkbox" class="chk">
                                         </th>
@@ -89,13 +89,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pb-4 pl-4 pr-4 pt-4" v-if="!hasData() && !loading()">
+                        <div class="pb-4 pl-4 pr-4 pt-4" v-if="!hasData() && !loading">
                             <div class="no-resul">
                                 <i class="icon-doc color-blue1"></i>
                                 <h2>No se encontró ningún registro.</h2>
                             </div>
                         </div>
-                        <div class="pb-4 pl-4 pr-4 pt-3" v-if="loading()">
+                        <div class="pb-4 pl-4 pr-4 pt-3" v-if="loading">
                             <div class="pb-3 pl-4 pr-4 pre-loader pt-3">
                                 <div class="table-responsive">
                                     <div class="l-hear">
@@ -137,45 +137,35 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, onMounted} from 'vue'
-import {useRouter} from 'vue-router'
+import {defineComponent, onMounted} from 'vue'
 import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/companies/components/SearchForm.vue";
+import {useCompanies} from "@/modules/companies/use/useCompanies";
+import {useFilters} from "@/modules/companies/use/useFilters";
+import useSearch from "@/modules/companies/use/useSearch";
 
 export default defineComponent({
     components: {SearchForm, Breadcrums},
     setup() {
         const store = useStore()
-        const router = useRouter()
-
+        const {companies, hasData, loading, getCompanies} = useCompanies();
+        const {setFilters} = useFilters();
+        const {setSearchQuery} = useSearch();
         const breadcrumbUrl: string = store.state.ERP_URL + '/api/company/breadcrumbs'
-        const loaded = ref(false)
 
-        onMounted(async () => {
-            await store.dispatch('companies/companySearcher');
-            loaded.value = true;
+        onMounted(() => {
+            getCompanies();
         })
 
-        function loading(): boolean {
-            return store.state.companies.loading;
-        }
-
-        function hasData() {
-            return store.state.companies.list.length > 0 && loaded;
-        }
-
-        function goToDetails(id: string) {
-            router.push({name: 'companies.edit', params: {id}});
-        }
-
         return {
+            companies,
             store,
             breadcrumbUrl,
-            loaded,
             loading,
             hasData,
-            goToDetails
+            setFilters,
+            setSearchQuery
         }
     }
 })
