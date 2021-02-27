@@ -1064,3 +1064,22 @@ td-ini-sd {
     padding: 8px 0px 0px 16px;
     width: 77px;
 }
+
+.ima-preloader {
+    width: 100%;
+    height: 180px;
+    background-color: #ebeeee;
+}
+
+.label-preloader {
+    color: #ebeeee;
+    width: 70px;
+    height: 16px;
+    background-color: #ebeeee;
+}
+
+.inp-preloader {
+    width: 100%;
+    height: 38px;
+    background-color: #ebeeee;
+}

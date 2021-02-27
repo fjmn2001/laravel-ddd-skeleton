@@ -1,6 +1,6 @@
-import Login from '../Login.vue'
-import Recovery from '../Recovery.vue'
-import PasswordReset from '../PasswordReset.vue'
+import Login from '../views/Login.vue'
+import Recovery from '../views/Recovery.vue'
+import PasswordReset from '../views/PasswordReset.vue'
 
 export default [
     {
