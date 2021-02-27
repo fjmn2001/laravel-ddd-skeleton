@@ -18,7 +18,7 @@
                                 class="fa fa-chevron-up"></i></a>
                         </div>
 
-                        <div id="des02" class="pb-3 pl-4 pr-4 pt-3" v-if="hasData() && !loading()">
+                        <div id="des02" class="pb-3 pl-4 pr-4 pt-3" v-if="hasData() && !loading">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -89,13 +89,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pb-4 pl-4 pr-4 " v-if="!hasData() && !loading()">
+                        <div class="pb-4 pl-4 pr-4 " v-if="!hasData() && !loading">
                             <div class="no-resul">
                                 <i class="icon-doc color-blue1"></i>
                                 <h2>No se encontró ningún registro.</h2>
                             </div>
                         </div>
-                        <div class="pb-4 pl-4 pr-4 pt-3" v-if="loading()">
+                        <div class="pb-4 pl-4 pr-4 pt-3" v-if="loading">
                             <div class="pb-3 pl-4 pr-4 pre-loader pt-3">
                                 <div class="table-responsive">
                                     <div class="l-hear">
@@ -132,12 +132,15 @@
                     </div>
                 </div>
             </div>
+            <pre>
+                {{ companies }}
+            </pre>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from 'vue'
+import {defineComponent} from 'vue'
 import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/companies/components/SearchForm.vue";
@@ -149,32 +152,15 @@ export default defineComponent({
     components: {SearchForm, Breadcrums},
     setup() {
         const store = useStore()
-
-        //const response = await api.getCompanies({id, page, perPage})
-        //companies.value = response.data
-
-        const {companies} = useCompanies();
+        const {companies, hasData, loading} = useCompanies();
         const {setFilters} = useFilters();
         const {setSearchQuery} = useSearch();
-
-
         const breadcrumbUrl: string = store.state.ERP_URL + '/api/company/breadcrumbs'
-        const loaded = ref(false)
-
-
-        function loading(): boolean {
-            return store.state.companies.loading;
-        }
-
-        function hasData() {
-            return store.state.companies.list.length > 0 && loaded;
-        }
 
         return {
             companies,
             store,
             breadcrumbUrl,
-            loaded,
             loading,
             hasData,
             setFilters,

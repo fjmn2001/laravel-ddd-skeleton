@@ -4,14 +4,25 @@ import {api} from "@/modules/companies/services/api";
 
 export function useCompanies() {
     const companies: Ref<Company[]> = ref([]);
+    const loaded = ref(false)
+    const loading = ref(false)
 
     onMounted(async () => {
-        //await store.dispatch('companies/companySearcher');
-        //loaded.value = true;
+        loading.value = true;
+
         companies.value = await api.getCompanies()
+
+        loaded.value = true;
+        loading.value = false;
     })
 
+    function hasData() {
+        return companies.value.length > 0 && loaded;
+    }
+
     return {
-        companies
+        companies,
+        hasData,
+        loading
     }
 }
