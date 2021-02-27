@@ -142,16 +142,19 @@ import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/companies/components/SearchForm.vue";
 import {useCompanies} from "@/modules/companies/use/useCompanies";
+import {useCatalog} from "@/modules/companies/use/useCatalog";
 
 export default defineComponent({
     components: {SearchForm, Breadcrums},
     setup() {
         const store = useStore()
         const {companies, hasData, loading, getCompanies} = useCompanies();
+        const {getCatalog} = useCatalog();
         const breadcrumbUrl: string = store.state.ERP_URL + '/api/company/breadcrumbs'
 
-        onMounted(() => {
-            getCompanies();
+        onMounted(async () => {
+            await getCatalog();
+            await getCompanies();
         })
 
         return {

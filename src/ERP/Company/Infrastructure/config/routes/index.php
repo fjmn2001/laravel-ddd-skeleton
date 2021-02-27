@@ -8,6 +8,13 @@ use Medine\ERP\Company\Infrastructure\Controller\CompaniesGetController;
 use Medine\ERP\Company\Infrastructure\Controller\CompanyGetController;
 
 Route::middleware('auth:api')->group(function () {
+    Route::get('/company/catalog', function () {
+        return new \Illuminate\Http\JsonResponse([
+            'states' => [
+                ['id' => 'active', 'title' => 'Activo']
+            ]
+        ], \Illuminate\Http\JsonResponse::HTTP_OK);
+    });
     Route::post('/company', CompanyPostController::class);
     Route::post('/company/breadcrumbs', CompanyBreadcrumbsPostController::class);
     Route::put('/company/{id}', CompanyPutController::class);

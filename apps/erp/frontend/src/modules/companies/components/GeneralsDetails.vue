@@ -25,11 +25,12 @@
                                 <label>Tipo de empresa</label>
                                 <input type="text" required="" class="form-control inp-filter" disabled>
                             </div>
-                            <div class="col-lg-6 col-md-12">
+                            <div class="col-lg-6 col-md-12" v-if="catalogs">
                                 <label>Estado *</label>
                                 <select name="state" required="" v-model="state" class="form-control inp-filter">
                                     <option value="">Seleccione</option>
-                                    <option value="active">Activo</option>
+                                    <option :value="state.id" v-for="state in catalogs.states" v-html="state.title"
+                                            :key="state.id"></option>
                                 </select>
                             </div>
                         </div>
@@ -149,10 +150,12 @@
 <script lang="ts">
 import {defineComponent, ref, onMounted, watch} from 'vue'
 import {useCompany} from "@/modules/companies/use/useCompany";
+import {useCatalog} from "@/modules/companies/use/useCatalog";
 
 export default defineComponent({
     setup() {
         const {company} = useCompany();
+        const {catalogs} = useCatalog();
 
         const name = ref('')
         const state = ref('active')
@@ -175,7 +178,8 @@ export default defineComponent({
             name,
             state,
             address,
-            phone
+            phone,
+            catalogs
         }
     }
 });
