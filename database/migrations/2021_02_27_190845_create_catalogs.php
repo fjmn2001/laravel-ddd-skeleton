@@ -17,6 +17,7 @@ class CreateCatalogs extends Migration
             $table->uuid('id');
             $table->string('tag');
             $table->string('value');
+            $table->string('type');
             $table->string('module');
             $table->unsignedInteger('order');
         });
@@ -27,6 +28,7 @@ class CreateCatalogs extends Migration
                     'id' => \Medine\ERP\Shared\Domain\ValueObjects\Uuid::random()->value(),
                     'tag' => 'active',
                     'value' => 'Active',
+                    'type' => 'state',
                     'module' => 'companies',
                     'order' => 10
                 ],
@@ -34,6 +36,7 @@ class CreateCatalogs extends Migration
                     'id' => \Medine\ERP\Shared\Domain\ValueObjects\Uuid::random()->value(),
                     'tag' => 'inactive',
                     'value' => 'Inactive',
+                    'type' => 'state',
                     'module' => 'companies',
                     'order' => 20
                 ]

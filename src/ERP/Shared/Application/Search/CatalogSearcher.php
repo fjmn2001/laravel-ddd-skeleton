@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Shared\Application\Search;
 
+use Medine\ERP\Company\Application\Response\CompanyCatalogsResponse;
 use Medine\ERP\Shared\Domain\CatalogRepository;
 use Medine\ERP\Shared\Domain\Criteria;
 use Medine\ERP\Shared\Domain\Criteria\Filters;
 use Medine\ERP\Shared\Domain\Criteria\Order;
-use function Lambdish\Phunctional\map;
 
 final class CatalogSearcher
 {
@@ -19,7 +19,7 @@ final class CatalogSearcher
         $this->repository = $repository;
     }
 
-    public function __invoke(SearcherRequest $request)
+    public function __invoke(SearcherRequest $request, CompanyCatalogsResponse $response)
     {
         $criteria = new Criteria(
             Filters::fromValues($request->filters()),
@@ -28,11 +28,8 @@ final class CatalogSearcher
             $request->limit()
         );
 
-        dd($this->repository->matching($criteria));
+        ($response)($this->repository->matching($criteria));
 
-        return new CompaniesResponse(...map(
-            $this->toResponse(),
-            $this->repository->matching($criteria)
-        ));
+        return $response;
     }
 }

@@ -36,8 +36,8 @@ final class CompanyCatalogGetControllerTest extends TestCase
 
         $response->assertJson([
             'states' => [
-                ['id' => 'active', 'title' => 'Activa'],
-                ['id' => 'inactive', 'title' => 'Inactiva']
+                ['id' => 'active', 'title' => 'Active'],
+                ['id' => 'inactive', 'title' => 'Inactive']
             ]
         ]);
         $response->assertStatus(200);

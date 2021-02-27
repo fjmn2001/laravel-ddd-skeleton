@@ -12,6 +12,7 @@ use Medine\ERP\Shared\Domain\ValueObjects\Catalog\CatalogId;
 use Medine\ERP\Shared\Domain\ValueObjects\Catalog\CatalogModule;
 use Medine\ERP\Shared\Domain\ValueObjects\Catalog\CatalogOrder;
 use Medine\ERP\Shared\Domain\ValueObjects\Catalog\CatalogTag;
+use Medine\ERP\Shared\Domain\ValueObjects\Catalog\CatalogType;
 use Medine\ERP\Shared\Domain\ValueObjects\Catalog\CatalogValue;
 
 final class MySqlCatalogRepository extends MySqlRepository implements CatalogRepository
@@ -27,6 +28,7 @@ final class MySqlCatalogRepository extends MySqlRepository implements CatalogRep
                 new CatalogId($row->id),
                 new CatalogTag($row->tag),
                 new CatalogValue($row->value),
+                new CatalogType($row->type),
                 new CatalogModule($row->module),
                 new CatalogOrder($row->order)
             );

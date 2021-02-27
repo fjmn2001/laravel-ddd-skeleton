@@ -8,6 +8,7 @@ use Medine\ERP\Shared\Domain\ValueObjects\Catalog\CatalogId;
 use Medine\ERP\Shared\Domain\ValueObjects\Catalog\CatalogModule;
 use Medine\ERP\Shared\Domain\ValueObjects\Catalog\CatalogOrder;
 use Medine\ERP\Shared\Domain\ValueObjects\Catalog\CatalogTag;
+use Medine\ERP\Shared\Domain\ValueObjects\Catalog\CatalogType;
 use Medine\ERP\Shared\Domain\ValueObjects\Catalog\CatalogValue;
 
 final class Catalog
@@ -15,6 +16,7 @@ final class Catalog
     private $id;
     private $tag;
     private $value;
+    private $type;
     private $module;
     private $order;
 
@@ -22,6 +24,7 @@ final class Catalog
         CatalogId $id,
         CatalogTag $tag,
         CatalogValue $value,
+        CatalogType $type,
         CatalogModule $module,
         CatalogOrder $order
     )
@@ -29,6 +32,7 @@ final class Catalog
         $this->id = $id;
         $this->tag = $tag;
         $this->value = $value;
+        $this->type = $type;
         $this->module = $module;
         $this->order = $order;
     }
@@ -48,6 +52,11 @@ final class Catalog
         return $this->value;
     }
 
+    public function type(): CatalogType
+    {
+        return $this->type;
+    }
+
     public function module(): CatalogModule
     {
         return $this->module;
@@ -62,10 +71,11 @@ final class Catalog
         CatalogId $id,
         CatalogTag $tag,
         CatalogValue $value,
+        CatalogType $type,
         CatalogModule $module,
         CatalogOrder $order
     ): self
     {
-        return new self($id, $tag, $value, $module, $order);
+        return new self($id, $tag, $value, $type, $module, $order);
     }
 }
