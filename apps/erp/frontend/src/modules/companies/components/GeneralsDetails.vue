@@ -1,81 +1,149 @@
 <template>
-    <div class="d-datos-principal ml-n3 mr-n3">
-        <div class="pb-4">
-            <div class="align-items-center d-flex justify-content-between pt-sm-3 row">
-                <div class="d-flex pl-md-3">
-                    <h4 class="ml-5 ml-md-4 pb-md-0" style="padding-left: 12px;">Detalles de la
-                        empresa</h4>
-                </div>
+<div>
+    <div  class="xcontainer">
+        <div class="align-items-center d-flex div-title-card justify-content-between row">
+            <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column">
+                <h5 class="xtitle-buscar">Detalles de la
+                    empresa</h5>
+                <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 xsubtitle-buscar">(Formulario)</p>
             </div>
-            <div class="des01 pb-2 pl-4 pr-4">
-                <div class="mt-3 pl-3 pr-3 row">
-                    <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center">
-                        <img src="@/assets/images/company.jpg"
-                             class="img-fluid img-thumbnail logo-empresa">
-                    </div>
-                    <div class="col-lg-9 col-md-6 col-sm-12 pt-4">
-                        <label>
-                            <label>Nombre de la empresa *</label>
-                        </label>
-                        <input type="text" name="name" required="" v-model="name" class="form-control inp-filter">
-                        <div class="mt-3 row">
-                            <div class="col-lg-6 col-md-12">
-                                <label>Tipo de empresa</label>
-                                <input type="text" required="" class="form-control inp-filter" disabled>
-                            </div>
-                            <div class="col-lg-6 col-md-12">
-                                <label>Estado *</label>
-                                <select name="state" required="" v-model="state" class="form-control inp-filter">
-                                    <option value="">Seleccione</option>
-                                    <option value="active">Activo</option>
-                                </select>
-                            </div>
+            <a href="#des01" id="desplegar-busqueda" data-toggle="collapse"><i class="fa fa-chevron-down"></i></a>
+        </div>
+        <div id="des01" class="des01 m-3 pb-3">
+            <div class="mt-3 pl-3 pr-3 row">
+                <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center">
+                    <img src="@/assets/images/company.jpg"
+                         class="img-fluid img-thumbnail logo-empresa">
+                </div>
+                <div class="col-lg-9 col-md-6 col-sm-12 pt-4">
+                    <label>
+                        <label>Nombre de la empresa *</label>
+                    </label>
+                    <input type="text" name="name" required="" v-model="name" class="form-control inp-filter">
+                    <div class="mt-3 row">
+                        <div class="col-lg-6 col-md-12">
+                            <label>Tipo de empresa</label>
+                            <input type="text" required="" class="form-control inp-filter" disabled>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label>Estado *</label>
+                            <select name="state" required="" v-model="state" class="form-control inp-filter">
+                                <option value="">Seleccione</option>
+                                <option value="active">Activo</option>
+                            </select>
                         </div>
                     </div>
                 </div>
-                <div class="mt-3 pl-3 pr-3 row">
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <label>Dirección *</label>
-                        <input type="text" name="address" required="" v-model="address" class="form-control inp-filter">
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <label>Teléfono *</label>
-                        <input type="text" required="" v-model="phone" class="form-control inp-filter">
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <label>Unidad de peso</label>
-                        <select class="form-control inp-filter" disabled>
-                            <option value=""></option>
-                            <option value="1">option1</option>
-                            <option value="2">option2</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <label>Retiene impuestos</label>
-                        <select class="form-control inp-filter" disabled>
-                            <option value=""></option>
-                            <option value="1">option1</option>
-                            <option value="2">option2</option>
-                        </select>
-                    </div>
+            </div>
+            <div class="mt-3 pl-3 pr-3 row">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label>Dirección *</label>
+                    <input type="text" name="address" required="" v-model="address" class="form-control inp-filter">
                 </div>
-                <div class="mt-3 pl-3 pr-3 row">
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <label>Código patronal</label>
-                        <input type="text" class="form-control inp-filter" disabled>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <label>Permitir crear facturas en periodos cerrados: </label>
-                        <input type="text" required="" class="form-control inp-filter" disabled>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <label>Referencia&nbsp;</label>
-                        <input type="text" required="" class="form-control inp-filter" disabled>
-                    </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label>Teléfono *</label>
+                    <input type="text" required="" v-model="phone" class="form-control inp-filter">
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label>Unidad de peso</label>
+                    <select class="form-control inp-filter" disabled>
+                        <option value=""></option>
+                        <option value="1">option1</option>
+                        <option value="2">option2</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label>Retiene impuestos</label>
+                    <select class="form-control inp-filter" disabled>
+                        <option value=""></option>
+                        <option value="1">option1</option>
+                        <option value="2">option2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-3 pl-3 pr-3 row">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label>Código patronal</label>
+                    <input type="text" class="form-control inp-filter" disabled>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label>Permitir crear facturas en periodos cerrados: </label>
+                    <input type="text" required="" class="form-control inp-filter" disabled>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <label>Referencia&nbsp;</label>
+                    <input type="text" required="" class="form-control inp-filter" disabled>
                 </div>
             </div>
         </div>
     </div>
+    <div class="xcontainer" >
+        <div class="align-items-center d-flex div-title-card justify-content-between row">
+            <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column">
+                <h5 class="stitle-preloader xtitle-buscar"></h5>
+                <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 st-des-preloader xsubtitle-buscar"></p>
+            </div>
+            <div href="#des011" data-toggle="collapse" class="icon-preloader"></div>
+        </div>
+        <div id="des011" class="des01 m-3 pb-3">
+            <div class="mt-3 pl-3 pr-3 row">
+                <div class="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center">
+                    <div class="ima-preloader"></div>
+                </div>
+                <div class="col-lg-9 col-md-6 col-sm-12 pt-4">
+                    <label class="label-preloader"></label>
+                    <div class="inp-preloader"></div>
+                    <div class="mt-3 row">
+                        <div class="col-lg-6 col-md-12">
+                            <label class="label-preloader"></label>
+                            <div class="inp-preloader"></div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <label class="label-preloader"></label>
+                            <div class="inp-preloader"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3 pl-3 pr-3 row">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label class="label-preloader"></label>
+                    <div class="inp-preloader"></div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label class="label-preloader"></label>
+                    <div class="inp-preloader"></div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label class="label-preloader"></label>
+                    <div class="inp-preloader"></div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label class="label-preloader"></label>
+                    <div class="inp-preloader"></div>
+                </div>
+            </div>
+            <div class="mt-3 pl-3 pr-3 row">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label class="label-preloader"></label>
+                    <div class="inp-preloader"></div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label class="label-preloader"></label>
+                    <div class="inp-preloader"></div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label class="label-preloader"></label>
+                    <div class="inp-preloader"></div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <label class="label-preloader"></label>
+                    <div class="inp-preloader"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </template>
 
 <script lang="ts">

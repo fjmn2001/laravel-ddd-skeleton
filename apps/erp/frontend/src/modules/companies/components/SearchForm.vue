@@ -25,7 +25,7 @@
             <div class="row pt-3">
                 <div
                     class="col-lg-3 col-md-4 col-sm-12 d-flex justify-content-center offset-lg-8 offset-md-7 offset-sm-0">
-                    <a type="button" class="btn btn-blue-deg btn-sm disabled mr-1 mr-lg-5" :disabled="loading()"
+                    <a type="button" class="btn btn-blue-deg btn-sm mr-1 mr-lg-5" :disabled="loading()"
                        @click.prevent="search">Buscar</a>
                     <button type="button" class="btn btn-outline-secondary btn-sm mr-0 pl-3 pr-3 limpia"
                             @click.prevent="clean">Limpiar
