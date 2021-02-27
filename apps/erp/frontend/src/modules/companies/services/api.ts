@@ -1,8 +1,10 @@
 import {Company} from "@/modules/companies/types/Company";
 import axios from "axios";
 import {useFilters} from "@/modules/companies/use/useFilters";
+import {useCompany} from "@/modules/companies/use/useCompany";
 
 const {filters, orderBy, order, limit, offset} = useFilters();
+const {company} = useCompany();
 
 export const api = {
     async getCompanies(): Promise<Company[]> {
@@ -19,4 +21,16 @@ export const api = {
             resolve(response.data);
         });
     },
+    async createCompany(): Promise<Company> {
+        const response = await axios.post(process.env.VUE_APP_ERP_URL + '/api/company', {
+            id: company.value.id,
+            name: company.value.name,
+            state: company.value.state,
+            address: company.value.address,
+            phone: company.value.phone,
+        });
+        return new Promise(resolve => {
+            resolve(response.data);
+        });
+    }
 };

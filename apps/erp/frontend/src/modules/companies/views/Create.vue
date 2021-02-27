@@ -17,9 +17,7 @@ import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
 import GeneralsDetails from "@/modules/companies/components/GeneralsDetails.vue";
 import FormButtons from "@/components/FormButtons.vue";
-import CompanyCreator from "@/modules/companies/Application/CompanyCreator";
-import CompanyCreatorRequest from "@/modules/companies/Application/CompanyCreatorRequest";
-import {v4 as uuidv4} from 'uuid';
+import {useCompany} from "@/modules/companies/use/useCompany";
 
 export default defineComponent({
     components: {FormButtons, GeneralsDetails, Breadcrums},
@@ -29,7 +27,7 @@ export default defineComponent({
 
         const breadcrumbUrl: string = store.state.ERP_URL + '/api/company/breadcrumbs'
         const sending = ref(false)
-        const company = store.state.companies.company
+        const {create} = useCompany()
 
         function cancel(): void {
             router.push({name: 'companies'});
@@ -38,14 +36,7 @@ export default defineComponent({
         async function submit() {
             try {
                 sending.value = true
-                const creator = new CompanyCreator();
-                await creator.__invoke(new CompanyCreatorRequest(
-                    uuidv4(),
-                    company.name,
-                    company.state,
-                    company.address,
-                    company.phone
-                ))
+                await create()
                 //todo: add toast
                 //toastr.success('hola', 'exito');
                 router.push({name: 'companies'});

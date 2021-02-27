@@ -9,7 +9,6 @@ const offset: Ref<number> = ref(0);
 
 export function useFilters() {
     function setFilters(newFilters: Filter[]) {
-        console.log(newFilters, 'new filters');
         filters.value = newFilters;
     }
 

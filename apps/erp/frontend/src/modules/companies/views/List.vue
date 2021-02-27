@@ -142,14 +142,12 @@ import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/companies/components/SearchForm.vue";
 import {useCompanies} from "@/modules/companies/use/useCompanies";
-import useSearch from "@/modules/companies/use/useSearch";
 
 export default defineComponent({
     components: {SearchForm, Breadcrums},
     setup() {
         const store = useStore()
         const {companies, hasData, loading, getCompanies} = useCompanies();
-        const {setSearchQuery} = useSearch();
         const breadcrumbUrl: string = store.state.ERP_URL + '/api/company/breadcrumbs'
 
         onMounted(() => {
@@ -161,8 +159,7 @@ export default defineComponent({
             store,
             breadcrumbUrl,
             loading,
-            hasData,
-            setSearchQuery
+            hasData
         }
     }
 })
