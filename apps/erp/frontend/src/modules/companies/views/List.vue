@@ -89,7 +89,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pb-4 pl-4 pr-4 " v-if="!hasData() && !loading">
+                        <div class="pb-4 pl-4 pr-4 pt-4" v-if="!hasData() && !loading">
                             <div class="no-resul">
                                 <i class="icon-doc color-blue1"></i>
                                 <h2>No se encontró ningún registro.</h2>
@@ -132,15 +132,12 @@
                     </div>
                 </div>
             </div>
-            <pre>
-                {{ companies }}
-            </pre>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, onMounted} from 'vue'
 import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/companies/components/SearchForm.vue";
@@ -152,10 +149,14 @@ export default defineComponent({
     components: {SearchForm, Breadcrums},
     setup() {
         const store = useStore()
-        const {companies, hasData, loading} = useCompanies();
+        const {companies, hasData, loading, getCompanies} = useCompanies();
         const {setFilters} = useFilters();
         const {setSearchQuery} = useSearch();
         const breadcrumbUrl: string = store.state.ERP_URL + '/api/company/breadcrumbs'
+
+        onMounted(() => {
+            getCompanies();
+        })
 
         return {
             companies,
