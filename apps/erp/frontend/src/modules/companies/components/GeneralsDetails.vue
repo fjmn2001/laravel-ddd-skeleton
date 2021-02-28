@@ -33,6 +33,14 @@
                                             :key="state.id"></option>
                                 </select>
                             </div>
+                            <div class="col-lg-6 col-md-12" v-if="catalogs">
+                                <label>select2</label>
+                                <select2 :config="{}" :attr="{}" v-model="state">
+                                    <option value="">Seleccione</option>
+                                    <option :value="state.id" v-for="state in catalogs.states" v-html="state.title"
+                                            :key="state.id"></option>
+                                </select2>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -151,8 +159,10 @@
 import {defineComponent, ref, onMounted, watch} from 'vue'
 import {useCompany} from "@/modules/companies/use/useCompany";
 import {useCatalog} from "@/modules/companies/use/useCatalog";
+//import Select2 from "@/components/Select2.vue";
 
 export default defineComponent({
+    //components: {Select2},
     setup() {
         const {company} = useCompany();
         const {catalogs} = useCatalog();
