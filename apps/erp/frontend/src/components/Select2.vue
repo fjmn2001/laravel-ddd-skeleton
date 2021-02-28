@@ -7,7 +7,7 @@
 <script>
 import $ from "jquery";
 
-import {defineComponent, ref, onMounted, onUnmounted} from 'vue'
+import {defineComponent, ref, onMounted, onUnmounted, watch} from 'vue'
 
 export default defineComponent({
     props: ['config', 'modelValue', 'attr'],
@@ -40,9 +40,6 @@ export default defineComponent({
                 myConfig.value.ajax = $.extend(myAjax.value, props.config.ajax);
             }
 
-            console.log(props.modelValue, 'prop value')
-
-
             window.$(root.value)
                 // init select2
                 .select2(myConfig.value)
@@ -50,7 +47,6 @@ export default defineComponent({
                 .trigger('change')
                 // emit event on change.
                 .on('change', function () {
-                    console.log('change', $(root.value).val());
                     emit('update:modelValue', $(root.value).val());
                 })
         })
@@ -59,71 +55,62 @@ export default defineComponent({
             window.$(root.value).off().select2('destroy');
         })
 
-        console.log(contador, myAjax, myConfig, props, 'ended');
+        watch(() => props.modelValue, (value) => {
+            const isValidValue = (value) => {
+                if (typeof value === 'object' && value.length) return true;
+                if (typeof value === 'string' && value.length) return true;
+                if (typeof value === 'number' && value) return true;
+                return false;
+            };
+
+            $(root.value).val(value);
+            if ($(root.value).val() === null && isValidValue(value)) {
+                console.log('todo: add ajax support');
+                //todo: add ajax support
+                // let datos = $.extend({erptkn: window.tkn}, {id: value});
+                // $.ajax({
+                //     url: props.config.ajax.url(),
+                //     type: "POST",
+                //     data: datos,
+                //     dataType: "json",
+                //     success(data) {
+                //         if (!_.isEmpty(data)) {
+                //             if (typeof data[0] === 'object') {
+                //                 _.forEach(data, (row) => {
+                //                     let text = typeof row.nombre !== 'undefined' ? row.nombre : row.text;
+                //                     $(root.value).append('<option value="' + row.id + '" selected>' + text + '</option>');
+                //                 });
+                //                 setTimeout(function () {
+                //                     $(root.value).val(value).trigger('change');
+                //                 }, 1000);
+                //             } else {
+                //                 let text = typeof data.nombre !== 'undefined' ? data.nombre : data.text;
+                //                 $(root.value).append('<option value="' + data.id + '" selected>' + text + '</option>');
+                //
+                //                 setTimeout(function () {
+                //                     $(root.value).val(data.id != '' ? value : '').trigger('change');
+                //                 });
+                //             }
+                //         }
+                //     }
+                // });
+            } else {
+                const aux = $(root.value).val();
+
+                if (Array.isArray(aux) && aux.length === value.length && contador.value > 0) {
+                    contador.value = 0;
+                    return;
+                }
+
+                contador.value += 1;
+                window.$(root.value).val(value).trigger('change');
+            }
+        })
 
         return {
             root
         }
     },
-
-    // mounted() {
-
-    // },
-    //
-    // watch: {
-    //     value(value, oldValue) {
-    //         let self = this;
-    //         let isValidValue = (value) => {
-    //             if (typeof value === 'object' && !_.isEmpty(value)) return true;
-    //             if (typeof value === 'string' && value.length) return true;
-    //             if (typeof value === 'number' && value) return true;
-    //             return false;
-    //         };
-    //
-    //         $(root.value).val(value);
-    //         if ($(root.value).val() === null && isValidValue(value)) {
-    //             let datos = $.extend({erptkn: window.tkn}, {id: value});
-    //             $.ajax({
-    //                 url: self.config.ajax.url(),
-    //                 type: "POST",
-    //                 data: datos,
-    //                 dataType: "json",
-    //                 success(data) {
-    //                     if (!_.isEmpty(data)) {
-    //                         if (typeof data[0] === 'object') {
-    //                             _.forEach(data, (row) => {
-    //                                 let text = typeof row.nombre !== 'undefined' ? row.nombre : row.text;
-    //                                 $(self.$el).append('<option value="' + row.id + '" selected>' + text + '</option>');
-    //                             });
-    //                             setTimeout(function () {
-    //                                 $(self.$el).val(value).trigger('change');
-    //                             }, 1000);
-    //                         } else {
-    //                             let text = typeof data.nombre !== 'undefined' ? data.nombre : data.text;
-    //                             $(self.$el).append('<option value="' + data.id + '" selected>' + text + '</option>');
-    //
-    //                             setTimeout(function () {
-    //                                 $(self.$el).val(data.id != '' ? value : '').trigger('change');
-    //                             });
-    //                         }
-    //                     }
-    //                 }
-    //             });
-    //         } else {
-    //             let aux = $(root.value).val();
-    //
-    //             if (_.isArray(aux) && aux.length === _.toArray(value).length && this.contador > 0) {
-    //                 this.contador = 0;
-    //                 return;
-    //             }
-    //
-    //             this.contador += 1;
-    //             $(root.value).val(value).trigger('change');
-    //         }
-    //     }
-    // },
-    //
-
 })
 </script>
 

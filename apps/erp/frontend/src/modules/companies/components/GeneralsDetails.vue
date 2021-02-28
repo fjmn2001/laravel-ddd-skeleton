@@ -27,15 +27,7 @@
                             </div>
                             <div class="col-lg-6 col-md-12" v-if="catalogs">
                                 <label>Estado *</label>
-                                <select name="state" required="" v-model="state" class="form-control inp-filter">
-                                    <option value="">Seleccione</option>
-                                    <option :value="state.id" v-for="state in catalogs.states" v-html="state.title"
-                                            :key="state.id"></option>
-                                </select>
-                            </div>
-                            <div class="col-lg-6 col-md-12" v-if="catalogs">
-                                <label>select2</label>
-                                <select2 :config="{}" :attr="{}" v-model="state">
+                                <select2 name="state" required="" :config="{}" :attr="{}" v-model="state">
                                     <option value="">Seleccione</option>
                                     <option :value="state.id" v-for="state in catalogs.states" v-html="state.title"
                                             :key="state.id"></option>

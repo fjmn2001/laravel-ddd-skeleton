@@ -15,10 +15,10 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12" v-if="catalogs">
                     <label>Estado</label>
-                    <select class="form-control inp-filter" v-model="state">
+                    <select2 name="state" :config="{}" :attr="{multiple: true}" v-model="state">
                         <option :value="state.id" v-for="state in catalogs.states" v-html="state.title"
                                 :key="state.id"></option>
-                    </select>
+                    </select2>
                 </div>
             </div>
             <div class="row pt-3">
@@ -54,7 +54,8 @@ export default defineComponent({
 
         async function search() {
             await setFilters([
-                {field: 'name', value: name.value}
+                {field: 'name', value: name.value},
+                {field: 'state', value: state.value}
             ])
             getCompanies();
         }
