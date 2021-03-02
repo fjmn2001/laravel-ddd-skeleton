@@ -17609,3 +17609,12 @@ img.logo {
     height: 39px;
     margin-left: 4px;
 }
+
+.mini-sidebar .log-a img.logo {
+    margin-left: -2px;
+    margin-top: -6px;
+}
+
+.mini-sidebar nav .log-a b {
+    margin-left: 4px;
+}
