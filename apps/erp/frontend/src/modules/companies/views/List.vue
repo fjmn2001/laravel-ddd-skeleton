@@ -47,7 +47,8 @@
                                         <td v-text="company.createdAt"></td>
                                         <td v-text="company.usersQuantity"></td>
                                         <td class=" td-btn-med">
-                                            <button type="button" class="btn btn-green btn-sm btn-table">Activo</button>
+                                            <button type="button" class="btn btn-green btn-sm btn-table"
+                                                    v-html="company.stateValue"></button>
                                         </td>
                                         <td>
                                             <div class="dropdown">
