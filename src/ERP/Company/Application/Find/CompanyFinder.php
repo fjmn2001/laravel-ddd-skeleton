@@ -29,7 +29,8 @@ final class CompanyFinder
             $company->state()->value(),
             $company->logo()->value(),
             $company->createdAt()->format('d/m/Y'),
-            $company->usersQuantity()
+            $company->usersQuantity(),
+            $company->stateValue()
         );
     }
 }
