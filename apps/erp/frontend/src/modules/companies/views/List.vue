@@ -134,11 +134,34 @@
                 </div>
             </div>
         </div>
+        <button type="button" @click.prevent="toggleModal(true)">Show modal</button>
+        <teleport to="body">
+            <div class="modal fade" :class="{show: showModal}" tabindex="-1"
+                 :style="{display: showModal ? 'block' : 'none'}">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                    @click.prevent="toggleModal(false)"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Modal body text goes here.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" @click.prevent="toggleModal(false)">Close
+                            </button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </teleport>
     </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted} from 'vue'
+import {defineComponent, onMounted, ref} from 'vue'
 import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/companies/components/SearchForm.vue";
@@ -152,18 +175,25 @@ export default defineComponent({
         const {companies, hasData, loading, getCompanies} = useCompanies();
         const {getCatalog} = useCatalog();
         const breadcrumbUrl: string = store.state.ERP_URL + '/api/company/breadcrumbs'
+        const showModal = ref(false);
 
         onMounted(async () => {
             await getCatalog();
             await getCompanies();
         })
 
+        function toggleModal(value: boolean) {
+            showModal.value = value;
+        }
+
         return {
             companies,
             store,
             breadcrumbUrl,
             loading,
-            hasData
+            hasData,
+            toggleModal,
+            showModal
         }
     }
 })
