@@ -5594,11 +5594,13 @@ ul.list-icons li i {
 }
 
 .logo b {
-    height: 60px;
     display: inline-block;
     width: 60px;
     line-height: 60px;
     text-align: center;
+    padding-right: 0px;
+    margin-right: -3px;
+    height: 3;
 }
 
 .logo i {
@@ -5609,6 +5611,9 @@ ul.list-icons li i {
     width: 265px;
     float: left;
     background: rgba(0, 0, 0, .1);
+    height: 65px;
+    display: flex;
+    align-items: center;
 }
 
 .top-left-part a {
@@ -17535,4 +17540,66 @@ select::-ms-expand {
     width: 20px;
     height: 20px;
     border-radius: 3px;
+}
+
+.mini-sidebar .logo > b {
+    width: 54px;
+    padding: 2px;
+    border-radius: 8px;
+    margin-left: 1px;
+}
+
+img.logo {
+    width: 54px;
+    padding: 2px;
+    border-radius: 8px 0px 0px 8px;
+    background-color: rgba(255, 255, 255, 0.19);
+}
+
+.log-a {
+    padding: 0px;
+    margin-top: -9px;
+    display: flex;
+    align-items: center;
+    height: 70px;
+}
+
+.empresas-btn {
+    background-color: rgba(255, 255, 255, 0.19);
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 39px;
+    font-size: 1.1rem!important;
+    font-weight: 700;
+    margin-right: 5px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    margin-top: -5px;
+}
+
+.empresas-btn {
+    color: white!important;
+}
+
+.menu-empresas li a {
+    font-size: 14px;
+}
+
+.menu-empresas li {
+    display: flex;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #ecedee;
+}
+
+.menu-empresas {
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+}
+
+.div-emp-ima {
+    background-color: rgba(255, 255, 255, 0.19);
+    height: 39px;
+    margin-left: 4px;
 }
