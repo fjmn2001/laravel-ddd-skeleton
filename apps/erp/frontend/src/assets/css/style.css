@@ -17581,9 +17581,6 @@ img.logo {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
     margin-top: -5px;
-}
-
-.empresas-btn {
     color: white!important;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
@@ -17617,4 +17614,8 @@ img.logo {
 
 .mini-sidebar nav .log-a b {
     margin-left: 4px;
+}
+
+.mini-sidebar .navbar-header .empresas-btn {
+    display: none;
 }
