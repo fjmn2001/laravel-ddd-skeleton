@@ -94,12 +94,13 @@ export default defineComponent({
 
         const breadcrumbUrl: string = ERP_URL + '/api/company/breadcrumbs'
         const sending = ref(false)
-        const {create} = useCompany()
+        const {create, reset} = useCompany()
         const {getCatalog} = useCatalog();
         const loading = ref(true);
 
         onMounted(async () => {
             await getCatalog();
+            await reset();
             await console.log('get default values');
             loading.value = false
         })
