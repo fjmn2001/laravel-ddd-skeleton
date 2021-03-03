@@ -6,18 +6,13 @@
                     <b><img src="@/assets/images/company.jpg" alt="home"
                             class="logo" @click.prevent="toggleCompaniesList"></b> <span class="dropdown">
                     <a class="btn btn-block empresas-btn font-20 waves-effect waves-light" href="#"
-                       @click.prevent="toggleCompaniesList">
-                        Lider.c.a
+                       @click.prevent="toggleCompaniesList" v-html="user?.company.name">
                     </a>
                     <ul class="animated dropdown-menu  dropdown-tasks slideInUp menu-empresas"
                         :class="{show: showCompaniesList}">
-                                    <li>
+                                    <li v-for="company in user?.companies" :key="company.id">
                                         <img src="@/assets/images/MAKRO-01-1024x648.jpg" class="logo">
-                                        <a href="javascript:void(0);">makro.ca</a>
-                                    </li>
-                                    <li>
-                                        <img src="@/assets/images/LOGO-BOLIVAR.jpg" class="logo">
-                                        <a href="javascript:void(0);">Constructora bolivar</a>
+                                        <a href="javascript:void(0);" v-html="company.name"></a>
                                     </li>
                                 </ul> </span> </a>
             </div>
@@ -100,7 +95,7 @@ import {useAuth} from "@/modules/auth/use/useAuth";
 
 export default defineComponent({
     setup() {
-        const {destroyToken} = useAuth();
+        const {destroyToken, user} = useAuth();
         const showSidebar = ref(false);
         const showCompaniesList = ref(false);
 
@@ -125,6 +120,7 @@ export default defineComponent({
         }
 
         return {
+            user,
             showSidebar,
             showCompaniesList,
             toggleSidebar,

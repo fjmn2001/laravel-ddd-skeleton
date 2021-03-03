@@ -10,7 +10,7 @@
 
 <script>
 import {defineComponent, onMounted} from 'vue'
-import {useRoute} from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 import Topbar from "@/components/Topbar";
 import Leftbar from "@/components/Leftbar";
 import {useAuth} from "@/modules/auth/use/useAuth";
@@ -18,15 +18,17 @@ import {useAuth} from "@/modules/auth/use/useAuth";
 export default defineComponent({
     components: {Leftbar, Topbar},
     setup() {
-        const {validationToken} = useAuth();
+        const {getUser} = useAuth();
         const route = useRoute();
+        const router = useRouter();
 
-        function validation() {
-            validationToken();
-        }
-
-        onMounted(() => {
-            validation();
+        onMounted(async () => {
+            try {
+                await getUser();
+            } catch (e) {
+                console.log(e);
+                router.push({name: 'auth.login'})
+            }
         });
 
         return {
