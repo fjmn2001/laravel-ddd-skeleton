@@ -96,14 +96,16 @@
 <script>
 import $ from "jquery";
 import {defineComponent, ref} from 'vue'
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 export default defineComponent({
     setup() {
+        const {destroyToken} = useAuth();
         const showSidebar = ref(false);
         const showCompaniesList = ref(false);
 
         function logout() {
-            this.$store.dispatch('destroyToken').then(() => {
+            destroyToken().then(() => {
                 this.$router.push({name: 'landing'});
             })
         }

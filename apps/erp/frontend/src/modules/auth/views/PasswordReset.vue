@@ -45,12 +45,12 @@
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
 import {useRouter} from 'vue-router'
-import {useStore} from 'vuex'
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 export default defineComponent({
     setup() {
         const router = useRouter();
-        const store = useStore();
+        const {resetPassword} = useAuth();
 
         const password = ref('');
         const passwordConfirmation = ref('');
@@ -61,7 +61,7 @@ export default defineComponent({
         function submit() {
             sending.value = true;
             const urlParams = new URLSearchParams(window.location.search);
-            store.dispatch('auth/resetRassword', {
+            resetPassword({
                 password: password.value,
                 passwordConfirmation: passwordConfirmation.value,
                 email: urlParams.get('email'),

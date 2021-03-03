@@ -79,20 +79,20 @@
 <script lang="ts">
 import {defineComponent, ref, onMounted} from 'vue'
 import {useRouter} from 'vue-router'
-import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
 import GeneralsDetails from "@/modules/companies/components/GeneralsDetails.vue";
 import FormButtons from "@/components/FormButtons.vue";
 import {useCompany} from "@/modules/companies/use/useCompany";
 import {useCatalog} from "@/modules/companies/use/useCatalog";
+import {useCore} from "@/modules/shared/use/useCore";
 
 export default defineComponent({
     components: {FormButtons, GeneralsDetails, Breadcrums},
     setup() {
-        const store = useStore();
+        const {ERP_URL} = useCore();
         const router = useRouter();
 
-        const breadcrumbUrl: string = store.state.ERP_URL + '/api/company/breadcrumbs'
+        const breadcrumbUrl: string = ERP_URL + '/api/company/breadcrumbs'
         const sending = ref(false)
         const {create} = useCompany()
         const {getCatalog} = useCatalog();

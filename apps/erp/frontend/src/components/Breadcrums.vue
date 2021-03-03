@@ -49,7 +49,7 @@
 import axios from "axios";
 import {defineComponent, ref, onMounted} from 'vue'
 import {useRoute} from 'vue-router'
-import {useStore} from 'vuex'
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 export default defineComponent({
     props: {
@@ -60,7 +60,7 @@ export default defineComponent({
     },
     setup(props) {
         const route = useRoute();
-        const store = useStore();
+        const {token} = useAuth();
         const title = ref('');
         const routes = ref([]);
         const menu = ref({});
@@ -68,7 +68,7 @@ export default defineComponent({
 
         function getBreadcrumbs() {
             loading.value = true;
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + store.state.token;
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.value;
             axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
             axios.post(props.breadcrumbUrl, {
                 name: route.name,

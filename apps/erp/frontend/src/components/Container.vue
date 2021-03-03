@@ -11,18 +11,18 @@
 <script>
 import {defineComponent, onMounted} from 'vue'
 import {useRoute} from 'vue-router'
-import {useStore} from 'vuex'
 import Topbar from "@/components/Topbar";
 import Leftbar from "@/components/Leftbar";
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 export default defineComponent({
     components: {Leftbar, Topbar},
     setup() {
-        const store = useStore();
+        const {validationToken} = useAuth();
         const route = useRoute();
 
         function validation() {
-            store.dispatch('validationToken');
+            validationToken();
         }
 
         onMounted(() => {

@@ -162,19 +162,19 @@
 
 <script lang="ts">
 import {defineComponent, onMounted, ref} from 'vue'
-import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/companies/components/SearchForm.vue";
 import {useCompanies} from "@/modules/companies/use/useCompanies";
 import {useCatalog} from "@/modules/companies/use/useCatalog";
+import {useCore} from "@/modules/shared/use/useCore";
 
 export default defineComponent({
     components: {SearchForm, Breadcrums},
     setup() {
-        const store = useStore()
+        const {ERP_URL} = useCore();
         const {companies, hasData, loading, getCompanies} = useCompanies();
         const {getCatalog} = useCatalog();
-        const breadcrumbUrl: string = store.state.ERP_URL + '/api/company/breadcrumbs'
+        const breadcrumbUrl: string = ERP_URL + '/api/company/breadcrumbs'
         const showModal = ref(false);
 
         onMounted(async () => {
@@ -188,7 +188,6 @@ export default defineComponent({
 
         return {
             companies,
-            store,
             breadcrumbUrl,
             loading,
             hasData,
