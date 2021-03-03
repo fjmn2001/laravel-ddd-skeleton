@@ -3,6 +3,7 @@
         <div id="wrapper">
             <router-view/>
         </div>
+        <footer class="footer t-a-c">&copy; 2021 Medine</footer>
     </div>
 </template>
 
