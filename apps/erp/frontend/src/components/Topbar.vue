@@ -2,7 +2,11 @@
     <nav class="navbar navbar-default navbar-static-top m-b-0">
         <div class="navbar-header">
             <div class="top-left-part">
-                <a class="log-a logo" href="javascript:void(0)"><b><img src="@/assets/images/company.jpg" alt="home" class="logo"></b> <span class="dropdown">  <a class="btn btn-block empresas-btn font-20 waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:void(0);">Lider.c.a</a><ul class="animated dropdown-menu  dropdown-tasks slideInUp menu-empresas">
+                <a class="log-a logo" href="javascript:void(0)"><b><img src="@/assets/images/company.jpg" alt="home"
+                                                                        class="logo"></b> <span class="dropdown">  <a
+                    class="btn btn-block empresas-btn font-20 waves-effect waves-light" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" href="javascript:void(0);">Lider.c.a</a><ul
+                    class="animated dropdown-menu  dropdown-tasks slideInUp menu-empresas">
                                     <li>
                                         <img src="@/assets/images/MAKRO-01-1024x648.jpg" class="logo">
                                         <a href="javascript:void(0);">makro.ca</a>
@@ -15,8 +19,9 @@
             </div>
             <ul class="nav navbar-top-links navbar-left hidden-xs">
                 <li class="icon-nav" style="margin-left: 5px;">
-                    <a href="javascript:void(0)" class="sidebartoggler font-20 waves-effect waves-light"><i
-                        class="icon-arrow-left-circle"></i></a>
+                    <a href="#" @click.prevent="toggleSidebar"
+                       class="sidebartoggler font-20 waves-effect waves-light"><i
+                        :class="{'fa fa-bars': !showSidebar, 'icon-arrow-left-circle': showSidebar}"></i></a>
                 </li>
                 <li class="icon-nav">
                     <router-link :to="{name: 'home'}" class="font-20"><i class="fa fa-home"/></router-link>
@@ -85,16 +90,36 @@
 </template>
 
 <script>
-export default {
-    name: "Topbar",
-    methods: {
-        logout() {
+import $ from "jquery";
+import {defineComponent, ref} from 'vue'
+
+export default defineComponent({
+    setup() {
+        const showSidebar = ref(false);
+
+        function logout() {
             this.$store.dispatch('destroyToken').then(() => {
                 this.$router.push({name: 'landing'});
             })
         }
+
+        function toggleSidebar() {
+            if (showSidebar.value) {
+                showSidebar.value = false
+                $('body').addClass('mini-sidebar')
+            } else {
+                showSidebar.value = true
+                $('body').removeClass('mini-sidebar')
+            }
+        }
+
+        return {
+            showSidebar,
+            toggleSidebar,
+            logout
+        };
     }
-}
+})
 </script>
 
 <style scoped>
