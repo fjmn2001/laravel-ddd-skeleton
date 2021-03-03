@@ -17627,3 +17627,15 @@ img.logo {
 .mini-sidebar .navbar-header .empresas-btn {
     display: none;
 }
+
+.btn-modal{
+    background-color: white!important;
+    color: #0F95F2;
+    font-weight: 600;
+    border: 1px solid #cfd2d9;
+}
+
+.btn-modal:hover {
+    background-color: #0F95F2!important;
+    color: white;
+}

@@ -52,15 +52,8 @@
                                         </td>
                                         <td>
                                             <div class="dropdown">
-                                                <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu1"
-                                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <a class="btn btn-sm btn-opt" href="#" data-toggle="modal" data-target="#exampleModal">
                                                     <img src="@/assets/images/icons/3puntos_H.svg"> </a>
-                                                <div class="dropdown-menu dropdown-menu-right"
-                                                     aria-labelledby="dropdownMenu1">
-                                                    <a class="dropdown-item" href="#">Duplicar</a>
-                                                    <a class="dropdown-item" href="#">Copiar</a>
-                                                    <a class="dropdown-item" href="#">Eliminar</a>
-                                                </div>
                                             </div>
                                         </td>
                                     </tr>
@@ -130,6 +123,19 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body p-4">
+                        <button class="btn btn-block  my-3 btn-modal">Copiar</button>
+                        <button class="btn btn-block  my-3 btn-modal">Suspender</button>
+                        <button class="btn btn-block  my-3 btn-modal">Editar</button>
                     </div>
                 </div>
             </div>
