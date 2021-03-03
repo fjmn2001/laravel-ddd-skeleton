@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import $ from "jquery";
-
 import {defineComponent, ref, onMounted, onUnmounted, watch} from 'vue'
 
 export default defineComponent({
@@ -34,10 +32,10 @@ export default defineComponent({
         });
 
         onMounted(() => {
-            myConfig.value = $.extend(myConfig.value, props.config);
+            myConfig.value = window.$.extend(myConfig.value, props.config);
 
             if (props.config.ajax) {
-                myConfig.value.ajax = $.extend(myAjax.value, props.config.ajax);
+                myConfig.value.ajax = window.$.extend(myAjax.value, props.config.ajax);
             }
 
             window.$(root.value)
@@ -47,7 +45,7 @@ export default defineComponent({
                 .trigger('change')
                 // emit event on change.
                 .on('change', function () {
-                    emit('update:modelValue', $(root.value).val());
+                    emit('update:modelValue', window.$(root.value).val());
                 })
         })
 
@@ -63,8 +61,8 @@ export default defineComponent({
                 return false;
             };
 
-            $(root.value).val(value);
-            if ($(root.value).val() === null && isValidValue(value)) {
+            window.$(root.value).val(value);
+            if (window.$(root.value).val() === null && isValidValue(value)) {
                 console.log('todo: add ajax support');
                 //todo: add ajax support
                 // let datos = $.extend({erptkn: window.tkn}, {id: value});
@@ -95,7 +93,7 @@ export default defineComponent({
                 //     }
                 // });
             } else {
-                const aux = $(root.value).val();
+                const aux = window.$(root.value).val();
 
                 if (Array.isArray(aux) && aux.length === value.length && contador.value > 0) {
                     contador.value = 0;

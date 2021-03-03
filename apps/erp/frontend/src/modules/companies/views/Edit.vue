@@ -79,11 +79,11 @@
 <script lang="ts">
 import {defineComponent, ref, onMounted, nextTick} from 'vue'
 import {useRouter} from 'vue-router'
-import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
 import GeneralsDetails from "@/modules/companies/components/GeneralsDetails.vue";
 import FormButtons from "@/components/FormButtons.vue";
 import {useCompany} from "@/modules/companies/use/useCompany";
+import {useCore} from "@/modules/shared/use/useCore";
 
 export default defineComponent({
     components: {FormButtons, GeneralsDetails, Breadcrums},
@@ -94,10 +94,10 @@ export default defineComponent({
         }
     },
     setup(props) {
-        const store = useStore();
+        const {ERP_URL} = useCore();
         const router = useRouter();
 
-        const breadcrumbUrl: string = store.state.ERP_URL + '/api/company/breadcrumbs'
+        const breadcrumbUrl: string = ERP_URL + '/api/company/breadcrumbs'
         const sending = ref(false)
         const loading = ref(true)
         const {find, update} = useCompany()
