@@ -1,6 +1,7 @@
 import {ref, Ref} from "vue";
 import axios from "axios";
 import {useCore} from "@/modules/shared/use/useCore";
+import {User} from "@/modules/auth/types/User";
 
 type retrieveTokenParam = {
     username: string
@@ -12,6 +13,7 @@ type passwordRequestParam = {
 }
 
 const token: Ref<string | null> = ref(localStorage.getItem('access_token') || null)
+const user: Ref<User | null> = ref(null)
 
 export function useAuth() {
     const {ERP_URL} = useCore();
@@ -48,12 +50,30 @@ export function useAuth() {
         });
     }
 
-    function validationToken() {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.value;
-        axios.get(ERP_URL + '/api/user').catch(() => {
+    async function getUser() {
+        try {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.value;
+            const response = await axios.get(ERP_URL + '/api/user');
+
+            user.value = {
+                id: response.data.id,
+                email: response.data.email,
+                name: response.data.name,
+                company: response.data.company,
+                companies: response.data.companies
+            };
+
+            return new Promise(resolve => {
+                resolve(response.data);
+            });
+        } catch (e) {
             localStorage.removeItem('access_token');
             token.value = null;
-        });
+
+            return new Promise((_, reject) => {
+                reject(e?.response?.data);
+            });
+        }
     }
 
     function passwordRequest(credentials: passwordRequestParam) {
@@ -81,10 +101,11 @@ export function useAuth() {
 
     return {
         token,
+        user,
         isLogged,
         retrieveToken,
         destroyToken,
-        validationToken,
+        getUser,
         passwordRequest,
         resetPassword
     }

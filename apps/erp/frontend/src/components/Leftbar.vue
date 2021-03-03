@@ -6,7 +6,7 @@
                     <div class="profile-image">
                         <img src="@/assets/images/user.jpg" alt="user-img" class="img-circle">
                     </div>
-                    <p class="profile-text m-t-15 font-16"><a href="javascript:void(0);">José Pereira</a></p>
+                    <p class="profile-text m-t-15 font-16"><a href="javascript:void(0);" v-html="user?.name"></a></p>
                 </div>
             </div>
             <nav class="sidebar-nav">
@@ -95,9 +95,18 @@
 </template>
 
 <script>
-export default {
-    name: "Leftbar"
-}
+import {defineComponent} from 'vue'
+import {useAuth} from "@/modules/auth/use/useAuth";
+
+export default defineComponent({
+    setup() {
+        const {user} = useAuth()
+
+        return {
+            user
+        }
+    }
+})
 </script>
 
 <style scoped>
