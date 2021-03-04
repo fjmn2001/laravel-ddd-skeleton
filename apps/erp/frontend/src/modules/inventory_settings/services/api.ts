@@ -2,6 +2,7 @@ import {useAuth} from "@/modules/auth/use/useAuth";
 import axios from "axios";
 import {ItemCategory} from "@/modules/inventory_settings/types/ItemCategory";
 import {useItemCategoryFilters} from "@/modules/inventory_settings/use/useItemCategoryFilters";
+import {useItemCategory} from "@/modules/inventory_settings/use/useItemCatetory";
 
 export const api = {
     async getItemCategories(): Promise<ItemCategory[]> {
@@ -16,6 +17,20 @@ export const api = {
                 limit: limit.value,
                 offset: offset.value
             }
+        });
+        return new Promise(resolve => {
+            resolve(response.data);
+        });
+    },
+    async createItemCategory(): Promise<ItemCategory> {
+        const {user} = useAuth();
+        const {itemCategory} = useItemCategory();
+        const response = await axios.post(process.env.VUE_APP_ERP_URL + '/api/item_categories', {
+            id: itemCategory.value.id,
+            name: itemCategory.value.name,
+            description: itemCategory.value.description,
+            state: itemCategory.value.state,
+            companyId: user.value?.company.id,
         });
         return new Promise(resolve => {
             resolve(response.data);

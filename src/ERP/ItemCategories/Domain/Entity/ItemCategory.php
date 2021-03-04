@@ -19,7 +19,7 @@ final class ItemCategory
     private function __construct(
         string $id,
         string $name,
-        string $description,
+        ?string $description,
         string $state,
         int $createdBy,
         int $updatedBy,
@@ -41,7 +41,7 @@ final class ItemCategory
     public static function fromDatabase(
         string $id,
         string $name,
-        string $description,
+        ?string $description,
         string $state,
         int $created_by,
         int $updated_by,
@@ -73,7 +73,7 @@ final class ItemCategory
         return $this->name;
     }
 
-    public function description(): string
+    public function description(): ?string
     {
         return $this->description;
     }
@@ -108,7 +108,14 @@ final class ItemCategory
         return $this->updatedAt;
     }
 
-    public static function create(string $id, string $name, string $description, string $state, int $createdBy, string $companyId): self
+    public static function create(
+        string $id,
+        string $name,
+        ?string $description,
+        string $state,
+        int $createdBy,
+        string $companyId
+    ): self
     {
         return new self(
             $id,

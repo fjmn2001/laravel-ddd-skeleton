@@ -7,7 +7,7 @@
                         categorías de ítems</h5>
                 </div>
             </div>
-            <form class="des01 mb-3 ml-0 mr-3 mt-2" @submit.prevent="submit">
+            <form class="des01 mb-3 ml-0 mr-3 mt-2" @submit.prevent="submit" autocomplete="off">
                 <div class=" row">
                     <div class="col-lg-3 col-md-6 col-sm-12 pl-3 pl-lg-0 pl-md-3">
                         <label>Nombre *</label>
@@ -29,11 +29,14 @@
                 <div class="mt-2 row" style="width: 100%;">
                     <div
                         class="col-lg-7 col-md-8 col-xl-6 d-flex justify-content-around offset-lg-5 offset-md-4 offset-xl-6">
-                        <button type="button" class="btn btn-blue2-deg btn-sm pl-3 pr-3">Buscar</button>
-                        <button type="button" class="btn btn-outline-secondary btn-sm mr-0 pl-3 pr-3"
-                                style="margin: 10px 0px; min-width: 100px;" @click="myReset">Cancelar
+                        <button type="button" class="btn btn-blue2-deg btn-sm pl-3 pr-3" :disabled="sending">Buscar
                         </button>
-                        <button type="submit" class="btn btn-blue-deg btn-sm pl-3 pr-3">Guardar</button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm mr-0 pl-3 pr-3"
+                                style="margin: 10px 0px; min-width: 100px;" @click="myReset" :disabled="sending">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-blue-deg btn-sm pl-3 pr-3" :disabled="sending">Guardar
+                        </button>
                     </div>
                 </div>
             </form>
@@ -107,7 +110,7 @@ export default defineComponent({
         const sending: Ref<boolean> = ref(false);
         const {setFilters} = useItemCategoryFilters();
         const {user} = useAuth();
-        const {itemCategory, reset} = useItemCategory();
+        const {itemCategory, reset, create} = useItemCategory();
 
         //..
         const name: Ref<string> = ref('');
@@ -125,21 +128,21 @@ export default defineComponent({
             reset();
         }
 
+        async function getItemCategories() {
+            itemCategories.value = await api.getItemCategories();
+        }
+
         async function submit() {
             try {
                 sending.value = true
-                //await create()
+                await create()
                 myReset();
-                console.log('submited');
+                await getItemCategories()
             } catch (e) {
                 console.log(e);
             } finally {
                 sending.value = false
             }
-        }
-
-        async function getItemCategories() {
-            itemCategories.value = await api.getItemCategories();
         }
 
         onMounted(async () => {
