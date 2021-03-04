@@ -78,11 +78,10 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, Ref, onMounted} from 'vue'
+import {defineComponent, ref, onMounted} from 'vue'
 import {useAuth} from "@/modules/auth/use/useAuth";
-import {api} from "@/services/api";
-import {TopBarOption} from "@/types/TopBarOption";
 import {useRouter} from "vue-router";
+import {useMenu} from "@/use/useMenu";
 
 export default defineComponent({
     setup() {
@@ -90,17 +89,11 @@ export default defineComponent({
         const {destroyToken, user} = useAuth();
         const showSidebar = ref(false);
         const showCompaniesList = ref(false);
-        const topBarOptions: Ref<TopBarOption[]> = ref([])
-        const topBarOptionSelected: Ref<string | null> = ref(null)
+        const {getTopBarOptions, topBarOptions, getLeftBarOptions, topBarOptionSelected} = useMenu();
 
         onMounted(async () => {
-            topBarOptions.value = await api.getTopBarOptions();
+            getTopBarOptions();
         });
-
-        async function getLeftBarOptions(name: string) {
-            topBarOptionSelected.value = name;
-            console.log(name, 'hi there!');
-        }
 
         function logout() {
             destroyToken().then(() => {

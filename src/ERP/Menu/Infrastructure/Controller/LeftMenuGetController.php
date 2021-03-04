@@ -14,7 +14,7 @@ final class LeftMenuGetController
             ['name' => 'inventory.setting', 'title' => 'Setting', 'class' => 'fa-fw icon-settings']
         ],
         'companies' => [
-            ['name' => 'companies', 'title' => 'Companies', 'class' => 'fa-fw building']
+            ['name' => 'companies', 'title' => 'Companies', 'class' => 'fa fa-building']
         ]
     ];
 
