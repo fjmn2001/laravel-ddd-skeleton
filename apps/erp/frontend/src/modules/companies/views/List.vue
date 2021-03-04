@@ -48,7 +48,7 @@
                                         <td v-text="company.usersQuantity"></td>
                                         <td class=" td-btn-med">
                                             <button type="button" class="btn btn-green btn-sm btn-table"
-                                                    v-html="company.stateValue"></button>
+                                                    v-html="company.stateValue" data-toggle="modal" data-target="#exampleModalEstado"></button>
                                         </td>
                                         <td>
                                             <div class="dropdown">
@@ -128,36 +128,39 @@
             </div>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body p-4">
-                        <button class="btn btn-block  my-3 btn-modal">Copiar</button>
-                        <button class="btn btn-block  my-3 btn-modal">Suspender</button>
-                        <button class="btn btn-block  my-3 btn-modal">Editar</button>
+        <teleport to="body">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Opciones</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body p-4">
+
+                            <button class="btn btn-block  my-3 btn-modal">Copiar</button>
+                            <button class="btn btn-block  my-3 btn-modal">Suspender</button>
+                            <button class="btn btn-block  my-3 btn-modal">Editar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <button type="button" @click.prevent="toggleModal(true)">Show modal</button>
-        <teleport to="body">
-            <div class="modal fade" :class="{show: showModal}" tabindex="-1"
-                 :style="{display: showModal ? 'block' : 'none'}">
-                <div class="modal-dialog">
+
+            <div class="modal fade" id="exampleModalEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                                    @click.prevent="toggleModal(false)"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Modal body text goes here.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click.prevent="toggleModal(false)">Close
+                            <h4 class="modal-title">Opciones</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
                             </button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                        <div class="modal-body p-4">
+
+                            <button class="btn btn-block  my-3 btn-outline-success">Activo</button>
+                            <button class="btn btn-block  my-3 btn-outline-danger">Desactivado</button>
                         </div>
                     </div>
                 </div>

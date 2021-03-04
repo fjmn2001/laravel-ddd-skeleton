@@ -17639,3 +17639,9 @@ img.logo {
     background-color: #0F95F2!important;
     color: white;
 }
+
+.modal-title{
+    font-family: "Poppins-Bold";
+    color: #576984;
+    font-size: 20px;
+}
