@@ -118,23 +118,24 @@ export default defineComponent({
         watch(() => description.value, (val) => itemCategory.value.description = val)
         watch(() => state.value, (val) => itemCategory.value.state = val)
 
+        function myReset() {
+            name.value = '';
+            description.value = '';
+            state.value = 'active';
+            reset();
+        }
+
         async function submit() {
             try {
                 sending.value = true
                 //await create()
+                myReset();
                 console.log('submited');
             } catch (e) {
                 console.log(e);
             } finally {
                 sending.value = false
             }
-        }
-
-        function myReset() {
-            name.value = '';
-            description.value = '';
-            state.value = 'active';
-            reset();
         }
 
         async function getItemCategories() {
