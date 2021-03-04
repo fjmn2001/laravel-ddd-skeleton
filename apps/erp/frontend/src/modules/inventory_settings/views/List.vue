@@ -19,7 +19,7 @@
                             </ul>
                         </div>
                     </div>
-                    <item-categories v-if="optionSelected === 'item-categories'"></item-categories>
+                    <item-categories v-if="optionSelected === 'item-categories' && user"></item-categories>
                 </div>
             </div>
         </div>
@@ -31,6 +31,7 @@ import {defineComponent, Ref, ref} from 'vue'
 import Breadcrums from '@/components/Breadcrums.vue';
 import {useCore} from "@/modules/shared/use/useCore";
 import ItemCategories from "@/modules/inventory_settings/components/ItemCategories.vue";
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 export default defineComponent({
     components: {ItemCategories, Breadcrums},
@@ -42,6 +43,7 @@ export default defineComponent({
             {name: 'location-types', title: 'Tipos de ubicación'}
         ])
         const optionSelected: Ref<string | null> = ref('item-categories')
+        const {user} = useAuth();
 
         function selectOption(name: string) {
             optionSelected.value = name;
@@ -51,6 +53,7 @@ export default defineComponent({
             breadcrumbUrl,
             options,
             optionSelected,
+            user,
             selectOption
         }
     }
