@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Medine\ERP\ItemCategories\Domain\Entity\ItemCategoryRepository;
+use Medine\ERP\ItemCategories\Infrastructure\Persistence\MySqlItemCategoryRepository;
 use Medine\ERP\Locations\Domain\LocationRepository;
 use Medine\ERP\Locations\Infrastructure\MySqlLocationRepository;
 use Medine\ERP\Product\Domain\Contracts\ProductRepository;
@@ -42,7 +44,8 @@ class AppServiceProvider extends ServiceProvider
         LocationRepository::class => MySqlLocationRepository::class,
         ProductRepository::class => MySqlProductRepository::class,
         ClientRepository::class => MySqlClientRepository::class,
-        CatalogRepository::class => MySqlCatalogRepository::class
+        CatalogRepository::class => MySqlCatalogRepository::class,
+        ItemCategoryRepository::class => MySqlItemCategoryRepository::class
     ];
 
     /**

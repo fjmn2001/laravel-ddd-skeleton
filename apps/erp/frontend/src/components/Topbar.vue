@@ -27,24 +27,13 @@
                 </li>
                 <li style="padding-top: 3px;">
                     <ul class="menu-horizontal" id="list01">
-                        <li>
-                            <a class="nav-link menu-link-med" id="menu-compras"
-                               href="javascript:void(0)">Compras</a>
-                        </li>
-                        <li>
-                            <a class="nav-link menu-link-med" id="menu-ventas" href="javascript:void(0)">Ventas</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#">Inventario</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#">Contabilidad</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#">Contratos</a>
-                        </li>
-                        <li>
-                            <router-link :to="{name: 'companies'}" class="nav-link">Empresas</router-link>
+                        <li v-for="topBarOption in topBarOptions" :key="topBarOption.name">
+                            <a class="nav-link menu-link-med"
+                               :class="{'topMenuSelected': topBarOption.name === topBarOptionSelected}"
+                               href="#"
+                               @click.prevent="getLeftBarOptions(topBarOption.name)">
+                                {{ topBarOption.title }}
+                            </a>
                         </li>
                     </ul>
                 </li>
@@ -88,20 +77,28 @@
     </nav>
 </template>
 
-<script>
-import $ from "jquery";
-import {defineComponent, ref} from 'vue'
+<script lang="ts">
+import $ from 'jquery';
+import {defineComponent, ref, onMounted} from 'vue'
 import {useAuth} from "@/modules/auth/use/useAuth";
+import {useRouter} from "vue-router";
+import {useMenu} from "@/use/useMenu";
 
 export default defineComponent({
     setup() {
+        const router = useRouter();
         const {destroyToken, user} = useAuth();
         const showSidebar = ref(false);
         const showCompaniesList = ref(false);
+        const {getTopBarOptions, topBarOptions, getLeftBarOptions, topBarOptionSelected} = useMenu();
+
+        onMounted(async () => {
+            getTopBarOptions();
+        });
 
         function logout() {
             destroyToken().then(() => {
-                this.$router.push({name: 'landing'});
+                router.push({name: 'landing'});
             })
         }
 
@@ -123,6 +120,9 @@ export default defineComponent({
             user,
             showSidebar,
             showCompaniesList,
+            topBarOptions,
+            topBarOptionSelected,
+            getLeftBarOptions,
             toggleSidebar,
             toggleCompaniesList,
             logout
@@ -132,5 +132,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.topMenuSelected {
+    color: white;
+}
 </style>

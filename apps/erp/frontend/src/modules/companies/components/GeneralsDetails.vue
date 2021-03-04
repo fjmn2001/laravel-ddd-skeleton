@@ -86,10 +86,8 @@
 import {defineComponent, ref, onMounted, watch} from 'vue'
 import {useCompany} from "@/modules/companies/use/useCompany";
 import {useCatalog} from "@/modules/companies/use/useCatalog";
-//import Select2 from "@/components/Select2.vue";
 
 export default defineComponent({
-    //components: {Select2},
     setup() {
         const {company} = useCompany();
         const {catalogs} = useCatalog();

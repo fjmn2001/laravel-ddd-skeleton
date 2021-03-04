@@ -5,6 +5,7 @@ import auth from '../modules/auth/router/index';
 import home from "../modules/home/router";
 import landing from "../modules/landing/router";
 import companies from "../modules/companies/router";
+import inventorySettings from "../modules/inventory_settings/router";
 
 const routes: Array<RouteRecordRaw> = [
     ...auth,
@@ -16,7 +17,8 @@ const routes: Array<RouteRecordRaw> = [
         children: [
             ...home,
             ...landing,
-            ...companies
+            ...companies,
+            ...inventorySettings
         ]
     }
     // {

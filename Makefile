@@ -49,3 +49,8 @@ migrate-refresh:
 
 migrate-rollback:
 	docker-compose exec php php artisan migrate:rollback
+
+swap-memory:
+	/bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+	/sbin/mkswap /var/swap.1
+	/sbin/swapon /var/swap.1
