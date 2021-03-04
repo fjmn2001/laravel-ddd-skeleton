@@ -16,7 +16,8 @@ final class Filters extends Collection
 
     private static function filterBuilder(): callable
     {
-        return function (array $values) {
+        return function ($values) {
+            $values = is_array($values) ? $values : json_decode($values, true);
             return Filter::fromValues($values);
         };
     }
