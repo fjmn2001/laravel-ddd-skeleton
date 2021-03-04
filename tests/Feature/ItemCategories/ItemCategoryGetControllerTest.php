@@ -26,39 +26,35 @@ final class ItemCategoryGetControllerTest extends FeatureBase
     /**
      * @test
      */
-    public function it_should_update_an_existing_item_category()
+    public function it_should_get_an_existing_item_category()
     {
         Passport::actingAs(
             User::factory()->create()
         );
 
         $companyId = Uuid::uuid4();
-        $categoryId = Uuid::uuid4();
         $this->buildCompany($companyId, $this->faker);
 
-        $this->buildItemCategory($categoryId, $companyId);
-
-        $response = $this->putJson('/api/item_categories/' . $categoryId, [
-            'name' => $this->faker->name,
-            'description' => $this->faker->text(50),
-            'state' => $this->faker->randomElement(['active', 'inactive'])
-        ]);
-
-        $response->assertJson([]);
-        $response->assertStatus(200);
-    }
-
-    private function buildItemCategory(\Ramsey\Uuid\UuidInterface $categoryId, \Ramsey\Uuid\UuidInterface $companyId): void
-    {
-        $response = $this->postJson('/api/item_categories', [
+        $categoryId = Uuid::uuid4();
+        $categoryName = $this->faker->name;
+        $categoryDescription = $this->faker->text(50);
+        $this->postJson('/api/item_categories', [
             'id' => $categoryId,
-            'name' => $this->faker->name,
-            'description' => $this->faker->text(50),
+            'name' => $categoryName,
+            'description' => $categoryDescription,
             'state' => 'active',
             'companyId' => $companyId,
         ]);
 
-        $response->assertJson([]);
-        $response->assertStatus(201);
+        $response = $this->getJson('/api/item_categories/' . $categoryId);
+
+        $response->assertJson([
+            'id' => $categoryId,
+            'name' => $categoryName,
+            'description' => $categoryDescription,
+            'state' => 'active',
+            'companyId' => $companyId,
+        ]);
+        $response->assertStatus(200);
     }
 }

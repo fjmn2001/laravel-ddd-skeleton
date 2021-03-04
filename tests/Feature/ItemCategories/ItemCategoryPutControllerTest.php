@@ -11,7 +11,7 @@ use Laravel\Passport\Passport;
 use Ramsey\Uuid\Uuid;
 use Tests\Feature\Shared\FeatureBase;
 
-final class ItemCategoryPostControllerTest extends FeatureBase
+final class ItemCategoryPutControllerTest extends FeatureBase
 {
     use DatabaseTransactions;
 
@@ -26,17 +26,32 @@ final class ItemCategoryPostControllerTest extends FeatureBase
     /**
      * @test
      */
-    public function it_should_create_a_new_item_category()
+    public function it_should_update_an_existing_item_category()
     {
         Passport::actingAs(
             User::factory()->create()
         );
 
         $companyId = Uuid::uuid4();
+        $categoryId = Uuid::uuid4();
         $this->buildCompany($companyId, $this->faker);
 
+        $this->buildItemCategory($categoryId, $companyId);
+
+        $response = $this->putJson('/api/item_categories/' . $categoryId, [
+            'name' => $this->faker->name,
+            'description' => $this->faker->text(50),
+            'state' => $this->faker->randomElement(['active', 'inactive'])
+        ]);
+
+        $response->assertJson([]);
+        $response->assertStatus(200);
+    }
+
+    private function buildItemCategory(\Ramsey\Uuid\UuidInterface $categoryId, \Ramsey\Uuid\UuidInterface $companyId): void
+    {
         $response = $this->postJson('/api/item_categories', [
-            'id' => Uuid::uuid4(),
+            'id' => $categoryId,
             'name' => $this->faker->name,
             'description' => $this->faker->text(50),
             'state' => 'active',
