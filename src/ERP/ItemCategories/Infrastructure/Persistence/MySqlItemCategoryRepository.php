@@ -25,4 +25,40 @@ final class MySqlItemCategoryRepository extends MySqlRepository implements \Medi
             'updated_at' => $category->updatedAt()
         ]);
     }
+
+    public function find(string $id): ?ItemCategory
+    {
+        return DB::table('item_categories')
+            ->where('id', $id)
+            ->take(1)
+            ->get()
+            ->map(function ($row) {
+                return ItemCategory::fromDatabase(
+                    $row->id,
+                    $row->name,
+                    $row->description,
+                    $row->state,
+                    $row->created_by,
+                    $row->updated_by,
+                    $row->company_id,
+                    $row->created_at,
+                    $row->updated_at
+                );
+            })
+            ->first();
+    }
+
+    public function update(ItemCategory $category): void
+    {
+        DB::table('item_categories')
+            ->where('id', $category->id())
+            ->take(1)
+            ->update([
+                'name' => $category->name(),
+                'description' => $category->description(),
+                'state' => $category->state(),
+                'updated_by' => $category->updatedBy(),
+                'updated_at' => $category->updatedAt()
+            ]);
+    }
 }

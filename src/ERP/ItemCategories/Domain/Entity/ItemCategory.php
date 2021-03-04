@@ -38,6 +38,31 @@ final class ItemCategory
         $this->updatedAt = $updatedAt;
     }
 
+    public static function fromDatabase(
+        string $id,
+        string $name,
+        string $description,
+        string $state,
+        int $created_by,
+        int $updated_by,
+        string $company_id,
+        string $created_at,
+        string $updated_at
+    ): self
+    {
+        return new self(
+            $id,
+            $name,
+            $description,
+            $state,
+            $created_by,
+            $updated_by,
+            $company_id,
+            new \DateTimeImmutable($created_at),
+            new \DateTimeImmutable($updated_at)
+        );
+    }
+
     public function id(): string
     {
         return $this->id;
@@ -96,5 +121,37 @@ final class ItemCategory
             new \DateTimeImmutable(),
             new \DateTimeImmutable()
         );
+    }
+
+    public function changeName(string $name)
+    {
+        if ($name !== $this->name) {
+            $this->name = $name;
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function changeDescription(string $description)
+    {
+        if ($description !== $this->description) {
+            $this->description = $description;
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function changeState(string $state)
+    {
+        if ($state !== $this->state) {
+            $this->state = $state;
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function changeUpdatedBy(int $updatedBy)
+    {
+        if ($updatedBy !== $this->updatedBy) {
+            $this->updatedBy = $updatedBy;
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 }
