@@ -78,6 +78,7 @@
 </template>
 
 <script lang="ts">
+import $ from 'jquery';
 import {defineComponent, ref, onMounted} from 'vue'
 import {useAuth} from "@/modules/auth/use/useAuth";
 import {useRouter} from "vue-router";
@@ -104,10 +105,10 @@ export default defineComponent({
         function toggleSidebar() {
             if (showSidebar.value) {
                 showSidebar.value = false
-                window.$('body').addClass('mini-sidebar')
+                $('body').addClass('mini-sidebar')
             } else {
                 showSidebar.value = true
-                window.$('body').removeClass('mini-sidebar')
+                $('body').removeClass('mini-sidebar')
             }
         }
 
