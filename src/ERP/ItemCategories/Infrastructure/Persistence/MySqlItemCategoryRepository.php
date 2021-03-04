@@ -32,19 +32,7 @@ final class MySqlItemCategoryRepository extends MySqlRepository implements \Medi
             ->where('id', $id)
             ->take(1)
             ->get()
-            ->map(function ($row) {
-                return ItemCategory::fromDatabase(
-                    $row->id,
-                    $row->name,
-                    $row->description,
-                    $row->state,
-                    $row->created_by,
-                    $row->updated_by,
-                    $row->company_id,
-                    $row->created_at,
-                    $row->updated_at
-                );
-            })
+            ->map($this->buildItemCategory())
             ->first();
     }
 
@@ -60,5 +48,31 @@ final class MySqlItemCategoryRepository extends MySqlRepository implements \Medi
                 'updated_by' => $category->updatedBy(),
                 'updated_at' => $category->updatedAt()
             ]);
+    }
+
+    public function matching(\Medine\ERP\Shared\Domain\Criteria $criteria): array
+    {
+        $query = DB::table('item_categories');
+        $query = (new MySqlItemCategoryFilters($query))($criteria);
+        $query = $this->completeBuilder($criteria, $query);
+
+        return $query->get()->map($this->buildItemCategory())->toArray();
+    }
+
+    private function buildItemCategory(): \Closure
+    {
+        return function ($row) {
+            return ItemCategory::fromDatabase(
+                $row->id,
+                $row->name,
+                $row->description,
+                $row->state,
+                $row->created_by,
+                $row->updated_by,
+                $row->company_id,
+                $row->created_at,
+                $row->updated_at
+            );
+        };
     }
 }
