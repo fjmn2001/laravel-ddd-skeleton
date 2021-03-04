@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class=" pl-2 pr-2 table-responsive">
+        <div class=" pl-2 pr-2 table-responsive" v-if="itemCategories.length > 0 && !loading">
             <table class="table">
                 <thead>
                 <tr>
@@ -56,39 +56,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr v-for="itemCategory in itemCategories" :key="itemCategory.id">
                     <td></td>
-                    <td>Ítems inventariado</td>
-                    <td>Ítems guardados en bodega</td>
+                    <td v-html="itemCategory.name"></td>
+                    <td v-html="itemCategory.description"></td>
                     <td>
-                        <button type="button" class="btn btn-green btn-sm btn-table">Activo</button>
-                        &nbsp;
+                        <button type="button" class="btn btn-green btn-sm btn-table"
+                                v-html="itemCategory.state"></button>
                     </td>
                     <td>
                         <div class="dropdown">
-                            <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu1"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="@/assets/images/icons/3puntos_H.svg"> </a>
-                            <div class="dropdown-menu dropdown-menu-right"
-                                 aria-labelledby="dropdownMenu1">
-                                <a class="dropdown-item" href="#">Duplicar</a>
-                                <a class="dropdown-item" href="#">Copiar</a>
-                                <a class="dropdown-item" href="#">Eliminar</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>Ítems no inventariado</td>
-                    <td>No guardados</td>
-                    <td>
-                        <button type="button" class="btn btn-red btn-sm btn-table">Desactivado</button>
-                        &nbsp;
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu1"
+                            <a class="btn btn-sm btn-opt" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="@/assets/images/icons/3puntos_H.svg"> </a>
                             <div class="dropdown-menu dropdown-menu-right"
@@ -103,16 +81,48 @@
                 </tbody>
             </table>
         </div>
-        <table-pager></table-pager>
+        <table-pager v-if="itemCategories.length > 0 && !loading"></table-pager>
+        <no-results v-if="itemCategories.length === 0 && !loading"></no-results>
+        <loading v-if="loading"></loading>
     </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import {defineComponent, ref, Ref, onMounted} from "vue";
 import TablePager from "@/components/TablePager.vue"
+import {ItemCategory} from "@/modules/inventory_settings/types/ItemCategory";
+import NoResults from "@/components/table/NoResults.vue";
+import Loading from "@/components/table/Loading.vue";
+import {api} from "@/modules/inventory_settings/services/api";
+import {useItemCategoryFilters} from "@/modules/inventory_settings/use/useItemCategoryFilters";
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 export default defineComponent({
-    components: {TablePager}
+    components: {Loading, NoResults, TablePager},
+
+    setup() {
+        const itemCategories: Ref<ItemCategory[]> = ref([]);
+        const loading: Ref<boolean> = ref(true);
+        const {setFilters} = useItemCategoryFilters();
+        const {user} = useAuth();
+
+        async function getItemCategories() {
+            itemCategories.value = await api.getItemCategories();
+        }
+
+        onMounted(async () => {
+            await setFilters([
+                {field: 'companyId', value: user?.value?.company.id}
+            ]);
+            await getItemCategories();
+            loading.value = false;
+        });
+
+        return {
+            itemCategories,
+            loading
+        }
+    }
 })
 </script>
 
