@@ -17653,3 +17653,12 @@ img.logo {
     color: #576984;
     font-size: 15px;
 }
+ .preloader-options{
+     width: 100%;
+ }
+
+.preloader-options > div{
+    width: 100%;
+    height: 38px;
+    background-color: #f1f3f3;
+}

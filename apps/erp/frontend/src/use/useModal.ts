@@ -24,7 +24,12 @@ export function useModal() {
     function populateLoading(name: string) {
         const modal = $('#' + name);
 
-        modal.find(".modal-body").empty().html('Loading...')
+        modal.find(".modal-body").empty().html('  ' +
+            '<div class="preloader-options" >\n' +
+            '  <div class="btn-block  my-3 "></div>\n' +
+            '  <div class="btn-block  my-3 "></div>\n' +
+            '  <div class="btn-block  my-3 "></div>\n' +
+            '</div>');
     }
 
     function populateBody(name: string, html: string) {
