@@ -47,119 +47,105 @@
                                         <td v-text="company.createdAt"></td>
                                         <td v-text="company.usersQuantity"></td>
                                         <td class=" td-btn-med">
-                                            <button type="button" class="btn btn-green btn-sm btn-table">Activo</button>
+                                            <button type="button" class="btn btn-green btn-sm btn-table"
+                                                    v-html="company.stateValue" data-toggle="modal" data-target="#exampleModalEstado"></button>
                                         </td>
                                         <td>
                                             <div class="dropdown">
-                                                <a class="btn btn-sm btn-opt" href="#" role="button" id="dropdownMenu1"
-                                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <a class="btn btn-sm btn-opt" href="#" data-toggle="modal" data-target="#exampleModal">
                                                     <img src="@/assets/images/icons/3puntos_H.svg"> </a>
-                                                <div class="dropdown-menu dropdown-menu-right"
-                                                     aria-labelledby="dropdownMenu1">
-                                                    <a class="dropdown-item" href="#">Duplicar</a>
-                                                    <a class="dropdown-item" href="#">Copiar</a>
-                                                    <a class="dropdown-item" href="#">Eliminar</a>
-                                                </div>
                                             </div>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="justify-content-center mt-0 pt-0 row">
-                                <div
-                                    class="align-items-center col-md-6 d-flex justify-content-center offset-md-3 pb-3 pt-3 pagination">
-                                    <a class="btn btn-cicle"><img src="@/assets/images/icons/two-arrow-left.svg"></a>
-                                    <a class="btn btn-cicle"><img src="@/assets/images/icons/one-arrow-left.svg"
-                                                                  style="width: 0.4rem;"></a>
-                                    <p class="p-pag">Página <input type="text" value="1" class="inp-pag">&nbsp;de 6</p>
-                                    <a class="btn btn-cicle"><img src="@/assets/images/icons/one-arrow-right.svg"
-                                                                  style="width: 0.4rem;"></a>
-                                    <a class="btn btn-cicle"><img src="@/assets/images/icons/two-arrow-right.svg"></a>
-                                    <select class="inp-pag sel-pag">
-                                        <option value="5">5</option>
-                                        <option value="10">10</option>
-                                        <option value="20">20</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                </div>
-                                <div class="align-items-center col-md-3 d-flex justify-content-end pb-3 pt-3">
-                                    <p class="mr-4 p-pag">Mostrando 1 - 10 de 20</p>
-                                </div>
-                            </div>
+                            <table-pager></table-pager>
                         </div>
-                        <div class="pb-4 pl-4 pr-4 pt-4" v-if="!hasData() && !loading">
-                            <div class="no-resul">
-                                <i class="icon-doc color-blue1"></i>
-                                <h2>No se encontró ningún registro.</h2>
-                            </div>
-                        </div>
-                        <div class="pb-4 pl-4 pr-4 pt-3" v-if="loading">
-                            <div class="pb-3 pl-4 pr-4 pre-loader pt-3">
-                                <div class="table-responsive">
-                                    <div class="l-hear">
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                    </div>
-                                    <div class="l-bod l-hear">
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                    </div>
-                                </div>
-                                <div class="justify-content-center mt-0 pt-0 row">
-                                    <div
-                                        class="align-items-center col-md-6 d-flex justify-content-center offset-md-3 pb-3 pt-3 pagination">
-                                        <a class="btn btn-cicle"></a>
-                                        <a class="btn btn-cicle"></a>
-                                        <p class="p-pag">Página &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                                        <a class="btn btn-cicle"></a>
-                                        <a class="btn btn-cicle"></a>
-                                        <input type="text" class="inp-pag" style="margin-left: 7px;">
-                                    </div>
-                                    <div class="align-items-center col-md-3 d-flex justify-content-end pb-3 pt-3">
-                                        <p class="mr-4 p-pag">Mostrando 1 - 10 de 20</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <no-results v-if="!hasData() && !loading"></no-results>
+                        <loading v-if="loading"></loading>
                     </div>
                 </div>
             </div>
         </div>
+
+        <teleport to="body">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Opciones</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body p-4">
+
+                            <button class="btn btn-block  my-3 btn-modal">Copiar</button>
+                            <button class="btn btn-block  my-3 btn-modal">Suspender</button>
+                            <button class="btn btn-block  my-3 btn-modal">Editar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="exampleModalEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Opciones</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body p-4">
+
+                            <button class="btn btn-block  my-3 btn-outline-success">Activo</button>
+                            <button class="btn btn-block  my-3 btn-outline-danger">Desactivado</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </teleport>
     </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted} from 'vue'
-import {useStore} from 'vuex'
+import {defineComponent, onMounted, ref} from 'vue'
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/companies/components/SearchForm.vue";
 import {useCompanies} from "@/modules/companies/use/useCompanies";
+import {useCatalog} from "@/modules/companies/use/useCatalog";
+import {useCore} from "@/modules/shared/use/useCore";
+import TablePager from "@/components/TablePager.vue";
+import NoResults from "@/components/table/NoResults.vue";
+import Loading from "@/components/table/Loading.vue";
 
 export default defineComponent({
-    components: {SearchForm, Breadcrums},
+    components: {Loading, NoResults, TablePager, SearchForm, Breadcrums},
     setup() {
-        const store = useStore()
+        const {ERP_URL} = useCore();
         const {companies, hasData, loading, getCompanies} = useCompanies();
-        const breadcrumbUrl: string = store.state.ERP_URL + '/api/company/breadcrumbs'
+        const {getCatalog} = useCatalog();
+        const breadcrumbUrl: string = ERP_URL + '/api/company/breadcrumbs'
+        const showModal = ref(false);
 
-        onMounted(() => {
-            getCompanies();
+        onMounted(async () => {
+            await getCatalog();
+            await getCompanies();
         })
+
+        function toggleModal(value: boolean) {
+            showModal.value = value;
+        }
 
         return {
             companies,
-            store,
             breadcrumbUrl,
             loading,
-            hasData
+            hasData,
+            toggleModal,
+            showModal
         }
     }
 })

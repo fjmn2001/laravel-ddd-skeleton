@@ -38,6 +38,7 @@ final class CompaniesGetController
                 'name' => $companyResponse->name(),
                 'address' => $companyResponse->address(),
                 'state' => $companyResponse->state(),
+                'stateValue' => $companyResponse->stateValue(),
                 'logo' => $companyResponse->logo(),
                 'createdAt' => $companyResponse->createdAt(),
                 'usersQuantity' => $companyResponse->usersQuantity()

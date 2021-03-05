@@ -13,14 +13,13 @@
                     <label>Nombre de la empresa</label>
                     <input type="text" class="form-control inp-filter" v-model="name">
                 </div>
-                <!--                <div class="col-lg-3 col-md-3 col-sm-12" style="margin-left: 0px;">-->
-                <!--                    <label>Estado</label>-->
-                <!--                    <v-select multiple-->
-                <!--                              :options="[{label: 'Activa', id: 'active'}, {label: 'Inactiva', id: 'inactive'}]"-->
-                <!--                              v-model="state"-->
-                <!--                              :reduce="option => option.id">-->
-                <!--                    </v-select>-->
-                <!--                </div>-->
+                <div class="col-lg-3 col-md-3 col-sm-12" v-if="catalogs">
+                    <label>Estado</label>
+                    <select2 name="state" :config="{}" :attr="{multiple: true}" v-model="state">
+                        <option :value="state.id" v-for="state in catalogs.states" v-html="state.title"
+                                :key="state.id"></option>
+                    </select2>
+                </div>
             </div>
             <div class="row pt-3">
                 <div
@@ -41,19 +40,22 @@
 import {defineComponent, ref, nextTick} from 'vue'
 import {useCompanies} from "@/modules/companies/use/useCompanies";
 import {useFilters} from "@/modules/companies/use/useFilters";
+import {useCatalog} from "@/modules/companies/use/useCatalog";
 
 export default defineComponent({
     emits: ['search'],
     setup() {
         const {setFilters} = useFilters()
         const {loading, getCompanies} = useCompanies();
+        const {catalogs} = useCatalog();
 
         const name = ref('')
         const state = ref([])
 
         async function search() {
             await setFilters([
-                {field: 'name', value: name.value}
+                {field: 'name', value: name.value},
+                {field: 'state', value: state.value}
             ])
             getCompanies();
         }
@@ -71,7 +73,8 @@ export default defineComponent({
             state,
             search,
             clean,
-            loading
+            loading,
+            catalogs
         };
     }
 })

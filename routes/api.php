@@ -2,6 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Medine\ERP\Company\Application\Response\CompaniesResponse;
+use Medine\ERP\Company\Application\Response\CompanyResponse;
+use function Lambdish\Phunctional\map;
+use function Lambdish\Phunctional\first;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +19,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    $user = $request->user();
+
+    $searcher = new \Medine\ERP\Company\Application\Search\CompanySearcher(new \Medine\ERP\Company\Infrastructure\MySqlCompanyRepository);
+    $response = ($searcher)(new \Medine\ERP\Company\Application\Search\CompanySearcherRequest(
+        [
+            ['field' => 'state', 'value' => ['active']],
+            ['field' => 'user', 'value' => [$user->id]]
+        ]
+    ));
+    $companies = map(function (CompanyResponse $response) {
+        return [
+            'id' => $response->id(),
+            'name' => $response->name(),
+            'logo' => $response->logo()
+        ];
+    }, $response->companies());
+
+    return [
+        'id' => $user->id,
+        'email' => $user->email,
+        'name' => $user->name,
+        'companies' => $companies,
+        'company' => first($companies)
+    ];
 });
