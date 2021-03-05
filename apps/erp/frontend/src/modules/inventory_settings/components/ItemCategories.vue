@@ -1,5 +1,5 @@
 <template>
-    <div class="config-div02 pl-sm-5 pr-sm-5">
+    <div class="config-div02 pr-5 pl-5 pt-4">
         <div class="pl-3 pl-md-2">
             <div class="d-flex pt-2 row">
                 <div style="padding-left: 0px;" class="align-items-center col-md-12 d-flex">
@@ -7,7 +7,7 @@
                         categorías de ítems</h5>
                 </div>
             </div>
-            <form class="des01 mb-3 ml-0 mr-3 mt-2" @submit.prevent="submit" autocomplete="off">
+            <form class="des01 mb-3 ml-0 mr-3 mt-3" @submit.prevent="submit" autocomplete="off">
                 <div class=" row">
                     <div class="col-lg-3 col-md-6 col-sm-12 pl-3 pl-lg-0 pl-md-3">
                         <label>Nombre *</label>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <div class="mt-2 row" style="width: 100%;">
+                <div class="mt-3 row" style="width: 100%;">
                     <div
                         class="col-lg-7 col-md-8 col-xl-6 d-flex justify-content-around offset-lg-5 offset-md-4 offset-xl-6">
                         <button type="button" class="btn btn-blue2-deg btn-sm pl-3 pr-3" :disabled="sending"
