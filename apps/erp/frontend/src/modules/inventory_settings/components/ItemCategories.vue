@@ -44,7 +44,7 @@
             <div class="d-flex pt-1 row">
                 <div style="padding-left: 0px;" class="align-items-center col-md-12 d-flex mb-2">
                     <h5 class="d-inline ml-4 ml-lg-3 ml-md-3 ml-sm-2 xtitle-buscar"
-                        >Categorías de ítems</h5>
+                    >Categorías de ítems</h5>
                 </div>
             </div>
         </div>
@@ -65,8 +65,8 @@
                     <td v-html="itemCategory.name"></td>
                     <td v-html="itemCategory.description"></td>
                     <td>
-                        <button type="button" class="btn btn-green btn-sm btn-table"
-                                v-html="itemCategory.state"></button>
+                        <button type="button" class="btn btn-green btn-sm btn-table changeState"
+                                v-html="itemCategory.state" @click.prevent="changeState(itemCategory.id)"></button>
                     </td>
                     <td>
                         <div class="dropdown">
@@ -160,13 +160,22 @@ export default defineComponent({
             loading.value = false;
         });
 
+        async function changeState(id: string) {
+            show('optionsModal')
+            populateLoading('optionsModal')
+            const response = await api.getItemCategoryStates(id);
+            populateBody('optionsModal', response)
+        }
+
         async function showOptionsModal(id: string) {
             show('optionsModal')
             populateLoading('optionsModal')
 
             const html = await api.getItemCategoryOptions(id)
+            const modal = $('#optionsModal');
+
             populateBody('optionsModal', html)
-            $('#optionsModal').off('click', '.edit').on('click', '.edit', async () => {
+            modal.off('click', '.edit').on('click', '.edit', async () => {
                 populateLoading('optionsModal')
                 const response = await api.findItemCategory(id);
                 itemCategory.value = response
@@ -175,6 +184,11 @@ export default defineComponent({
                 state.value = response.state;
                 editing.value = true;
                 hide('optionsModal')
+            });
+
+            modal.off('click', '.changeState').on('click', '.changeState', async () => {
+                hide('optionsModal')
+                changeState(id)
             });
         }
 
@@ -200,7 +214,8 @@ export default defineComponent({
             submit,
             myReset,
             showOptionsModal,
-            search
+            search,
+            changeState
         }
     }
 })
