@@ -8,6 +8,9 @@
                     <ul>
                         <li>Empresas</li>
                     </ul>
+                    <ul>
+                        <li><router-link :to="{name: 'clients'}">Clientes</router-link></li>
+                    </ul>
                 </div>
             </div>
         </div>
