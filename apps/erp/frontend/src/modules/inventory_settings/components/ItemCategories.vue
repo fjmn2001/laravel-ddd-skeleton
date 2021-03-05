@@ -7,7 +7,7 @@
                         categorías de ítems</h5>
                 </div>
             </div>
-            <form class="des01 mb-3 ml-0 mr-3 mt-2" @submit.prevent="submit">
+            <form class="des01 mb-3 ml-0 mr-3 mt-2" @submit.prevent="submit" autocomplete="off">
                 <div class=" row">
                     <div class="col-lg-3 col-md-6 col-sm-12 pl-3 pl-lg-0 pl-md-3">
                         <label>Nombre *</label>
@@ -29,11 +29,15 @@
                 <div class="mt-2 row" style="width: 100%;">
                     <div
                         class="col-lg-7 col-md-8 col-xl-6 d-flex justify-content-around offset-lg-5 offset-md-4 offset-xl-6">
-                        <button type="button" class="btn btn-blue2-deg btn-sm pl-3 pr-3">Buscar</button>
-                        <button type="button" class="btn btn-outline-secondary btn-sm mr-0 pl-3 pr-3"
-                                style="margin: 10px 0px; min-width: 100px;" @click="myReset">Cancelar
+                        <button type="button" class="btn btn-blue2-deg btn-sm pl-3 pr-3" :disabled="sending"
+                                @click.prevent="search">Buscar
                         </button>
-                        <button type="submit" class="btn btn-blue-deg btn-sm pl-3 pr-3">Guardar</button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm mr-0 pl-3 pr-3"
+                                style="margin: 10px 0px; min-width: 100px;" @click="myReset" :disabled="sending">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-blue-deg btn-sm pl-3 pr-3" :disabled="sending">Guardar
+                        </button>
                     </div>
                 </div>
             </form>
@@ -66,15 +70,9 @@
                     </td>
                     <td>
                         <div class="dropdown">
-                            <a class="btn btn-sm btn-opt" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="@/assets/images/icons/3puntos_H.svg"> </a>
-                            <div class="dropdown-menu dropdown-menu-right"
-                                 aria-labelledby="dropdownMenu1">
-                                <a class="dropdown-item" href="#">Duplicar</a>
-                                <a class="dropdown-item" href="#">Copiar</a>
-                                <a class="dropdown-item" href="#">Eliminar</a>
-                            </div>
+                            <a class="btn btn-sm btn-opt" href="#" @click.prevent="showOptionsModal(itemCategory.id)">
+                                <img src="@/assets/images/icons/3puntos_H.svg">
+                            </a>
                         </div>
                     </td>
                 </tr>
@@ -84,30 +82,36 @@
         <table-pager v-if="itemCategories.length > 0 && !loading"></table-pager>
         <no-results v-if="itemCategories.length === 0 && !loading"></no-results>
         <loading v-if="loading"></loading>
+        <options-modal :name="'optionsModal'"></options-modal>
     </div>
 </template>
 
 <script lang="ts">
+import $ from 'jquery'
 import {defineComponent, ref, Ref, onMounted, watch} from "vue";
 import TablePager from "@/components/TablePager.vue"
 import {ItemCategory} from "@/modules/inventory_settings/types/ItemCategory";
 import NoResults from "@/components/table/NoResults.vue";
 import Loading from "@/components/table/Loading.vue";
-import {api} from "@/modules/inventory_settings/services/api";
+import {api} from "@/modules/inventory_settings/services/item_categories/api";
 import {useItemCategoryFilters} from "@/modules/inventory_settings/use/useItemCategoryFilters";
 import {useAuth} from "@/modules/auth/use/useAuth";
 import {useItemCategory} from "@/modules/inventory_settings/use/useItemCatetory";
+import OptionsModal from "@/components/modal/optionsModal.vue";
+import {useModal} from "@/use/useModal";
 
 export default defineComponent({
-    components: {Loading, NoResults, TablePager},
+    components: {OptionsModal, Loading, NoResults, TablePager},
 
     setup() {
         const itemCategories: Ref<ItemCategory[]> = ref([]);
         const loading: Ref<boolean> = ref(true);
         const sending: Ref<boolean> = ref(false);
+        const editing: Ref<boolean> = ref(false);
         const {setFilters} = useItemCategoryFilters();
         const {user} = useAuth();
-        const {itemCategory, reset} = useItemCategory();
+        const {itemCategory, reset, create} = useItemCategory();
+        const {show, populateLoading, populateBody, hide} = useModal();
 
         //..
         const name: Ref<string> = ref('');
@@ -122,24 +126,30 @@ export default defineComponent({
             name.value = '';
             description.value = '';
             state.value = 'active';
+            editing.value = false;
             reset();
+        }
+
+        async function getItemCategories() {
+            itemCategories.value = await api.getItemCategories();
         }
 
         async function submit() {
             try {
                 sending.value = true
-                //await create()
+                if (editing.value) {
+                    await api.updateItemCategory();
+                } else {
+                    await create()
+                }
+
                 myReset();
-                console.log('submited');
+                await getItemCategories()
             } catch (e) {
                 console.log(e);
             } finally {
                 sending.value = false
             }
-        }
-
-        async function getItemCategories() {
-            itemCategories.value = await api.getItemCategories();
         }
 
         onMounted(async () => {
@@ -150,6 +160,36 @@ export default defineComponent({
             loading.value = false;
         });
 
+        async function showOptionsModal(id: string) {
+            show('optionsModal')
+            populateLoading('optionsModal')
+
+            const html = await api.getItemCategoryOptions(id)
+            populateBody('optionsModal', html)
+            $('#optionsModal').off('click', '.edit').on('click', '.edit', async () => {
+                populateLoading('optionsModal')
+                const response = await api.findItemCategory(id);
+                itemCategory.value = response
+                name.value = response.name;
+                description.value = response.description;
+                state.value = response.state;
+                editing.value = true;
+                hide('optionsModal')
+            });
+        }
+
+        async function search() {
+            loading.value = true;
+            await setFilters([
+                {field: 'companyId', value: user?.value?.company.id},
+                {field: 'name', value: name.value},
+                {field: 'description', value: description.value},
+                {field: 'state', value: state}
+            ]);
+            await getItemCategories()
+            loading.value = false;
+        }
+
         return {
             name,
             description,
@@ -158,7 +198,9 @@ export default defineComponent({
             loading,
             sending,
             submit,
-            myReset
+            myReset,
+            showOptionsModal,
+            search
         }
     }
 })
