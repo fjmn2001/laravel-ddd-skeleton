@@ -29,7 +29,8 @@
                 <div class="mt-2 row" style="width: 100%;">
                     <div
                         class="col-lg-7 col-md-8 col-xl-6 d-flex justify-content-around offset-lg-5 offset-md-4 offset-xl-6">
-                        <button type="button" class="btn btn-blue2-deg btn-sm pl-3 pr-3" :disabled="sending">Buscar
+                        <button type="button" class="btn btn-blue2-deg btn-sm pl-3 pr-3" :disabled="sending"
+                                @click.prevent="search">Buscar
                         </button>
                         <button type="button" class="btn btn-outline-secondary btn-sm mr-0 pl-3 pr-3"
                                 style="margin: 10px 0px; min-width: 100px;" @click="myReset" :disabled="sending">
@@ -177,6 +178,18 @@ export default defineComponent({
             });
         }
 
+        async function search() {
+            loading.value = true;
+            await setFilters([
+                {field: 'companyId', value: user?.value?.company.id},
+                {field: 'name', value: name.value},
+                {field: 'description', value: description.value},
+                {field: 'state', value: state}
+            ]);
+            await getItemCategories()
+            loading.value = false;
+        }
+
         return {
             name,
             description,
@@ -186,7 +199,8 @@ export default defineComponent({
             sending,
             submit,
             myReset,
-            showOptionsModal
+            showOptionsModal,
+            search
         }
     }
 })
