@@ -12,8 +12,8 @@ final class ItemCategoryStatesGetController
     {
         $data = ' data-id="' . $id . '" ';
         $html = '';
-        $html .= '<button class="btn btn-block  my-3 btn-outline-success" ' . $data . ' data-state="active">Active</button>';
-        $html .= '<button class="btn btn-block  my-3 btn-outline-danger" ' . $data . ' data-state="inactive">Inactive</button>';
+        $html .= '<button class="btn btn-block  my-3 btn-outline-success updateState" ' . $data . ' data-state="active">Active</button>';
+        $html .= '<button class="btn btn-block  my-3 btn-outline-danger updateState" ' . $data . ' data-state="inactive">Inactive</button>';
 
         return new JsonResponse($html, JsonResponse::HTTP_OK);
     }

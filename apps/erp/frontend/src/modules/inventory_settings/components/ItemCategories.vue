@@ -163,8 +163,12 @@ export default defineComponent({
         async function changeState(id: string) {
             show('optionsModal')
             populateLoading('optionsModal')
+            const modal = $('#optionsModal');
             const response = await api.getItemCategoryStates(id);
             populateBody('optionsModal', response)
+            modal.off('click', '.updateState').on('click', '.updateState', async (e) => {
+                console.log('updateState', $(e.target).data('state'), $(e.target).data('id'));
+            });
         }
 
         async function showOptionsModal(id: string) {
