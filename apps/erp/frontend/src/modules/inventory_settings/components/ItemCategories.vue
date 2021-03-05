@@ -41,10 +41,10 @@
                     </div>
                 </div>
             </form>
-            <div class="d-flex pt-2 row">
+            <div class="d-flex pt-1 row">
                 <div style="padding-left: 0px;" class="align-items-center col-md-12 d-flex mb-2">
                     <h5 class="d-inline ml-4 ml-lg-3 ml-md-3 ml-sm-2 xtitle-buscar"
-                        style="padding-bottom: 0px;">Categorías de ítems</h5>
+                        >Categorías de ítems</h5>
                 </div>
             </div>
         </div>
