@@ -9,8 +9,27 @@ use Medine\ERP\Clients\Domain\Contracts\ClientRepository;
 use Medine\ERP\Clients\Domain\Entity\Client;
 use Medine\ERP\Clients\Domain\Entity\ClientHasEmail;
 use Medine\ERP\Clients\Domain\Entity\ClientHasPhone;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientClientCategory;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientClientType;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientCreatedAt;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientDni;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientDniType;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientFrequentClientNumber;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientHasEmailClientId;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientHasEmailEmail;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientHasEmailEmailType;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientHasEmailId;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientHasPhoneClientId;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientHasPhoneId;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientHasPhoneNumber;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientHasPhoneNumberType;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientId;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientLastname;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientName;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientState;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientUpdatedAt;
 use function Lambdish\Phunctional\map;
+use function Lambdish\Phunctional\each;
 
 final class MySqlClientRepository implements ClientRepository
 {
@@ -48,13 +67,29 @@ final class MySqlClientRepository implements ClientRepository
     public function find(ClientId $id): ?Client
     {
         $row = DB::table('clients')->where('clients.id', '=', $id->value())->first();
-        dd($row);
+
         if(empty($row))
             return null;
 
         $client = Client::fromDatabase(
-
+            new ClientId($row->id),
+            new ClientName($row->name),
+            new ClientLastname($row->lastname),
+            new ClientDni($row->dni),
+            new ClientDniType($row->dni_type),
+            new ClientClientType($row->client_type),
+            new ClientClientCategory($row->client_category),
+            new ClientFrequentClientNumber($row->frequent_client_number),
+            new ClientState($row->state),
+            new ClientCreatedAt($row->created_at),
+            new ClientUpdatedAt($row->updated_at),
         );
+
+        $rowPhones = DB::table('client_phones')->where('client_phones.client_id', '=', $id->value())->get();
+        $rowEmails = DB::table('client_emails')->where('client_emails.client_id', '=', $id->value())->get();
+
+        each($this->addClientPhone($client), $rowPhones);
+        each($this->addClientEmail($client), $rowEmails);
 
         return $client;
     }
@@ -70,7 +105,6 @@ final class MySqlClientRepository implements ClientRepository
                 'client_id' => $email->clientId()->value(),
                 'created_at' => $email->createdAt()->value(),
                 'updated_at' => $email->updatedAt()->value(),
-
             ];
         };
     }
@@ -86,6 +120,30 @@ final class MySqlClientRepository implements ClientRepository
                 'created_at' => $phone->createdAt()->value(),
                 'updated_at' => $phone->updatedAt()->value()
             ];
+        };
+    }
+
+    private function addClientPhone(Client $client)
+    {
+        return function (\stdClass $item) use ($client) {
+            $client->addClientPhone(ClientHasPhone::create(
+                new ClientHasPhoneId($item->id),
+                new ClientHasPhoneNumber($item->number),
+                new ClientHasPhoneNumberType($item->number_type),
+                new ClientHasPhoneClientId($item->client_id),
+            ));
+        };
+    }
+
+    private function addClientEmail(Client $client)
+    {
+        return function (\stdClass $item) use ($client) {
+            $client->addClientEmail(ClientHasEmail::create(
+                new ClientHasEmailId($item->id),
+                new ClientHasEmailEmail($item->email),
+                new ClientHasEmailEmailType($item->email_type),
+                new ClientHasEmailClientId($item->client_id),
+            ));
         };
     }
 }

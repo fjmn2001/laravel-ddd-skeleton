@@ -62,6 +62,7 @@ final class ClientGetControllerTest extends TestCase
         $this->postJson('/api/client', $client);
 
         $response = $this->getJson('/api/client/' . $clientId);
+        dd($response);
         $response->assertJson($client);
         $response->assertStatus(200);
     }

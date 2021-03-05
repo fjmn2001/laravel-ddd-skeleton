@@ -13,7 +13,9 @@ final class ClientFinder
 {
     private $repository;
 
-    public function __construct(ClientRepository $repository)
+    public function __construct(
+        ClientRepository $repository
+    )
     {
         $this->repository = $repository;
     }

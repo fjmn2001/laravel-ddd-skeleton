@@ -90,11 +90,31 @@ final class Client
     }
 
     public static function fromDatabase(
-
+        ClientId $id,
+        ClientName $name,
+        ClientLastname $lastname,
+        ClientDni $dni,
+        ClientDniType $dniType,
+        ClientClientType $clientType,
+        ClientClientCategory $clientCategory,
+        ClientFrequentClientNumber $frequentClientNumber,
+        ClientState $state,
+        ClientCreatedAt $createdAt,
+        ClientUpdatedAt $updatedAt
     ): self
     {
         return new self(
-
+            $id,
+            $name,
+            $lastname,
+            $dni,
+            $dniType,
+            $clientType,
+            $clientCategory,
+            $frequentClientNumber,
+            $state,
+            $createdAt,
+            $updatedAt
         );
     }
 
