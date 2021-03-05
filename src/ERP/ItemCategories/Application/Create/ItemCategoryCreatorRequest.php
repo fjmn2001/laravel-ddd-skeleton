@@ -16,7 +16,7 @@ final class ItemCategoryCreatorRequest
     public function __construct(
         string $id,
         string $name,
-        string $description,
+        ?string $description,
         string $state,
         int $createdBy,
         string $companyId
@@ -40,7 +40,7 @@ final class ItemCategoryCreatorRequest
         return $this->name;
     }
 
-    public function description(): string
+    public function description(): ?string
     {
         return $this->description;
     }

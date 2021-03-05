@@ -13,7 +13,7 @@ final class ItemCategoryResponse
     private $state;
     private $companyId;
 
-    public function __construct(string $id, string $name, string $description, string $state, string $companyId)
+    public function __construct(string $id, string $name, ?string $description, string $state, string $companyId)
     {
         $this->id = $id;
         $this->name = $name;
@@ -32,7 +32,7 @@ final class ItemCategoryResponse
         return $this->name;
     }
 
-    public function description(): string
+    public function description(): ?string
     {
         return $this->description;
     }
