@@ -33,7 +33,9 @@ final class ClientFinder
             $client->frequentClientNumber()->value(),
             $client->state()->value(),
             $client->createdAt()->format('d/m/Y'),
-            $client->updatedAt()->format('d/m/Y')
+            $client->updatedAt()->format('d/m/Y'),
+            $client->phones(),
+            $client->emails()
         );
     }
 

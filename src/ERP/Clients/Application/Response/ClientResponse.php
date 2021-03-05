@@ -6,6 +6,10 @@ declare(strict_types=1);
 namespace Medine\ERP\Clients\Application\Response;
 
 
+use Medine\ERP\Clients\Domain\Entity\ClientHasEmail;
+use Medine\ERP\Clients\Domain\Entity\ClientHasPhone;
+use function Lambdish\Phunctional\map;
+
 final class ClientResponse
 {
     private $id;
@@ -19,6 +23,8 @@ final class ClientResponse
     private $state;
     private $createdAt;
     private $updatedAt;
+    private $phones;
+    private $emails;
 
     public function __construct(
         $id,
@@ -31,7 +37,9 @@ final class ClientResponse
         $frequentClientNumber,
         $state,
         $createdAt,
-        $updatedAt
+        $updatedAt,
+        $phones,
+        $emails
     )
     {
         $this->id = $id;
@@ -45,6 +53,8 @@ final class ClientResponse
         $this->state = $state;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
+        $this->phones = $phones;
+        $this->emails = $emails;
     }
 
     public function id()
@@ -100,5 +110,42 @@ final class ClientResponse
     public function updatedAt()
     {
         return $this->updatedAt;
+    }
+
+    public function phones()
+    {
+        $phones = map($this->retrievePhone(), $this->phones);
+        return $phones;
+    }
+
+    public function emails()
+    {
+        $emails = map($this->retrieveEmail(), $this->emails);
+        return $emails;
+    }
+
+
+    private function retrieveEmail(): \Closure
+    {
+        return function (ClientHasEmail $email) {
+            return [
+                'id' => $email->id()->value(),
+                'email' => $email->email()->value(),
+                'email_type' => $email->emailType()->value(),
+                'client_id' => $email->clientId()->value()
+            ];
+        };
+    }
+
+    private function retrievePhone(): \Closure
+    {
+        return function (ClientHasPhone $phone) {
+            return [
+                'id' => $phone->id()->value(),
+                'number' => $phone->number()->value(),
+                'number_type' => $phone->numberType()->value(),
+                'client_id' => $phone->clientId()->value()
+            ];
+        };
     }
 }

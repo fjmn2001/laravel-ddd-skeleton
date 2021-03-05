@@ -23,17 +23,17 @@ final class ClientGetController extends Controller
         $client = ($this->finder)(new ClientFinderRequest($id));
 
         return new JsonResponse([
-            $client->id(),
-            $client->name(),
-            $client->lastname(),
-            $client->dni(),
-            $client->dniType(),
-            $client->clientType(),
-            $client->clientCategory(),
-            $client->frequentClientNumber(),
-            $client->state(),
-            $client->createdAt(),
-            $client->updatedAt(),
+            'id' => $client->id(),
+            'name' => $client->name(),
+            'lastname' => $client->lastname(),
+            'dni' => $client->dni(),
+            'dni_type' => $client->dniType(),
+            'client_type' => $client->clientType(),
+            'client_category' => $client->clientCategory(),
+            'frequent_client_number' => $client->frequentClientNumber(),
+            'state' => $client->state(),
+            'phones' => $client->phones(),
+            'emails' => $client->emails()
         ]);
     }
 }

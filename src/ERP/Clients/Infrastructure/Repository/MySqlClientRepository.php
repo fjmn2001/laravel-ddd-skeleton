@@ -16,13 +16,17 @@ use Medine\ERP\Clients\Domain\ValueObjects\ClientDni;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientDniType;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientFrequentClientNumber;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientHasEmailClientId;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientHasEmailCreateAt;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientHasEmailEmail;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientHasEmailEmailType;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientHasEmailId;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientHasEmailUpdateAt;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientHasPhoneClientId;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientHasPhoneCreateAt;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientHasPhoneId;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientHasPhoneNumber;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientHasPhoneNumberType;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientHasPhoneUpdateAt;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientId;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientLastname;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientName;
@@ -126,11 +130,13 @@ final class MySqlClientRepository implements ClientRepository
     private function addClientPhone(Client $client)
     {
         return function (\stdClass $item) use ($client) {
-            $client->addClientPhone(ClientHasPhone::create(
+            $client->addClientPhone(ClientHasPhone::fromDatabase(
                 new ClientHasPhoneId($item->id),
                 new ClientHasPhoneNumber($item->number),
                 new ClientHasPhoneNumberType($item->number_type),
                 new ClientHasPhoneClientId($item->client_id),
+                new ClientHasPhoneCreateAt($item->created_at),
+                new ClientHasPhoneUpdateAt($item->updated_at)
             ));
         };
     }
@@ -138,11 +144,13 @@ final class MySqlClientRepository implements ClientRepository
     private function addClientEmail(Client $client)
     {
         return function (\stdClass $item) use ($client) {
-            $client->addClientEmail(ClientHasEmail::create(
+            $client->addClientEmail(ClientHasEmail::fromDatabase(
                 new ClientHasEmailId($item->id),
                 new ClientHasEmailEmail($item->email),
                 new ClientHasEmailEmailType($item->email_type),
                 new ClientHasEmailClientId($item->client_id),
+                new ClientHasEmailCreateAt($item->created_at),
+                new ClientHasEmailUpdateAt($item->updated_at)
             ));
         };
     }

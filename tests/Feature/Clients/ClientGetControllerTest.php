@@ -48,6 +48,7 @@ final class ClientGetControllerTest extends TestCase
                     'id' => Uuid::random()->value(),
                     'number' => '111-222-333-5555',
                     'number_type' => 'work',
+                    'client_id' => $clientId
                 ],
             ],
             'emails' => [
@@ -55,6 +56,7 @@ final class ClientGetControllerTest extends TestCase
                     'id' => Uuid::random()->value(),
                     'email' => $this->faker->email,
                     'email_type' => 'work',
+                    'client_id' => $clientId
                 ],
             ]
         ];
@@ -62,7 +64,6 @@ final class ClientGetControllerTest extends TestCase
         $this->postJson('/api/client', $client);
 
         $response = $this->getJson('/api/client/' . $clientId);
-        dd($response);
         $response->assertJson($client);
         $response->assertStatus(200);
     }
