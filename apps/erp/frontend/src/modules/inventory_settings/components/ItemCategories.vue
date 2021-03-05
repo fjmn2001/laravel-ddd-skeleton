@@ -69,15 +69,9 @@
                     </td>
                     <td>
                         <div class="dropdown">
-                            <a class="btn btn-sm btn-opt" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="@/assets/images/icons/3puntos_H.svg"> </a>
-                            <div class="dropdown-menu dropdown-menu-right"
-                                 aria-labelledby="dropdownMenu1">
-                                <a class="dropdown-item" href="#">Duplicar</a>
-                                <a class="dropdown-item" href="#">Copiar</a>
-                                <a class="dropdown-item" href="#">Eliminar</a>
-                            </div>
+                            <a class="btn btn-sm btn-opt" href="#" @click.prevent="showOptionsModal(itemCategory.id)">
+                                <img src="@/assets/images/icons/3puntos_H.svg">
+                            </a>
                         </div>
                     </td>
                 </tr>
@@ -87,22 +81,26 @@
         <table-pager v-if="itemCategories.length > 0 && !loading"></table-pager>
         <no-results v-if="itemCategories.length === 0 && !loading"></no-results>
         <loading v-if="loading"></loading>
+        <options-modal :name="'optionsModal'"></options-modal>
     </div>
 </template>
 
 <script lang="ts">
+import $ from 'jquery'
 import {defineComponent, ref, Ref, onMounted, watch} from "vue";
 import TablePager from "@/components/TablePager.vue"
 import {ItemCategory} from "@/modules/inventory_settings/types/ItemCategory";
 import NoResults from "@/components/table/NoResults.vue";
 import Loading from "@/components/table/Loading.vue";
-import {api} from "@/modules/inventory_settings/services/api";
+import {api} from "@/modules/inventory_settings/services/item_categories/api";
 import {useItemCategoryFilters} from "@/modules/inventory_settings/use/useItemCategoryFilters";
 import {useAuth} from "@/modules/auth/use/useAuth";
 import {useItemCategory} from "@/modules/inventory_settings/use/useItemCatetory";
+import OptionsModal from "@/components/modal/optionsModal.vue";
+import {useModal} from "@/use/useModal";
 
 export default defineComponent({
-    components: {Loading, NoResults, TablePager},
+    components: {OptionsModal, Loading, NoResults, TablePager},
 
     setup() {
         const itemCategories: Ref<ItemCategory[]> = ref([]);
@@ -111,6 +109,7 @@ export default defineComponent({
         const {setFilters} = useItemCategoryFilters();
         const {user} = useAuth();
         const {itemCategory, reset, create} = useItemCategory();
+        const {show, populateLoading, populateBody} = useModal();
 
         //..
         const name: Ref<string> = ref('');
@@ -153,6 +152,17 @@ export default defineComponent({
             loading.value = false;
         });
 
+        async function showOptionsModal(id: string) {
+            show('optionsModal')
+            populateLoading('optionsModal')
+
+            const html = await api.getItemCategoryOptions(id)
+            populateBody('optionsModal', html)
+            $('#optionsModal').off('click', '.edit').on('click', '.edit', () => {
+                console.log('id', id);
+            });
+        }
+
         return {
             name,
             description,
@@ -161,7 +171,8 @@ export default defineComponent({
             loading,
             sending,
             submit,
-            myReset
+            myReset,
+            showOptionsModal
         }
     }
 })

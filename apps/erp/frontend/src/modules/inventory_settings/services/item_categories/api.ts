@@ -36,4 +36,12 @@ export const api = {
             resolve(response.data);
         });
     },
+    async getItemCategoryOptions(id: string): Promise<string> {
+        const {token} = useAuth();
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.value;
+        const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/item_categories/options/' + id);
+        return new Promise(resolve => {
+            resolve(response.data);
+        });
+    },
 }
