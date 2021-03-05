@@ -30,4 +30,9 @@ abstract class Filters
 
         return $this->builder;
     }
+
+    protected function value($value): array
+    {
+        return is_array($value) ? $value : [$value];
+    }
 }
