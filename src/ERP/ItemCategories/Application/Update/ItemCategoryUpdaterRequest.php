@@ -15,7 +15,7 @@ final class ItemCategoryUpdaterRequest
     public function __construct(
         string $id,
         string $name,
-        string $description,
+        ?string $description,
         string $state,
         int $updatedBy
     )
@@ -37,7 +37,7 @@ final class ItemCategoryUpdaterRequest
         return $this->name;
     }
 
-    public function description(): string
+    public function description(): ?string
     {
         return $this->description;
     }

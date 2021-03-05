@@ -138,7 +138,7 @@ final class ItemCategory
         }
     }
 
-    public function changeDescription(string $description)
+    public function changeDescription(?string $description)
     {
         if ($description !== $this->description) {
             $this->description = $description;

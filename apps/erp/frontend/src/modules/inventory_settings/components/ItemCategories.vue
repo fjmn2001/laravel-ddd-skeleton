@@ -106,10 +106,11 @@ export default defineComponent({
         const itemCategories: Ref<ItemCategory[]> = ref([]);
         const loading: Ref<boolean> = ref(true);
         const sending: Ref<boolean> = ref(false);
+        const editing: Ref<boolean> = ref(false);
         const {setFilters} = useItemCategoryFilters();
         const {user} = useAuth();
         const {itemCategory, reset, create} = useItemCategory();
-        const {show, populateLoading, populateBody} = useModal();
+        const {show, populateLoading, populateBody, hide} = useModal();
 
         //..
         const name: Ref<string> = ref('');
@@ -124,6 +125,7 @@ export default defineComponent({
             name.value = '';
             description.value = '';
             state.value = 'active';
+            editing.value = false;
             reset();
         }
 
@@ -134,7 +136,12 @@ export default defineComponent({
         async function submit() {
             try {
                 sending.value = true
-                await create()
+                if (editing.value) {
+                    await api.updateItemCategory();
+                } else {
+                    await create()
+                }
+
                 myReset();
                 await getItemCategories()
             } catch (e) {
@@ -158,8 +165,15 @@ export default defineComponent({
 
             const html = await api.getItemCategoryOptions(id)
             populateBody('optionsModal', html)
-            $('#optionsModal').off('click', '.edit').on('click', '.edit', () => {
-                console.log('id', id);
+            $('#optionsModal').off('click', '.edit').on('click', '.edit', async () => {
+                populateLoading('optionsModal')
+                const response = await api.findItemCategory(id);
+                itemCategory.value = response
+                name.value = response.name;
+                description.value = response.description;
+                state.value = response.state;
+                editing.value = true;
+                hide('optionsModal')
             });
         }
 
