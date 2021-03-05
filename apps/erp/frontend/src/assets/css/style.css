@@ -86,7 +86,7 @@ h1 {
 }
 
 h2 {
-    /* line-height: 36px */
+    line-height: 36px;
     font-size: 24px;
 }
 
@@ -1838,9 +1838,12 @@ pre {
     bottom: 0;
     color: #58666e;
     left: 0;
-    padding: 20px 30px;
-    position: absolute;
+    padding-top: 5px;
+    position: fixed;
     right: 0;
+    background-color: white;
+    height: 30px;
+    z-index: 10;
 }
 
 .bg-title {
@@ -17008,7 +17011,6 @@ a:focus {
 
 #menu-config ul li a:hover {
     color: #1c3045;
-    font-weight: 500;
     background: #fafbfc;
 }
 
@@ -17019,7 +17021,7 @@ a:focus {
     font-weight: 700;
     border-right: 1px solid #ffffff;
     border-bottom-left-radius: 5px;
-    left: 2px;
+    left: 1px;
     position: relative;
 }
 
@@ -17644,4 +17646,19 @@ img.logo {
     font-family: "Poppins-Bold";
     color: #576984;
     font-size: 20px;
+}
+
+.xtitle-buscar-guardar {
+    font-family: "Poppins-Bold";
+    color: #576984;
+    font-size: 15px;
+}
+ .preloader-options{
+     width: 100%;
+ }
+
+.preloader-options > div{
+    width: 100%;
+    height: 38px;
+    background-color: #f1f3f3;
 }
