@@ -167,7 +167,15 @@ export default defineComponent({
             const response = await api.getItemCategoryStates(id);
             populateBody('optionsModal', response)
             modal.off('click', '.updateState').on('click', '.updateState', async (e) => {
-                console.log('updateState', $(e.target).data('state'), $(e.target).data('id'));
+                populateLoading('optionsModal')
+                await api.updateItemCategoryState(
+                    $(e.target).data('id'),
+                    $(e.target).data('state')
+                )
+                hide('optionsModal')
+                loading.value = true;
+                await getItemCategories();
+                loading.value = false;
             });
         }
 

@@ -8,6 +8,7 @@ use Medine\ERP\ItemCategories\Infrastructure\Controller\ItemCategoryGetControlle
 use Medine\ERP\ItemCategories\Infrastructure\Controller\ItemCategoryOptionsGetController;
 use Medine\ERP\ItemCategories\Infrastructure\Controller\ItemCategoryPostController;
 use Medine\ERP\ItemCategories\Infrastructure\Controller\ItemCategoryPutController;
+use Medine\ERP\ItemCategories\Infrastructure\Controller\ItemCategoryStatePutController;
 use Medine\ERP\ItemCategories\Infrastructure\Controller\ItemCategoryStatesGetController;
 
 Route::middleware('auth:api')->group(function () {
@@ -17,4 +18,5 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/item_categories', ItemCategoriesGetController::class);
     Route::get('/item_categories/options/{id}', ItemCategoryOptionsGetController::class);
     Route::get('/item_categories/states/{id}', ItemCategoryStatesGetController::class);
+    Route::put('/item_categories/state/{id}', ItemCategoryStatePutController::class);
 });
