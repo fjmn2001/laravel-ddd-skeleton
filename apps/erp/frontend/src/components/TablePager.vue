@@ -31,7 +31,7 @@
             </select>
         </div>
         <div class="align-items-center col-md-3 d-flex justify-content-end pb-3 pt-3">
-            <p class="mr-4 p-pag">Mostrando 1 - 10 de 20</p>
+            <p class="mr-4 p-pag">Mostrando {{ firstRow() }} - {{ lastRow() }} de {{ totalRows }}</p>
         </div>
     </div>
 </template>
@@ -43,9 +43,11 @@ export default defineComponent({
     setup() {
         const currentPage: Ref<number> = ref(1);
         const rowsByPage: Ref<number> = ref(10);
+        const totalRows: Ref<number> = ref(63);
 
+        //todo: lastPage
         function lastPage(): number {
-            return 6;
+            return 7;
         }
 
         function next() {
@@ -68,6 +70,16 @@ export default defineComponent({
             currentPage.value = lastPage();
         }
 
+        function firstRow() {
+            return (rowsByPage.value * (currentPage.value - 1)) + 1;
+        }
+
+        function lastRow() {
+            const lastRow = rowsByPage.value * (currentPage.value);
+
+            return lastRow > totalRows.value ? totalRows.value : lastRow;
+        }
+
         watch(() => currentPage.value, (val) => {
             if (val < 1 || val > lastPage()) {
                 currentPage.value = 1;
@@ -77,11 +89,14 @@ export default defineComponent({
         return {
             currentPage,
             rowsByPage,
+            totalRows,
             lastPage,
             next,
             prev,
             first,
-            last
+            last,
+            firstRow,
+            lastRow
         }
     }
 })
