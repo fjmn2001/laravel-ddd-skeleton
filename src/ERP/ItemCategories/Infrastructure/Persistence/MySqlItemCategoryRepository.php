@@ -63,7 +63,6 @@ final class MySqlItemCategoryRepository extends MySqlRepository implements \Medi
     {
         $query = DB::table('item_categories');
         $query = (new MySqlItemCategoryFilters($query))($criteria);
-        $query = $this->completeBuilder($criteria, $query);
 
         return (int)$query->count();
     }

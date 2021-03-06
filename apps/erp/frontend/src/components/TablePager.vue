@@ -46,7 +46,7 @@ export default defineComponent({
             required: true
         }
     },
-    setup(props) {
+    setup(props, {emit}) {
         const currentPage: Ref<number> = ref(1);
         const rowsByPage: Ref<number> = ref(10);
 
@@ -89,7 +89,12 @@ export default defineComponent({
         watch(() => currentPage.value, (val) => {
             if (val < 1 || val > lastPage()) {
                 currentPage.value = 1;
+            } else {
+                emit('setFromPager', {pLimit: rowsByPage.value, pOffset: firstRow() - 1})
             }
+        })
+        watch(() => rowsByPage.value, (val) => {
+            emit('setFromPager', {pLimit: val, pOffset: firstRow() - 1})
         })
 
         return {

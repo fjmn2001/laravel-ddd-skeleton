@@ -80,7 +80,8 @@
             </table>
         </div>
         <table-pager :totalRows="itemCategoriesCount"
-                     v-if="itemCategories.length > 0 && !loading"></table-pager>
+                     @setFromPager="mySetFromPager"
+                     v-show="itemCategories.length > 0 && !loading"></table-pager>
         <no-results v-if="itemCategories.length === 0 && !loading"></no-results>
         <loading v-if="loading"></loading>
         <options-modal :name="'optionsModal'"></options-modal>
@@ -111,7 +112,7 @@ export default defineComponent({
         const loading: Ref<boolean> = ref(true);
         const sending: Ref<boolean> = ref(false);
         const editing: Ref<boolean> = ref(false);
-        const {setFilters} = useItemCategoryFilters();
+        const {setFilters, setFromPager} = useItemCategoryFilters();
         const {user} = useAuth();
         const {itemCategory, reset, create} = useItemCategory();
         const {show, populateLoading, populateBody, hide} = useModal();
@@ -123,9 +124,15 @@ export default defineComponent({
 
         async function getItemCategories() {
             loading.value = true;
+            setFromPager({pLimit: 10, pOffset: 0})
             itemCategories.value = await api.getItemCategories();
             itemCategoriesCount.value = await api.getItemCategoriesCount();
             loading.value = false;
+        }
+
+        async function mySetFromPager({pLimit, pOffset}: { pLimit: number, pOffset: number }) {
+            setFromPager({pLimit, pOffset})
+            itemCategories.value = await api.getItemCategories();
         }
 
         watch(() => name.value, (val) => itemCategory.value.name = val)
@@ -249,7 +256,8 @@ export default defineComponent({
             myReset,
             showOptionsModal,
             search,
-            changeState
+            changeState,
+            mySetFromPager
         }
     }
 })
