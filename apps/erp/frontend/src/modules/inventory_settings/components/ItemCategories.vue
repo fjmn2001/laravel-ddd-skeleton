@@ -79,7 +79,9 @@
                 </tbody>
             </table>
         </div>
-        <table-pager v-if="itemCategories.length > 0 && !loading"></table-pager>
+        <table-pager :totalRows="itemCategoriesCount"
+                     @setFromPager="mySetFromPager"
+                     v-show="itemCategories.length > 0 && !loading"></table-pager>
         <no-results v-if="itemCategories.length === 0 && !loading"></no-results>
         <loading v-if="loading"></loading>
         <options-modal :name="'optionsModal'"></options-modal>
@@ -106,10 +108,11 @@ export default defineComponent({
 
     setup() {
         const itemCategories: Ref<ItemCategory[]> = ref([]);
+        const itemCategoriesCount: Ref<number> = ref(0);
         const loading: Ref<boolean> = ref(true);
         const sending: Ref<boolean> = ref(false);
         const editing: Ref<boolean> = ref(false);
-        const {setFilters} = useItemCategoryFilters();
+        const {setFilters, setFromPager} = useItemCategoryFilters();
         const {user} = useAuth();
         const {itemCategory, reset, create} = useItemCategory();
         const {show, populateLoading, populateBody, hide} = useModal();
@@ -121,8 +124,15 @@ export default defineComponent({
 
         async function getItemCategories() {
             loading.value = true;
+            setFromPager({pLimit: 10, pOffset: 0})
             itemCategories.value = await api.getItemCategories();
+            itemCategoriesCount.value = await api.getItemCategoriesCount();
             loading.value = false;
+        }
+
+        async function mySetFromPager({pLimit, pOffset}: { pLimit: number, pOffset: number }) {
+            setFromPager({pLimit, pOffset})
+            itemCategories.value = await api.getItemCategories();
         }
 
         watch(() => name.value, (val) => itemCategory.value.name = val)
@@ -241,11 +251,13 @@ export default defineComponent({
             itemCategories,
             loading,
             sending,
+            itemCategoriesCount,
             submit,
             myReset,
             showOptionsModal,
             search,
-            changeState
+            changeState,
+            mySetFromPager
         }
     }
 })
