@@ -40,14 +40,20 @@
 import {defineComponent, ref, Ref, watch} from "vue";
 
 export default defineComponent({
-    setup() {
+    props: {
+        totalRows: {
+            type: Number,
+            required: true
+        }
+    },
+    setup(props) {
         const currentPage: Ref<number> = ref(1);
         const rowsByPage: Ref<number> = ref(10);
-        const totalRows: Ref<number> = ref(63);
 
-        //todo: lastPage
         function lastPage(): number {
-            return 7;
+            const trunc = Math.trunc(props.totalRows / rowsByPage.value);
+
+            return (props.totalRows % rowsByPage.value) > 0 ? trunc + 1 : trunc;
         }
 
         function next() {
@@ -77,7 +83,7 @@ export default defineComponent({
         function lastRow() {
             const lastRow = rowsByPage.value * (currentPage.value);
 
-            return lastRow > totalRows.value ? totalRows.value : lastRow;
+            return lastRow > props.totalRows ? props.totalRows : lastRow;
         }
 
         watch(() => currentPage.value, (val) => {
@@ -89,7 +95,6 @@ export default defineComponent({
         return {
             currentPage,
             rowsByPage,
-            totalRows,
             lastPage,
             next,
             prev,

@@ -79,7 +79,7 @@
                 </tbody>
             </table>
         </div>
-        <table-pager v-if="itemCategories.length > 0 && !loading"></table-pager>
+        <table-pager :totalRows="20" v-if="itemCategories.length > 0 && !loading"></table-pager>
         <no-results v-if="itemCategories.length === 0 && !loading"></no-results>
         <loading v-if="loading"></loading>
         <options-modal :name="'optionsModal'"></options-modal>
