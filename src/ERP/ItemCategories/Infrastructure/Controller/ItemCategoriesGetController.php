@@ -6,6 +6,7 @@ namespace Medine\ERP\ItemCategories\Infrastructure\Controller;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Medine\ERP\Company\Application\Response\CompanyResponse;
 use Medine\ERP\ItemCategories\Application\Response\ItemCategoryResponse;
 use Medine\ERP\ItemCategories\Application\Search\ItemCategorySearcher;
@@ -36,9 +37,17 @@ final class ItemCategoriesGetController
                 'id' => $category->id(),
                 'name' => $category->name(),
                 'description' => $category->description(),
-                'state' => $category->state(),
+                'state' => $this->stateButton($category->state()),
                 'companyId' => $category->companyId()
             ];
         }, $response->categories()), JsonResponse::HTTP_OK);
+    }
+
+    private function stateButton(string $state): string
+    {
+        $title = Str::ucfirst($state);
+        $class = $state === 'active' ? 'btn-green' : 'btn-red';
+
+        return '<button type="button" class="btn btn-sm btn-table changeState ' . $class . '">' . $title . '</button>';
     }
 }
