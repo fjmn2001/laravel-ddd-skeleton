@@ -2,6 +2,7 @@ import {Company} from "@/modules/companies/types/Company";
 import axios from "axios";
 import {useFilters} from "@/modules/companies/use/useFilters";
 import {useCompany} from "@/modules/companies/use/useCompany";
+import {Catalog} from "@/modules/companies/types/Catalog";
 
 export const api = {
     async getCompanies(): Promise<Company[]> {
@@ -50,5 +51,11 @@ export const api = {
         return new Promise(resolve => {
             resolve(response.data);
         });
-    }
+    },
+    async getCatalog(): Promise<Catalog> {
+        const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/company/catalog');
+        return new Promise(resolve => {
+            resolve(response.data);
+        });
+    },
 };

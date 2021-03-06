@@ -39,11 +39,11 @@
 
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
-import {useStore} from 'vuex'
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 export default defineComponent({
     setup() {
-        const store = useStore();
+        const {passwordRequest} = useAuth();
 
         const email = ref('');
         const sending = ref(false);
@@ -52,7 +52,7 @@ export default defineComponent({
 
         function submit() {
             sending.value = true;
-            store.dispatch('auth/passwordRequest', {
+            passwordRequest({
                 email: email.value
             }).then(() => {
                 errorMessage.value = '';

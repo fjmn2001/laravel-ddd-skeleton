@@ -52,12 +52,12 @@
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
 import {useRouter} from 'vue-router'
-import {useStore} from 'vuex'
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 export default defineComponent({
     setup() {
         const router = useRouter();
-        const store = useStore();
+        const {retrieveToken} = useAuth();
 
         const username = ref('');
         const password = ref('');
@@ -66,7 +66,7 @@ export default defineComponent({
 
         function submit() {
             sending.value = true;
-            store.dispatch('retrieveToken', {
+            retrieveToken({
                 username: username.value,
                 password: password.value
             }).then(() => {

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Medine\ERP\ItemCategories\Domain\Entity\ItemCategoryRepository;
+use Medine\ERP\ItemCategories\Infrastructure\Persistence\MySqlItemCategoryRepository;
 use Medine\ERP\Locations\Domain\LocationRepository;
 use Medine\ERP\Locations\Infrastructure\MySqlLocationRepository;
 use Medine\ERP\Product\Domain\Contracts\ProductRepository;
@@ -15,7 +17,9 @@ use Medine\ERP\Roles\Infrastructure\MySqlRolRepository;
 use Medine\ERP\Roles\Domain\RolRepository;
 use Medine\ERP\Shared\Domain\Bus\Event\EventBus;
 use Medine\ERP\Shared\Domain\Bus\Event\SendEmailNotificationOnPasswordResetCreated;
+use Medine\ERP\Shared\Domain\CatalogRepository;
 use Medine\ERP\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus;
+use Medine\ERP\Shared\Infrastructure\MySqlCatalogRepository;
 use Medine\ERP\Users\Domain\PasswordResetRepository;
 use Medine\ERP\Users\Domain\UserRepository;
 use Medine\ERP\Users\Infrastructure\MySqlPasswordResetRepository;
@@ -40,6 +44,8 @@ class AppServiceProvider extends ServiceProvider
         LocationRepository::class => MySqlLocationRepository::class,
         ProductRepository::class => MySqlProductRepository::class,
         ClientRepository::class => MySqlClientRepository::class,
+        CatalogRepository::class => MySqlCatalogRepository::class,
+        ItemCategoryRepository::class => MySqlItemCategoryRepository::class
     ];
 
     /**

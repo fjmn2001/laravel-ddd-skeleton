@@ -23,6 +23,7 @@ final class Company
     private $createdAt;
     private $updatedAt;
     private $usersQuantity;
+    private $stateValue;
 
     private function __construct(
         CompanyId $id,
@@ -70,7 +71,8 @@ final class Company
         CompanyLogo $logo,
         CompanyCreatedAt $createdAt,
         CompanyUpdatedAt $updatedAt,
-        int $usersQuantity
+        int $usersQuantity,
+        string $stateValue
     ): self
     {
         $company = new self(
@@ -83,6 +85,7 @@ final class Company
             $updatedAt
         );
         $company->usersQuantity = $usersQuantity;
+        $company->stateValue = $stateValue;
 
         return $company;
     }
@@ -157,5 +160,10 @@ final class Company
     public function usersQuantity(): int
     {
         return $this->usersQuantity;
+    }
+
+    public function stateValue(): string
+    {
+        return $this->stateValue;
     }
 }

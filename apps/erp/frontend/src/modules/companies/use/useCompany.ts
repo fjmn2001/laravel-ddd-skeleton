@@ -24,10 +24,21 @@ export function useCompany() {
         company.value = await api.findCompany(id)
     }
 
+    async function reset() {
+        company.value = {
+            id: uuidv4(),
+            name: '',
+            state: 'active',
+            address: '',
+            phone: ''
+        };
+    }
+
     return {
         company: company,
         create,
         update,
-        find
+        find,
+        reset
     }
 }

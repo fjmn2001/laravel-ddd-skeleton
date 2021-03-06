@@ -19,14 +19,14 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue'
-import {useStore} from 'vuex'
 import Breadcrums from '@/components/Breadcrums.vue';
+import {useCore} from "@/modules/shared/use/useCore";
 
 export default defineComponent({
     components: {Breadcrums},
     setup() {
-        const store = useStore();
-        const breadcrumbUrl = store.state.ERP_URL + '/api/company/breadcrumbs';
+        const {ERP_URL} = useCore();
+        const breadcrumbUrl = ERP_URL + '/api/company/breadcrumbs';
 
         return {
             breadcrumbUrl

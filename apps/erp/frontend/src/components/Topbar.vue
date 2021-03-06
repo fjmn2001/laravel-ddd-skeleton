@@ -2,39 +2,38 @@
     <nav class="navbar navbar-default navbar-static-top m-b-0">
         <div class="navbar-header">
             <div class="top-left-part">
-                <a class="logo" href="javascript:void(0)"> <b> <img src="@/assets/images/logo-M.svg" alt="home">
-                </b> <span
-                    style=""> <img src="@/assets/images/logo-text-erp.svg" alt="homepage" class="dark-logo"
-                                   id="ima-logo-text"> </span> </a>
+                <a class="log-a logo" href="javascript:void(0)">
+                    <b><img src="@/assets/images/company.jpg" alt="home"
+                            class="logo" @click.prevent="toggleCompaniesList"></b> <span class="dropdown">
+                    <a class="btn btn-block empresas-btn font-20 waves-effect waves-light" href="#"
+                       @click.prevent="toggleCompaniesList" v-html="user?.company.name">
+                    </a>
+                    <ul class="animated dropdown-menu  dropdown-tasks slideInUp menu-empresas"
+                        :class="{show: showCompaniesList}">
+                                    <li v-for="company in user?.companies" :key="company.id">
+                                        <img src="@/assets/images/MAKRO-01-1024x648.jpg" class="logo">
+                                        <a href="javascript:void(0);" v-html="company.name"></a>
+                                    </li>
+                                </ul> </span> </a>
             </div>
             <ul class="nav navbar-top-links navbar-left hidden-xs">
                 <li class="icon-nav" style="margin-left: 5px;">
-                    <a href="javascript:void(0)" class="sidebartoggler font-20 waves-effect waves-light"><i
-                        class="icon-arrow-left-circle"></i></a>
+                    <a href="#" @click.prevent="toggleSidebar"
+                       class="sidebartoggler font-20 waves-effect waves-light"><i
+                        :class="{'fa fa-bars': !showSidebar, 'icon-arrow-left-circle': showSidebar}"></i></a>
                 </li>
                 <li class="icon-nav">
                     <router-link :to="{name: 'home'}" class="font-20"><i class="fa fa-home"/></router-link>
                 </li>
                 <li style="padding-top: 3px;">
                     <ul class="menu-horizontal" id="list01">
-                        <li>
-                            <a class="nav-link menu-link-med" id="menu-compras"
-                               href="javascript:void(0)">Compras</a>
-                        </li>
-                        <li>
-                            <a class="nav-link menu-link-med" id="menu-ventas" href="javascript:void(0)">Ventas</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#">Inventario</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#">Contabilidad</a>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#">Contratos</a>
-                        </li>
-                        <li>
-                            <router-link :to="{name: 'companies'}" class="nav-link">Empresas</router-link>
+                        <li v-for="topBarOption in topBarOptions" :key="topBarOption.name">
+                            <a class="nav-link menu-link-med"
+                               :class="{'topMenuSelected': topBarOption.name === topBarOptionSelected}"
+                               href="#"
+                               @click.prevent="getLeftBarOptions(topBarOption.name)">
+                                {{ topBarOption.title }}
+                            </a>
                         </li>
                     </ul>
                 </li>
@@ -78,19 +77,62 @@
     </nav>
 </template>
 
-<script>
-export default {
-    name: "Topbar",
-    methods: {
-        logout() {
-            this.$store.dispatch('destroyToken').then(() => {
-                this.$router.push({name: 'landing'});
+<script lang="ts">
+import $ from 'jquery';
+import {defineComponent, ref, onMounted} from 'vue'
+import {useAuth} from "@/modules/auth/use/useAuth";
+import {useRouter} from "vue-router";
+import {useMenu} from "@/use/useMenu";
+
+export default defineComponent({
+    setup() {
+        const router = useRouter();
+        const {destroyToken, user} = useAuth();
+        const showSidebar = ref(false);
+        const showCompaniesList = ref(false);
+        const {getTopBarOptions, topBarOptions, getLeftBarOptions, topBarOptionSelected} = useMenu();
+
+        onMounted(async () => {
+            getTopBarOptions();
+        });
+
+        function logout() {
+            destroyToken().then(() => {
+                router.push({name: 'landing'});
             })
         }
+
+        function toggleSidebar() {
+            if (showSidebar.value) {
+                showSidebar.value = false
+                $('body').addClass('mini-sidebar')
+            } else {
+                showSidebar.value = true
+                $('body').removeClass('mini-sidebar')
+            }
+        }
+
+        function toggleCompaniesList() {
+            showCompaniesList.value = !showCompaniesList.value;
+        }
+
+        return {
+            user,
+            showSidebar,
+            showCompaniesList,
+            topBarOptions,
+            topBarOptionSelected,
+            getLeftBarOptions,
+            toggleSidebar,
+            toggleCompaniesList,
+            logout
+        };
     }
-}
+})
 </script>
 
 <style scoped>
-
+.topMenuSelected {
+    color: white;
+}
 </style>
