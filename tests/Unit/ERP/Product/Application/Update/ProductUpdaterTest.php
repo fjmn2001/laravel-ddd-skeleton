@@ -4,34 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\Unit\ERP\Product\Application\Update;
 
-use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Medine\ERP\Product\Application\Create\CreateProductRequest;
-use Medine\ERP\Product\Application\Create\ProductCreator;
 use Medine\ERP\Product\Application\Update\ProductUpdater;
-use Medine\ERP\Product\Application\Update\UpdateProductRequest;
 use Medine\ERP\Product\Domain\Contracts\ProductRepository;
-use Medine\ERP\Product\Infrastructure\MySqlProductRepository;
-use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
-use Tests\Unit\ERP\Product\Application\Create\CreateProductRequestMother;
 use Tests\Unit\ERP\Product\Domain\ProductMother;
-use Tests\Unit\ERP\Product\Infrastructure\InMemoryProductRepository;
 
 final class ProductUpdaterTest extends TestCase
 {
     use DatabaseTransactions;
-
-    protected $updater;
-
-    protected function setUp(): void
-    {
-        $this->updater = new ProductUpdater(
-            new InMemoryProductRepository()
-        );
-
-        parent::setUp();
-    }
 
     /**
      * @test

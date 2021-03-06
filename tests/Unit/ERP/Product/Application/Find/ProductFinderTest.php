@@ -28,24 +28,6 @@ final class ProductFinderTest extends TestCase
 {
     use DatabaseTransactions;
 
-    protected $creator;
-    protected $finder;
-    protected $faker;
-
-    protected function setUp(): void
-    {
-        $this->creator = new ProductCreator(
-            new MySqlProductRepository()
-        );
-        $this->finder = new ProductFinder(
-            new MySqlProductRepository()
-        );
-
-        $this->faker = Factory::create();
-
-        parent::setUp();
-    }
-
     /**
      * @test
      */
