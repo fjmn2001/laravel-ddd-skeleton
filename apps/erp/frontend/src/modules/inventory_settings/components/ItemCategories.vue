@@ -20,6 +20,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 pr-lg-0">
                         <label>Estado *</label>
                         <select name="state" required="" class="form-control inp-filter" v-model="state">
+                            <option value="">Select</option>
                             <option value="active">Active</option>
                             <option value="inactive">Inactive</option>
                         </select>
@@ -117,7 +118,7 @@ export default defineComponent({
         //..
         const name: Ref<string> = ref('');
         const description: Ref<string> = ref('');
-        const state: Ref<string> = ref('active');
+        const state: Ref<string> = ref('');
 
         async function getItemCategories() {
             loading.value = true;
@@ -139,12 +140,16 @@ export default defineComponent({
         })
 
 
-        function myReset() {
+        async function myReset() {
             name.value = '';
             description.value = '';
-            state.value = 'active';
+            state.value = '';
             editing.value = false;
             reset();
+            await setFilters([
+                {field: 'companyId', value: user?.value?.company.id}
+            ]);
+            await getItemCategories()
         }
 
         async function submit() {
