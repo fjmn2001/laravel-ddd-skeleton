@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-
 namespace Medine\Apps\ERP\Backend\Controller\Clients;
 
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Medine\ERP\Clients\Application\Find\ClientFinder;
 use Medine\ERP\Clients\Application\Find\ClientFinderRequest;
 
-final class ClientBreadcrumbsPostController
+final class ClientBreadcrumbsPostController extends Controller
 {
     private $finder;
 
