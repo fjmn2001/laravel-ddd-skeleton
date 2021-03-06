@@ -66,8 +66,7 @@
                     <td v-html="itemCategory.name"></td>
                     <td v-html="itemCategory.description"></td>
                     <td>
-                        <button type="button" class="btn btn-green btn-sm btn-table changeState"
-                                v-html="itemCategory.state" @click.prevent="changeState(itemCategory.id)"></button>
+                        <span v-html="itemCategory.state" @click.prevent="changeState(itemCategory.id)"></span>
                     </td>
                     <td>
                         <div class="dropdown">
