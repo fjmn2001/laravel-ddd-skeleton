@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Shared\Domain\ValueObjects;
 
+use Medine\ERP\Shared\Domain\Exceptions\InvalidUuidException;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
 class Uuid
@@ -34,8 +35,8 @@ class Uuid
 
     private function ensureIsValidUuid(string $uuid): void
     {
-        if(!RamseyUuid::isValid($uuid)){
-            throw new \Exception(sprintf("<%s> does not allow the value <%s>", static::class, $uuid));
+        if(! RamseyUuid::isValid($uuid)){
+            throw new InvalidUuidException(sprintf("<%s> does not allow the value <%s>", static::class, $uuid));
         }
     }
 }
