@@ -2,6 +2,7 @@ import {ref, Ref} from "vue";
 import axios from "axios";
 import {useCore} from "@/modules/shared/use/useCore";
 import {User} from "@/modules/auth/types/User";
+import {Company} from "@/modules/auth/types/Company";
 
 type retrieveTokenParam = {
     username: string
@@ -76,6 +77,12 @@ export function useAuth() {
         }
     }
 
+    function setCompany(company: Company) {
+        if (user.value) {
+            user.value.company = company;
+        }
+    }
+
     function passwordRequest(credentials: passwordRequestParam) {
         return new Promise((resolve, reject) => {
             axios.post(ERP_URL + '/api/auth/password_request', {
@@ -107,6 +114,7 @@ export function useAuth() {
         destroyToken,
         getUser,
         passwordRequest,
-        resetPassword
+        resetPassword,
+        setCompany
     }
 }

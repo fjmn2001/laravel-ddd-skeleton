@@ -1,8 +1,4 @@
-type Company = {
-    id: string,
-    logo: string,
-    name: string
-}
+import {Company} from "@/modules/auth/types/Company";
 
 export interface User {
     id: number,
