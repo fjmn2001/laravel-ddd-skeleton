@@ -13,7 +13,8 @@ final class TopMenuGetController
     {
         return new JsonResponse([
             ['name' => 'inventory', 'title' => 'Inventory'],
-            ['name' => 'companies', 'title' => 'Companies']
+            ['name' => 'companies', 'title' => 'Companies'],
+            ['name' => 'clients', 'title' => 'Clients'],
         ], JsonResponse::HTTP_OK);
     }
 }

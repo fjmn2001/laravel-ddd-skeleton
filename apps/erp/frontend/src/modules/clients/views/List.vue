@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue'
-import {useStore} from 'vuex'
+import {useCore} from "@/modules/shared/use/useCore";
 
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/clients/components/SearchForm.vue";
@@ -23,11 +23,10 @@ export default defineComponent({
     components: {SearchForm, Breadcrums},
 
     setup() {
-        const store = useStore()
-        const breadcrumbUrl: string = store.state.ERP_URL + '/api/client/breadcrumbs'
+        const {ERP_URL} = useCore();
+        const breadcrumbUrl: string = ERP_URL + '/api/client/breadcrumbs'
 
         return {
-            store,
             breadcrumbUrl,
         }
     }

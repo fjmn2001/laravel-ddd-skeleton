@@ -9,7 +9,7 @@
                         <li>Empresas</li>
                     </ul>
                     <ul>
-                        <li><router-link :to="{name: 'clients'}">Clientes</router-link></li>
+                        <li>Clientes</li>
                     </ul>
                 </div>
             </div>
