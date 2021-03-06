@@ -130,8 +130,11 @@ export default defineComponent({
             reset();
         }
 
+
         async function getItemCategories() {
+            loading.value = true;
             itemCategories.value = await api.getItemCategories();
+            loading.value = false;
         }
 
         async function submit() {
@@ -144,6 +147,9 @@ export default defineComponent({
                 }
 
                 myReset();
+                await setFilters([
+                    {field: 'companyId', value: user?.value?.company.id}
+                ]);
                 await getItemCategories()
             } catch (e) {
                 console.log(e);
@@ -157,7 +163,6 @@ export default defineComponent({
                 {field: 'companyId', value: user?.value?.company.id}
             ]);
             await getItemCategories();
-            loading.value = false;
         });
 
         async function changeState(id: string) {
@@ -173,9 +178,10 @@ export default defineComponent({
                     $(e.target).data('state')
                 )
                 hide('optionsModal')
-                loading.value = true;
+                await setFilters([
+                    {field: 'companyId', value: user?.value?.company.id}
+                ]);
                 await getItemCategories();
-                loading.value = false;
             });
         }
 
@@ -205,7 +211,6 @@ export default defineComponent({
         }
 
         async function search() {
-            loading.value = true;
             await setFilters([
                 {field: 'companyId', value: user?.value?.company.id},
                 {field: 'name', value: name.value},
@@ -213,7 +218,6 @@ export default defineComponent({
                 {field: 'state', value: state}
             ]);
             await getItemCategories()
-            loading.value = false;
         }
 
         return {
