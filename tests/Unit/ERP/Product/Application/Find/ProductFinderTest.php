@@ -10,6 +10,7 @@ use Medine\ERP\Product\Application\Create\CreateProductRequest;
 use Medine\ERP\Product\Application\Create\ProductCreator;
 use Medine\ERP\Product\Application\Find\FindProductRequest;
 use Medine\ERP\Product\Application\Find\ProductFinder;
+use Medine\ERP\Product\Domain\Contracts\ProductRepository;
 use Medine\ERP\Product\Domain\Entity\Product;
 use Medine\ERP\Product\Domain\ValueObjects\ProductCategory;
 use Medine\ERP\Product\Domain\ValueObjects\ProductCode;
@@ -20,6 +21,8 @@ use Medine\ERP\Product\Domain\ValueObjects\ProductType;
 use Medine\ERP\Product\Infrastructure\MySqlProductRepository;
 use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
+use Tests\Unit\ERP\Product\Application\Create\CreateProductRequestMother;
+use Tests\Unit\ERP\Product\Domain\ProductMother;
 
 final class ProductFinderTest extends TestCase
 {
@@ -48,27 +51,14 @@ final class ProductFinderTest extends TestCase
      */
     public function it_should_find_an_existing_product()
     {
-        $UUID = Uuid::uuid4()->toString();
+        $product = ProductMother::random();
 
-        $product = Product::create(
-            new ProductId($UUID),
-            new ProductCode($this->faker->text(6)),
-            new ProductName($this->faker->name),
-            new ProductCategory(Uuid::uuid4()->toString()),
-            new ProductDescription($this->faker->realText(255)),
-            new ProductType(Uuid::uuid4()->toString())
+        $repository = $this->createMock(ProductRepository::class);
+        $this->shouldFind($repository, $product);
+
+        $response = (new ProductFinder($repository))->__invoke(
+            FindProductRequestMother::withId($product->id()->value())
         );
-
-        ($this->creator)(new CreateProductRequest(
-            $product->id()->value(),
-            $product->code()->value(),
-            $product->name()->value(),
-            $product->categoryId()->value(),
-            $product->description()->value(),
-            $product->typeId()->value()
-        ));
-
-        $response = ($this->finder)(new FindProductRequest($UUID));
 
         $this->assertEquals($product->id()->value(), $response->id());
         $this->assertEquals($product->code()->value(), $response->code());
@@ -76,5 +66,12 @@ final class ProductFinderTest extends TestCase
         $this->assertEquals($product->categoryId()->value(), $response->categoryId());
         $this->assertEquals($product->description()->value(), $response->description());
         $this->assertEquals($product->typeId()->value(), $response->typeId());
+    }
+
+    private function shouldFind(\PHPUnit\Framework\MockObject\MockObject $repository, Product $product): void
+    {
+        $repository->method('find')
+            ->with($this->equalTo($product->id()))
+            ->willReturn($product);
     }
 }
