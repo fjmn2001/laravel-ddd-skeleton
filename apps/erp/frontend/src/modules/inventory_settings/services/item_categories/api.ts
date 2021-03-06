@@ -22,6 +22,23 @@ export const api = {
             resolve(response.data);
         });
     },
+    async getItemCategoriesCount(): Promise<number> {
+        const {token} = useAuth();
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.value;
+        const {filters, orderBy, order, limit, offset} = useItemCategoryFilters();
+        const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/item_categories/count', {
+            params: {
+                filters: filters.value,
+                orderBy: orderBy.value,
+                order: order.value,
+                limit: limit.value,
+                offset: offset.value
+            }
+        });
+        return new Promise(resolve => {
+            resolve(response.data);
+        });
+    },
     async createItemCategory(): Promise<ItemCategory> {
         const {user} = useAuth();
         const {itemCategory} = useItemCategory();

@@ -79,7 +79,8 @@
                 </tbody>
             </table>
         </div>
-        <table-pager :totalRows="20" v-if="itemCategories.length > 0 && !loading"></table-pager>
+        <table-pager :totalRows="itemCategoriesCount"
+                     v-if="itemCategories.length > 0 && !loading"></table-pager>
         <no-results v-if="itemCategories.length === 0 && !loading"></no-results>
         <loading v-if="loading"></loading>
         <options-modal :name="'optionsModal'"></options-modal>
@@ -106,6 +107,7 @@ export default defineComponent({
 
     setup() {
         const itemCategories: Ref<ItemCategory[]> = ref([]);
+        const itemCategoriesCount: Ref<number> = ref(0);
         const loading: Ref<boolean> = ref(true);
         const sending: Ref<boolean> = ref(false);
         const editing: Ref<boolean> = ref(false);
@@ -122,6 +124,7 @@ export default defineComponent({
         async function getItemCategories() {
             loading.value = true;
             itemCategories.value = await api.getItemCategories();
+            itemCategoriesCount.value = await api.getItemCategoriesCount();
             loading.value = false;
         }
 
@@ -241,6 +244,7 @@ export default defineComponent({
             itemCategories,
             loading,
             sending,
+            itemCategoriesCount,
             submit,
             myReset,
             showOptionsModal,

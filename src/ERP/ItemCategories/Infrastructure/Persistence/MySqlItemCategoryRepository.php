@@ -59,6 +59,15 @@ final class MySqlItemCategoryRepository extends MySqlRepository implements \Medi
         return $query->get()->map($this->buildItemCategory())->toArray();
     }
 
+    public function count(\Medine\ERP\Shared\Domain\Criteria $criteria): int
+    {
+        $query = DB::table('item_categories');
+        $query = (new MySqlItemCategoryFilters($query))($criteria);
+        $query = $this->completeBuilder($criteria, $query);
+
+        return (int)$query->count();
+    }
+
     private function buildItemCategory(): \Closure
     {
         return function ($row) {

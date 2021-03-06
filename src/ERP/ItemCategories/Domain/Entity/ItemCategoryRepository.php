@@ -13,4 +13,6 @@ interface ItemCategoryRepository
     public function update(ItemCategory $category): void;
 
     public function matching(\Medine\ERP\Shared\Domain\Criteria $criteria): array;
+
+    public function count(\Medine\ERP\Shared\Domain\Criteria $criteria): int;
 }
