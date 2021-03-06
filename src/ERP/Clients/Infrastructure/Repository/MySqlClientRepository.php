@@ -32,10 +32,11 @@ use Medine\ERP\Clients\Domain\ValueObjects\ClientLastname;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientName;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientState;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientUpdatedAt;
+use Medine\ERP\Shared\Infrastructure\MySqlRepository;
 use function Lambdish\Phunctional\map;
 use function Lambdish\Phunctional\each;
 
-final class MySqlClientRepository implements ClientRepository
+final class MySqlClientRepository  extends MySqlRepository implements ClientRepository
 {
 
     public function save(Client $client): void
@@ -99,6 +100,15 @@ final class MySqlClientRepository implements ClientRepository
     }
 
 
+    public function matching(\Medine\ERP\Shared\Domain\Criteria $criteria): array
+    {
+        $query = DB::table('clients');
+        $query = (new MySqlClientsFilters($query))($criteria);
+        $query = $this->completeBuilder($criteria, $query);
+
+        return $query->get()->map($this->buildClients())->toArray();
+    }
+
     private function retrieveEmail(): \Closure
     {
         return function ($email) {
@@ -152,6 +162,33 @@ final class MySqlClientRepository implements ClientRepository
                 new ClientHasEmailCreateAt($item->created_at),
                 new ClientHasEmailUpdateAt($item->updated_at)
             ));
+        };
+    }
+
+    private function buildClients(): \Closure
+    {
+        return function ($row) {
+            $client = Client::fromDatabase(
+                new ClientId($row->id),
+                new ClientName($row->name),
+                new ClientLastname($row->lastname),
+                new ClientDni($row->dni),
+                new ClientDniType($row->dni_type),
+                new ClientClientType($row->client_type),
+                new ClientClientCategory($row->client_category),
+                new ClientFrequentClientNumber($row->frequent_client_number),
+                new ClientState($row->state),
+                new ClientCreatedAt($row->created_at),
+                new ClientUpdatedAt($row->updated_at),
+            );
+
+            $rowPhones = DB::table('client_phones')->where('client_phones.client_id', '=', $client->id()->value())->get();
+            $rowEmails = DB::table('client_emails')->where('client_emails.client_id', '=', $client->id()->value())->get();
+
+            each($this->addClientPhone($client), $rowPhones);
+            each($this->addClientEmail($client), $rowEmails);
+
+            return $client;
         };
     }
 }

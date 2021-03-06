@@ -28,14 +28,42 @@
                                             <input type="checkbox" class="chk">
                                         </th>
                                         <th>Nombre<i class="fa fa-sort thead-i"></i></th>
-                                        <th>Fecha de creación<i class="fa fa-sort thead-i"></i></th>
-                                        <th>Cantidad de usuario<i class="fa fa-caret-down thead-i"></i></th>
-                                        <th>Estado<i class="fa fa-caret-up thead-i"></i></th>
+                                        <th>Identificación<i class="fa fa-sort thead-i"></i></th>
+                                        <th>Teléfono<i class="fa fa-sort thead-i"></i></th>
+                                        <th>Correo electrónico<i class="fa fa-sort thead-i"></i></th>
+                                        <th>Crédito a favor</th>
+                                        <th>Saldo por cobrar</th>
+                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr v-for="client in clients" :key="client.id">
+                                        <th>
+                                            <input type="checkbox" class="chk">
+                                        </th>
+                                        <td>
+                                            <router-link
+                                                :to="{name: 'clients.edit', params:{id: client.id}}">
+                                                {{ client.name }}
+                                            </router-link>
+                                        </td>
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class=" td-btn-med">
+                                            <button type="button" class="btn btn-green btn-sm btn-table"
+                                                    v-html="client.state"></button>
+                                        </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a class="btn btn-sm btn-opt" href="#">
+                                                    <img src="@/assets/images/icons/3puntos_H.svg"> </a>
+                                            </div>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

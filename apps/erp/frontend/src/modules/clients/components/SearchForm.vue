@@ -33,18 +33,27 @@
 
 <script lang="ts">
 import {defineComponent, nextTick, ref} from 'vue'
+import {useFilters} from "@/modules/shared/use/useFilters";
+import {useClients} from "@/modules/clients/use/useClients";
+
 export default defineComponent({
     emits: ['search'],
     setup() {
         const name = ref('');
 
+        const {setFilters} = useFilters()
+        const {loading, getClients} = useClients();
 
 
         async function search() {
-            console.log('search');
+            await setFilters([
+                {field: 'name', value: name.value},
+            ])
+            getClients();
         }
 
         async function clean() {
+            name.value = '';
             nextTick(() => {
                 search();
             });
@@ -52,6 +61,7 @@ export default defineComponent({
 
         return {
             name,
+            loading,
             search,
             clean,
         }
