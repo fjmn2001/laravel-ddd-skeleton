@@ -99,6 +99,7 @@ import {useAuth} from "@/modules/auth/use/useAuth";
 import {useItemCategory} from "@/modules/inventory_settings/use/useItemCatetory";
 import OptionsModal from "@/components/modal/optionsModal.vue";
 import {useModal} from "@/use/useModal";
+import {Company} from "@/modules/auth/types/Company";
 
 export default defineComponent({
     components: {OptionsModal, Loading, NoResults, TablePager},
@@ -118,9 +119,25 @@ export default defineComponent({
         const description: Ref<string> = ref('');
         const state: Ref<string> = ref('active');
 
+        async function getItemCategories() {
+            loading.value = true;
+            itemCategories.value = await api.getItemCategories();
+            loading.value = false;
+        }
+
         watch(() => name.value, (val) => itemCategory.value.name = val)
         watch(() => description.value, (val) => itemCategory.value.description = val)
         watch(() => state.value, (val) => itemCategory.value.state = val)
+        //when changeCompany
+        watch(() => user.value?.company, async (company: Company | undefined) => {
+            if (company) {
+                await setFilters([
+                    {field: 'companyId', value: company.id}
+                ]);
+                await getItemCategories()
+            }
+        })
+
 
         function myReset() {
             name.value = '';
@@ -128,13 +145,6 @@ export default defineComponent({
             state.value = 'active';
             editing.value = false;
             reset();
-        }
-
-
-        async function getItemCategories() {
-            loading.value = true;
-            itemCategories.value = await api.getItemCategories();
-            loading.value = false;
         }
 
         async function submit() {
