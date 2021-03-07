@@ -84,6 +84,7 @@
                             <button class="btn btn-block  my-3 btn-modal">Copiar</button>
                             <button class="btn btn-block  my-3 btn-modal">Suspender</button>
                             <button class="btn btn-block  my-3 btn-modal">Editar</button>
+                            <button class="btn btn-block  my-3 btn-modal" data-toggle="modal" data-target="#ModalDocument">Subir documento</button>
                         </div>
                     </div>
                 </div>
@@ -102,6 +103,38 @@
 
                             <button class="btn btn-block  my-3 btn-outline-success">Activo</button>
                             <button class="btn btn-block  my-3 btn-outline-danger">Desactivado</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="ModalDocument" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content modal-doc">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Subir documento</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="subir-doc">
+                                <div class="barra-carga d-none">
+                                    <div>
+                                        <div style="width: 80%;"></div>
+                                    </div>
+                                    <span>80%</span>
+                                </div>
+                                <label for="fichero">
+                                    Selecione o arrastre un archivo
+                                    <i class="fa fa-cloud-upload"></i>
+                                </label>
+                                <input id="fichero" type="file">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-blue-deg ">Subir</button>
                         </div>
                     </div>
                 </div>

@@ -327,6 +327,7 @@
                                 <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column">
                                     <h5 class="xtitle-buscar">Detalles de la empresa</h5>
                                     <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 xsubtitle-buscar">(Formulario)</p>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Subir</button>
                                 </div>
                                 <a href="#des03" data-toggle="collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -355,6 +356,37 @@
                         <div class="col-6 col-md-2 col-sm-6" style="margin-top: 3px;">
                             <button type="button" class="btn btn-block btn-blue-deg mb-2 mr-0 mr-md-5 mt-2" style="height: 38px;">Guardar</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-doc">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Subir documento</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="subir-doc">
+                            <div class="barra-carga d-none">
+                                <div>
+                                    <div style="width: 80%;"></div>
+                                </div>
+                                <span>80%</span>
+                            </div>
+                            <label for="fichero">
+                                Selecione o arrastre un archivo
+                                <i class="fa fa-cloud-upload"></i>
+                            </label>
+                            <input id="fichero" type="file">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-blue-deg ">Subir</button>
                     </div>
                 </div>
             </div>
