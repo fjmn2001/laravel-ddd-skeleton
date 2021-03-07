@@ -7,17 +7,14 @@ namespace Medine\ERP\ItemCategories\Infrastructure\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Medine\ERP\Company\Application\Response\CompanyResponse;
-use Medine\ERP\ItemCategories\Application\Response\ItemCategoryResponse;
-use Medine\ERP\ItemCategories\Application\Search\ItemCategorySearcher;
+use Medine\ERP\ItemCategories\Application\Search\ItemCategoryCountSearcher;
 use Medine\ERP\ItemCategories\Application\Search\ItemCategorySearcherRequest;
-use function Lambdish\Phunctional\map;
 
-final class ItemCategoriesGetController
+final class ItemCategoriesCountGetController
 {
     private $searcher;
 
-    public function __construct(ItemCategorySearcher $searcher)
+    public function __construct(ItemCategoryCountSearcher $searcher)
     {
         $this->searcher = $searcher;
     }
@@ -32,15 +29,7 @@ final class ItemCategoriesGetController
             (int)$request->offset
         ));
 
-        return new JsonResponse(map(function (ItemCategoryResponse $category) {
-            return [
-                'id' => $category->id(),
-                'name' => $category->name(),
-                'description' => $category->description(),
-                'state' => $this->stateButton($category->state()),
-                'companyId' => $category->companyId()
-            ];
-        }, $response->categories()), JsonResponse::HTTP_OK);
+        return new JsonResponse($response->count(), JsonResponse::HTTP_OK);
     }
 
     private function stateButton(string $state): string

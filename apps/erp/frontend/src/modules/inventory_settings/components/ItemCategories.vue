@@ -20,6 +20,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 pr-lg-0">
                         <label>Estado *</label>
                         <select name="state" required="" class="form-control inp-filter" v-model="state">
+                            <option value="">Select</option>
                             <option value="active">Active</option>
                             <option value="inactive">Inactive</option>
                         </select>
@@ -44,7 +45,7 @@
             <div class="d-flex pt-1 row">
                 <div style="padding-left: 0px;" class="align-items-center col-md-12 d-flex mb-2">
                     <h5 class="d-inline ml-4 ml-lg-3 ml-md-3 ml-sm-2 xtitle-buscar"
-                        >Categorías de ítems</h5>
+                    >Categorías de ítems</h5>
                 </div>
             </div>
         </div>
@@ -65,8 +66,7 @@
                     <td v-html="itemCategory.name"></td>
                     <td v-html="itemCategory.description"></td>
                     <td>
-                        <button type="button" class="btn btn-green btn-sm btn-table"
-                                v-html="itemCategory.state"></button>
+                        <span v-html="itemCategory.state" @click.prevent="changeState(itemCategory.id)"></span>
                     </td>
                     <td>
                         <div class="dropdown">
@@ -79,7 +79,9 @@
                 </tbody>
             </table>
         </div>
-        <table-pager v-if="itemCategories.length > 0 && !loading"></table-pager>
+        <table-pager :totalRows="itemCategoriesCount"
+                     @setFromPager="mySetFromPager"
+                     v-show="itemCategories.length > 0 && !loading"></table-pager>
         <no-results v-if="itemCategories.length === 0 && !loading"></no-results>
         <loading v-if="loading"></loading>
         <options-modal :name="'optionsModal'"></options-modal>
@@ -99,16 +101,18 @@ import {useAuth} from "@/modules/auth/use/useAuth";
 import {useItemCategory} from "@/modules/inventory_settings/use/useItemCatetory";
 import OptionsModal from "@/components/modal/optionsModal.vue";
 import {useModal} from "@/use/useModal";
+import {Company} from "@/modules/auth/types/Company";
 
 export default defineComponent({
     components: {OptionsModal, Loading, NoResults, TablePager},
 
     setup() {
         const itemCategories: Ref<ItemCategory[]> = ref([]);
+        const itemCategoriesCount: Ref<number> = ref(0);
         const loading: Ref<boolean> = ref(true);
         const sending: Ref<boolean> = ref(false);
         const editing: Ref<boolean> = ref(false);
-        const {setFilters} = useItemCategoryFilters();
+        const {setFilters, setFromPager} = useItemCategoryFilters();
         const {user} = useAuth();
         const {itemCategory, reset, create} = useItemCategory();
         const {show, populateLoading, populateBody, hide} = useModal();
@@ -116,22 +120,45 @@ export default defineComponent({
         //..
         const name: Ref<string> = ref('');
         const description: Ref<string> = ref('');
-        const state: Ref<string> = ref('active');
+        const state: Ref<string> = ref('');
+
+        async function getItemCategories() {
+            loading.value = true;
+            setFromPager({pLimit: 10, pOffset: 0})
+            itemCategories.value = await api.getItemCategories();
+            itemCategoriesCount.value = await api.getItemCategoriesCount();
+            loading.value = false;
+        }
+
+        async function mySetFromPager({pLimit, pOffset}: { pLimit: number, pOffset: number }) {
+            setFromPager({pLimit, pOffset})
+            itemCategories.value = await api.getItemCategories();
+        }
 
         watch(() => name.value, (val) => itemCategory.value.name = val)
         watch(() => description.value, (val) => itemCategory.value.description = val)
         watch(() => state.value, (val) => itemCategory.value.state = val)
+        //when changeCompany
+        watch(() => user.value?.company, async (company: Company | undefined) => {
+            if (company) {
+                await setFilters([
+                    {field: 'companyId', value: company.id}
+                ]);
+                await getItemCategories()
+            }
+        })
 
-        function myReset() {
+
+        async function myReset() {
             name.value = '';
             description.value = '';
-            state.value = 'active';
+            state.value = '';
             editing.value = false;
             reset();
-        }
-
-        async function getItemCategories() {
-            itemCategories.value = await api.getItemCategories();
+            await setFilters([
+                {field: 'companyId', value: user?.value?.company.id}
+            ]);
+            await getItemCategories()
         }
 
         async function submit() {
@@ -144,6 +171,9 @@ export default defineComponent({
                 }
 
                 myReset();
+                await setFilters([
+                    {field: 'companyId', value: user?.value?.company.id}
+                ]);
                 await getItemCategories()
             } catch (e) {
                 console.log(e);
@@ -157,16 +187,37 @@ export default defineComponent({
                 {field: 'companyId', value: user?.value?.company.id}
             ]);
             await getItemCategories();
-            loading.value = false;
         });
+
+        async function changeState(id: string) {
+            show('optionsModal')
+            populateLoading('optionsModal')
+            const modal = $('#optionsModal');
+            const response = await api.getItemCategoryStates(id);
+            populateBody('optionsModal', response)
+            modal.off('click', '.updateState').on('click', '.updateState', async (e) => {
+                populateLoading('optionsModal')
+                await api.updateItemCategoryState(
+                    $(e.target).data('id'),
+                    $(e.target).data('state')
+                )
+                hide('optionsModal')
+                await setFilters([
+                    {field: 'companyId', value: user?.value?.company.id}
+                ]);
+                await getItemCategories();
+            });
+        }
 
         async function showOptionsModal(id: string) {
             show('optionsModal')
             populateLoading('optionsModal')
 
             const html = await api.getItemCategoryOptions(id)
+            const modal = $('#optionsModal');
+
             populateBody('optionsModal', html)
-            $('#optionsModal').off('click', '.edit').on('click', '.edit', async () => {
+            modal.off('click', '.edit').on('click', '.edit', async () => {
                 populateLoading('optionsModal')
                 const response = await api.findItemCategory(id);
                 itemCategory.value = response
@@ -176,10 +227,14 @@ export default defineComponent({
                 editing.value = true;
                 hide('optionsModal')
             });
+
+            modal.off('click', '.changeState').on('click', '.changeState', async () => {
+                hide('optionsModal')
+                changeState(id)
+            });
         }
 
         async function search() {
-            loading.value = true;
             await setFilters([
                 {field: 'companyId', value: user?.value?.company.id},
                 {field: 'name', value: name.value},
@@ -187,7 +242,6 @@ export default defineComponent({
                 {field: 'state', value: state}
             ]);
             await getItemCategories()
-            loading.value = false;
         }
 
         return {
@@ -197,10 +251,13 @@ export default defineComponent({
             itemCategories,
             loading,
             sending,
+            itemCategoriesCount,
             submit,
             myReset,
             showOptionsModal,
-            search
+            search,
+            changeState,
+            mySetFromPager
         }
     }
 })

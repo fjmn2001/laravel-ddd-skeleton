@@ -60,7 +60,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <table-pager></table-pager>
+                            <table-pager :totalRows="20"></table-pager>
                         </div>
                         <no-results v-if="!hasData() && !loading"></no-results>
                         <loading v-if="loading"></loading>
