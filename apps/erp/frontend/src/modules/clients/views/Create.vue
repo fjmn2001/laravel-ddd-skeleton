@@ -8,7 +8,7 @@
                 <payment-information v-if="!loading"></payment-information>
                 <users-assigned-client v-if="!loading"></users-assigned-client>
             </div>
-
+            <form-buttons @cancel="cancel" :disabledSave="sending"></form-buttons>
         </form>
     </div>
 </template>
@@ -17,7 +17,10 @@
 import {defineComponent, onMounted, ref} from 'vue'
 import {useRouter} from 'vue-router'
 import {useCore} from "@/modules/shared/use/useCore";
+import {useClient} from "@/modules/clients/use/useClient";
+
 import Breadcrums from '@/components/Breadcrums.vue';
+import FormButtons from "@/components/FormButtons.vue";
 import GeneralsDetails from "@/modules/clients/components/GeneralsDetails.vue";
 import ContactInformation from "@/modules/clients/components/ContactInformation.vue";
 import PaymentInformation from "@/modules/clients/components/PaymentInformation.vue";
@@ -30,6 +33,7 @@ export default defineComponent({
         ContactInformation,
         PaymentInformation,
         UsersAssignedClient,
+        FormButtons,
     },
     setup() {
         const router = useRouter();
@@ -37,8 +41,10 @@ export default defineComponent({
         const breadcrumbUrl: string = ERP_URL + '/api/client/breadcrumbs'
         const loading = ref(true);
         const sending = ref(false)
+        const {create, reset} = useClient()
 
         onMounted(async () => {
+            await reset();
             loading.value = false
         })
 
@@ -49,13 +55,13 @@ export default defineComponent({
         async function submit() {
             try {
                 sending.value = true
-                // await create()
+                await create()
                 //todo: add toast
                 //toastr.success('hola', 'exito');
-                // router.push({name: 'clients'});
+                router.push({name: 'clients'});
             } catch (e) {
                 //todo: add toast
-                // console.log('2', e);
+                console.log('2', e);
             } finally {
                 sending.value = false
             }
