@@ -12,12 +12,19 @@ export function useItemCategoryFilters() {
         filters.value = newFilters;
     }
 
+    function setFromPager({pLimit, pOffset}: { pLimit: number, pOffset: number }) {
+        console.log('setFromPager', pLimit, pOffset);
+        limit.value = pLimit;
+        offset.value = pOffset;
+    }
+
     return {
         filters,
         orderBy,
         order,
         limit,
         offset,
-        setFilters
+        setFilters,
+        setFromPager
     }
 }

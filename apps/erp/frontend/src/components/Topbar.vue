@@ -10,9 +10,10 @@
                     </a>
                     <ul class="animated dropdown-menu  dropdown-tasks slideInUp menu-empresas"
                         :class="{show: showCompaniesList}">
-                                    <li v-for="company in user?.companies" :key="company.id">
+                                    <li v-for="company in user?.companies" :key="company.id"
+                                        @click.prevent="changeCompany(company)">
                                         <img src="@/assets/images/MAKRO-01-1024x648.jpg" class="logo">
-                                        <a href="javascript:void(0);" v-html="company.name"></a>
+                                        <a href="#" v-html="company.name"></a>
                                     </li>
                                 </ul> </span> </a>
             </div>
@@ -83,11 +84,12 @@ import {defineComponent, ref, onMounted} from 'vue'
 import {useAuth} from "@/modules/auth/use/useAuth";
 import {useRouter} from "vue-router";
 import {useMenu} from "@/use/useMenu";
+import {Company} from "@/modules/auth/types/Company";
 
 export default defineComponent({
     setup() {
         const router = useRouter();
-        const {destroyToken, user} = useAuth();
+        const {destroyToken, user, setCompany} = useAuth();
         const showSidebar = ref(false);
         const showCompaniesList = ref(false);
         const {getTopBarOptions, topBarOptions, getLeftBarOptions, topBarOptionSelected} = useMenu();
@@ -95,6 +97,11 @@ export default defineComponent({
         onMounted(async () => {
             getTopBarOptions();
         });
+
+        function changeCompany(company: Company) {
+            setCompany(company);
+            showCompaniesList.value = false;
+        }
 
         function logout() {
             destroyToken().then(() => {
@@ -125,7 +132,8 @@ export default defineComponent({
             getLeftBarOptions,
             toggleSidebar,
             toggleCompaniesList,
-            logout
+            logout,
+            changeCompany
         };
     }
 })

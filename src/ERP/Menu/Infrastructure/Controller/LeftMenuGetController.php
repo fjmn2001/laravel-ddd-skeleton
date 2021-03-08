@@ -14,11 +14,12 @@ final class LeftMenuGetController
             ['name' => 'inventory_settings', 'title' => 'Setting', 'class' => 'fa-fw icon-settings']
         ],
         'companies' => [
-            ['name' => 'companies', 'title' => 'Companies', 'class' => 'fa fa-users']
+            ['name' => 'companies', 'title' => 'Companies', 'class' => 'fa fa-building-o fa-fw']
         ],
         'clients' => [
             ['name' => 'clients', 'title' => 'Clients', 'class' => 'fa fa-users']
         ],
+
     ];
 
     public function __invoke(Request $request)

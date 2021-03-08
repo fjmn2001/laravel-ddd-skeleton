@@ -7,7 +7,7 @@ const itemCategory: Ref<ItemCategory> = ref({
     id: uuidv4(),
     name: '',
     description: '',
-    state: 'active',
+    state: '',
     companyId: ''
 });
 
