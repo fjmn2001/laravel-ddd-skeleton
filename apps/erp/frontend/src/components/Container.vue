@@ -38,102 +38,66 @@ export default defineComponent({
             //         // $(this).addClass("inp-filter-val");
             //     }
             // });
-            //
-            //
-            // //-------ocultar menu por partes-------------------------------
-            //
-            // function validateList02() {
-            //
-            //     if ($("#list02 > li").length == 0) {
-            //         $('#iconList02').css('display', 'none');
-            //     } else {
-            //         $('#iconList02').css('display', 'block');
-            //     }
-            // }
-            //
-            // function mostrarMenu(minWidth) {
-            //     let liWidthAll = 400;
-            //
-            //     $(".menu-horizontal > li").each(function () {
-            //         liWidthAll = liWidthAll + $(this).width();
-            //     });
-            //
-            //     $('ul#list02 > li').each(function () {
-            //         const index = $(this).index() + 1;
-            //         liWidthAll = liWidthAll + (100 * index);
-            //
-            //         if (liWidthAll < minWidth) {
-            //             $(this).appendTo('#list01');
-            //
-            //         }
-            //     });
-            // }
-            //
-            // function ocultarMenu(screenWidth) {
-            //     let liWidthAll = 400;
-            //     const lessWidth = 100;
-            //     const minWidth = screenWidth - lessWidth;
-            //
-            //     $(".menu-horizontal > li").each(function () {
-            //         liWidthAll = liWidthAll + $(this).width();
-            //
-            //         if (liWidthAll > minWidth) {
-            //             $(this).appendTo('#list02');
-            //         }
-            //     });
-            //     mostrarMenu(minWidth)
-            //     validateList02();
-            // }
-            //
-            // ocultarMenu(screen.width);
-            // ocultarMenu($('body').width());
-            //
-            // $(window).resize(function () {
-            //     ocultarMenu(screen.width);
-            // });
-            // window.onresize = function () {
-            //     ocultarMenu($('body').width());
-            // };
-            //
-            // //----------------------------------------------------------------
-            //
-            //
-            // $('.menu-link-med').click(function () {
-            //     const idLi = $(this).attr('id');
-            //     const idUl = '.sub-' + idLi;
-            //     $('.sub-menu-lateral').css('display', 'none');
-            //     $(idUl).css('display', 'block');
-            // });
-            //
-            //
-            // setTimeout(
-            //     function () {
-            //         $('.sidebartoggler i').addClass('fa fa-bars');
-            //         $('.logo span').css('display', 'none');
-            //         $('body').addClass("mini-sidebar");
-            //         $('.scroll-sidebar').css('overflow', 'visible hidden');
-            //         $('.sidebar').css('overflow', 'visible');
-            //
-            //     }, 300);
-            //
-            // $('nav.sidebar-nav > ul').hover(
-            //     function () {
-            //         if ($('body.mini-sidebar').length === 1) {
-            //             $('nav.sidebar-nav > ul li ul').css('margin-left', '30px');
-            //             $('nav.sidebar-nav > ul li ul ').css('width', '176px');
-            //             $('nav.sidebar-nav > ul li ul li').css('padding-left', '0px');
-            //         }
-            //     },
-            //     function () {
-            //         if ($('body.mini-sidebar').length === 1) {
-            //
-            //             $('nav.sidebar-nav > ul li ul').css('margin-left', '-30px');
-            //             $('nav.sidebar-nav > ul li ul').css('width', 'auto');
-            //             $('nav.sidebar-nav > ul li ul li').css('padding-left', '60px');
-            //
-            //         }
-            //     }
-            //);
+
+
+            //-------ocultar menu por partes-------------------------------
+
+            function validateList02() {
+
+                if ($("#list02 > li").length == 0) {
+                    $('#iconList02').css('display', 'none');
+                } else {
+                    $('#iconList02').css('display', 'block');
+                }
+            }
+
+            function mostrarMenu(minWidth) {
+                let liWidthAll = 400;
+
+                $(".menu-horizontal > li").each(function () {
+                    liWidthAll = liWidthAll + $(this).width();
+                });
+
+                $('ul#list02 > li').each(function () {
+                    const index = $(this).index() + 1;
+                    liWidthAll = liWidthAll + (100 * index);
+
+                    if (liWidthAll < minWidth) {
+                        $(this).appendTo('#list01');
+
+                    }
+                });
+            }
+
+            function ocultarMenu(screenWidth) {
+                let liWidthAll = 400;
+                const lessWidth = 100;
+                const minWidth = screenWidth - lessWidth;
+
+                $(".menu-horizontal > li").each(function () {
+                    liWidthAll = liWidthAll + $(this).width();
+
+                    if (liWidthAll > minWidth) {
+                        $(this).appendTo('#list02');
+                    }
+                });
+                mostrarMenu(minWidth)
+                validateList02();
+            }
+
+            ocultarMenu(screen.width);
+            ocultarMenu($('body').width());
+
+            $(window).resize(function () {
+                ocultarMenu(screen.width);
+            });
+            window.onresize = function () {
+                ocultarMenu($('body').width());
+            };
+
+           //----------------------------------------------------------------
+
+
             //
             // $('#menu-config-collapse').on('click', function () {
             //     $('#menu-config').toggleClass('active');
