@@ -98,14 +98,14 @@ export default defineComponent({
            //----------------------------------------------------------------
 
 
-            //
-            // $('#menu-config-collapse').on('click', function () {
-            //     $('#menu-config').toggleClass('active');
-            // });
-            //
-            // $('.chk-dep-cat').on('click', function () {
-            //     $('.depreciar-categoria').toggleClass('collapse');
-            // });
+
+            $('#menu-config-collapse').on('click', function () {
+                $('#menu-config').toggleClass('active');
+            });
+
+            $('.chk-dep-cat').on('click', function () {
+                $('.depreciar-categoria').toggleClass('collapse');
+            });
         }
 
         onMounted(async () => {

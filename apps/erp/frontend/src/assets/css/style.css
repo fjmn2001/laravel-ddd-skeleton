@@ -17863,17 +17863,17 @@ img.logo {
     margin-right: 30px;
 }
 
-li.selected a span{
+a.selected span{
     color: #0078bc;
     font-weight: 600;
 }
 
 
-li.selected {
+a.selected {
     background-color: #f5f9fc;
 }
 
-li.selected a i {
+a.selected i {
     color: #0078bc;
 }
 
