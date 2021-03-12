@@ -12,7 +12,7 @@
             <nav class="sidebar-nav">
                 <ul id="side-menu" class="sub-menu-lateral sub-menu-compras" style="display: block;">
                     <li v-for="leftBarOption in leftBarOptions" :key="leftBarOption.name">
-                        <router-link :to="{name: leftBarOption.name}">
+                        <router-link :to="{name: leftBarOption.name}" class="selected">
                             <i :class="leftBarOption.class"></i>
                             <span class="hide-menu"> {{ leftBarOption.title }}</span>
                         </router-link>

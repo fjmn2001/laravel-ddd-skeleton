@@ -44,8 +44,7 @@
                             <a class="font-20 waves-effect waves-light pl-2 pr-2" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false" href="javascript:void(0);"> <i
                                 class="fa fa-chevron-circle-down"></i> </a>
-                            <ul class="animated dropdown-menu dropdown-menu-left dropdown-tasks slideInUp"
-                                id="list02">
+                            <ul class="animated dropdown-menu dropdown-menu-left dropdown-tasks slideInUp" id="list02">
                             </ul>
                         </li>
                     </ul>
@@ -142,5 +141,9 @@ export default defineComponent({
 <style scoped>
 .topMenuSelected {
     color: white;
+}
+
+#list02 > li > a.topMenuSelected {
+    color: dodgerblue !important;
 }
 </style>
