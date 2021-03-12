@@ -7455,9 +7455,9 @@ ul.list-icons li i {
 
     .main-conta {
         margin-top: 1rem !important;
-        padding-top: 5px !important;
-        padding-left: 65px !important;
-        padding-right: 5px !important;
+        padding-top: 10px !important;
+        padding-left: 70px !important;
+        padding-right: 10px !important;
     }
 
     .navigation > a {
@@ -17871,6 +17871,11 @@ a.selected span{
 
 a.selected {
     background-color: #f5f9fc;
+}
+
+a.selected {
+    background-color: #f5f9fc;
+    border-right: 1px solid #eff3f3;
 }
 
 a.selected i {
