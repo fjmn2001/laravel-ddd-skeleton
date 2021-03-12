@@ -1,12 +1,12 @@
 <template>
     <div class="page-wrapper" style="min-height: 875px;">
-        <div class="container-fluid mt-lg-5 mt-md-5 pt-lg-2 pt-md-2">
+        <div class="container-fluid main-conta pr-2r">
             <div class="pl-1 pr-1">
                 <breadcrums :breadcrumbUrl="breadcrumbUrl"></breadcrums>
-                <div class="d-datos-principal ml-n3 mr-n3">
+                <div class="xcontainer">
                     <p>Routes prototyped in vuejs</p>
-                    <ul>
-                        <li>Empresas</li>
+                    <ul style="list-style: none">
+                        <li >Empresas</li>
                     </ul>
                 </div>
             </div>
