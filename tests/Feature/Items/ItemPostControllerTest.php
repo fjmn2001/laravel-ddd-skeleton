@@ -45,7 +45,6 @@ final class ItemPostControllerTest extends FeatureBase
             'type' => $this->faker->randomElement(['inventoried', 'inventoried_serial', 'not_inventoried', 'service']),
             'category_id' => $categoryId,
             'state' => 'active',
-            'average_cost' => $this->faker->randomFloat(),
             'companyId' => $companyId,
         ]);
 

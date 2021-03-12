@@ -7,27 +7,36 @@ namespace Medine\ERP\Items\Application\Create;
 final class ItemCreatorRequest
 {
     private $id;
+    private $code;
     private $name;
-    private $description;
+    private $reference;
+    private $type;
+    private $categoryId;
     private $state;
-    private $createdBy;
     private $companyId;
+    private $createdBy;
 
     public function __construct(
         string $id,
+        string $code,
         string $name,
-        ?string $description,
+        ?string $reference,
+        string $type,
+        string $categoryId,
         string $state,
-        int $createdBy,
-        string $companyId
+        string $companyId,
+        int $createdBy
     )
     {
         $this->id = $id;
+        $this->code = $code;
         $this->name = $name;
-        $this->description = $description;
+        $this->reference = $reference;
+        $this->type = $type;
+        $this->categoryId = $categoryId;
         $this->state = $state;
-        $this->createdBy = $createdBy;
         $this->companyId = $companyId;
+        $this->createdBy = $createdBy;
     }
 
     public function id(): string
@@ -35,14 +44,29 @@ final class ItemCreatorRequest
         return $this->id;
     }
 
+    public function code(): string
+    {
+        return $this->code;
+    }
+
     public function name(): string
     {
         return $this->name;
     }
 
-    public function description(): ?string
+    public function reference(): ?string
     {
-        return $this->description;
+        return $this->reference;
+    }
+
+    public function type(): string
+    {
+        return $this->type;
+    }
+
+    public function categoryId(): string
+    {
+        return $this->categoryId;
     }
 
     public function state(): string
@@ -50,13 +74,13 @@ final class ItemCreatorRequest
         return $this->state;
     }
 
-    public function createdBy(): int
-    {
-        return $this->createdBy;
-    }
-
     public function companyId(): string
     {
         return $this->companyId;
+    }
+
+    public function createdBy(): int
+    {
+        return $this->createdBy;
     }
 }

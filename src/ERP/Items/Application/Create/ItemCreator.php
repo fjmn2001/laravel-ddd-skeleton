@@ -21,7 +21,7 @@ final class ItemCreator
         $category = Item::create(
             $request->id(),
             $request->name(),
-            $request->description(),
+            $request->reference(),
             $request->state(),
             $request->createdBy(),
             $request->companyId()
