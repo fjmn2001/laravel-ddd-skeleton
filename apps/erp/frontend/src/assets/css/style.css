@@ -7356,12 +7356,115 @@ ul.list-icons li i {
     .mini-sidebar .sidebar {
         position: fixed;
         transition: all .3s ease;
-        left: -265px;
+        left: 0px;
+        width: 60px;
     }
 
     .mini-sidebar.show-sidebar .sidebar {
         left: 0;
     }
+
+    .mini-sidebar .user-profile .profile-image {
+        padding-top: 0;
+    }
+
+    .mini-sidebar .user-profile .profile-image img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .mini-sidebar .hide-menu, .mini-sidebar .user-profile .profile-text {
+        display: none;
+    }
+
+    .mini-sidebar .sidebar-nav #side-menu li {
+        position: relative;
+    }
+
+    .mini-sidebar .sidebar-nav #side-menu > li > ul {
+        position: absolute;
+        left: 59px;
+        top: 48px;
+        width: 206px;
+        z-index: 999999;
+        background: #f7fafc;
+        color: #fff;
+        display: none;
+        padding-left: 0;
+    }
+
+    .mini-sidebar .sidebar-nav #side-menu > li:hover > ul {
+        height: auto !important;
+    }
+
+    .mini-sidebar .sidebar-nav #side-menu > li:hover > ul,
+    .mini-sidebar .sidebar-nav #side-menu > li:hover > ul.collapse {
+        display: block;
+    }
+
+    .mini-sidebar .user-profile {
+        width: 60px;
+    }
+
+    .mini-sidebar .user-profile .profile-image {
+        padding-top: 0;
+    }
+
+    .mini-sidebar .user-profile .profile-image img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .mini-sidebar .sidebar {
+        width: 60px;
+    }
+
+    .mini-sidebar .scroll-sidebar {
+        padding-bottom: 0;
+        position: absolute;
+    }
+
+    .mini-sidebar .hide-menu,
+    .mini-sidebar .user-profile .profile-text {
+        display: none;
+    }
+
+    .mini-sidebar .sidebar-nav {
+        background: 0 0;
+    }
+
+    .mini-sidebar .sidebar-nav #side-menu > li > a {
+        padding: 14px 20px;
+        width: 60px;
+    }
+
+    .mini-sidebar .sidebar-nav #side-menu > li:hover > a {
+        width: 265px;
+        background: #f8f8f8;
+        color: #2b2b2b;
+        border-color: #e5ebec;
+    }
+
+    .mini-sidebar .sidebar-nav #side-menu > li:hover > a i {
+        color: #0283cc;
+    }
+
+    .mini-sidebar .sidebar-nav #side-menu > li:hover > a .hide-menu {
+        display: inline;
+    }
+
+    .main-conta {
+        margin-top: 1rem !important;
+        padding-top: 10px !important;
+        padding-left: 70px !important;
+        padding-right: 10px !important;
+    }
+
+    .navigation > a {
+        margin-left: 10px !important;
+    }
+
+
 }
 
 @font-face {
@@ -15969,9 +16072,15 @@ ul.pro-amenities li span i {
         width: 60px;
     }
 
-    .logo b {
+    .mini-sidebar logo b {
         width: 60px;
-        margin-left: 0;
+        margin-left: 3px;
+        border-radius: 4px !important;
+    }
+
+    .mini-sidebar .top-left-part a {
+        width: 0px;
+        background-color: transparent;
     }
 
     .profile,
@@ -16228,6 +16337,11 @@ ul.pro-amenities li span i {
 
     .top-left-part {
         width: 60px;
+    }
+
+    .top-left-part a {
+        width: 0px;
+        background-color: transparent;
     }
 }
 
@@ -17551,14 +17665,14 @@ select::-ms-expand {
 .mini-sidebar .logo > b {
     width: 54px;
     padding: 2px;
-    border-radius: 8px;
+    border-radius: 4px;
     margin-left: 1px;
 }
 
 img.logo {
     width: 54px;
     padding: 5px;
-    border-radius: 11px;
+    border-radius: 9px;
     margin-top: 3px;
 }
 
@@ -17598,6 +17712,7 @@ img.logo {
     padding-top: 4px;
     padding-bottom: 4px;
     border-bottom: 1px solid #ecedee;
+    min-width: 265px;
 }
 
 .menu-empresas {
@@ -17746,4 +17861,27 @@ img.logo {
 .modal-doc > div > button.btn-blue-deg {
     width: 140px;
     margin-right: 30px;
+}
+
+a.selected span{
+    color: #0078bc;
+    font-weight: 600;
+}
+
+
+a.selected {
+    background-color: #f5f9fc;
+}
+
+a.selected {
+    background-color: #f5f9fc;
+    border-right: 1px solid #eff3f3;
+}
+
+a.selected i {
+    color: #0078bc;
+}
+
+.pr-2r{
+    padding-right: 2rem;
 }
