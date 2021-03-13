@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\ERP\Item\Application\Update;
 
 use Faker\Factory;
-use Medine\ERP\Item\Application\Update\UpdateItemRequest;
+use Medine\ERP\Item\Application\Update\ItemUpdaterRequest;
 use Medine\ERP\Item\Domain\ValueObjects\ItemCategoryId;
 use Medine\ERP\Item\Domain\ValueObjects\ItemCode;
 use Medine\ERP\Item\Domain\ValueObjects\ItemId;
@@ -30,9 +30,9 @@ final class UpdateItemRequestMother
         ItemCategoryId $categoryId,
         ItemState $state,
         int $updatedBy
-    ): UpdateItemRequest
+    ): ItemUpdaterRequest
     {
-        return new UpdateItemRequest (
+        return new ItemUpdaterRequest (
             $id->value(),
             $code->value(),
             $name->value(),
@@ -44,7 +44,7 @@ final class UpdateItemRequestMother
         );
     }
 
-    public static function withId(string $itemId): UpdateItemRequest
+    public static function withId(string $itemId): ItemUpdaterRequest
     {
         $faker = Factory::create();
 

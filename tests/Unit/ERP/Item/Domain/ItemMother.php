@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\ERP\Item\Domain;
 
 use Faker\Factory;
-use Medine\ERP\Item\Application\Create\CreateItemRequest;
+use Medine\ERP\Item\Application\Create\ItemCreatorRequest;
 use Medine\ERP\Item\Domain\Entity\Item;
 use Medine\ERP\Item\Domain\ValueObjects\ItemCategoryId;
 use Medine\ERP\Item\Domain\ValueObjects\ItemCode;
@@ -58,7 +58,7 @@ final class ItemMother
         );
     }
 
-    public static function fromRequest(CreateItemRequest $request): Item
+    public static function fromRequest(ItemCreatorRequest $request): Item
     {
         return self::create(
             ItemIdMother::create($request->id()),

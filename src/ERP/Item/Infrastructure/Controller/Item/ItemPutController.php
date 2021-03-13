@@ -7,7 +7,7 @@ namespace Medine\ERP\Item\Infrastructure\Controller\Item;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Medine\ERP\Item\Application\Update\ItemUpdater;
-use Medine\ERP\Item\Application\Update\UpdateItemRequest;
+use Medine\ERP\Item\Application\Update\ItemUpdaterRequest;
 
 final class ItemPutController
 {
@@ -20,7 +20,7 @@ final class ItemPutController
 
     public function __invoke(string $id, Request $request)
     {
-        ($this->updater)(new UpdateItemRequest(
+        ($this->updater)(new ItemUpdaterRequest(
             $id,
             $request->code,
             $request->name,

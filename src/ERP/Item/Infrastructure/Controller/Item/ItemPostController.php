@@ -7,7 +7,7 @@ namespace Medine\ERP\Item\Infrastructure\Controller\Item;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Medine\ERP\Item\Application\Create\CreateItemRequest;
+use Medine\ERP\Item\Application\Create\ItemCreatorRequest;
 use Medine\ERP\Item\Application\Create\ItemCreator;
 
 final class ItemPostController extends Controller
@@ -21,7 +21,7 @@ final class ItemPostController extends Controller
 
     public function __invoke(Request $request): JsonResponse
     {
-        ($this->creator)(new CreateItemRequest(
+        ($this->creator)(new ItemCreatorRequest(
             $request->id,
             $request->code,
             $request->name,

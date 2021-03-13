@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Item\Application\Create;
 
-final class CreateItemRequest
+final class ItemCreatorRequest
 {
     private $id;
     private $code;

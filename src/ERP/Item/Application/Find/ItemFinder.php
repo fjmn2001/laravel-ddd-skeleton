@@ -18,11 +18,11 @@ final class ItemFinder
         $this->finder = new \Medine\ERP\Item\Domain\Service\ItemFinder($repository);
     }
 
-    public function __invoke(FindItemRequest $request): ItemResponse
+    public function __invoke(ItemFinderRequest $request): ItemFinderResponse
     {
         $item = ($this->finder)(new ItemId($request->id()));
 
-        return new ItemResponse(
+        return new ItemFinderResponse(
             $item->id()->value(),
             $item->code()->value(),
             $item->name()->value(),

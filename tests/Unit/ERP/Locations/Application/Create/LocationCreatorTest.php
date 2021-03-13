@@ -7,7 +7,7 @@ namespace Tests\Unit\ERP\Locations\Application\Create;
 use Faker\Factory;
 use Medine\ERP\Locations\Application\Create\LocationCreator;
 use Medine\ERP\Locations\Application\Create\LocationCreatorRequest;
-use Medine\ERP\Item\Application\Create\CreateItemRequest;
+use Medine\ERP\Item\Application\Create\ItemCreatorRequest;
 use Medine\ERP\Item\Application\Create\ItemCreator;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;

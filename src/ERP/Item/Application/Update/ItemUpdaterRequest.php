@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Item\Application\Update;
 
-final class UpdateItemRequest
+final class ItemUpdaterRequest
 {
     private $id;
     private $code;

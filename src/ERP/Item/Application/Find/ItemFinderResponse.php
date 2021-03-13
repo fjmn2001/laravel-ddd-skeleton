@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Item\Application\Find;
 
-final class ItemResponse
+final class ItemFinderResponse
 {
     private $id;
     private $code;

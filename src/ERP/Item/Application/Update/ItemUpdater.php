@@ -25,7 +25,7 @@ final class ItemUpdater
         $this->finder = new ItemFinder($repository);
     }
 
-    public function __invoke(UpdateItemRequest $request)
+    public function __invoke(ItemUpdaterRequest $request)
     {
         $item = ($this->finder)(new ItemId(
             $request->id()

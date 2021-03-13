@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\ERP\Item\Application\Create;
 
 use Faker\Factory;
-use Medine\ERP\Item\Application\Create\CreateItemRequest;
+use Medine\ERP\Item\Application\Create\ItemCreatorRequest;
 use Medine\ERP\Item\Domain\ValueObjects\ItemCategoryId;
 use Medine\ERP\Item\Domain\ValueObjects\ItemCode;
 use Medine\ERP\Item\Domain\ValueObjects\ItemId;
@@ -29,9 +29,9 @@ final class CreateItemRequestMother
         string $state,
         string $companyId,
         int $createdBy
-    ): CreateItemRequest
+    ): ItemCreatorRequest
     {
-        return new CreateItemRequest(
+        return new ItemCreatorRequest(
             $id->value(),
             $code->value(),
             $name->value(),
@@ -44,7 +44,7 @@ final class CreateItemRequestMother
         );
     }
 
-    public static function random(): CreateItemRequest
+    public static function random(): ItemCreatorRequest
     {
         $faker = Factory::create();
 
@@ -61,7 +61,7 @@ final class CreateItemRequestMother
         );
     }
 
-    public static function withId(string $id): CreateItemRequest
+    public static function withId(string $id): ItemCreatorRequest
     {
         $faker = Factory::create();
 

@@ -23,7 +23,7 @@ final class ItemCreator
         $this->repository = $repository;
     }
 
-    public function __invoke(CreateItemRequest $request)
+    public function __invoke(ItemCreatorRequest $request)
     {
         $item = Item::create(
             new ItemId($request->id()),
