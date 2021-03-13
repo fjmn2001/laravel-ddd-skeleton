@@ -7373,7 +7373,8 @@ ul.list-icons li i {
         height: 50px;
     }
 
-    .mini-sidebar .hide-menu, .mini-sidebar .user-profile .profile-text {
+    .mini-sidebar .hide-menu,
+    .mini-sidebar .user-profile .profile-text {
         display: none;
     }
 
@@ -7463,8 +7464,6 @@ ul.list-icons li i {
     .navigation > a {
         margin-left: 10px !important;
     }
-
-
 }
 
 @font-face {
@@ -17863,11 +17862,10 @@ img.logo {
     margin-right: 30px;
 }
 
-a.selected span{
+a.selected span {
     color: #0078bc;
     font-weight: 600;
 }
-
 
 a.selected {
     background-color: #f5f9fc;
@@ -17882,6 +17880,68 @@ a.selected i {
     color: #0078bc;
 }
 
-.pr-2r{
+.pr-2r {
     padding-right: 2rem;
+}
+
+.pre-loader-sider-li {
+    padding: 14px 25px 14px 30px;
+    display: flex;
+    align-items: center;
+}
+
+.pre-loader-sider-li > span {
+    width: 30px;
+    height: 30px;
+    background-color: #f09090;
+}
+
+.pre-loader-sider-icon {
+    width: 20px;
+    height: 20px;
+    background-color: #f2f5f7;
+    border-radius: 5px;
+}
+
+.pre-loader-sider-text {
+    height: 15px;
+    width: 130px;
+    background-color: #f2f5f7;
+    margin-left: 15px;
+}
+
+.preloader-ima-user-sider {
+    width: 79px;
+    height: 79px;
+    background-color: #f2f5f7;
+    margin-left: 89px;
+    border-radius: 62px;
+}
+
+.preloader-text-user-sider {
+    width: 100px;
+    height: 14px;
+    margin-top: 21px;
+    margin-left: 80px;
+    background-color: #f2f5f7;
+    margin-bottom: 8px;
+}
+
+.mini-sidebar .pre-loader-sider-icon {
+    margin-left: -11px;
+}
+
+.mini-sidebar .pre-loader-sider-text {
+    display: none;
+}
+
+.mini-sidebar .preloader-text-user-sider {
+    display: none;
+}
+
+.mini-sidebar .preloader-ima-user-sider {
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+    margin-left: 5px;
 }
