@@ -19,4 +19,6 @@ interface ProductRepository
     public function update(Product $product): void;
 
     public function count(Criteria $criteria): int;
+
+    public function matching(Criteria $criteria): array;
 }

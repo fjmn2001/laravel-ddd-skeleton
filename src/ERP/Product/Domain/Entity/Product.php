@@ -22,6 +22,7 @@ final class Product
     private $type;
     private $categoryId;
     private $state;
+    private $averageCost = 0;//todo remove it
     private $companyId;
     private $createdBy;
     private $updatedBy;
@@ -149,6 +150,11 @@ final class Product
     public function state(): ProductState
     {
         return $this->state;
+    }
+
+    public function averageCost(): float
+    {
+        return $this->averageCost;
     }
 
     public function companyId(): string
