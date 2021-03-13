@@ -33,9 +33,11 @@ final class ProductUpdater
 
         $product->changeCode(new ProductCode($request->code()));
         $product->changeName(new ProductName($request->name()));
+        $product->changeReference($request->reference());
+        $product->changeType(new ProductType($request->type()));
         $product->changeCategoryId(new ProductCategoryId($request->categoryId()));
-        $product->changeType(new ProductType($request->typeId()));
         $product->changeState(new ProductState($request->state()));
+        $product->changeUpdatedBy($request->updatedBy());
 
         $this->repository->update($product);
     }

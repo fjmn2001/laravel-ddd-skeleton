@@ -20,12 +20,13 @@ final class ProductUpdaterTest extends TestCase
     public function it_should_update_an_existing_product_and_return_null()
     {
         $product = ProductMother::random();
-
         $repository = $this->createMock(ProductRepository::class);
+        $updater = new ProductUpdater($repository);
+
         $this->shouldFind($repository, $product);
         $this->shouldUpdate($repository, $product);
 
-        $response = (new ProductUpdater($repository))->__invoke(UpdateProductRequestMother::withId(
+        $response = ($updater)(UpdateProductRequestMother::withId(
             $product->id()->value()
         ));
 

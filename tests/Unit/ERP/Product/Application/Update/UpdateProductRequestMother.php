@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\Unit\ERP\Product\Application\Update;
 
+use Faker\Factory;
 use Medine\ERP\Product\Application\Update\UpdateProductRequest;
 use Medine\ERP\Product\Domain\ValueObjects\ProductCategoryId;
 use Medine\ERP\Product\Domain\ValueObjects\ProductCode;
-use Medine\ERP\Product\Domain\ValueObjects\ProductDescription;
 use Medine\ERP\Product\Domain\ValueObjects\ProductId;
 use Medine\ERP\Product\Domain\ValueObjects\ProductName;
 use Medine\ERP\Product\Domain\ValueObjects\ProductState;
 use Medine\ERP\Product\Domain\ValueObjects\ProductType;
 use Tests\Unit\ERP\Product\Domain\ProductCategoryIdMother;
 use Tests\Unit\ERP\Product\Domain\ProductCodeMother;
-use Tests\Unit\ERP\Product\Domain\ProductDescriptionMother;
 use Tests\Unit\ERP\Product\Domain\ProductIdMother;
 use Tests\Unit\ERP\Product\Domain\ProductNameMother;
 use Tests\Unit\ERP\Product\Domain\ProductStateMother;
@@ -26,33 +25,38 @@ final class UpdateProductRequestMother
         ProductId $id,
         ProductCode $code,
         ProductName $name,
+        string $reference,
+        ProductType $type,
         ProductCategoryId $categoryId,
-        ProductDescription $description,
-        ProductType $typeId,
-        ProductState $state
+        ProductState $state,
+        int $updatedBy
     ): UpdateProductRequest
     {
         return new UpdateProductRequest (
             $id->value(),
             $code->value(),
             $name->value(),
+            $reference,
+            $type->value(),
             $categoryId->value(),
-            $description->value(),
-            $typeId->value(),
-            $state->value()
+            $state->value(),
+            $updatedBy
         );
     }
 
     public static function withId(string $productId): UpdateProductRequest
     {
+        $faker = Factory::create();
+
         return self::create(
             ProductIdMother::create($productId),
             ProductCodeMother::random(),
             ProductNameMother::random(),
-            ProductCategoryIdMother::random(),
-            ProductDescriptionMother::random(),
+            $faker->text(50),
             ProductTypeIdMother::random(),
-            ProductStateMother::random()
+            ProductCategoryIdMother::random(),
+            ProductStateMother::random(),
+            $faker->numberBetween(1)
         );
     }
 }

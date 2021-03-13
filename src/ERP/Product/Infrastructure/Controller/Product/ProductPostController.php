@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Medine\Apps\ERP\Backend\Controller\Product;
+namespace Medine\ERP\Product\Infrastructure\Controller\Product;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;

@@ -192,6 +192,14 @@ final class Product
         }
     }
 
+    public function changeReference(string $reference): void
+    {
+        if (false === ($this->reference === $reference)) {
+            $this->reference = $reference;
+            $this->updatedAt = new ProductUpdatedAt();
+        }
+    }
+
     public function changeCategoryId(ProductCategoryId $newCategoryId): void
     {
         if (false === ($this->categoryId()->equals($newCategoryId))) {
@@ -216,4 +224,11 @@ final class Product
         }
     }
 
+    public function changeUpdatedBy(int $newUpdatedBy): void
+    {
+        if (false === ($this->updatedBy === $newUpdatedBy)) {
+            $this->updatedBy = $newUpdatedBy;
+            $this->updatedAt = new ProductUpdatedAt();
+        }
+    }
 }
