@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\ERP\Product\Application\Update;
 
 use Medine\ERP\Product\Application\Update\UpdateProductRequest;
-use Medine\ERP\Product\Domain\ValueObjects\ProductCategory;
+use Medine\ERP\Product\Domain\ValueObjects\ProductCategoryId;
 use Medine\ERP\Product\Domain\ValueObjects\ProductCode;
 use Medine\ERP\Product\Domain\ValueObjects\ProductDescription;
 use Medine\ERP\Product\Domain\ValueObjects\ProductId;
@@ -26,7 +26,7 @@ final class UpdateProductRequestMother
         ProductId $id,
         ProductCode $code,
         ProductName $name,
-        ProductCategory $categoryId,
+        ProductCategoryId $categoryId,
         ProductDescription $description,
         ProductType $typeId,
         ProductState $state

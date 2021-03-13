@@ -22,11 +22,14 @@ final class ItemPostController
     {
         ($this->creator)(new ItemCreatorRequest(
             $request->id,
+            $request->code,
             $request->name,
-            $request->description,
+            $request->reference,
+            $request->type,
+            $request->categoryId,
             $request->state,
-            $request->user()->id,
-            $request->companyId
+            $request->companyId,
+            $request->user()->id
         ));
 
         return new JsonResponse([], JsonResponse::HTTP_CREATED);

@@ -28,8 +28,8 @@ final class ProductFinder
             $product->code()->value(),
             $product->name()->value(),
             $product->categoryId()->value(),
-            $product->description()->value(),
-            $product->typeId()->value(),
+            $product->reference(),
+            $product->type()->value(),
             $product->state()->value()
         );
     }

@@ -9,25 +9,34 @@ final class CreateProductRequest
     private $id;
     private $code;
     private $name;
+    private $reference;
+    private $type;
     private $categoryId;
-    private $description;
-    private $typeId;
+    private $state;
+    private $companyId;
+    private $createdBy;
 
     public function __construct(
         string $id,
         string $code,
         string $name,
-        string $category,
-        string $description,
-        string $type
+        ?string $reference,
+        string $type,
+        string $categoryId,
+        string $state,
+        string $companyId,
+        int $createdBy
     )
     {
         $this->id = $id;
         $this->code = $code;
         $this->name = $name;
-        $this->categoryId = $category;
-        $this->description = $description;
-        $this->typeId = $type;
+        $this->reference = $reference;
+        $this->type = $type;
+        $this->categoryId = $categoryId;
+        $this->state = $state;
+        $this->companyId = $companyId;
+        $this->createdBy = $createdBy;
     }
 
     public function id(): string
@@ -45,19 +54,34 @@ final class CreateProductRequest
         return $this->name;
     }
 
+    public function reference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function type(): string
+    {
+        return $this->type;
+    }
+
     public function categoryId(): string
     {
         return $this->categoryId;
     }
 
-    public function description(): string
+    public function state(): string
     {
-        return $this->description;
+        return $this->state;
     }
 
-    public function typeId(): string
+    public function companyId(): string
     {
-        return $this->typeId;
+        return $this->companyId;
+    }
+
+    public function createdBy(): int
+    {
+        return $this->createdBy;
     }
 
 }

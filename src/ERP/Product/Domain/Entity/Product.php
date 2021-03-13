@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Product\Domain\Entity;
 
-use Medine\ERP\Product\Domain\ValueObjects\ProductCategory;
+use Medine\ERP\Product\Domain\ValueObjects\ProductCategoryId;
 use Medine\ERP\Product\Domain\ValueObjects\ProductCode;
 use Medine\ERP\Product\Domain\ValueObjects\ProductCreatedAt;
-use Medine\ERP\Product\Domain\ValueObjects\ProductDescription;
 use Medine\ERP\Product\Domain\ValueObjects\ProductId;
 use Medine\ERP\Product\Domain\ValueObjects\ProductName;
 use Medine\ERP\Product\Domain\ValueObjects\ProductState;
@@ -19,21 +18,27 @@ final class Product
     private $id;
     private $code;
     private $name;
+    private $reference;
+    private $type;
     private $categoryId;
-    private $description;
-    private $typeId;
     private $state;
+    private $companyId;
+    private $createdBy;
+    private $updatedBy;
     private $createdAt;
     private $updatedAt;
 
-    public function __construct(
+    private function __construct(
         ProductId $id,
         ProductCode $code,
         ProductName $name,
-        ProductCategory $category,
-        ProductDescription $description,
+        string $reference,
         ProductType $type,
+        ProductCategoryId $categoryId,
         ProductState $state,
+        string $companyId,
+        int $createdBy,
+        int $updatedBy,
         ProductCreatedAt $createAt,
         ProductUpdatedAt $updatedAt
     )
@@ -41,10 +46,13 @@ final class Product
         $this->id = $id;
         $this->code = $code;
         $this->name = $name;
-        $this->categoryId = $category;
-        $this->description = $description;
-        $this->typeId = $type;
+        $this->reference = $reference;
+        $this->type = $type;
+        $this->categoryId = $categoryId;
         $this->state = $state;
+        $this->companyId = $companyId;
+        $this->createdBy = $createdBy;
+        $this->updatedBy = $updatedBy;
         $this->createdAt = $createAt;
         $this->updatedAt = $updatedAt;
     }
@@ -53,19 +61,25 @@ final class Product
         ProductId $id,
         ProductCode $code,
         ProductName $name,
-        ProductCategory $category,
-        ProductDescription $description,
-        ProductType $type
+        string $reference,
+        ProductType $type,
+        ProductCategoryId $category,
+        ProductState $state,
+        string $companyId,
+        int $createdBy
     ): self
     {
         return new self(
             $id,
             $code,
             $name,
-            $category,
-            $description,
+            $reference,
             $type,
-            new ProductState('activo'),
+            $category,
+            $state,
+            $companyId,
+            $createdBy,
+            $createdBy,
             new ProductCreatedAt(),
             new ProductUpdatedAt()
         );
@@ -75,10 +89,13 @@ final class Product
         ProductId $id,
         ProductCode $code,
         ProductName $name,
-        ProductCategory $category,
-        ProductDescription $description,
+        string $reference,
         ProductType $type,
+        ProductCategoryId $categoryId,
         ProductState $state,
+        string $companyId,
+        int $createdBy,
+        int $updatedBy,
         ProductCreatedAt $createAt,
         ProductUpdatedAt $updatedAt
     ): self
@@ -87,10 +104,13 @@ final class Product
             $id,
             $code,
             $name,
-            $category,
-            $description,
+            $reference,
             $type,
+            $categoryId,
             $state,
+            $companyId,
+            $createdBy,
+            $updatedBy,
             $createAt,
             $updatedAt
         );
@@ -111,24 +131,39 @@ final class Product
         return $this->name;
     }
 
-    public function categoryId(): ProductCategory
+    public function reference(): string
+    {
+        return $this->reference;
+    }
+
+    public function type(): ProductType
+    {
+        return $this->type;
+    }
+
+    public function categoryId(): ProductCategoryId
     {
         return $this->categoryId;
-    }
-
-    public function description(): ProductDescription
-    {
-        return $this->description;
-    }
-
-    public function typeId(): ProductType
-    {
-        return $this->typeId;
     }
 
     public function state(): ProductState
     {
         return $this->state;
+    }
+
+    public function companyId(): string
+    {
+        return $this->companyId;
+    }
+
+    public function createdBy(): int
+    {
+        return $this->createdBy;
+    }
+
+    public function updatedBy(): int
+    {
+        return $this->updatedBy;
     }
 
     public function createdAt(): ProductCreatedAt
@@ -157,7 +192,7 @@ final class Product
         }
     }
 
-    public function changeCategoryId(ProductCategory $newCategoryId): void
+    public function changeCategoryId(ProductCategoryId $newCategoryId): void
     {
         if (false === ($this->categoryId()->equals($newCategoryId))) {
             $this->categoryId = $newCategoryId;
@@ -165,18 +200,10 @@ final class Product
         }
     }
 
-    public function changeDescription(ProductDescription $newDescription): void
+    public function changeType(ProductType $newType): void
     {
-        if (false === ($this->description()->equals($newDescription))) {
-            $this->description = $newDescription;
-            $this->updatedAt = new ProductUpdatedAt();
-        }
-    }
-
-    public function changeTypeId(ProductType $newTypeId): void
-    {
-        if (false === ($this->typeId()->equals($newTypeId))) {
-            $this->typeId = $newTypeId;
+        if (false === ($this->type()->equals($newType))) {
+            $this->type = $newType;
             $this->updatedAt = new ProductUpdatedAt();
         }
     }

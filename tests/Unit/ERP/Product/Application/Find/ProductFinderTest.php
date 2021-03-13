@@ -33,8 +33,8 @@ final class ProductFinderTest extends TestCase
         $this->assertEquals($product->code()->value(), $response->code());
         $this->assertEquals($product->name()->value(), $response->name());
         $this->assertEquals($product->categoryId()->value(), $response->categoryId());
-        $this->assertEquals($product->description()->value(), $response->description());
-        $this->assertEquals($product->typeId()->value(), $response->typeId());
+        $this->assertEquals($product->reference(), $response->reference());
+        $this->assertEquals($product->type()->value(), $response->typeId());
     }
 
     private function shouldFind(\PHPUnit\Framework\MockObject\MockObject $repository, Product $product): void

@@ -10,7 +10,7 @@ final class ProductResponse
     private $code;
     private $name;
     private $categoryId;
-    private $description;
+    private $reference;
     private $typeId;
     private $state;
 
@@ -19,7 +19,7 @@ final class ProductResponse
         string $code,
         string $name,
         string $categoryId,
-        string $description,
+        string $reference,
         string $typeId,
         string $state
     )
@@ -28,7 +28,7 @@ final class ProductResponse
         $this->code = $code;
         $this->name = $name;
         $this->categoryId = $categoryId;
-        $this->description = $description;
+        $this->reference = $reference;
         $this->typeId = $typeId;
         $this->state = $state;
     }
@@ -53,9 +53,9 @@ final class ProductResponse
         return $this->categoryId;
     }
 
-    public function description(): string
+    public function reference(): string
     {
-        return $this->description;
+        return $this->reference;
     }
 
     public function typeId(): string

@@ -25,9 +25,12 @@ final class ProductPostController extends Controller
             $request->id,
             $request->code,
             $request->name,
-            $request->category_id,
-            $request->description,
-            $request->type_id
+            $request->reference,
+            $request->type,
+            $request->categoryId,
+            $request->state,
+            $request->companyId,
+            $request->user()->id
         ));
 
         return response()->json([], JsonResponse::HTTP_CREATED);

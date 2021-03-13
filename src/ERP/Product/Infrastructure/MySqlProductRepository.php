@@ -7,10 +7,9 @@ namespace Medine\ERP\Product\Infrastructure;
 use Illuminate\Support\Facades\DB;
 use Medine\ERP\Product\Domain\Contracts\ProductRepository;
 use Medine\ERP\Product\Domain\Entity\Product;
-use Medine\ERP\Product\Domain\ValueObjects\ProductCategory;
+use Medine\ERP\Product\Domain\ValueObjects\ProductCategoryId;
 use Medine\ERP\Product\Domain\ValueObjects\ProductCode;
 use Medine\ERP\Product\Domain\ValueObjects\ProductCreatedAt;
-use Medine\ERP\Product\Domain\ValueObjects\ProductDescription;
 use Medine\ERP\Product\Domain\ValueObjects\ProductId;
 use Medine\ERP\Product\Domain\ValueObjects\ProductName;
 use Medine\ERP\Product\Domain\ValueObjects\ProductState;
@@ -26,10 +25,13 @@ final class MySqlProductRepository implements ProductRepository
             'id' => $product->id()->value(),
             'code' => $product->code()->value(),
             'name' => $product->name()->value(),
+            'reference' => $product->reference(),
+            'type' => $product->type()->value(),
             'category_id' => $product->categoryId()->value(),
-            'description' => $product->description()->value(),
-            'type_id' => $product->typeId()->value(),
             'state' => $product->state()->value(),
+            'company_id' => $product->companyId(),
+            'created_by' => $product->createdBy(),
+            'updated_by' => $product->updatedBy(),
             'created_at' => $product->createdAt()->value(),
             'updated_at' => $product->updatedAt()->value()
         ]);
@@ -43,10 +45,13 @@ final class MySqlProductRepository implements ProductRepository
             new ProductId($row->id),
             new ProductCode($row->code),
             new ProductName($row->name),
-            new ProductCategory($row->category_id),
-            new ProductDescription($row->description),
-            new ProductType($row->type_id),
+            $row->reference,
+            new ProductType($row->type),
+            new ProductCategoryId($row->category_id),
             new ProductState($row->state),
+            $row->company_id,
+            $row->created_by,
+            $row->updated_by,
             new ProductCreatedAt($row->created_at),
             new ProductUpdatedAt($row->updated_at)
         ) : null;
@@ -57,10 +62,11 @@ final class MySqlProductRepository implements ProductRepository
         DB::table('products')->where('products.id', $product->id()->value())->take(1)->update([
             'code' => $product->code()->value(),
             'name' => $product->name()->value(),
+            'reference' => $product->reference(),
+            'type' => $product->type()->value(),
             'category_id' => $product->categoryId()->value(),
-            'description' => $product->description()->value(),
-            'type_id' => $product->typeId()->value(),
             'state' => $product->state()->value(),
+            'updated_by' => $product->updatedBy(),
             'updated_at' => $product->updatedAt()->value(),
         ]);
     }

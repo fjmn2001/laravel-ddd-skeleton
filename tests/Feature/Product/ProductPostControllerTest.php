@@ -33,13 +33,17 @@ final class ProductPostControllerTest extends TestCase
             User::factory()->create()
         );
 
+        $companyId = Uuid::uuid4();
+        $categoryId = Uuid::uuid4();
         $response = $this->postJson('/api/product', [
             'id' => Uuid::uuid4()->toString(),
-            'code' => $this->faker->randomElement(['qwertz']),
-            'name' => $this->faker->name,
-            'category_id' => Uuid::uuid4()->toString(),
-            'description' => $this->faker->realText(255),
-            'type_id' => Uuid::uuid4()->toString()
+            'code' => $this->faker->randomElement(['code01', 'code02']),
+            'name' => $this->faker->randomElement(['item01', 'item02']),
+            'reference' => $this->faker->text(50),
+            'type' => $this->faker->randomElement(['inventoried', 'inventoried_serial', 'not_inventoried', 'service']),
+            'categoryId' => $categoryId,
+            'state' => 'active',
+            'companyId' => $companyId,
         ]);
 
         $response->assertJson([]);

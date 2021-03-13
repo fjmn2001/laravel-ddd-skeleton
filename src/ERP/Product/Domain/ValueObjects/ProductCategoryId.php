@@ -6,7 +6,7 @@ namespace Medine\ERP\Product\Domain\ValueObjects;
 
 use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 
-final class ProductCategory extends Uuid
+final class ProductCategoryId extends Uuid
 {
 
 }

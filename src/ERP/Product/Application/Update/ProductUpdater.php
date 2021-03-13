@@ -6,7 +6,7 @@ namespace Medine\ERP\Product\Application\Update;
 
 use Medine\ERP\Product\Domain\Contracts\ProductRepository;
 use Medine\ERP\Product\Domain\Service\ProductFinder;
-use Medine\ERP\Product\Domain\ValueObjects\ProductCategory;
+use Medine\ERP\Product\Domain\ValueObjects\ProductCategoryId;
 use Medine\ERP\Product\Domain\ValueObjects\ProductCode;
 use Medine\ERP\Product\Domain\ValueObjects\ProductDescription;
 use Medine\ERP\Product\Domain\ValueObjects\ProductId;
@@ -33,9 +33,8 @@ final class ProductUpdater
 
         $product->changeCode(new ProductCode($request->code()));
         $product->changeName(new ProductName($request->name()));
-        $product->changeCategoryId(new ProductCategory($request->categoryId()));
-        $product->changeDescription(new ProductDescription($request->description()));
-        $product->changeTypeId(new ProductType($request->typeId()));
+        $product->changeCategoryId(new ProductCategoryId($request->categoryId()));
+        $product->changeType(new ProductType($request->typeId()));
         $product->changeState(new ProductState($request->state()));
 
         $this->repository->update($product);
