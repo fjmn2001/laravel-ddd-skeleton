@@ -7,6 +7,7 @@ namespace Tests\Unit\ERP\Product\Infrastructure;
 use Medine\ERP\Product\Domain\Contracts\ProductRepository;
 use Medine\ERP\Product\Domain\Entity\Product;
 use Medine\ERP\Product\Domain\ValueObjects\ProductId;
+use Medine\ERP\Shared\Domain\Criteria;
 
 final class InMemoryProductRepository implements ProductRepository
 {
@@ -24,5 +25,10 @@ final class InMemoryProductRepository implements ProductRepository
     public function update(Product $product): void
     {
         // TODO: Implement update() method.
+    }
+
+    public function count(Criteria $criteria): int
+    {
+        // TODO: Implement count() method.
     }
 }

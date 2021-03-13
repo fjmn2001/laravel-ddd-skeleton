@@ -70,4 +70,12 @@ final class MySqlProductRepository implements ProductRepository
             'updated_at' => $product->updatedAt()->value(),
         ]);
     }
+
+    public function count(\Medine\ERP\Shared\Domain\Criteria $criteria): int
+    {
+        $query = DB::table('products');
+        $query = (new MySqlProductFilters($query))($criteria);
+
+        return (int)$query->count();
+    }
 }
