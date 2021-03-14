@@ -7,12 +7,12 @@ namespace Tests\Unit\ERP\Locations\Application\Create;
 use Faker\Factory;
 use Medine\ERP\Locations\Application\Create\LocationCreator;
 use Medine\ERP\Locations\Application\Create\LocationCreatorRequest;
-use Medine\ERP\Product\Application\Create\CreateProductRequest;
-use Medine\ERP\Product\Application\Create\ProductCreator;
+use Medine\ERP\Item\Application\Create\ItemCreatorRequest;
+use Medine\ERP\Item\Application\Create\ItemCreator;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 use Tests\Unit\ERP\Locations\Infrastructure\InMemoryLocationRepository;
-use Tests\Unit\ERP\Product\Infrastructure\InMemoryProductRepository;
+use Tests\Unit\ERP\Item\Infrastructure\InMemoryItemRepository;
 
 final class LocationCreatorTest extends TestCase
 {
