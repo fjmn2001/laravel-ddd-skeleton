@@ -30,6 +30,10 @@ export function useClient() {
         await api.createClient()
     }
 
+    async function find(id: string) {
+        client.value = await api.findClient(id)
+    }
+
     async function reset() {
         client.value = {
             id: uuidv4(),
@@ -57,6 +61,7 @@ export function useClient() {
     return {
         client: client,
         create,
+        find,
         reset
     }
 }

@@ -10,13 +10,13 @@
                 <div class="mt-3 pl-3 pr-3 row">
                     <div class="col-lg-5 col-md-5 pt-md-0">
                         <label>Línea de negocio o Centro contable</label>
-                        <input type="text" class="form-control inp-filter">
+                        <input type="text" class="form-control inp-filter" disabled="">
                     </div>
                     <div class="col-lg-5 col-md-4">
                         <label>Asignado a</label>
                         <div class="form-group mb-0">
                             <div class="input-group">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" disabled="">
                             </div>
                         </div>
                     </div>

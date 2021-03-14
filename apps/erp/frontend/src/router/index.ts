@@ -5,7 +5,7 @@ import auth from '../modules/auth/router/index';
 import home from "../modules/home/router";
 import landing from "../modules/landing/router";
 import companies from "../modules/companies/router";
-import clients from "./../modules/clients/router";
+import clients from "../modules/clients/router";
 import inventorySettings from "../modules/inventory_settings/router";
 
 const routes: Array<RouteRecordRaw> = [
