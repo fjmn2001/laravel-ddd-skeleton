@@ -44,20 +44,20 @@ final class ClientGetControllerTest extends TestCase
             'frequentClientNumber' => '111-222-333-5555',
             'state' => 'activo',
             'phones' => [
-                [
-                    'id' => Uuid::random()->value(),
-                    'number' => '111-222-333-5555',
-                    'numberType' => 'work',
-                    'client_id' => $clientId
-                ],
+//                [
+//                    'id' => Uuid::random()->value(),
+//                    'number' => '111-222-333-5555',
+//                    'numberType' => 'work',
+//                    'client_id' => $clientId
+//                ],
             ],
             'emails' => [
-                [
-                    'id' => Uuid::random()->value(),
-                    'email' => $this->faker->email,
-                    'emailType' => 'work',
-                    'client_id' => $clientId
-                ],
+//                [
+//                    'id' => Uuid::random()->value(),
+//                    'email' => $this->faker->email,
+//                    'emailType' => 'work',
+//                    'client_id' => $clientId
+//                ],
             ]
         ];
 

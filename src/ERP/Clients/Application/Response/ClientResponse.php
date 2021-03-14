@@ -114,12 +114,18 @@ final class ClientResponse
 
     public function phones()
     {
+        if(empty($this->phones))
+            return [];
+
         $phones = map($this->retrievePhone(), $this->phones);
         return $phones;
     }
 
     public function emails()
     {
+        if(empty($this->emails))
+            return [];
+
         $emails = map($this->retrieveEmail(), $this->emails);
         return $emails;
     }
@@ -131,7 +137,7 @@ final class ClientResponse
             return [
                 'id' => $email->id()->value(),
                 'email' => $email->email()->value(),
-                'email_type' => $email->emailType()->value(),
+                'emailType' => $email->emailType()->value(),
                 'client_id' => $email->clientId()->value()
             ];
         };
@@ -143,7 +149,7 @@ final class ClientResponse
             return [
                 'id' => $phone->id()->value(),
                 'number' => $phone->number()->value(),
-                'number_type' => $phone->numberType()->value(),
+                'numberType' => $phone->numberType()->value(),
                 'client_id' => $phone->clientId()->value()
             ];
         };

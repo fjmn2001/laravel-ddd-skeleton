@@ -97,8 +97,11 @@ final class MySqlClientRepository  extends MySqlRepository implements ClientRepo
         $rowPhones = DB::table('client_phones')->where('client_phones.client_id', '=', $id->value())->get();
         $rowEmails = DB::table('client_emails')->where('client_emails.client_id', '=', $id->value())->get();
 
-        each($this->addClientPhone($client), $rowPhones);
-        each($this->addClientEmail($client), $rowEmails);
+        if(!$rowPhones->isEmpty())
+            each($this->addClientPhone($client), $rowPhones);
+
+        if(!$rowEmails->isEmpty())
+            each($this->addClientEmail($client), $rowEmails);
 
         return $client;
     }
