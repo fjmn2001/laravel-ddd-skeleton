@@ -1,15 +1,52 @@
 <template>
     <div class="page-wrapper" style="min-height: 875px;">
         <form class="container-fluid main-conta" autocomplete="off" @submit.prevent="submit">
-
+            <div class="pl-1 pr-1">
+                <breadcrums :breadcrumbUrl="breadcrumbUrl"></breadcrums>
+<!--                <generals-details v-if="!loading"></generals-details>-->
+<!--                <contact-information v-if="!loading"></contact-information>-->
+<!--                <payment-information v-if="!loading"></payment-information>-->
+<!--                <users-assigned-client v-if="!loading"></users-assigned-client>-->
+            </div>
+            <form-buttons @cancel="cancel" :disabledSave="sending"></form-buttons>
         </form>
     </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
-export default defineComponent({
+import {defineComponent, ref} from 'vue'
+import {useCore} from "@/modules/shared/use/useCore";
+import {useRouter} from "vue-router";
 
+import Breadcrums from '@/components/Breadcrums.vue';
+import FormButtons from "@/components/FormButtons.vue";
+
+export default defineComponent({
+    components: {
+        Breadcrums,
+        FormButtons,
+    },
+    setup() {
+        const router = useRouter();
+        const {ERP_URL} = useCore();
+        const loading = ref(true);
+        const sending = ref(false)
+        const breadcrumbUrl: string = ERP_URL + '/api/client/breadcrumbs'
+
+
+
+        function cancel(): void {
+            router.push({name: 'clients'});
+        }
+
+        return {
+            breadcrumbUrl,
+            sending,
+            loading,
+
+            cancel,
+        }
+    }
 })
 </script>
 
