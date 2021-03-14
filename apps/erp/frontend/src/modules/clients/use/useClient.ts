@@ -34,8 +34,8 @@ export function useClient() {
         client.value = {
             id: uuidv4(),
             name: '',
-            lastname: '',
-            dni: '',
+            lastname: 'lastname',
+            dni: 'dni',
             dniType: '',
             clientType: '',
             clientCategory: '',

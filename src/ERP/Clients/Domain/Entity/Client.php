@@ -173,12 +173,12 @@ final class Client
         return $this->updatedAt;
     }
 
-    public function phones(): array
+    public function phones(): ?array
     {
         return $this->phones;
     }
 
-    public function emails(): array
+    public function emails(): ?array
     {
         return $this->emails;
     }

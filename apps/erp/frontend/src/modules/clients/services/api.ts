@@ -24,6 +24,7 @@ export const api = {
     async createClient(): Promise<Client> {
         const {client} = useClient();
         const response = await axios.post(process.env.VUE_APP_ERP_URL + '/api/client', {
+            id: client.value.id,
             name: client.value.name,
             lastname: client.value.lastname,
             dni: client.value.dni,

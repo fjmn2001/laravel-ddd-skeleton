@@ -55,11 +55,15 @@ final class MySqlClientRepository  extends MySqlRepository implements ClientRepo
             'updated_at' => $client->updatedAt()->value(),
         ]);
 
-        $phones = map($this->retrievePhone(), $client->phones());
-        $emails = map($this->retrieveEmail(), $client->emails());
+        if(!empty($client->phones()))
+            $phones = map($this->retrievePhone(), $client->phones());
+        if(!empty($client->emails()))
+            $emails = map($this->retrieveEmail(), $client->emails());
 
-        DB::table('client_phones')->insert($phones);
-        DB::table('client_emails')->insert($emails);
+        if(!empty($client->phones()))
+            DB::table('client_phones')->insert($phones);
+        if(!empty($client->emails()))
+            DB::table('client_emails')->insert($emails);
     }
 
     public function update(Client $company): void

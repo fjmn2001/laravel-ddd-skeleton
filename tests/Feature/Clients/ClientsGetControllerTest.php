@@ -41,23 +41,23 @@ final class ClientsGetControllerTest extends TestCase
             'name' => $clientName,
             'lastname' => $this->faker->lastName,
             'dni' => '336-225-55',
-            'dni_type' => 'natural',
-            'client_type' => 'contador',
-            'client_category' => 'taller',
-            'frequent_client_number' => '111-222-333-5555',
+            'dniType' => 'natural',
+            'clientType' => 'contador',
+            'clientCategory' => 'taller',
+            'frequentClientNumber' => '111-222-333-5555',
             'state' => 'activo',
             'phones' => [
                 [
                     'id' => Uuid::random()->value(),
                     'number' => '111-222-333-5555',
-                    'number_type' => 'work',
+                    'numberType' => 'work',
                 ],
             ],
             'emails' => [
                 [
                     'id' => Uuid::random()->value(),
                     'email' => $this->faker->email,
-                    'email_type' => 'work',
+                    'emailType' => 'work',
                 ],
             ]
         ]);

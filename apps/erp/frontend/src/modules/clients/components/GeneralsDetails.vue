@@ -12,12 +12,12 @@
                         <label>Nombre del cliente
                             <span class="text-danger">*</span>
                         </label>
-                        <input type="text" class="form-control" v-model="name">
+                        <input type="text" class="form-control" v-model="name" required="" >
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12" style="padding-bottom: 7px;">
                         <label>Identificación</label>
                         <span class="text-danger">*</span>
-                        <select class="form-control inp-filter" v-model="clientType">
+                        <select class="form-control inp-filter" v-model="dniType" required="" >
                             <option value="">Seleccione</option>
                             <option value="ruc">Jur&iacute;dica</option>
                             <option value="ruc_nt">Jur&iacute;dica NT</option>

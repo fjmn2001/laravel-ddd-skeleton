@@ -58,7 +58,7 @@ export default defineComponent({
                 await create()
                 //todo: add toast
                 //toastr.success('hola', 'exito');
-                router.push({name: 'clients'});
+                // router.push({name: 'clients'});
             } catch (e) {
                 //todo: add toast
                 console.log('2', e);
