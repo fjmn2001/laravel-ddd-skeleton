@@ -8,16 +8,45 @@
                     </div>
                     <p class="profile-text m-t-15 font-16"><a href="javascript:void(0);" v-html="user?.name"></a></p>
                 </div>
+               <!--  --------------------Start loading user------------------------------------ -->
+                <div class="dropdown user-pro-body">
+                    <div class="profile-image">
+                        <div class="preloader-ima-user-sider"></div>
+                        <div class="preloader-text-user-sider"></div>
+                    </div>
+                </div>
+                <!-- ----------------------------End   ------------------------------- -->
             </div>
+
             <nav class="sidebar-nav">
                 <ul id="side-menu" class="sub-menu-lateral sub-menu-compras" style="display: block;">
                     <li v-for="leftBarOption in leftBarOptions" :key="leftBarOption.name">
-                        <router-link :to="{name: leftBarOption.name}">
+                        <router-link :to="{name: leftBarOption.name}" class="selected">
                             <i :class="leftBarOption.class"></i>
                             <span class="hide-menu" style="margin: 5px"> {{ leftBarOption.title }}</span>
                         </router-link>
                     </li>
                 </ul>
+               <!--  --------------------Start loading menu------------------------------------ -->
+                <ul class="sub-menu-lateral sub-menu-compras">
+                    <li class="pre-loader-sider-li">
+                        <div class="pre-loader-sider-icon"></div>
+                        <div class="pre-loader-sider-text"></div>
+                    </li>
+                    <li class="pre-loader-sider-li">
+                        <div class="pre-loader-sider-icon"></div>
+                        <div class="pre-loader-sider-text"></div>
+                    </li>
+                    <li class="pre-loader-sider-li">
+                        <div class="pre-loader-sider-icon"></div>
+                        <div class="pre-loader-sider-text"></div>
+                    </li>
+                    <li class="pre-loader-sider-li">
+                        <div class="pre-loader-sider-icon"></div>
+                        <div class="pre-loader-sider-text"></div>
+                    </li>
+                </ul>
+                <!-- ----------------------------End   ------------------------------- -->
             </nav>
         </div>
     </aside>
