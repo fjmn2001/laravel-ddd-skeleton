@@ -7,8 +7,8 @@ use Medine\ERP\ItemCategories\Domain\Entity\ItemCategoryRepository;
 use Medine\ERP\ItemCategories\Infrastructure\Persistence\MySqlItemCategoryRepository;
 use Medine\ERP\Locations\Domain\LocationRepository;
 use Medine\ERP\Locations\Infrastructure\MySqlLocationRepository;
-use Medine\ERP\Product\Domain\Contracts\ProductRepository;
-use Medine\ERP\Product\Infrastructure\MySqlProductRepository;
+use Medine\ERP\Item\Domain\Contracts\ItemRepository;
+use Medine\ERP\Item\Infrastructure\MySqlItemRepository;
 use Medine\ERP\Clients\Domain\Contracts\ClientRepository;
 use Medine\ERP\Clients\Infrastructure\Repository\MySqlClientRepository;
 use Medine\ERP\PurchaseInvoices\Domain\PurchaseInvoiceRepository;
@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
         PasswordResetRepository::class => MySqlPasswordResetRepository::class,
         PurchaseInvoiceRepository::class => MySqlPurchaseInvoiceRepository::class,
         LocationRepository::class => MySqlLocationRepository::class,
-        ProductRepository::class => MySqlProductRepository::class,
+        ItemRepository::class => MySqlItemRepository::class,
         ClientRepository::class => MySqlClientRepository::class,
         CatalogRepository::class => MySqlCatalogRepository::class,
         ItemCategoryRepository::class => MySqlItemCategoryRepository::class

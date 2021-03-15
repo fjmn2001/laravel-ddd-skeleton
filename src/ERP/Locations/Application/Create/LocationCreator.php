@@ -9,7 +9,7 @@ use Medine\ERP\Locations\Domain\LocationRepository;
 use Medine\ERP\Locations\Domain\ValueObject\LocationBarcode;
 use Medine\ERP\Locations\Domain\ValueObject\LocationCode;
 use Medine\ERP\Locations\Domain\ValueObject\LocationCompanyId;
-use Medine\ERP\Locations\Domain\ValueObject\LocationDirection;
+use Medine\ERP\Locations\Domain\ValueObject\LocationAddress;
 use Medine\ERP\Locations\Domain\ValueObject\LocationId;
 use Medine\ERP\Locations\Domain\ValueObject\LocationItemState;
 use Medine\ERP\Locations\Domain\ValueObject\LocationMainContact;
@@ -33,10 +33,11 @@ final class LocationCreator
             new LocationName($request->name()),
             new LocationMainContact($request->mainContact()),
             new LocationBarcode($request->barcode()),
+            new LocationAddress($request->address()),
+            new LocationItemState($request->itemState()),
             new LocationState($request->state()),
-            new LocationDirection($request->direction()),
             new LocationCompanyId($request->companyId()),
-            new LocationItemState($request->itemState())
+            $request->createdBy()
         );
 
         $this->repository->save($location);

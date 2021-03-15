@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Medine\ERP\Locations\Application\Create;
+namespace Medine\ERP\Item\Application\Create;
 
-final class LocationCreatorRequest
+final class ItemCreatorRequest
 {
     private $id;
     private $code;
     private $name;
-    private $mainContact;
-    private $barcode;
-    private $address;
-    private $itemState;
+    private $reference;
+    private $type;
+    private $categoryId;
     private $state;
     private $companyId;
     private $createdBy;
@@ -21,10 +20,9 @@ final class LocationCreatorRequest
         string $id,
         string $code,
         string $name,
-        string $mainContact,
-        ?string $barcode,
-        string $address,
-        string $itemState,
+        ?string $reference,
+        string $type,
+        string $categoryId,
         string $state,
         string $companyId,
         int $createdBy
@@ -33,12 +31,11 @@ final class LocationCreatorRequest
         $this->id = $id;
         $this->code = $code;
         $this->name = $name;
-        $this->mainContact = $mainContact;
-        $this->barcode = $barcode;
-        $this->address = $address;
+        $this->reference = $reference;
+        $this->type = $type;
+        $this->categoryId = $categoryId;
         $this->state = $state;
         $this->companyId = $companyId;
-        $this->itemState = $itemState;
         $this->createdBy = $createdBy;
     }
 
@@ -57,24 +54,19 @@ final class LocationCreatorRequest
         return $this->name;
     }
 
-    public function mainContact(): string
+    public function reference(): ?string
     {
-        return $this->mainContact;
+        return $this->reference;
     }
 
-    public function barcode(): ?string
+    public function type(): string
     {
-        return $this->barcode;
+        return $this->type;
     }
 
-    public function address(): string
+    public function categoryId(): string
     {
-        return $this->address;
-    }
-
-    public function itemState(): string
-    {
-        return $this->itemState;
+        return $this->categoryId;
     }
 
     public function state(): string
@@ -91,4 +83,5 @@ final class LocationCreatorRequest
     {
         return $this->createdBy;
     }
+
 }

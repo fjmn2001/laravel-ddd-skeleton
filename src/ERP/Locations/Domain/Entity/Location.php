@@ -8,7 +8,7 @@ use Medine\ERP\Locations\Domain\ValueObject\LocationBarcode;
 use Medine\ERP\Locations\Domain\ValueObject\LocationCode;
 use Medine\ERP\Locations\Domain\ValueObject\LocationCompanyId;
 use Medine\ERP\Locations\Domain\ValueObject\LocationCreatedAt;
-use Medine\ERP\Locations\Domain\ValueObject\LocationDirection;
+use Medine\ERP\Locations\Domain\ValueObject\LocationAddress;
 use Medine\ERP\Locations\Domain\ValueObject\LocationId;
 use Medine\ERP\Locations\Domain\ValueObject\LocationItemState;
 use Medine\ERP\Locations\Domain\ValueObject\LocationMainContact;
@@ -23,10 +23,12 @@ final class Location
     private $name;
     private $mainContact;
     private $barcode;
-    private $state;
-    private $direction;
-    private $companyId;
+    private $address;
     private $itemState;
+    private $state;
+    private $companyId;
+    private $createdBy;
+    private $updatedBy;
     private $createdAt;
     private $updatedAt;
 
@@ -36,10 +38,12 @@ final class Location
         LocationName $name,
         LocationMainContact $mainContact,
         LocationBarcode $barcode,
-        LocationState $state,
-        LocationDirection $direction,
-        LocationCompanyId $companyId,
+        LocationAddress $address,
         LocationItemState $itemState,
+        LocationState $state,
+        LocationCompanyId $companyId,
+        int $createdBy,
+        int $updatedBy,
         LocationCreatedAt $createdAt,
         LocationUpdatedAt $updatedAt
     )
@@ -49,10 +53,12 @@ final class Location
         $this->name = $name;
         $this->mainContact = $mainContact;
         $this->barcode = $barcode;
-        $this->state = $state;
-        $this->direction = $direction;
-        $this->companyId = $companyId;
+        $this->address = $address;
         $this->itemState = $itemState;
+        $this->state = $state;
+        $this->companyId = $companyId;
+        $this->createdBy = $createdBy;
+        $this->updatedBy = $updatedBy;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
     }
@@ -63,10 +69,11 @@ final class Location
         LocationName $name,
         LocationMainContact $mainContact,
         LocationBarcode $barcode,
+        LocationAddress $address,
+        LocationItemState $itemState,
         LocationState $state,
-        LocationDirection $direction,
         LocationCompanyId $companyId,
-        LocationItemState $itemState
+        int $createdBy
     ): self
     {
         return new self(
@@ -75,10 +82,12 @@ final class Location
             $name,
             $mainContact,
             $barcode,
-            new LocationState('to_be_approved'),
-            $direction,
-            $companyId,
+            $address,
             $itemState,
+            $state,
+            $companyId,
+            $createdBy,
+            $createdBy,
             new LocationCreatedAt(),
             new LocationUpdatedAt()
         );
@@ -114,9 +123,9 @@ final class Location
         return $this->state;
     }
 
-    public function direction(): LocationDirection
+    public function address(): LocationAddress
     {
-        return $this->direction;
+        return $this->address;
     }
 
     public function companyId(): LocationCompanyId
@@ -128,6 +137,17 @@ final class Location
     {
         return $this->itemState;
     }
+
+    public function createdBy(): int
+    {
+        return $this->createdBy;
+    }
+
+    public function updatedBy(): int
+    {
+        return $this->updatedBy;
+    }
+
     public function createdAt(): LocationCreatedAt
     {
         return $this->createdAt;
