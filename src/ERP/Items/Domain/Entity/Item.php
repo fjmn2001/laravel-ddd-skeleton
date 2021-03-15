@@ -87,33 +87,33 @@ final class Item
     }
 
     public static function fromValues(
-        ItemId $id,
-        ItemCode $code,
-        ItemName $name,
+        string $id,
+        string $code,
+        string $name,
         string $reference,
-        ItemType $type,
-        ItemCategoryId $categoryId,
-        ItemState $state,
+        string $type,
+        string $categoryId,
+        string $state,
         string $companyId,
         int $createdBy,
         int $updatedBy,
-        ItemCreatedAt $createAt,
-        ItemUpdatedAt $updatedAt
+        string $createAt,
+        string $updatedAt
     ): self
     {
         return new self(
-            $id,
-            $code,
-            $name,
+            new ItemId($id),
+            new ItemCode($code),
+            new ItemName($name),
             $reference,
-            $type,
-            $categoryId,
-            $state,
+            new ItemType($type),
+            new ItemCategoryId($categoryId),
+            new ItemState($state),
             $companyId,
             $createdBy,
             $updatedBy,
-            $createAt,
-            $updatedAt
+            new ItemCreatedAt($createAt),
+            new ItemUpdatedAt($updatedAt)
         );
     }
 

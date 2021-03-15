@@ -7,16 +7,11 @@ namespace Medine\ERP\Items\Infrastructure;
 use Illuminate\Support\Facades\DB;
 use Medine\ERP\Items\Domain\Contracts\ItemRepository;
 use Medine\ERP\Items\Domain\Entity\Item;
-use Medine\ERP\Items\Domain\ValueObjects\ItemCategoryId;
-use Medine\ERP\Items\Domain\ValueObjects\ItemCode;
-use Medine\ERP\Items\Domain\ValueObjects\ItemCreatedAt;
 use Medine\ERP\Items\Domain\ValueObjects\ItemId;
-use Medine\ERP\Items\Domain\ValueObjects\ItemName;
-use Medine\ERP\Items\Domain\ValueObjects\ItemState;
-use Medine\ERP\Items\Domain\ValueObjects\ItemType;
-use Medine\ERP\Items\Domain\ValueObjects\ItemUpdatedAt;
+use Medine\ERP\Shared\Domain\Criteria;
+use Medine\ERP\Shared\Infrastructure\MySqlRepository;
 
-final class MySqlItemRepository implements ItemRepository
+final class MySqlItemRepository extends MySqlRepository implements ItemRepository
 {
 
     public function save(Item $item): void
@@ -39,22 +34,12 @@ final class MySqlItemRepository implements ItemRepository
 
     public function find(ItemId $itemId): ?Item
     {
-        $row = DB::table('products')->where('products.id', $itemId->value())->first();
-
-        return !empty($row) ? Item::fromValues(
-            new ItemId($row->id),
-            new ItemCode($row->code),
-            new ItemName($row->name),
-            $row->reference,
-            new ItemType($row->type),
-            new ItemCategoryId($row->category_id),
-            new ItemState($row->state),
-            $row->company_id,
-            $row->created_by,
-            $row->updated_by,
-            new ItemCreatedAt($row->created_at),
-            new ItemUpdatedAt($row->updated_at)
-        ) : null;
+        return DB::table('products')
+            ->where('products.id', $itemId->value())
+            ->take(1)
+            ->get()
+            ->map($this->buildItem())
+            ->first();
     }
 
     public function update(Item $item): void
@@ -77,5 +62,34 @@ final class MySqlItemRepository implements ItemRepository
         $query = (new MySqlItemFilters($query))($criteria);
 
         return (int)$query->count();
+    }
+
+    public function matching(Criteria $criteria): array
+    {
+        $query = DB::table('products');
+        $query = (new MySqlItemFilters($query))($criteria);
+        $query = $this->completeBuilder($criteria, $query);
+
+        return $query->get()->map($this->buildItem())->toArray();
+    }
+
+    private function buildItem(): \Closure
+    {
+        return function ($row) {
+            return Item::fromValues(
+                $row->id,
+                $row->code,
+                $row->name,
+                $row->reference,
+                $row->type,
+                $row->category_id,
+                $row->state,
+                $row->company_id,
+                $row->created_by,
+                $row->updated_by,
+                $row->created_at,
+                $row->updated_at
+            );
+        };
     }
 }
