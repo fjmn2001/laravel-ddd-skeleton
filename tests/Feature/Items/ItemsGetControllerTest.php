@@ -1,0 +1,43 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Feature\Items;
+
+use App\Models\User;
+use Faker\Factory;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Laravel\Passport\Passport;
+use Tests\TestCase;
+
+final class ItemsGetControllerTest extends TestCase
+{
+    use DatabaseTransactions;
+
+    protected $faker;
+
+    protected function setUp(): void
+    {
+        $this->faker = Factory::create();
+
+        parent::setUp();
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_get_the_existing_items()
+    {
+        Passport::actingAs(
+            User::factory()->create()
+        );
+
+        $response = $this->json('GET', '/api/items', [
+            'filters' => [
+                ['field' => 'companyId', 'value' => $this->faker->uuid]
+            ]
+        ]);
+
+        $response->assertStatus(200);
+    }
+}

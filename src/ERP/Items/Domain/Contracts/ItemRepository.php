@@ -19,4 +19,6 @@ interface ItemRepository
     public function update(Item $item): void;
 
     public function count(Criteria $criteria): int;
+
+    public function matching(Criteria $criteria): array;
 }

@@ -31,4 +31,9 @@ final class InMemoryItemRepository implements ItemRepository
     {
         // TODO: Implement count() method.
     }
+
+    public function matching(Criteria $criteria): array
+    {
+        // TODO: Implement matching() method.
+    }
 }
