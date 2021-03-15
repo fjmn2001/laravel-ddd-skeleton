@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Medine\Apps\ERP\Backend\Controller\Locations;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Medine\ERP\Locations\Application\Create\LocationCreator;
 use Medine\ERP\Locations\Application\Create\LocationCreatorRequest;
 
-final class LocationsPostController extends Controller
+final class LocationsPostController
 {
     private $creator;
 
@@ -27,10 +26,11 @@ final class LocationsPostController extends Controller
             $request->name,
             $request->mainContact,
             $request->barcode,
+            $request->address,
+            $request->itemState,
             $request->state,
-            $request->direction,
             $request->companyId,
-            $request->itemState
+            $request->user()->id
         ));
 
         return new JsonResponse([], JsonResponse::HTTP_CREATED);

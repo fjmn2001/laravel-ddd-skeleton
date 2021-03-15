@@ -8,11 +8,10 @@ use App\Models\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Laravel\Passport\Passport;
-//use Ramsey\Uuid\Uuid;
 use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 use Tests\TestCase;
 
-final class LocationsPostControllerTest extends TestCase
+final class LocationPostControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -35,14 +34,15 @@ final class LocationsPostControllerTest extends TestCase
 
         $response = $this->postJson('/api/location', [
             'id' => Uuid::random()->value(),
-            'code' => $this->faker->postcode,
-            'name' => 'bodega',
+            'code' => $this->faker->randomElement(['code1', 'code2']),
+            'name' => $this->faker->randomElement(['location1', 'location2']),
             'mainContact' => $this->faker->name,
-            'barcode' => $this->faker->postcode,
-            'state' => 'activo',
-            'direction' => 'el paraiso',
+            'barcode' => $this->faker->randomElement(['barcode1', 'barcode2']),
+            'address' => $this->faker->randomElement(['address1', 'address2']),
+            'itemState' => $this->faker->randomElement(['available', 'not_available']),
+            'state' => $this->faker->randomElement(['active', 'inactive']),
             'companyId' => Uuid::random()->value(),
-            'itemState' => 'disponible'
+
         ]);
 
         $response->assertJson([]);

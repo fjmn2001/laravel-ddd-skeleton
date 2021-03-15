@@ -6,26 +6,17 @@ namespace Tests\Unit\ERP\Locations\Application\Create;
 
 use Faker\Factory;
 use Medine\ERP\Locations\Application\Create\LocationCreator;
-use Medine\ERP\Locations\Application\Create\LocationCreatorRequest;
-use Medine\ERP\Product\Application\Create\CreateProductRequest;
-use Medine\ERP\Product\Application\Create\ProductCreator;
+use Medine\ERP\Locations\Domain\LocationRepository;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Ramsey\Uuid\Uuid;
-use Tests\Unit\ERP\Locations\Infrastructure\InMemoryLocationRepository;
-use Tests\Unit\ERP\Product\Infrastructure\InMemoryProductRepository;
 
 final class LocationCreatorTest extends TestCase
 {
-    protected $creator;
-    protected $faker;
+    private $faker;
 
     protected function setUp(): void
     {
-        $this->creator = new LocationCreator(
-            new InMemoryLocationRepository()
-        );
         $this->faker = Factory::create();
-
         parent::setUp();
     }
 
@@ -34,18 +25,16 @@ final class LocationCreatorTest extends TestCase
      */
     public function it_should_create_a_valid_location_and_return_null()
     {
-        $response = ($this->creator)(new LocationCreatorRequest(
-            Uuid::uuid4()->toString(),
-            $this->faker->postcode,
-            $this->faker->text(20),
-            $this->faker->name,
-            $this->faker->postcode,
-            $this->faker->state,
-            $this->faker->text(25),
-            Uuid::uuid4()->toString(),
-            $this->faker->text(15)
-        ));
+        $repository = $this->createMock(LocationRepository::class);
+        $this->shouldCreate($repository);
+        $creator = new LocationCreator($repository);
+        $response = ($creator)(LocationCreatorRequestMother::random());
 
         $this->assertNull($response);
+    }
+
+    private function shouldCreate(MockObject $repository): void
+    {
+        $repository->method('save');
     }
 }

@@ -14,16 +14,18 @@ final class MySqlLocationRepository extends MySqlRepository implements LocationR
 
     public function save(Location $location): void
     {
-        DB::table('location')->insert([
+        DB::table('locations')->insert([
             'id' => $location->id()->value(),
             'code' => $location->code()->value(),
             'name' => $location->name()->value(),
             'main_contact' => $location->mainContact()->value(),
             'barcode' => $location->barcode()->value(),
-            'state' => $location->state()->value(),
-            'direction' => $location->direction()->value(),
-            'company_id' => $location->companyId()->value(),
+            'address' => $location->address()->value(),
             'item_State' => $location->itemState()->value(),
+            'state' => $location->state()->value(),
+            'company_id' => $location->companyId()->value(),
+            'created_by' => $location->createdBy(),
+            'updated_by' => $location->updatedBy(),
             'created_at' => $location->createdAt()->value(),
             'updated_at' => $location->updatedAt()->value(),
         ]);

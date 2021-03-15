@@ -6,7 +6,7 @@ namespace Medine\ERP\Locations\Domain\ValueObject;
 
 use Medine\ERP\Shared\Domain\ValueObjects\StringValueObject;
 
-final class LocationDirection extends StringValueObject
+final class LocationAddress extends StringValueObject
 {
 
 }
