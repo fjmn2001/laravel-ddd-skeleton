@@ -34,7 +34,7 @@ final class ItemFinderTest extends TestCase
         $this->assertEquals($item->name()->value(), $response->name());
         $this->assertEquals($item->categoryId()->value(), $response->categoryId());
         $this->assertEquals($item->reference(), $response->reference());
-        $this->assertEquals($item->type()->value(), $response->typeId());
+        $this->assertEquals($item->type()->value(), $response->type());
     }
 
     private function shouldFind(\PHPUnit\Framework\MockObject\MockObject $repository, Item $item): void
