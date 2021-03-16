@@ -6,7 +6,7 @@ namespace Medine\ERP\Items\Infrastructure\Controller;
 
 use Illuminate\Http\JsonResponse;
 
-final class ItemsOptionsGetController
+final class ItemOptionsGetController
 {
     public function __invoke(string $id)
     {
