@@ -22,7 +22,8 @@
                 <ul id="side-menu" class="sub-menu-lateral sub-menu-compras" style="display: block;"
                     v-show="!loadingLeftBar">
                     <li v-for="leftBarOption in leftBarOptions" :key="leftBarOption.name">
-                        <router-link :to="{name: leftBarOption.name}" class="selected">
+                        <router-link :to="{name: leftBarOption.name}"
+                                     :class="{selected: isSelected(leftBarOption.name)}">
                             <i :class="leftBarOption.class"></i>
                             <span class="hide-menu"> {{ leftBarOption.title }}</span>
                         </router-link>
@@ -53,20 +54,27 @@
     </aside>
 </template>
 
-<script>
+<script lang="ts">
 import {defineComponent} from 'vue'
 import {useAuth} from "@/modules/auth/use/useAuth";
 import {useMenu} from "@/use/useMenu";
+import {useRoute} from "vue-router";
 
 export default defineComponent({
     setup() {
         const {user} = useAuth()
         const {leftBarOptions, loadingLeftBar} = useMenu();
+        const route = useRoute();
+
+        function isSelected(name: string): boolean {
+            return name.indexOf(route.name.toString()) !== -1;
+        }
 
         return {
             user,
             leftBarOptions,
-            loadingLeftBar
+            loadingLeftBar,
+            isSelected
         }
     }
 })
