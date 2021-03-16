@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\ItemCategories;
+namespace Tests\Feature\Items;
 
 use App\Models\User;
 use Faker\Factory;
@@ -11,7 +11,7 @@ use Laravel\Passport\Passport;
 use Ramsey\Uuid\Uuid;
 use Tests\Feature\Shared\FeatureBase;
 
-final class ItemCategoryStatesGetControllerTest extends FeatureBase
+final class ItemOptionsGetControllerTest extends FeatureBase
 {
     use DatabaseTransactions;
 
@@ -26,27 +26,16 @@ final class ItemCategoryStatesGetControllerTest extends FeatureBase
     /**
      * @test
      */
-    public function it_should_get_all_states_for_an_existing_item_category()
+    public function it_should_get_all_options_for_an_existing_item()
     {
         Passport::actingAs(
             User::factory()->create()
         );
 
         $companyId = Uuid::uuid4();
-        $itemId = Uuid::uuid4();
         $this->buildCompany($companyId, $this->faker);
-        $this->buildItem($itemId, $companyId);
 
-        $response = $this->getJson('/api/items/states/' . $itemId);
-
-
-        $response->assertStatus(200);
-    }
-
-    private function buildItem(\Ramsey\Uuid\UuidInterface $itemId, \Ramsey\Uuid\UuidInterface $companyId): void
-    {
-
-
+        $itemId = Uuid::uuid4();
         $itemCode = $this->faker->randomElement(['code01', 'code02']);
         $itemName = $this->faker->randomElement(['item01', 'item02']);
         $itemReference = $this->faker->text(50);
@@ -63,5 +52,10 @@ final class ItemCategoryStatesGetControllerTest extends FeatureBase
             'state' => $itemState,
             'companyId' => $companyId,
         ]);
+
+        $response = $this->getJson('/api/items/options/' . $itemId);
+
+
+        $response->assertStatus(200);
     }
 }

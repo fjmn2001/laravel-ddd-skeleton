@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\ItemCategories;
+namespace Tests\Feature\Items;
 
 use App\Models\User;
 use Faker\Factory;
@@ -11,7 +11,7 @@ use Laravel\Passport\Passport;
 use Ramsey\Uuid\Uuid;
 use Tests\Feature\Shared\FeatureBase;
 
-final class ItemCategoryStatesGetControllerTest extends FeatureBase
+final class ItemStatePutControllerTest extends FeatureBase
 {
     use DatabaseTransactions;
 
@@ -26,7 +26,7 @@ final class ItemCategoryStatesGetControllerTest extends FeatureBase
     /**
      * @test
      */
-    public function it_should_get_all_states_for_an_existing_item_category()
+    public function it_should_inactivate_an_existing_item()
     {
         Passport::actingAs(
             User::factory()->create()
@@ -37,9 +37,11 @@ final class ItemCategoryStatesGetControllerTest extends FeatureBase
         $this->buildCompany($companyId, $this->faker);
         $this->buildItem($itemId, $companyId);
 
-        $response = $this->getJson('/api/items/states/' . $itemId);
+        $response = $this->putJson('/api/items/state/' . $itemId, [
+            'state' => 'inactive'
+        ]);
 
-
+        $response->assertJson([]);
         $response->assertStatus(200);
     }
 
