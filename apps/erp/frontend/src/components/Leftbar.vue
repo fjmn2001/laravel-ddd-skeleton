@@ -8,18 +8,19 @@
                     </div>
                     <p class="profile-text m-t-15 font-16"><a href="javascript:void(0);" v-html="user?.name"></a></p>
                 </div>
-               <!--  --------------------Start loading user------------------------------------ -->
-                <div class="dropdown user-pro-body">
-                    <div class="profile-image">
-                        <div class="preloader-ima-user-sider"></div>
-                        <div class="preloader-text-user-sider"></div>
-                    </div>
-                </div>
+                <!--  --------------------Start loading user------------------------------------ -->
+                <!--                <div class="dropdown user-pro-body">-->
+                <!--                    <div class="profile-image">-->
+                <!--                        <div class="preloader-ima-user-sider"></div>-->
+                <!--                        <div class="preloader-text-user-sider"></div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
                 <!-- ----------------------------End   ------------------------------- -->
             </div>
 
             <nav class="sidebar-nav">
-                <ul id="side-menu" class="sub-menu-lateral sub-menu-compras" style="display: block;">
+                <ul id="side-menu" class="sub-menu-lateral sub-menu-compras" style="display: block;"
+                    v-show="!loadingLeftBar">
                     <li v-for="leftBarOption in leftBarOptions" :key="leftBarOption.name">
                         <router-link :to="{name: leftBarOption.name}" class="selected">
                             <i :class="leftBarOption.class"></i>
@@ -27,8 +28,8 @@
                         </router-link>
                     </li>
                 </ul>
-               <!--  --------------------Start loading menu------------------------------------ -->
-                <ul class="sub-menu-lateral sub-menu-compras">
+                <!--  --------------------Start loading menu------------------------------------ -->
+                <ul class="sub-menu-lateral sub-menu-compras" v-show="loadingLeftBar">
                     <li class="pre-loader-sider-li">
                         <div class="pre-loader-sider-icon"></div>
                         <div class="pre-loader-sider-text"></div>
@@ -60,11 +61,12 @@ import {useMenu} from "@/use/useMenu";
 export default defineComponent({
     setup() {
         const {user} = useAuth()
-        const {leftBarOptions} = useMenu();
+        const {leftBarOptions, loadingLeftBar} = useMenu();
 
         return {
             user,
-            leftBarOptions
+            leftBarOptions,
+            loadingLeftBar
         }
     }
 })

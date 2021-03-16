@@ -6,6 +6,7 @@ import home from "../modules/home/router";
 import landing from "../modules/landing/router";
 import companies from "../modules/companies/router";
 import inventorySettings from "../modules/inventory_settings/router";
+import items from "../modules/items/router";
 
 const routes: Array<RouteRecordRaw> = [
     ...auth,
@@ -18,7 +19,8 @@ const routes: Array<RouteRecordRaw> = [
             ...home,
             ...landing,
             ...companies,
-            ...inventorySettings
+            ...inventorySettings,
+            ...items
         ]
     }
     // {
