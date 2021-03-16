@@ -4,5 +4,6 @@ interface defaultCatalog {
 }
 
 export interface Catalog {
+    categories: defaultCatalog[]
     states: defaultCatalog[]
 }

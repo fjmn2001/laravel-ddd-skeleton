@@ -160,7 +160,7 @@ export default defineComponent({
         const {ERP_URL} = useCore();
         const {items, hasData, loading, getCompanies} = useCompanies();
         const {getCatalog} = useCatalog();
-        const breadcrumbUrl: string = ERP_URL + '/api/company/breadcrumbs'
+        const breadcrumbUrl: string = ERP_URL + '/api/items/breadcrumbs'
         const showModal = ref(false);
 
         onMounted(async () => {

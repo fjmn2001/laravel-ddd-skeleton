@@ -67,7 +67,7 @@ export default defineComponent({
         const route = useRoute();
 
         function isSelected(name: string): boolean {
-            return name.indexOf(route.name.toString()) !== -1;
+            return !!route.name && name.indexOf(route.name.toString()) !== -1;
         }
 
         return {
