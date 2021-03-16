@@ -9,9 +9,9 @@ final class ItemUpdaterRequest
     private $id;
     private $code;
     private $name;
-    private $categoryId;
     private $reference;
     private $type;
+    private $categoryId;
     private $state;
     private $updatedBy;
 
