@@ -11,8 +11,8 @@
                     <div>
                         <div class="align-items-center d-flex div-title-card justify-content-between row">
                             <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column">
-                                <h5 class="xtitle-buscar">Lista de empresas</h5>
-                                <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 xsubtitle-buscar">(Tabla principai)</p>
+                                <h5 class="xtitle-buscar">Items List</h5>
+                                <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 xsubtitle-buscar">(Main table)</p>
                             </div>
                             <a href="#des02" id="desplegar-busqueda1" data-toggle="collapse"><i
                                 class="fa fa-chevron-up"></i></a>

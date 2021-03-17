@@ -45,6 +45,8 @@ export const api = {
             code: item.value.code,
             name: item.value.name,
             reference: item.value.reference,
+            type: item.value.type,
+            categoryId: item.value.categoryId,
             state: item.value.state,
             companyId: item.value.companyId
         });
@@ -58,6 +60,8 @@ export const api = {
             code: item.value.code,
             name: item.value.name,
             reference: item.value.reference,
+            type: item.value.type,
+            categoryId: item.value.categoryId,
             state: item.value.state,
             companyId: item.value.companyId
         });
