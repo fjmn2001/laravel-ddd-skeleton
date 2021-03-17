@@ -7,14 +7,9 @@ const order: Ref<string> = ref('desc');
 const limit: Ref<number> = ref(10);
 const offset: Ref<number> = ref(0);
 
-export function useItemCategoryFilters() {
+export function useFilters() {
     function setFilters(newFilters: Filter[]) {
         filters.value = newFilters;
-    }
-
-    function setFromPager({pLimit, pOffset}: { pLimit: number, pOffset: number }) {
-        limit.value = pLimit;
-        offset.value = pOffset;
     }
 
     return {
@@ -23,7 +18,6 @@ export function useItemCategoryFilters() {
         order,
         limit,
         offset,
-        setFilters,
-        setFromPager
+        setFilters
     }
 }
