@@ -40,7 +40,7 @@ final class ItemsGetController
                 'type' => $item->type(),
                 'categoryId' => $item->categoryId(),
                 'state' => $this->stateButton($item->state()),
-                'averageCost' => $item->averageCost(),
+                'averageCost' => $this->averageCostTag($item->averageCost()),
                 'companyId' => $item->companyId()
             ];
         }, $response->items()), JsonResponse::HTTP_OK);
@@ -52,5 +52,10 @@ final class ItemsGetController
         $class = $state === 'active' ? 'btn-green' : 'btn-red';
 
         return '<button type="button" class="btn btn-sm btn-table changeState ' . $class . '">' . $title . '</button>';
+    }
+
+    private function averageCostTag(float $averageCost)
+    {
+        return '<p class="borde-yellow1">$' . number_format($averageCost, 4) . '</p>';
     }
 }

@@ -26,11 +26,12 @@
                                         <th id="th-ini-sd">
                                             <input type="checkbox" class="chk">
                                         </th>
-                                        <th>Nombre<i class="fa fa-sort thead-i"></i></th>
-                                        <th>Fecha de creación<i class="fa fa-sort thead-i"></i></th>
-                                        <th>Cantidad de usuario<i class="fa fa-caret-down thead-i"></i></th>
-                                        <th>Estado<i class="fa fa-caret-up thead-i"></i></th>
-                                        <th>Opciones</th>
+                                        <th>No. item<i class="fa fa-sort thead-i"></i></th>
+                                        <th>Name<i class="fa fa-sort thead-i"></i></th>
+                                        <th>Category<i class="fa fa-caret-down thead-i"></i></th>
+                                        <th>Average cost<i class="fa fa-caret-down thead-i"></i></th>
+                                        <th>State<i class="fa fa-caret-up thead-i"></i></th>
+                                        <th>Options</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -41,16 +42,18 @@
                                         <td>
                                             <router-link
                                                 :to="{name: 'items.edit', params:{id: item.id}}">
+                                                {{ item.code }}
+                                            </router-link>
+                                        </td>
+                                        <td>
+                                            <router-link
+                                                :to="{name: 'items.edit', params:{id: item.id}}">
                                                 {{ item.name }}
                                             </router-link>
                                         </td>
-                                        <td v-text="item.createdAt"></td>
-                                        <td v-text="item.usersQuantity"></td>
-                                        <td class=" td-btn-med">
-                                            <button type="button" class="btn btn-green btn-sm btn-table"
-                                                    v-html="item.stateValue" data-toggle="modal"
-                                                    data-target="#exampleModalEstado"></button>
-                                        </td>
+                                        <td v-text="item.categoryId"></td>
+                                        <td v-html="item.averageCost"></td>
+                                        <td v-html="item.state"></td>
                                         <td>
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-opt" href="#" data-toggle="modal"
