@@ -2,8 +2,8 @@
     <div>
         <div class="align-items-center d-flex div-title-card justify-content-between row">
             <div class="align-items-baseline d-sm-flex flex-md-row flex-sm-column">
-                <h5 class="xtitle-buscar">Buscar empresa</h5>
-                <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 xsubtitle-buscar">(Búsqueda avanzada)</p>
+                <h5 class="xtitle-buscar">Search items</h5>
+                <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 xsubtitle-buscar">(Advance search)</p>
             </div>
             <a href="#des01" id="desplegar-busqueda" data-toggle="collapse"><i class="fa fa-chevron-down"></i></a>
         </div>
