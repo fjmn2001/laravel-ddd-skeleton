@@ -6,7 +6,7 @@
                     <b><img src="@/assets/images/company.jpg" alt="home"
                             class="logo" @click.prevent="toggleCompaniesList"></b> <span class="dropdown">
                     <a class="btn btn-block empresas-btn font-20 waves-effect waves-light" href="#"
-                       @click.prevent="toggleCompaniesList" v-html="user?.item.name">
+                       @click.prevent="toggleCompaniesList" v-html="user?.company.name">
                     </a>
                     <ul class="animated dropdown-menu  dropdown-tasks slideInUp menu-empresas"
                         :class="{show: showCompaniesList}">
