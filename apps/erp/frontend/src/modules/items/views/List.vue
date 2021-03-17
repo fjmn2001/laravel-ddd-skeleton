@@ -151,7 +151,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted, Ref, ref} from 'vue'
+import {defineComponent, onMounted, ref} from 'vue'
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/items/components/SearchForm.vue";
 import {useItems} from "@/modules/items/use/useItems";
@@ -160,18 +160,25 @@ import {useCore} from "@/modules/shared/use/useCore";
 import TablePager from "@/components/TablePager.vue";
 import NoResults from "@/components/table/NoResults.vue";
 import Loading from "@/components/table/Loading.vue";
+import {useFilters} from "@/modules/items/use/useFilters";
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 export default defineComponent({
     components: {Loading, NoResults, TablePager, SearchForm, Breadcrums},
     setup() {
         const {ERP_URL} = useCore();
         const {items, hasData, loading, getItems, itemsCount} = useItems();
+        const {setFilters} = useFilters();
+        const {user} = useAuth();
         const {getCatalog} = useCatalog();
         const breadcrumbUrl: string = ERP_URL + '/api/items/breadcrumbs'
         const showModal = ref(false);
 
         onMounted(async () => {
             await getCatalog();
+            await setFilters([
+                {field: 'companyId', value: user?.value?.company.id}
+            ]);
             await getItems();
         })
 
