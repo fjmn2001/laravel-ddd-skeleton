@@ -17,7 +17,7 @@ import {useRouter} from 'vue-router'
 import Breadcrums from '@/components/Breadcrums.vue';
 import GeneralsDetails from "@/modules/items/components/GeneralsDetails.vue";
 import FormButtons from "@/components/FormButtons.vue";
-import {useCompany} from "@/modules/items/use/useCompany";
+import {useItem} from "@/modules/items/use/useItem";
 import {useCatalog} from "@/modules/items/use/useCatalog";
 import {useCore} from "@/modules/shared/use/useCore";
 import Loading from "@/components/form/Loading.vue";
@@ -30,7 +30,7 @@ export default defineComponent({
 
         const breadcrumbUrl: string = ERP_URL + '/api/items/breadcrumbs'
         const sending = ref(false)
-        const {create, reset} = useCompany()
+        const {create, reset} = useItem()
         const {getCatalog} = useCatalog();
         const loading = ref(true);
 

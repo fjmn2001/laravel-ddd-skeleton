@@ -34,25 +34,27 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr v-for="company in items" :key="company.id">
+                                    <tr v-for="item in items" :key="item.id">
                                         <th>
                                             <input type="checkbox" class="chk">
                                         </th>
                                         <td>
                                             <router-link
-                                                :to="{name: 'items.edit', params:{id: company.id}}">
-                                                {{ company.name }}
+                                                :to="{name: 'items.edit', params:{id: item.id}}">
+                                                {{ item.name }}
                                             </router-link>
                                         </td>
-                                        <td v-text="company.createdAt"></td>
-                                        <td v-text="company.usersQuantity"></td>
+                                        <td v-text="item.createdAt"></td>
+                                        <td v-text="item.usersQuantity"></td>
                                         <td class=" td-btn-med">
                                             <button type="button" class="btn btn-green btn-sm btn-table"
-                                                    v-html="company.stateValue" data-toggle="modal" data-target="#exampleModalEstado"></button>
+                                                    v-html="item.stateValue" data-toggle="modal"
+                                                    data-target="#exampleModalEstado"></button>
                                         </td>
                                         <td>
                                             <div class="dropdown">
-                                                <a class="btn btn-sm btn-opt" href="#" data-toggle="modal" data-target="#exampleModal">
+                                                <a class="btn btn-sm btn-opt" href="#" data-toggle="modal"
+                                                   data-target="#exampleModal">
                                                     <img src="@/assets/images/icons/3puntos_H.svg"> </a>
                                             </div>
                                         </td>
@@ -60,7 +62,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <table-pager :totalRows="20"></table-pager>
+                            <table-pager :totalRows="itemsCount"></table-pager>
                         </div>
                         <no-results v-if="!hasData() && !loading"></no-results>
                         <loading v-if="loading"></loading>
@@ -70,7 +72,8 @@
         </div>
 
         <teleport to="body">
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -84,13 +87,16 @@
                             <button class="btn btn-block  my-3 btn-modal">Copiar</button>
                             <button class="btn btn-block  my-3 btn-modal">Suspender</button>
                             <button class="btn btn-block  my-3 btn-modal">Editar</button>
-                            <button class="btn btn-block  my-3 btn-modal" data-toggle="modal" data-target="#ModalDocument">Subir documento</button>
+                            <button class="btn btn-block  my-3 btn-modal" data-toggle="modal"
+                                    data-target="#ModalDocument">Subir documento
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="modal fade" id="exampleModalEstado" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="exampleModalEstado" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -109,7 +115,8 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="ModalDocument" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="ModalDocument" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content modal-doc">
                         <div class="modal-header">
@@ -144,10 +151,10 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted, ref} from 'vue'
+import {defineComponent, onMounted, Ref, ref} from 'vue'
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/items/components/SearchForm.vue";
-import {useCompanies} from "@/modules/items/use/useCompanies";
+import {useItems} from "@/modules/items/use/useItems";
 import {useCatalog} from "@/modules/items/use/useCatalog";
 import {useCore} from "@/modules/shared/use/useCore";
 import TablePager from "@/components/TablePager.vue";
@@ -158,14 +165,14 @@ export default defineComponent({
     components: {Loading, NoResults, TablePager, SearchForm, Breadcrums},
     setup() {
         const {ERP_URL} = useCore();
-        const {items, hasData, loading, getCompanies} = useCompanies();
+        const {items, hasData, loading, getItems, itemsCount} = useItems();
         const {getCatalog} = useCatalog();
         const breadcrumbUrl: string = ERP_URL + '/api/items/breadcrumbs'
         const showModal = ref(false);
 
         onMounted(async () => {
             await getCatalog();
-            await getCompanies();
+            await getItems();
         })
 
         function toggleModal(value: boolean) {
@@ -174,6 +181,7 @@ export default defineComponent({
 
         return {
             items,
+            itemsCount,
             breadcrumbUrl,
             loading,
             hasData,

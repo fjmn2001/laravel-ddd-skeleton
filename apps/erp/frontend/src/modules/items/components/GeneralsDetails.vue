@@ -12,22 +12,22 @@
                 <div class="mt-3 pl-3 pr-3 row">
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <label>Número de ítem *</label>
-                        <input type="text" name="code" required="" class="form-control inp-filter">
+                        <input type="text" name="code" required="" v-model="code" class="form-control inp-filter">
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <label>Nombre *</label>
-                        <input type="text" required="" class="form-control inp-filter">
+                        <input type="text" required="" v-model="name" class="form-control inp-filter">
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <label>Referencia</label>
-                        <input type="text" class="form-control inp-filter">
+                        <input type="text" v-model="reference" class="form-control inp-filter">
                     </div>
                 </div>
 
                 <div class="mt-3 pl-3 pr-3 row">
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <label>Tipo de item *</label>
-                        <select2 name="type" :config="{}" :attr="{}">
+                        <select2 name="type" required="" v-model="type" :config="{}" :attr="{}">
                             <option value="">Select</option>
                             <option value="inventoried">Inventoried</option>
                             <option value="inventoried_serial">Inventoried with serial</option>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <label>Categoría *</label>
-                        <select2 name="categoryId" :config="{}" :attr="{}">
+                        <select2 name="categoryId" required="" v-model="categoryId" :config="{}" :attr="{}">
                             <option value="">Select</option>
                             <option :value="category.id" v-for="category in catalogs.categories"
                                     v-html="category.title" :key="category.id"></option>
@@ -45,8 +45,10 @@
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <label>Estado *</label>
-                        <select2 name="state" :config="{}" :attr="{}">
+                        <select2 name="state" required="" v-model="state" :config="{}" :attr="{}">
                             <option value="">Select</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
                         </select2>
                     </div>
                 </div>
@@ -58,36 +60,44 @@
 
 <script lang="ts">
 import {defineComponent, ref, onMounted, watch} from 'vue'
-import {useCompany} from "@/modules/items/use/useCompany";
+import {useItem} from "@/modules/items/use/useItem";
 import {useCatalog} from "@/modules/items/use/useCatalog";
 
 export default defineComponent({
     setup() {
-        const {company} = useCompany();
+        const {item} = useItem();
         const {catalogs} = useCatalog();
 
+        const code = ref('')
         const name = ref('')
+        const reference = ref('')
+        const type = ref('')
+        const categoryId = ref('')
         const state = ref('active')
-        const address = ref('')
-        const phone = ref('')
 
         onMounted(() => {
-            name.value = company.value.name;
-            state.value = company.value.state;
-            address.value = company.value.address;
-            phone.value = company.value.phone;
+            code.value = item.value.code;
+            name.value = item.value.name;
+            reference.value = item.value.reference;
+            type.value = item.value.type;
+            categoryId.value = item.value.categoryId;
+            state.value = item.value.state;
         })
 
-        watch(() => name.value, val => company.value.name = val)
-        watch(() => state.value, val => company.value.state = val)
-        watch(() => address.value, val => company.value.address = val)
-        watch(() => phone.value, val => company.value.phone = val)
+        watch(() => code.value, val => item.value.code = val)
+        watch(() => name.value, val => item.value.name = val)
+        watch(() => reference.value, val => item.value.reference = val)
+        watch(() => type.value, val => item.value.type = val)
+        watch(() => categoryId.value, val => item.value.categoryId = val)
+        watch(() => state.value, val => item.value.state = val)
 
         return {
+            code,
             name,
+            reference,
+            type,
+            categoryId,
             state,
-            address,
-            phone,
             catalogs
         }
     }

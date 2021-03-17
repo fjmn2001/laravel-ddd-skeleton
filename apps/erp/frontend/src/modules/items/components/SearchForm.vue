@@ -38,7 +38,7 @@
 
 <script>
 import {defineComponent, ref, nextTick} from 'vue'
-import {useCompanies} from "@/modules/items/use/useCompanies";
+import {useItems} from "@/modules/items/use/useItems";
 import {useFilters} from "@/modules/items/use/useFilters";
 import {useCatalog} from "@/modules/items/use/useCatalog";
 
@@ -46,7 +46,7 @@ export default defineComponent({
     emits: ['search'],
     setup() {
         const {setFilters} = useFilters()
-        const {loading, getCompanies} = useCompanies();
+        const {loading, getItems} = useItems();
         const {catalogs} = useCatalog();
 
         const name = ref('')
@@ -57,7 +57,7 @@ export default defineComponent({
                 {field: 'name', value: name.value},
                 {field: 'state', value: state.value}
             ])
-            getCompanies();
+            getItems();
         }
 
         async function clean() {

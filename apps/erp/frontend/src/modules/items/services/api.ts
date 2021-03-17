@@ -1,14 +1,14 @@
-import {Company} from "@/modules/items/types/Company";
+import {Item} from "@/modules/items/types/Item";
 import axios from "axios";
 import {useFilters} from "@/modules/items/use/useFilters";
-import {useCompany} from "@/modules/items/use/useCompany";
+import {useItem} from "@/modules/items/use/useItem";
 import {Catalog} from "@/modules/items/types/Catalog";
 import {useAuth} from "@/modules/auth/use/useAuth";
 
 export const api = {
-    async getCompanies(): Promise<Company[]> {
+    async getItems(): Promise<Item[]> {
         const {filters, orderBy, order, limit, offset} = useFilters();
-        const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/company', {
+        const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/items', {
             params: {
                 filters: filters.value,
                 orderBy: orderBy.value,
@@ -21,34 +21,52 @@ export const api = {
             resolve(response.data);
         });
     },
-    async createCompany(): Promise<Company> {
-        const {company} = useCompany();
-        const response = await axios.post(process.env.VUE_APP_ERP_URL + '/api/company', {
-            id: company.value.id,
-            name: company.value.name,
-            state: company.value.state,
-            address: company.value.address,
-            phone: company.value.phone,
+    async getItemsCount(): Promise<number> {
+        const {token} = useAuth();
+        const {filters, orderBy, order, limit, offset} = useFilters();
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.value;
+        const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/items/count', {
+            params: {
+                filters: filters.value,
+                orderBy: orderBy.value,
+                order: order.value,
+                limit: limit.value,
+                offset: offset.value
+            }
         });
         return new Promise(resolve => {
             resolve(response.data);
         });
     },
-    async updateCompany(): Promise<Company> {
-        const {company} = useCompany();
-        const response = await axios.put(process.env.VUE_APP_ERP_URL + '/api/company/' + company.value.id, {
-            name: company.value.name,
-            state: company.value.state,
-            address: company.value.address,
-            phone: company.value.phone,
-            logo: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fvuejs.org%2F&psig=AOvVaw2iwaicA5-fgsHJgOFWwde7&ust=1613311099724000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPik6qyC5-4CFQAAAAAdAAAAABAD'
+    async createItem(): Promise<Item> {
+        const {item} = useItem();
+        const response = await axios.post(process.env.VUE_APP_ERP_URL + '/api/items', {
+            id: item.value.id,
+            code: item.value.code,
+            name: item.value.name,
+            reference: item.value.reference,
+            state: item.value.state,
+            companyId: item.value.companyId
         });
         return new Promise(resolve => {
             resolve(response.data);
         });
     },
-    async findCompany(id: string): Promise<Company> {
-        const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/company/' + id);
+    async updateItem(): Promise<Item> {
+        const {item} = useItem();
+        const response = await axios.put(process.env.VUE_APP_ERP_URL + '/api/items/' + item.value.id, {
+            code: item.value.code,
+            name: item.value.name,
+            reference: item.value.reference,
+            state: item.value.state,
+            companyId: item.value.companyId
+        });
+        return new Promise(resolve => {
+            resolve(response.data);
+        });
+    },
+    async findItem(id: string): Promise<Item> {
+        const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/items/' + id);
         return new Promise(resolve => {
             resolve(response.data);
         });
