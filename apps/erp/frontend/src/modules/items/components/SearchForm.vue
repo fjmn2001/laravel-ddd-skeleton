@@ -10,14 +10,25 @@
         <div id="des01" class="des01 m-3 pb-3 collapse">
             <div class="pb-1 pl-3 pr-3 pt-2 row">
                 <div class="col-lg-3 col-md-3 col-sm-12">
-                    <label>Nombre de la empresa</label>
+                    <label>No. item</label>
+                    <input type="text" class="form-control inp-filter" v-model="code">
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <label>Name</label>
                     <input type="text" class="form-control inp-filter" v-model="name">
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12" v-if="catalogs">
+                    <label>Category</label>
+                    <select2 :config="{}" :attr="{multiple: true}" v-model="categoryId">
+                        <option :value="category.id" v-for="category in catalogs.categories" v-html="category.title"
+                                :key="category.id"></option>
+                    </select2>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12" v-if="catalogs">
                     <label>Estado</label>
                     <select2 name="state" :config="{}" :attr="{multiple: true}" v-model="state">
-                        <option :value="state.id" v-for="state in catalogs.states" v-html="state.title"
-                                :key="state.id"></option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
                     </select2>
                 </div>
             </div>
@@ -49,19 +60,25 @@ export default defineComponent({
         const {loading, getItems} = useItems();
         const {catalogs} = useCatalog();
 
+        const code = ref('')
         const name = ref('')
+        const categoryId = ref([])
         const state = ref([])
 
         async function search() {
             await setFilters([
+                {field: 'code', value: code.value},
                 {field: 'name', value: name.value},
+                {field: 'categoryId', value: categoryId.value},
                 {field: 'state', value: state.value}
             ])
             getItems();
         }
 
         async function clean() {
+            code.value = ''
             name.value = ''
+            categoryId.value = []
             state.value = []
             nextTick(() => {
                 search();
@@ -69,7 +86,9 @@ export default defineComponent({
         }
 
         return {
+            code,
             name,
+            categoryId,
             state,
             search,
             clean,

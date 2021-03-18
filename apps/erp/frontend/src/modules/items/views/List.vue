@@ -53,12 +53,15 @@
                                         </td>
                                         <td v-text="item.categoryId"></td>
                                         <td v-html="item.averageCost"></td>
-                                        <td v-html="item.state"></td>
+                                        <td>
+                                            <span v-html="item.state" @click.prevent="changeState(item.id)"></span>
+                                        </td>
                                         <td>
                                             <div class="dropdown">
-                                                <a class="btn btn-sm btn-opt" href="#" data-toggle="modal"
-                                                   data-target="#exampleModal">
-                                                    <img src="@/assets/images/icons/3puntos_H.svg"> </a>
+                                                <a class="btn btn-sm btn-opt" href="#"
+                                                   @click.prevent="showOptionsModal(item.id)">
+                                                    <img src="@/assets/images/icons/3puntos_H.svg">
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>
@@ -69,87 +72,11 @@
                         </div>
                         <no-results v-if="!hasData() && !loading"></no-results>
                         <loading v-if="loading"></loading>
+                        <options-modal :name="'optionsModal'"></options-modal>
                     </div>
                 </div>
             </div>
         </div>
-
-        <teleport to="body">
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Opciones</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body p-4">
-
-                            <button class="btn btn-block  my-3 btn-modal">Copiar</button>
-                            <button class="btn btn-block  my-3 btn-modal">Suspender</button>
-                            <button class="btn btn-block  my-3 btn-modal">Editar</button>
-                            <button class="btn btn-block  my-3 btn-modal" data-toggle="modal"
-                                    data-target="#ModalDocument">Subir documento
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="exampleModalEstado" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Opciones</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body p-4">
-
-                            <button class="btn btn-block  my-3 btn-outline-success">Activo</button>
-                            <button class="btn btn-block  my-3 btn-outline-danger">Desactivado</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal -->
-            <div class="modal fade" id="ModalDocument" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content modal-doc">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Subir documento</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="subir-doc">
-                                <div class="barra-carga d-none">
-                                    <div>
-                                        <div style="width: 80%;"></div>
-                                    </div>
-                                    <span>80%</span>
-                                </div>
-                                <label for="fichero">
-                                    Selecione o arrastre un archivo
-                                    <i class="fa fa-cloud-upload"></i>
-                                </label>
-                                <input id="fichero" type="file">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-blue-deg ">Subir</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </teleport>
     </div>
 </template>
 
@@ -165,9 +92,14 @@ import NoResults from "@/components/table/NoResults.vue";
 import Loading from "@/components/table/Loading.vue";
 import {useFilters} from "@/modules/items/use/useFilters";
 import {useAuth} from "@/modules/auth/use/useAuth";
+import $ from "jquery";
+import {api} from "@/modules/items/services/api";
+import {useModal} from "@/use/useModal";
+import OptionsModal from "@/components/modal/optionsModal.vue";
+import router from "@/router";
 
 export default defineComponent({
-    components: {Loading, NoResults, TablePager, SearchForm, Breadcrums},
+    components: {Loading, NoResults, TablePager, SearchForm, Breadcrums, OptionsModal},
     setup() {
         const {ERP_URL} = useCore();
         const {items, hasData, loading, getItems, itemsCount} = useItems();
@@ -176,6 +108,7 @@ export default defineComponent({
         const {getCatalog} = useCatalog();
         const breadcrumbUrl: string = ERP_URL + '/api/items/breadcrumbs'
         const showModal = ref(false);
+        const {show, populateLoading, populateBody, hide} = useModal();
 
         onMounted(async () => {
             await getCatalog();
@@ -184,6 +117,46 @@ export default defineComponent({
             ]);
             await getItems();
         })
+
+        async function changeState(id: string) {
+            show('optionsModal')
+            populateLoading('optionsModal')
+            const modal = $('#optionsModal');
+            const response = await api.getItemStates(id);
+            populateBody('optionsModal', response)
+            modal.off('click', '.updateState').on('click', '.updateState', async (e) => {
+                populateLoading('optionsModal')
+                await api.updateItemState(
+                    $(e.target).data('id'),
+                    $(e.target).data('state')
+                )
+                hide('optionsModal')
+                await setFilters([
+                    {field: 'companyId', value: user?.value?.company.id}
+                ]);
+                await getItems();
+            });
+        }
+
+        async function showOptionsModal(id: string) {
+            show('optionsModal')
+            populateLoading('optionsModal')
+
+            const html = await api.getItemOptions(id)
+            const modal = $('#optionsModal');
+
+            populateBody('optionsModal', html)
+
+            modal.off('click', '.edit').on('click', '.edit', async () => {
+                hide('optionsModal')
+                router.push({name: 'items.edit', params: {id}});
+            });
+
+            modal.off('click', '.changeState').on('click', '.changeState', async () => {
+                hide('optionsModal')
+                changeState(id)
+            });
+        }
 
         function toggleModal(value: boolean) {
             showModal.value = value;
@@ -196,6 +169,8 @@ export default defineComponent({
             loading,
             hasData,
             toggleModal,
+            changeState,
+            showOptionsModal,
             showModal
         }
     }

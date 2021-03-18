@@ -33,7 +33,7 @@ final class Item
         ItemId $id,
         ItemCode $code,
         ItemName $name,
-        string $reference,
+        ?string $reference,
         ItemType $type,
         ItemCategoryId $categoryId,
         ItemState $state,
@@ -62,7 +62,7 @@ final class Item
         ItemId $id,
         ItemCode $code,
         ItemName $name,
-        string $reference,
+        ?string $reference,
         ItemType $type,
         ItemCategoryId $category,
         ItemState $state,
@@ -90,7 +90,7 @@ final class Item
         string $id,
         string $code,
         string $name,
-        string $reference,
+        ?string $reference,
         string $type,
         string $categoryId,
         string $state,
@@ -132,7 +132,7 @@ final class Item
         return $this->name;
     }
 
-    public function reference(): string
+    public function reference(): ?string
     {
         return $this->reference;
     }
@@ -198,7 +198,7 @@ final class Item
         }
     }
 
-    public function changeReference(string $reference): void
+    public function changeReference(?string $reference): void
     {
         if (false === ($this->reference === $reference)) {
             $this->reference = $reference;
