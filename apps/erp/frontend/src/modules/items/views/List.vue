@@ -81,7 +81,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted, ref} from 'vue'
+import {defineComponent, onMounted, ref, watch} from 'vue'
 import Breadcrums from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/items/components/SearchForm.vue";
 import {useItems} from "@/modules/items/use/useItems";
@@ -97,6 +97,7 @@ import {api} from "@/modules/items/services/api";
 import {useModal} from "@/use/useModal";
 import OptionsModal from "@/components/modal/optionsModal.vue";
 import router from "@/router";
+import {Company} from "@/modules/auth/types/Company";
 
 export default defineComponent({
     components: {Loading, NoResults, TablePager, SearchForm, Breadcrums, OptionsModal},
@@ -110,12 +111,23 @@ export default defineComponent({
         const showModal = ref(false);
         const {show, populateLoading, populateBody, hide} = useModal();
 
-        onMounted(async () => {
+        async function initComponent() {
             await getCatalog();
             await setFilters([
                 {field: 'companyId', value: user?.value?.company.id}
             ]);
             await getItems();
+        }
+
+        onMounted(async () => {
+            initComponent();
+        })
+
+        //when changeCompany
+        watch(() => user.value?.company, async (company: Company | undefined) => {
+            if (company) {
+                initComponent()
+            }
         })
 
         async function changeState(id: string) {
