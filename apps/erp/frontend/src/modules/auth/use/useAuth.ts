@@ -51,6 +51,14 @@ export function useAuth() {
         });
     }
 
+    function currentCompanyId() {
+        if (user.value && user.value?.company) {
+            return user.value.company.id;
+        }
+
+        return '';
+    }
+
     async function getUser() {
         try {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.value;
@@ -115,6 +123,7 @@ export function useAuth() {
         getUser,
         passwordRequest,
         resetPassword,
-        setCompany
+        setCompany,
+        currentCompanyId
     }
 }

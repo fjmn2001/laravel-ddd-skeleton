@@ -11,21 +11,23 @@ final class LocationCreatorRequest
     private $name;
     private $mainContact;
     private $barcode;
-    private $state;
-    private $direction;
-    private $companyId;
+    private $address;
     private $itemState;
+    private $state;
+    private $companyId;
+    private $createdBy;
 
     public function __construct(
         string $id,
         string $code,
         string $name,
         string $mainContact,
-        string $barcode,
+        ?string $barcode,
+        string $address,
+        string $itemState,
         string $state,
-        string $direction,
         string $companyId,
-        string $itemState
+        int $createdBy
     )
     {
         $this->id = $id;
@@ -33,10 +35,11 @@ final class LocationCreatorRequest
         $this->name = $name;
         $this->mainContact = $mainContact;
         $this->barcode = $barcode;
+        $this->address = $address;
         $this->state = $state;
-        $this->direction = $direction;
         $this->companyId = $companyId;
         $this->itemState = $itemState;
+        $this->createdBy = $createdBy;
     }
 
     public function id(): string
@@ -59,9 +62,19 @@ final class LocationCreatorRequest
         return $this->mainContact;
     }
 
-    public function barcode(): string
+    public function barcode(): ?string
     {
         return $this->barcode;
+    }
+
+    public function address(): string
+    {
+        return $this->address;
+    }
+
+    public function itemState(): string
+    {
+        return $this->itemState;
     }
 
     public function state(): string
@@ -69,18 +82,13 @@ final class LocationCreatorRequest
         return $this->state;
     }
 
-    public function direction(): string
-    {
-        return $this->direction;
-    }
-
     public function companyId(): string
     {
         return $this->companyId;
     }
 
-    public function itemState(): string
+    public function createdBy(): int
     {
-        return $this->itemState;
+        return $this->createdBy;
     }
 }

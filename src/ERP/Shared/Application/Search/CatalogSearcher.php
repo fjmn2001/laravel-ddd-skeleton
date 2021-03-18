@@ -19,7 +19,7 @@ final class CatalogSearcher
         $this->repository = $repository;
     }
 
-    public function __invoke(SearcherRequest $request, CompanyCatalogsResponse $response)
+    public function __invoke(SearcherRequest $request, $response)
     {
         $criteria = new Criteria(
             Filters::fromValues($request->filters()),

@@ -33,22 +33,35 @@ final class ItemCategoryStatesGetControllerTest extends FeatureBase
         );
 
         $companyId = Uuid::uuid4();
+        $itemId = Uuid::uuid4();
         $this->buildCompany($companyId, $this->faker);
+        $this->buildItem($itemId, $companyId);
 
-        $categoryId = Uuid::uuid4();
-        $categoryName = $this->faker->name;
-        $categoryDescription = $this->faker->text(50);
-        $this->postJson('/api/item_categories', [
-            'id' => $categoryId,
-            'name' => $categoryName,
-            'description' => $categoryDescription,
-            'state' => 'active',
-            'companyId' => $companyId,
-        ]);
-
-        $response = $this->getJson('/api/item_categories/states/' . $categoryId);
+        $response = $this->getJson('/api/items/states/' . $itemId);
 
 
         $response->assertStatus(200);
+    }
+
+    private function buildItem(\Ramsey\Uuid\UuidInterface $itemId, \Ramsey\Uuid\UuidInterface $companyId): void
+    {
+
+
+        $itemCode = $this->faker->randomElement(['code01', 'code02']);
+        $itemName = $this->faker->randomElement(['item01', 'item02']);
+        $itemReference = $this->faker->text(50);
+        $itemType = $this->faker->randomElement(['inventoried', 'inventoried_serial', 'not_inventoried', 'service']);
+        $itemCategoryId = Uuid::uuid4();
+        $itemState = 'active';
+        $this->postJson('/api/items', [
+            'id' => $itemId,
+            'code' => $itemCode,
+            'name' => $itemName,
+            'reference' => $itemReference,
+            'type' => $itemType,
+            'categoryId' => $itemCategoryId,
+            'state' => $itemState,
+            'companyId' => $companyId,
+        ]);
     }
 }

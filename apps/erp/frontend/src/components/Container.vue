@@ -3,7 +3,7 @@
         <div id="wrapper">
             <topbar v-if="route.meta.requiresAuth"></topbar>
             <leftbar v-if="route.meta.requiresAuth"></leftbar>
-            <router-view/>
+            <router-view v-if="user"/>
         </div>
     </div>
 </template>
@@ -19,7 +19,7 @@ import {useAuth} from "@/modules/auth/use/useAuth";
 export default defineComponent({
     components: {Leftbar, Topbar},
     setup() {
-        const {getUser} = useAuth();
+        const {getUser, user} = useAuth();
         const route = useRoute();
         const router = useRouter();
 
@@ -95,8 +95,7 @@ export default defineComponent({
                 ocultarMenu($('body').width());
             };
 
-           //----------------------------------------------------------------
-
+            //----------------------------------------------------------------
 
 
             $('#menu-config-collapse').on('click', function () {
@@ -119,7 +118,8 @@ export default defineComponent({
         });
 
         return {
-            route
+            route,
+            user
         }
     }
 });

@@ -18,7 +18,7 @@ class RouteServiceProvider extends ServiceProvider
         'src/ERP/Company/Infrastructure/config/routes/index.php',
         'src/ERP/Roles/Infrastructure/config/routes/index.php',
         'src/ERP/Provider/Infrastructure/config/routes/index.php',
-        'src/ERP/Product/Infrastructure/config/routes/index.php',
+        'src/ERP/Items/Infrastructure/config/routes/index.php',
         'src/ERP/PurchaseInvoices/Infrastructure/config/routes/index.php',
         'src/ERP/Locations/Infrastructure/config/routes/index.php',
         'src/ERP/Menu/Infrastructure/config/routes/index.php',

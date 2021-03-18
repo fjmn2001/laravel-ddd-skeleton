@@ -24,9 +24,6 @@ final class LeftMenuGetControllerTest extends TestCase
             "name" => 'inventory'
         ]);
 
-        $response->assertJson([
-            ['name' => 'inventory_settings', 'title' => 'Setting', 'class' => 'fa-fw icon-settings']
-        ]);
         $response->assertStatus(200);
     }
 }
