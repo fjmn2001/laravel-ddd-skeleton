@@ -37,7 +37,7 @@ export default defineComponent({
     setup(props) {
         const router = useRouter();
         const {ERP_URL} = useCore();
-        const {find} = useClient()
+        const {find, update} = useClient()
         const loading = ref(true);
         const sending = ref(false)
         const breadcrumbUrl: string = ERP_URL + '/api/client/breadcrumbs'
@@ -48,17 +48,29 @@ export default defineComponent({
             nextTick(() => loading.value = false);
         });
 
-
-
         function cancel(): void {
             router.push({name: 'clients'});
+        }
+
+        async function submit() {
+            try {
+                sending.value = true
+                await update();
+                //todo: add toast
+                router.push({name: 'clients'});
+            } catch (e) {
+                //todo: add toast
+                console.log('2', e);
+            } finally {
+                sending.value = false
+            }
         }
 
         return {
             breadcrumbUrl,
             sending,
             loading,
-
+            submit,
             cancel,
         }
     }
