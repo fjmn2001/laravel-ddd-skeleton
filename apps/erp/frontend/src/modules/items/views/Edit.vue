@@ -12,6 +12,7 @@
 </template>
 
 <script lang="ts">
+import toastr from "toastr";
 import {defineComponent, ref, onMounted, nextTick} from 'vue'
 import {useRouter} from 'vue-router'
 import Breadcrums from '@/components/Breadcrums.vue';
@@ -51,11 +52,11 @@ export default defineComponent({
             try {
                 sending.value = true
                 await update();
-                //todo: add toast
+                toastr.success("Su solicitud se ha procesado correctamente.");
                 router.push({name: 'items'});
             } catch (e) {
-                //todo: add toast
-                console.log('2', e);
+                toastr.error(e?.response?.data?.message);
+                console.log(e);
             } finally {
                 sending.value = false
             }
