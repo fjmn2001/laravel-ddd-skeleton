@@ -196,4 +196,52 @@ final class Client
     {
         $this->emails[] = $email;
     }
+
+    public function changeName(ClientName $newName)
+    {
+        if (false === ($this->name()->equals($newName))) {
+            $this->name = $newName;
+            $this->updatedAt = new ClientUpdatedAt();
+        }
+    }
+
+    public function changeDniType(ClientDniType $newDniType)
+    {
+        if (false === ($this->dniType()->equals($newDniType))) {
+            $this->dniType = $newDniType;
+            $this->updatedAt = new ClientUpdatedAt();
+        }
+    }
+
+    public function changeClientType(ClientClientType $newClientType)
+    {
+        if (false === ($this->clientType()->equals($newClientType))) {
+            $this->clientType = $newClientType;
+            $this->updatedAt = new ClientUpdatedAt();
+        }
+    }
+
+    public function changeClientCategory(ClientClientCategory $newClientCategory)
+    {
+        if (false === ($this->clientCategory()->equals($newClientCategory))) {
+            $this->clientCategory = $newClientCategory;
+            $this->updatedAt = new ClientUpdatedAt();
+        }
+    }
+
+    public function changeFrequentClientNumbrer(ClientFrequentClientNumber $newFrequentClientNumber)
+    {
+        if (false === ($this->frequentClientNumber()->equals($newFrequentClientNumber))) {
+            $this->frequentClientNumber = $newFrequentClientNumber;
+            $this->updatedAt = new ClientUpdatedAt();
+        }
+    }
+
+    public function changeState(ClientState $newState)
+    {
+        if (false === ($this->state()->equals($newState))) {
+            $this->state = $newState;
+            $this->updatedAt = new ClientUpdatedAt();
+        }
+    }
 }

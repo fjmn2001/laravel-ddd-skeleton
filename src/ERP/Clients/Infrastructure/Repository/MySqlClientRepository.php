@@ -66,10 +66,20 @@ final class MySqlClientRepository  extends MySqlRepository implements ClientRepo
             DB::table('client_emails')->insert($emails);
     }
 
-    public function update(Client $company): void
+    public function update(Client $client): void
     {
-        DB::table('clients')->where('clients.id', $company->id()->value())->take(1)->update([
 
+        DB::table('clients')->where('clients.id', $client->id()->value())->take(1)->update([
+            'name' => $client->name()->value(),
+            'lastname' => $client->lastname()->value(),
+            'dni' => $client->dni()->value(),
+            'dni_type' => $client->dniType()->value(),
+            'client_type' => $client->clientType()->value(),
+            'client_category' => $client->clientCategory()->value(),
+            'frequent_client_number' => $client->frequentClientNumber()->value(),
+            'state' => $client->state()->value(),
+            'created_at' => $client->createdAt()->value(),
+            'updated_at' => $client->updatedAt()->value(),
         ]);
     }
 

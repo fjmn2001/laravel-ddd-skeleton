@@ -6,14 +6,13 @@ namespace Tests\Feature\Clients;
 
 use App\Models\User;
 use Faker\Factory;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Laravel\Passport\Passport;
 use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-final class ClientGetControllerTest extends TestCase
+final class ClientPutControllerTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     private $faker;
@@ -27,12 +26,14 @@ final class ClientGetControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_should_get_an_client_existing()
+    public function it_should_update_an_existing_client()
     {
         Passport::actingAs(
             User::factory()->create()
         );
+
         $clientId = Uuid::random()->value();
+
         $client = [
             'id' => $clientId,
             'name' => $this->faker->name,
@@ -43,28 +44,16 @@ final class ClientGetControllerTest extends TestCase
             'clientCategory' => 'taller',
             'frequentClientNumber' => '111-222-333-5555',
             'state' => 'activo',
-            'phones' => [
-                [
-                    'id' => Uuid::random()->value(),
-                    'number' => '111-222-333-5555',
-                    'numberType' => 'work',
-                    'client_id' => $clientId
-                ],
-            ],
-            'emails' => [
-                [
-                    'id' => Uuid::random()->value(),
-                    'email' => $this->faker->email,
-                    'emailType' => 'work',
-                    'client_id' => $clientId
-                ],
-            ]
+            'phones' => [],
+            'emails' => []
         ];
-
         $this->postJson('/api/client', $client);
 
-        $response = $this->getJson('/api/client/' . $clientId);
-        $response->assertJson($client);
+        $client['name'] = 'kakashi hatake';
+        $client['dniType'] = 'hokage';
+
+        $response = $this->putJson('/api/client/' . $clientId, $client);
+        $response->assertJson([]);
         $response->assertStatus(200);
     }
 }
