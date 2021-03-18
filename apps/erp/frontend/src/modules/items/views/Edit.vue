@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import toastr from "toastr";
-import {defineComponent, ref, onMounted, nextTick} from 'vue'
+import {defineComponent, ref, onMounted, nextTick, watch} from 'vue'
 import {useRouter} from 'vue-router'
 import Breadcrums from '@/components/Breadcrums.vue';
 import GeneralsDetails from "@/modules/items/components/GeneralsDetails.vue";
@@ -21,6 +21,8 @@ import FormButtons from "@/components/FormButtons.vue";
 import {useItem} from "@/modules/items/use/useItem";
 import {useCore} from "@/modules/shared/use/useCore";
 import Loading from "@/components/form/Loading.vue";
+import {Company} from "@/modules/auth/types/Company";
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 export default defineComponent({
     components: {FormButtons, GeneralsDetails, Breadcrums, Loading},
@@ -38,11 +40,19 @@ export default defineComponent({
         const sending = ref(false)
         const loading = ref(true)
         const {find, update} = useItem()
+        const {user} = useAuth();
 
         onMounted(async () => {
             await find(props.id ? props.id : '')
             nextTick(() => loading.value = false);
         });
+
+        //when changeCompany
+        watch(() => user.value?.company, async (company: Company | undefined) => {
+            if (company) {
+                router.push({name: 'items'});
+            }
+        })
 
         function cancel(): void {
             router.push({name: 'items'});
