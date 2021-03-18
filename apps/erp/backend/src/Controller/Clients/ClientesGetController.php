@@ -36,6 +36,8 @@ final class ClientesGetController extends Controller
             return [
                 'id' => $client->id(),
                 'name' => $client->name(),
+                'phone' => $client->firstPhones(),
+                'email' => $client->firstEmails(),
                 'state' => $client->state(),
             ];
         }, $response->clients()), JsonResponse::HTTP_OK);

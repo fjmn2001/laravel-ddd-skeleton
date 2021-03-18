@@ -121,13 +121,32 @@ final class ClientResponse
         return $phones;
     }
 
-    public function emails()
+    public function firstPhones()
+    {
+        if(empty($this->phones))
+            return [];
+
+        $phone =$this->phones[0];
+        return [
+            'id' => $phone->id()->value(),
+            'number' => $phone->number()->value(),
+            'numberType' => $phone->numberType()->value(),
+            'client_id' => $phone->clientId()->value()
+        ];
+    }
+
+    public function firstEmails()
     {
         if(empty($this->emails))
             return [];
 
-        $emails = map($this->retrieveEmail(), $this->emails);
-        return $emails;
+        $email = $this->emails[0];
+        return [
+            'id' => $email->id()->value(),
+            'email' => $email->email()->value(),
+            'emailType' => $email->emailType()->value(),
+            'client_id' => $email->clientId()->value()
+        ];
     }
 
 

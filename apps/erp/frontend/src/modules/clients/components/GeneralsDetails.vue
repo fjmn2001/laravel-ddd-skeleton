@@ -55,17 +55,19 @@
                     <div class="col-md-3">
                         <label>Tipo de cliente</label>
                         <select class="form-control inp-filter" v-model="clientType">
-                            <option value=""></option>
-                            <option value="1">Opción01</option>
-                            <option value="2">Opción01</option>
+                            <option value="">Seleccione</option>
+                            <option value="tip-1">Tipo 1</option>
+                            <option value="tip-2">Tipo 2</option>
+                            <option value="tip-3">Tipo 3</option>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <label>Categoría de cliente</label>
                         <select class="form-control inp-filter" v-model="clientCategory">
-                            <option value=""></option>
-                            <option value="1">Opción01</option>
-                            <option value="1">Opción02</option>
+                            <option value="">Seleccione</option>
+                            <option value="cat-1">Categoria 1</option>
+                            <option value="cat-2">Categoria 2</option>
+                            <option value="cat-3">Categoria 3</option>
                         </select>
                     </div>
                     <div class="col-md-3" id="div_limite_ventas">
@@ -104,9 +106,8 @@
                         <label class="lbl-nombre">Estado&nbsp;</label>
                         <span class="text-danger">*</span>
                         <select required="" class="form-control inp-filter" v-model="state">
-                            <option value=""></option>
-                            <option value="1">option1</option>
-                            <option value="3">option2</option>
+                            <option value="active">Activo</option>
+                            <option value="inactive">Inactivo</option>
                         </select>
                     </div>
                 </div>
@@ -114,7 +115,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <label>Cuenta por cobrar</label>
                         <select required="" class="form-control inp-filter" disabled="">
-                            <option value=""></option>
+                            <option value="">Seleccione</option>
                             <option value="1">option1</option>
                             <option value="3">option2</option>
                         </select>

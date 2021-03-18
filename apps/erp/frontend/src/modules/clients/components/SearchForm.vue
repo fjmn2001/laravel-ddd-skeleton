@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import {defineComponent, nextTick, ref} from 'vue'
-import {useFilters} from "@/modules/shared/use/useFilters";
+import {useFilters} from "@/modules/clients/use/useFilters";
 import {useClients} from "@/modules/clients/use/useClients";
 
 export default defineComponent({

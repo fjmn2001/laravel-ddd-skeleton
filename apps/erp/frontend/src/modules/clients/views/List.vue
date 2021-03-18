@@ -50,8 +50,8 @@
                                         </td>
 
                                         <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{client.phone.number}}</td>
+                                        <td>{{client.email.email}}</td>
                                         <td></td>
                                         <td></td>
                                         <td class=" td-btn-med">
