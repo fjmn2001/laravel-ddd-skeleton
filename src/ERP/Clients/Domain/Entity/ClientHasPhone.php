@@ -56,6 +56,25 @@ final class ClientHasPhone
         );
     }
 
+    public static function fromDatabase(
+        ClientHasPhoneId $id,
+        ClientHasPhoneNumber $number,
+        ClientHasPhoneNumberType $numberType,
+        ClientHasPhoneClientId $clientId,
+        ClientHasPhoneCreateAt $createAt,
+        ClientHasPhoneUpdateAt $updateAt
+    ): self
+    {
+        return new self(
+            $id,
+            $number,
+            $numberType,
+            $clientId,
+            $createAt,
+            $updateAt
+        );
+    }
+
     public function id(): ClientHasPhoneId
     {
         return $this->id;

@@ -25,7 +25,7 @@
                         <router-link :to="{name: leftBarOption.name}"
                                      :class="{selected: isSelected(leftBarOption.name)}">
                             <i :class="leftBarOption.class"></i>
-                            <span class="hide-menu"> {{ leftBarOption.title }}</span>
+                            <span class="hide-menu" style="margin: 5px"> {{ leftBarOption.title }}</span>
                         </router-link>
                     </li>
                 </ul>
