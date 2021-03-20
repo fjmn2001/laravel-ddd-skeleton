@@ -38,5 +38,6 @@ class CreateClientePhones extends Migration
     public function down()
     {
         Schema::dropIfExists('cliente_phones');
+        Schema::dropIfExists('client_emails');
     }
 }
