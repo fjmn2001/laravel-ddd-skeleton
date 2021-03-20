@@ -42,7 +42,7 @@ final class LocationGetControllerTest extends LocationFeatureBase
             'barcode' => $barcode,
             'address' => $address,
             'itemState' => $itemState,
-            'state' => $itemState,
+            'state' => $state,
             'companyId' => $companyId->toString(),
         ]);
         $response->assertStatus(200);

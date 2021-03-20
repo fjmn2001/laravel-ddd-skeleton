@@ -93,6 +93,39 @@ final class Location
         );
     }
 
+    public static function fromValue(
+        $id,
+        $code,
+        $name,
+        $mainContact,
+        $barcode,
+        $address,
+        $itemState,
+        $state,
+        $companyId,
+        $createdBy,
+        $updatedBy,
+        $createdAt,
+        $updatedAt
+    ): self
+    {
+        return new self(
+            new LocationId($id),
+            new LocationCode($code),
+            new LocationName($name),
+            new LocationMainContact($mainContact),
+            new LocationBarcode($barcode),
+            new LocationAddress($address),
+            new LocationItemState($itemState),
+            new LocationState($state),
+            new LocationCompanyId($companyId),
+            $createdBy,
+            $updatedBy,
+            new LocationCreatedAt($createdAt),
+            new LocationUpdatedAt($updatedAt)
+        );
+    }
+
     public function id(): LocationId
     {
         return $this->id;

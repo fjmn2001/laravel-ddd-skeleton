@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Locations\Application\Find;
 
-final class LocationFinderResponse
+use JsonSerializable;
+
+final class LocationFinderResponse implements JsonSerializable
 {
     private $id;
     private $code;
@@ -82,5 +84,12 @@ final class LocationFinderResponse
     public function companyId(): string
     {
         return $this->companyId;
+    }
+
+    public function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
+
+        return $vars;
     }
 }
