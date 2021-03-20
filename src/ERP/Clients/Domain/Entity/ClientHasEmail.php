@@ -54,6 +54,25 @@ final class ClientHasEmail
         );
     }
 
+    public static function fromDatabase(
+        ClientHasEmailId $id,
+        ClientHasEmailEmail $email,
+        ClientHasEmailEmailType $emailType,
+        ClientHasEmailClientId $clientId,
+        ClientHasEmailCreateAt $createAt,
+        ClientHasEmailUpdateAt $updateAt
+    ): self
+    {
+        return new self(
+            $id,
+            $email,
+            $emailType,
+            $clientId,
+            $createAt,
+            $updateAt
+        );
+    }
+
     public function id(): ClientHasEmailId
     {
         return $this->id;
