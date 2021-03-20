@@ -20,7 +20,7 @@ final class ItemResponse
         string $id,
         string $code,
         string $name,
-        string $reference,
+        ?string $reference,
         string $type,
         string $categoryId,
         string $state,
@@ -54,7 +54,7 @@ final class ItemResponse
         return $this->name;
     }
 
-    public function reference(): string
+    public function reference(): ?string
     {
         return $this->reference;
     }

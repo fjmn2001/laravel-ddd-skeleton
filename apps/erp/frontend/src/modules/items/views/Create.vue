@@ -12,7 +12,8 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, onMounted} from 'vue'
+import toastr from "toastr";
+import {defineComponent, ref, onMounted, watch} from 'vue'
 import {useRouter} from 'vue-router'
 import Breadcrums from '@/components/Breadcrums.vue';
 import GeneralsDetails from "@/modules/items/components/GeneralsDetails.vue";
@@ -21,6 +22,8 @@ import {useItem} from "@/modules/items/use/useItem";
 import {useCatalog} from "@/modules/items/use/useCatalog";
 import {useCore} from "@/modules/shared/use/useCore";
 import Loading from "@/components/form/Loading.vue";
+import {Company} from "@/modules/auth/types/Company";
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 export default defineComponent({
     components: {Loading, FormButtons, GeneralsDetails, Breadcrums},
@@ -33,12 +36,24 @@ export default defineComponent({
         const {create, reset} = useItem()
         const {getCatalog} = useCatalog();
         const loading = ref(true);
+        const {user} = useAuth();
 
-        onMounted(async () => {
+        async function initComponent() {
             await getCatalog();
             await reset();
-            await console.log('get default values');
             loading.value = false
+        }
+
+        onMounted(async () => {
+            initComponent();
+        })
+
+        //when changeCompany
+        watch(() => user.value?.company, async (company: Company | undefined) => {
+            if (company) {
+                loading.value = true
+                initComponent()
+            }
         })
 
         function cancel(): void {
@@ -49,12 +64,11 @@ export default defineComponent({
             try {
                 sending.value = true
                 await create()
-                //todo: add toast
-                //toastr.success('hola', 'exito');
+                toastr.success("Su solicitud se ha procesado correctamente.");
                 router.push({name: 'items'});
             } catch (e) {
-                //todo: add toast
-                console.log('2', e);
+                toastr.error(e?.response?.data?.message);
+                console.log(e);
             } finally {
                 sending.value = false
             }

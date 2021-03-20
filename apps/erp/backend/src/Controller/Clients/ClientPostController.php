@@ -22,17 +22,17 @@ final class ClientPostController extends Controller
     public function __invoke(Request $request): JsonResponse
     {
         ($this->creator)(new ClientCreatorRequest(
-            $request->id,
-            $request->name,
-            $request->lastname,
-            $request->dni,
-            $request->dniType,
-            $request->clientType,
-            $request->clientCategory,
-            $request->frequentClientNumber,
-            $request->state,
-            $request->phones,
-            $request->emails,
+            $request->input('id'),
+            $request->input('name'),
+            $request->input('lastname'),
+            $request->input('dni'),
+            $request->input('dniType'),
+            $request->input('clientType'),
+            $request->input('clientCategory'),
+            $request->input('frequentClientNumber', ''),
+            $request->input('state'),
+            $request->input('phones'),
+            $request->input('emails'),
         ));
         return response()->json([], JsonResponse::HTTP_CREATED);
     }

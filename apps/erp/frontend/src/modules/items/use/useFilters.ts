@@ -12,12 +12,18 @@ export function useFilters() {
         filters.value = newFilters;
     }
 
+    function setFromPager({pLimit, pOffset}: { pLimit: number, pOffset: number }) {
+        limit.value = pLimit;
+        offset.value = pOffset;
+    }
+
     return {
         filters,
         orderBy,
         order,
         limit,
         offset,
-        setFilters
+        setFilters,
+        setFromPager
     }
 }
