@@ -68,8 +68,10 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <table-pager :totalRows="itemsCount"></table-pager>
                         </div>
+                        <table-pager :totalRows="itemsCount"
+                                     @setFromPager="mySetFromPager"
+                                     v-show="hasData() && !loading"></table-pager>
                         <no-results v-if="!hasData() && !loading"></no-results>
                         <loading v-if="loading"></loading>
                         <options-modal :name="'optionsModal'"></options-modal>
@@ -104,7 +106,7 @@ export default defineComponent({
     setup() {
         const {ERP_URL} = useCore();
         const {items, hasData, loading, getItems, itemsCount} = useItems();
-        const {setFilters} = useFilters();
+        const {setFilters, setFromPager} = useFilters();
         const {user} = useAuth();
         const {getCatalog} = useCatalog();
         const breadcrumbUrl: string = ERP_URL + '/api/items/breadcrumbs'
@@ -116,6 +118,12 @@ export default defineComponent({
             await setFilters([
                 {field: 'companyId', value: user?.value?.company.id}
             ]);
+            setFromPager({pLimit: 10, pOffset: 0})
+            await getItems();
+        }
+
+        async function mySetFromPager({pLimit, pOffset}: { pLimit: number, pOffset: number }) {
+            setFromPager({pLimit, pOffset})
             await getItems();
         }
 
@@ -183,6 +191,7 @@ export default defineComponent({
             toggleModal,
             changeState,
             showOptionsModal,
+            mySetFromPager,
             showModal
         }
     }

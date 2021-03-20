@@ -14,19 +14,20 @@
                         <label>Número de ítem *</label>
                         <input type="text" name="code" required="" v-model="code" class="form-control inp-filter">
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <label>Nombre *</label>
+                    <div class="col-lg-9 col-md-12 col-sm-12">
+                        <label>Nombre de ítem *</label>
                         <input type="text" required="" v-model="name" class="form-control inp-filter">
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <label>Referencia</label>
-                        <input type="text" v-model="reference" class="form-control inp-filter">
                     </div>
                 </div>
 
                 <div class="mt-3 pl-3 pr-3 row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label>Referencia</label>
+                        <input type="text" v-model="reference" class="form-control inp-filter">
+                    </div>
+
                     <div class="col-lg-3 col-md-3 col-sm-12">
-                        <label>Tipo de item *</label>
+                        <label>Tipo de ítem *</label>
                         <select2 name="type" required="" v-model="type" :config="{}" :attr="{}">
                             <option value="">Select</option>
                             <option value="inventoried">Inventoried</option>
@@ -43,6 +44,9 @@
                                     v-html="category.title" :key="category.id"></option>
                         </select2>
                     </div>
+                </div>
+
+                <div class="mt-3 pl-3 pr-3 row">
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <label>Estado *</label>
                         <select2 name="state" required="" v-model="state" :config="{}" :attr="{}">
