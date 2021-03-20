@@ -3,8 +3,13 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
-use Medine\Apps\ERP\Backend\Controller\Locations\LocationsPostController;
+use Medine\ERP\Locations\Infrastructure\Controller\LocationGetController;
+use Medine\ERP\Locations\Infrastructure\Controller\LocationPostController;
 
 Route::middleware('auth:api')->group(function () {
-    Route::post('/location', LocationsPostController::class);
+    //get
+    Route::get('/locations/{id}', LocationGetController::class);
+
+    //post
+    Route::post('/locations', LocationPostController::class);
 });
