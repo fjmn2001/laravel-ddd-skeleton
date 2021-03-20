@@ -22,10 +22,16 @@ final class CompaniesGetController
 
     public function __invoke(Request $request)
     {
+
+        $filters = $request->get('filters', []);
+
+        $filters = is_array($filters) ? $filters : json_decode($filters);
+        if (is_array($filters)) {
+            $filters[] = ['field' => 'user', 'value' => $request->user()->id];
+        }
+
         $response = ($this->searcher)(new CompanySearcherRequest(
-            map(function ($filter) {
-                return is_array($filter) ? $filter : json_decode($filter, true);
-            }, $request->get('filters', [])),
+            $filters,
             $request->get('order_by'),
             $request->get('order'),
             (int)$request->get('limit'),
