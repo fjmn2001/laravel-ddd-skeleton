@@ -23,17 +23,17 @@ final class ClientPutController
     public function __invoke(string $id, Request $request): JsonResponse
     {
         ($this->updater)(new ClientUpdaterRequest(
-            $request->id,
-            $request->name,
-            $request->lastname,
-            $request->dni,
-            $request->dniType,
-            $request->clientType,
-            $request->clientCategory,
-            $request->frequentClientNumber,
-            $request->state,
-            $request->phones,
-            $request->emails,
+            $request->input('id'),
+            $request->input('name'),
+            $request->input('lastname'),
+            $request->input('dni'),
+            $request->input('dniType'),
+            $request->input('clientType'),
+            $request->input('clientCategory'),
+            $request->input('frequentClientNumber', ''),
+            $request->input('state'),
+            $request->input('phones'),
+            $request->input('emails'),
         ));
 
         return response()->json([], JsonResponse::HTTP_OK);

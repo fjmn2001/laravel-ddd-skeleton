@@ -25,6 +25,7 @@ import GeneralsDetails from "@/modules/clients/components/GeneralsDetails.vue";
 import ContactInformation from "@/modules/clients/components/ContactInformation.vue";
 import PaymentInformation from "@/modules/clients/components/PaymentInformation.vue";
 import UsersAssignedClient from "@/modules/clients/components/UsersAssignedClient.vue";
+import toastr from "toastr";
 
 export default defineComponent({
     components: {Breadcrums, FormButtons, GeneralsDetails, ContactInformation, PaymentInformation, UsersAssignedClient},
@@ -56,10 +57,10 @@ export default defineComponent({
             try {
                 sending.value = true
                 await update();
-                //todo: add toast
+                toastr.success("Su solicitud se ha procesado correctamente.");
                 router.push({name: 'clients'});
             } catch (e) {
-                //todo: add toast
+                toastr.error(e?.response?.data?.message);
                 console.log('2', e);
             } finally {
                 sending.value = false
