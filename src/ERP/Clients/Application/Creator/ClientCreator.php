@@ -67,11 +67,11 @@ final class ClientCreator
     {
         return function (array $item) use ($client) {
 
-            if(!empty($item['number']) && !empty($item['numberType']))
+            if(!empty($item['number']))
                 $client->addClientPhone(ClientHasPhone::create(
                     new ClientHasPhoneId($item['id']),
                     new ClientHasPhoneNumber($item['number']),
-                    new ClientHasPhoneNumberType($item['numberType']),
+                    new ClientHasPhoneNumberType(!empty($item['numberType']) ? $item['numberType'] : ''),
                     new ClientHasPhoneClientId($client->id()->value()),
                 ));
 
@@ -82,11 +82,11 @@ final class ClientCreator
     {
         return function (array $item) use ($client) {
 
-            if(!empty($item['email']) && !empty($item['emailType']))
+            if(!empty($item['email']))
                 $client->addClientEmail(ClientHasEmail::create(
                     new ClientHasEmailId($item['id']),
                     new ClientHasEmailEmail($item['email']),
-                    new ClientHasEmailEmailType($item['emailType']),
+                    new ClientHasEmailEmailType( !empty($item['emailType']) ? $item['emailType'] : ''),
                     new ClientHasEmailClientId($client->id()->value()),
                 ));
         };

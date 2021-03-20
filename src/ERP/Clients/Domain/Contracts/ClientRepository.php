@@ -11,6 +11,8 @@ interface ClientRepository
 {
     public function find(ClientId $id): ?Client;
     public function save(Client $client): void;
+    public function savePhones(Client $client): void;
+    public function saveEmails(Client $client): void;
     public function update(Client $client): void;
     public function matching(\Medine\ERP\Shared\Domain\Criteria $criteria): array;
 }

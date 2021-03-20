@@ -3,6 +3,18 @@ import {v4 as uuidv4} from 'uuid';
 import {Client} from "@/modules/clients/types/Client";
 import {api} from "@/modules/clients/services/api";
 
+
+const ClientePhones = {
+    id: uuidv4(),
+    number: '',
+    numberType: '',
+}
+const ClienteEmails = {
+    id: uuidv4(),
+    email: '',
+    emailType: '',
+}
+
 const client: Ref<Client> = ref({
     id: uuidv4(),
     name: '',
@@ -13,17 +25,10 @@ const client: Ref<Client> = ref({
     clientCategory: '',
     frequentClientNumber: '',
     state: '',
-    phones: [{
-        id: uuidv4(),
-        number: '',
-        numberType: '',
-    }],
-    emails: [{
-        id: uuidv4(),
-        email: '',
-        emailType: '',
-    }],
+    phones: [ClientePhones],
+    emails: [ClienteEmails],
 });
+
 
 export function useClient() {
     async function create() {
@@ -37,6 +42,23 @@ export function useClient() {
     async function find(id: string) {
         client.value = await api.findClient(id)
     }
+
+    function addEmail() {
+        return {
+            id: uuidv4(),
+            email: '',
+            emailType: '',
+        }
+    }
+
+    function addPhone() {
+        return {
+            id: uuidv4(),
+            number: '',
+            numberType: '',
+        }
+    }
+
 
     async function reset() {
         client.value = {
@@ -64,6 +86,10 @@ export function useClient() {
 
     return {
         client: client,
+        ClienteEmails,
+        ClientePhones,
+        addEmail,
+        addPhone,
         create,
         update,
         find,

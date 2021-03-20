@@ -244,4 +244,14 @@ final class Client
             $this->updatedAt = new ClientUpdatedAt();
         }
     }
+
+    public function restartPhones()
+    {
+        $this->phones = [];
+    }
+
+    public function restartEmails()
+    {
+        $this->emails = [];
+    }
 }

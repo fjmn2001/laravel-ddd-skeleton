@@ -55,15 +55,8 @@ final class MySqlClientRepository  extends MySqlRepository implements ClientRepo
             'updated_at' => $client->updatedAt()->value(),
         ]);
 
-        if(!empty($client->phones()))
-            $phones = map($this->retrievePhone(), $client->phones());
-        if(!empty($client->emails()))
-            $emails = map($this->retrieveEmail(), $client->emails());
-
-        if(!empty($client->phones()))
-            DB::table('client_phones')->insert($phones);
-        if(!empty($client->emails()))
-            DB::table('client_emails')->insert($emails);
+        $this->savePhones($client);
+        $this->saveEmails($client);
     }
 
     public function update(Client $client): void
@@ -81,6 +74,33 @@ final class MySqlClientRepository  extends MySqlRepository implements ClientRepo
             'created_at' => $client->createdAt()->value(),
             'updated_at' => $client->updatedAt()->value(),
         ]);
+
+        $this->savePhones($client);
+        $this->saveEmails($client);
+    }
+
+    public function savePhones(Client $client): void
+    {
+        if(!empty($client->phones()))
+            DB::table('client_phones')->where('client_phones.client_id', $client->id()->value())->delete();
+
+        if(!empty($client->phones()))
+            $phones = map($this->retrievePhone(), $client->phones());
+
+        if(!empty($client->phones()))
+            DB::table('client_phones')->insert($phones);
+    }
+
+    public function saveEmails(Client $client): void
+    {
+        if(!empty($client->emails()))
+            DB::table('client_emails')->where('client_emails.client_id', $client->id()->value())->delete();
+
+        if(!empty($client->emails()))
+            $emails = map($this->retrieveEmail(), $client->emails());
+
+        if(!empty($client->emails()))
+            DB::table('client_emails')->insert($emails);
     }
 
     public function find(ClientId $id): ?Client

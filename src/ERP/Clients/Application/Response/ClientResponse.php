@@ -121,6 +121,16 @@ final class ClientResponse
         return $phones;
     }
 
+
+    public function emails()
+    {
+        if(empty($this->emails))
+            return [];
+
+        $phones = map($this->retrieveEmail(), $this->emails);
+        return $phones;
+    }
+
     public function firstPhones()
     {
         if(empty($this->phones))
