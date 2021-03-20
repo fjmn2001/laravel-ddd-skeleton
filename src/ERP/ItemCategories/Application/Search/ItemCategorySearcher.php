@@ -22,7 +22,7 @@ final class ItemCategorySearcher
         $this->repository = $repository;
     }
 
-    public function __invoke(ItemCategorySearcherRequest $request)
+    public function __invoke(ItemCategorySearcherRequest $request): ItemCategoriesResponse
     {
         $criteria = new Criteria(
             Filters::fromValues($request->filters()),

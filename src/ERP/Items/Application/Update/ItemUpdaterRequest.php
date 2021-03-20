@@ -9,9 +9,9 @@ final class ItemUpdaterRequest
     private $id;
     private $code;
     private $name;
-    private $categoryId;
     private $reference;
     private $type;
+    private $categoryId;
     private $state;
     private $updatedBy;
 
@@ -19,7 +19,7 @@ final class ItemUpdaterRequest
         string $id,
         string $code,
         string $name,
-        string $reference,
+        ?string $reference,
         string $type,
         string $categoryId,
         string $state,
@@ -51,7 +51,7 @@ final class ItemUpdaterRequest
         return $this->name;
     }
 
-    public function reference(): string
+    public function reference(): ?string
     {
         return $this->reference;
     }

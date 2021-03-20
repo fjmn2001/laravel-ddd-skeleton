@@ -33,7 +33,7 @@ final class Item
         ItemId $id,
         ItemCode $code,
         ItemName $name,
-        string $reference,
+        ?string $reference,
         ItemType $type,
         ItemCategoryId $categoryId,
         ItemState $state,
@@ -62,7 +62,7 @@ final class Item
         ItemId $id,
         ItemCode $code,
         ItemName $name,
-        string $reference,
+        ?string $reference,
         ItemType $type,
         ItemCategoryId $category,
         ItemState $state,
@@ -87,33 +87,33 @@ final class Item
     }
 
     public static function fromValues(
-        ItemId $id,
-        ItemCode $code,
-        ItemName $name,
-        string $reference,
-        ItemType $type,
-        ItemCategoryId $categoryId,
-        ItemState $state,
+        string $id,
+        string $code,
+        string $name,
+        ?string $reference,
+        string $type,
+        string $categoryId,
+        string $state,
         string $companyId,
         int $createdBy,
         int $updatedBy,
-        ItemCreatedAt $createAt,
-        ItemUpdatedAt $updatedAt
+        string $createAt,
+        string $updatedAt
     ): self
     {
         return new self(
-            $id,
-            $code,
-            $name,
+            new ItemId($id),
+            new ItemCode($code),
+            new ItemName($name),
             $reference,
-            $type,
-            $categoryId,
-            $state,
+            new ItemType($type),
+            new ItemCategoryId($categoryId),
+            new ItemState($state),
             $companyId,
             $createdBy,
             $updatedBy,
-            $createAt,
-            $updatedAt
+            new ItemCreatedAt($createAt),
+            new ItemUpdatedAt($updatedAt)
         );
     }
 
@@ -132,7 +132,7 @@ final class Item
         return $this->name;
     }
 
-    public function reference(): string
+    public function reference(): ?string
     {
         return $this->reference;
     }
@@ -198,7 +198,7 @@ final class Item
         }
     }
 
-    public function changeReference(string $reference): void
+    public function changeReference(?string $reference): void
     {
         if (false === ($this->reference === $reference)) {
             $this->reference = $reference;

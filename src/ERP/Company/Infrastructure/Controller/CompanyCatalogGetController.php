@@ -31,9 +31,14 @@ final class CompanyCatalogGetController
         ), new CompanyCatalogsResponse);
 
         return new \Illuminate\Http\JsonResponse([
-            'states' => map(function (CatalogResponse $catalogResponse) {
-                return ['id' => $catalogResponse->tag(), 'title' => $catalogResponse->value()];
-            }, $response->states()),
+            'states' => map($this->buildState(), $response->states()),
         ], \Illuminate\Http\JsonResponse::HTTP_OK);
+    }
+
+    private function buildState(): \Closure
+    {
+        return function (CatalogResponse $catalogResponse) {
+            return ['id' => $catalogResponse->tag(), 'title' => $catalogResponse->value()];
+        };
     }
 }

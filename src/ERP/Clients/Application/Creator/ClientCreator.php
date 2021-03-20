@@ -66,24 +66,29 @@ final class ClientCreator
     private function addClientPhone(Client $client): \Closure
     {
         return function (array $item) use ($client) {
-            $client->addClientPhone(ClientHasPhone::create(
-                new ClientHasPhoneId($item['id']),
-                new ClientHasPhoneNumber($item['number']),
-                new ClientHasPhoneNumberType($item['number_type']),
-                new ClientHasPhoneClientId($client->id()->value()),
-            ));
+
+            if(!empty($item['number']))
+                $client->addClientPhone(ClientHasPhone::create(
+                    new ClientHasPhoneId($item['id']),
+                    new ClientHasPhoneNumber($item['number']),
+                    new ClientHasPhoneNumberType(!empty($item['numberType']) ? $item['numberType'] : ''),
+                    new ClientHasPhoneClientId($client->id()->value()),
+                ));
+
         };
     }
 
     private function addClientEmail(Client $client): \Closure
     {
         return function (array $item) use ($client) {
-            $client->addClientEmail(ClientHasEmail::create(
-                new ClientHasEmailId($item['id']),
-                new ClientHasEmailEmail($item['email']),
-                new ClientHasEmailEmailType($item['email_type']),
-                new ClientHasEmailClientId($client->id()->value()),
-            ));
+
+            if(!empty($item['email']))
+                $client->addClientEmail(ClientHasEmail::create(
+                    new ClientHasEmailId($item['id']),
+                    new ClientHasEmailEmail($item['email']),
+                    new ClientHasEmailEmailType( !empty($item['emailType']) ? $item['emailType'] : ''),
+                    new ClientHasEmailClientId($client->id()->value()),
+                ));
         };
     }
 }

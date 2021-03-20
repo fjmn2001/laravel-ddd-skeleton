@@ -13,7 +13,6 @@ export function useItemCategoryFilters() {
     }
 
     function setFromPager({pLimit, pOffset}: { pLimit: number, pOffset: number }) {
-        console.log('setFromPager', pLimit, pOffset);
         limit.value = pLimit;
         offset.value = pOffset;
     }
