@@ -120,7 +120,9 @@ export default defineComponent({
         const breadcrumbUrl: string = ERP_URL + '/api/client/breadcrumbs'
 
         async function initComponent() {
-            await setFilters([]);
+            await setFilters([
+                {field: 'companyId', value: user?.value?.company.id}
+            ]);
             await getClients();
         }
         onMounted( async () => {

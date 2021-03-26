@@ -9,11 +9,11 @@ use Medine\ERP\Shared\Infrastructure\Filters;
 
 final class MySqlClientsFilters extends Filters
 {
-//    protected function companyId(FilterValue $value)
-//    {
-//        $value = $this->value($value->value());
-//        $this->builder->whereIn('clients.company_id', $value);
-//    }
+    protected function companyId(FilterValue $value)
+    {
+        $value = $this->value($value->value());
+        $this->builder->whereIn('clients.company_id', $value);
+    }
 
     protected function name(FilterValue $value)
     {
