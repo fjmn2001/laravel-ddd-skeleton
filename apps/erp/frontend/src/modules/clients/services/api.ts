@@ -27,6 +27,7 @@ export const api = {
         const {client} = useClient();
         const response = await axios.post(process.env.VUE_APP_ERP_URL + '/api/client', {
             id: client.value.id,
+            companyId: client.value.companyId,
             name: client.value.name,
             lastname: client.value.lastname,
             dni: client.value.dni,
@@ -48,6 +49,7 @@ export const api = {
         const {client} = useClient();
 
         const response = await axios.put(process.env.VUE_APP_ERP_URL + '/api/client/' + client.value.id, {
+            companyId: client.value.companyId,
             name: client.value.name,
             lastname: client.value.lastname,
             dni: client.value.dni,

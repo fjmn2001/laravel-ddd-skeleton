@@ -8,6 +8,7 @@ namespace Medine\ERP\Clients\Domain\Entity;
 
 use Medine\ERP\Clients\Domain\ValueObjects\ClientClientCategory;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientClientType;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientCompanyId;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientCreatedAt;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientDni;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientDniType;
@@ -21,6 +22,7 @@ use Medine\ERP\Clients\Domain\ValueObjects\ClientUpdatedAt;
 final class Client
 {
     private $id;
+    private $companyId;
     private $name;
     private $lastname;
     private $dni;
@@ -37,6 +39,7 @@ final class Client
 
     private function __construct(
         ClientId $id,
+        ClientCompanyId $companyId,
         ClientName $name,
         ClientLastname $lastname,
         ClientDni $dni,
@@ -50,6 +53,7 @@ final class Client
     )
     {
         $this->id = $id;
+        $this->companyId = $companyId;
         $this->name = $name;
         $this->lastname = $lastname;
         $this->dni = $dni;
@@ -64,6 +68,7 @@ final class Client
 
     public static function create(
         ClientId $id,
+        ClientCompanyId $companyId,
         ClientName $name,
         ClientLastname $lastname,
         ClientDni $dni,
@@ -76,6 +81,7 @@ final class Client
     {
         return new self(
             $id,
+            $companyId,
             $name,
             $lastname,
             $dni,
@@ -91,6 +97,7 @@ final class Client
 
     public static function fromDatabase(
         ClientId $id,
+        ClientCompanyId $companyId,
         ClientName $name,
         ClientLastname $lastname,
         ClientDni $dni,
@@ -105,6 +112,7 @@ final class Client
     {
         return new self(
             $id,
+            $companyId,
             $name,
             $lastname,
             $dni,
@@ -121,6 +129,11 @@ final class Client
     public function id(): ClientId
     {
         return $this->id;
+    }
+
+    public function companyId(): ClientCompanyId
+    {
+        return $this->companyId;
     }
 
     public function name(): ClientName

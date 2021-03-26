@@ -9,6 +9,7 @@ namespace Medine\ERP\Clients\Application\Updater;
 final class ClientUpdaterRequest
 {
     private $id;
+    private $companyId;
     private $name;
     private $lastmane;
     private $dni;
@@ -22,6 +23,7 @@ final class ClientUpdaterRequest
 
     public function __construct(
         string $id,
+        string $companyId,
         string $name,
         string $lastmane,
         string $dni,
@@ -35,6 +37,7 @@ final class ClientUpdaterRequest
     )
     {
         $this->id = $id;
+        $this->companyId = $companyId;
         $this->name = $name;
         $this->lastmane = $lastmane;
         $this->dni = $dni;
@@ -50,6 +53,11 @@ final class ClientUpdaterRequest
     public function id(): string
     {
         return $this->id;
+    }
+
+    public function companyId(): string
+    {
+        return $this->companyId;
     }
 
     public function name(): string

@@ -23,6 +23,7 @@ final class ClientPostController extends Controller
     {
         ($this->creator)(new ClientCreatorRequest(
             $request->input('id'),
+            $request->input('companyId'),
             $request->input('name'),
             $request->input('lastname'),
             $request->input('dni'),

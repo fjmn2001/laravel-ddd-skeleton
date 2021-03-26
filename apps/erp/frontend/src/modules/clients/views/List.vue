@@ -147,7 +147,9 @@ export default defineComponent({
                     $(e.target).data('state')
                 )
                 hide('optionsModal')
-                await setFilters([]);
+                await setFilters([
+                    {field: 'companyId', value: user?.value?.company.id}
+                ]);
                 await getClients();
             });
         }

@@ -12,6 +12,7 @@ use Medine\ERP\Clients\Domain\Entity\Client;
 use Medine\ERP\Clients\Domain\Entity\ClientHasEmail;
 use Medine\ERP\Clients\Domain\Entity\ClientHasPhone;
 
+use Medine\ERP\Clients\Domain\ValueObjects\ClientCompanyId;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientId;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientDni;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientName;
@@ -47,6 +48,7 @@ final class ClientCreator
     {
         $client = Client::create(
             new ClientId($request->id()),
+            new ClientCompanyId($request->companyId()),
             new ClientName($request->name()),
             new ClientLastname($request->lastmane()),
             new ClientDni($request->dni()),

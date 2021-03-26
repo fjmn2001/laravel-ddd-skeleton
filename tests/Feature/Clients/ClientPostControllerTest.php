@@ -14,7 +14,7 @@ use Tests\TestCase;
 final class ClientPostControllerTest extends TestCase
 {
 
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
 
     private $faker;
 
@@ -34,9 +34,11 @@ final class ClientPostControllerTest extends TestCase
         );
 
         $clientId = Uuid::random()->value();
+        $companyId = Uuid::random()->value();
 
         $response = $this->postJson('/api/client', [
             'id' => $clientId,
+            'companyId' => $companyId,
             'name' => $this->faker->name,
             'lastname' => $this->faker->lastName,
             'dni' => '336-225-55',

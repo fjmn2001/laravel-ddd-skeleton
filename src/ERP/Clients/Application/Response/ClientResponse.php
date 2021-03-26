@@ -13,6 +13,7 @@ use function Lambdish\Phunctional\map;
 final class ClientResponse
 {
     private $id;
+    private $companyId;
     private $name;
     private $lastname;
     private $dni;
@@ -28,6 +29,7 @@ final class ClientResponse
 
     public function __construct(
         $id,
+        $companyId,
         $name,
         $lastname,
         $dni,
@@ -43,6 +45,7 @@ final class ClientResponse
     )
     {
         $this->id = $id;
+        $this->companyId = $companyId;
         $this->name = $name;
         $this->lastname = $lastname;
         $this->dni = $dni;
@@ -60,6 +63,11 @@ final class ClientResponse
     public function id()
     {
         return $this->id;
+    }
+
+    public function companyId()
+    {
+        return $this->companyId;
     }
 
     public function name()

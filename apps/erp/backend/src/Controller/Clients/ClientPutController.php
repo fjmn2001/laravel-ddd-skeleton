@@ -24,6 +24,7 @@ final class ClientPutController
     {
         ($this->updater)(new ClientUpdaterRequest(
             $request->input('id'),
+            $request->input('companyId'),
             $request->input('name'),
             $request->input('lastname'),
             $request->input('dni'),

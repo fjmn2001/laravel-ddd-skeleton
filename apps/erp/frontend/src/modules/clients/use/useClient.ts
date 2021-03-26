@@ -3,6 +3,9 @@ import {v4 as uuidv4} from 'uuid';
 import {Client} from "@/modules/clients/types/Client";
 import {api} from "@/modules/clients/services/api";
 
+import {useAuth} from "@/modules/auth/use/useAuth";
+
+const {user} = useAuth();
 
 const ClientePhones = {
     id: uuidv4(),
@@ -17,6 +20,7 @@ const ClienteEmails = {
 
 const client: Ref<Client> = ref({
     id: uuidv4(),
+    companyId: user.value ? user.value.company.id : '',
     name: '',
     lastname: 'active',
     dni: '',
@@ -63,6 +67,7 @@ export function useClient() {
     async function reset() {
         client.value = {
             id: uuidv4(),
+            companyId: user.value ? user.value.company.id : '',
             name: '',
             lastname: 'lastname',
             dni: 'dni',
