@@ -7,6 +7,7 @@ namespace Medine\Apps\ERP\Backend\Controller\Clients;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
 use Medine\ERP\Clients\Application\Response\ClientResponse;
 use Medine\ERP\Clients\Application\Search\ClientSearcher;
 use Medine\ERP\Clients\Application\Search\ClientSearcherRequest;
@@ -38,9 +39,29 @@ final class ClientesGetController extends Controller
                 'name' => $client->name(),
                 'phone' => $client->firstPhones(),
                 'email' => $client->firstEmails(),
-                'state' => $client->state(),
+                'state' => $this->stateButton($client->state()),
+                'creditoFavor' => $this->creditoFavorTag(0),
+                'saldoCobrar' => $this->saldoCobrar(0),
             ];
         }, $response->clients()), JsonResponse::HTTP_OK);
+    }
+
+    private function stateButton(string $state): string
+    {
+        $title = Str::ucfirst($state);
+        $class = $state === 'active' ? 'btn-green' : 'btn-red';
+
+        return '<button type="button" class="btn btn-sm btn-table changeState ' . $class . '">' . $title . '</button>';
+    }
+
+    private function creditoFavorTag(float $credito)
+    {
+        return '<p class="borde-green1">$' . number_format($credito, 4) . '</p>';
+    }
+
+    private function saldoCobrar(float $saldo)
+    {
+        return '<p class="borde-yellow1">$' . number_format($saldo, 4) . '</p>';
     }
 
 }

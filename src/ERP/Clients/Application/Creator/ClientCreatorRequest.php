@@ -10,6 +10,7 @@ final class ClientCreatorRequest
 {
 
     private $id;
+    private $companyId;
     private $name;
     private $lastmane;
     private $dni;
@@ -23,6 +24,7 @@ final class ClientCreatorRequest
 
     public function __construct(
         string $id,
+        string $companyId,
         string $name,
         string $lastmane,
         string $dni,
@@ -36,6 +38,7 @@ final class ClientCreatorRequest
     )
     {
         $this->id = $id;
+        $this->companyId = $companyId;
         $this->name = $name;
         $this->lastmane = $lastmane;
         $this->dni = $dni;
@@ -51,6 +54,11 @@ final class ClientCreatorRequest
     public function id(): string
     {
         return $this->id;
+    }
+
+    public function companyId(): string
+    {
+        return $this->companyId;
     }
 
     public function name(): string

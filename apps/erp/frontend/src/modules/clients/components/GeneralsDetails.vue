@@ -53,8 +53,8 @@
 
                 <div class="mt-4 pl-3 pr-3 row">
                     <div class="col-md-3">
-                        <label>Tipo de cliente</label>
-                        <select class="form-control inp-filter" v-model="clientType">
+                        <label>Tipo de cliente <span class="text-danger">*</span></label>
+                        <select class="form-control inp-filter" required="" v-model="clientType">
                             <option value="">Seleccione</option>
                             <option value="tip-1">Tipo 1</option>
                             <option value="tip-2">Tipo 2</option>
@@ -62,8 +62,8 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label>Categoría de cliente</label>
-                        <select class="form-control inp-filter" v-model="clientCategory">
+                        <label>Categoría de cliente <span class="text-danger">*</span></label>
+                        <select class="form-control inp-filter" required="" v-model="clientCategory">
                             <option value="">Seleccione</option>
                             <option value="cat-1">Categoria 1</option>
                             <option value="cat-2">Categoria 2</option>
@@ -122,7 +122,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <label>Número de cliente frecuente</label>
-                        <input type="text" required="" class="form-control inp-filter" v-model="frequentClientNumber">
+                        <input type="text" class="form-control inp-filter" v-model="frequentClientNumber">
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12">
                         <label>Observaciones</label>

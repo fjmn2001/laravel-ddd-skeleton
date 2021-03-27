@@ -14,7 +14,7 @@ final class TopMenuGetController
         return new JsonResponse([
             ['name' => 'inventory', 'title' => 'Inventory'],
             ['name' => 'companies', 'title' => 'Companies'],
-            ['name' => 'clients', 'title' => 'Clients'],
+            ['name' => 'sales', 'title' => 'Sales'],
         ], JsonResponse::HTTP_OK);
     }
 }

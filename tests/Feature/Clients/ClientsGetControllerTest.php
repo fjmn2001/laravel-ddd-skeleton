@@ -35,9 +35,11 @@ final class ClientsGetControllerTest extends TestCase
 
         $clientId = Uuid::random()->value();
         $clientName = $this->faker->name;
+        $companyId = Uuid::random()->value();
 
         $response = $this->postJson('/api/client', [
             'id' => $clientId,
+            'companyId' => $companyId,
             'name' => $clientName,
             'lastname' => $this->faker->lastName,
             'dni' => '336-225-55',

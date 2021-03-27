@@ -3,6 +3,7 @@ import axios from "axios";
 // import {useFilters} from "@/modules/shared/use/useFilters";
 import {useFilters} from "@/modules/clients/use/useFilters";
 import {useClient} from "@/modules/clients/use/useClient";
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 export const api = {
     async getClients(): Promise<Client[]> {
@@ -26,6 +27,7 @@ export const api = {
         const {client} = useClient();
         const response = await axios.post(process.env.VUE_APP_ERP_URL + '/api/client', {
             id: client.value.id,
+            companyId: client.value.companyId,
             name: client.value.name,
             lastname: client.value.lastname,
             dni: client.value.dni,
@@ -47,6 +49,7 @@ export const api = {
         const {client} = useClient();
 
         const response = await axios.put(process.env.VUE_APP_ERP_URL + '/api/client/' + client.value.id, {
+            companyId: client.value.companyId,
             name: client.value.name,
             lastname: client.value.lastname,
             dni: client.value.dni,
@@ -67,6 +70,34 @@ export const api = {
 
     async findClient(id: string): Promise<Client> {
         const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/client/' + id);
+        return new Promise(resolve => {
+            resolve(response.data);
+        });
+    },
+
+    async updateClientState(id: string, state: string): Promise<Client> {
+        const response = await axios.put(process.env.VUE_APP_ERP_URL + '/api/client/state/' + id, {
+            id,
+            state
+        });
+        return new Promise(resolve => {
+            resolve(response.data);
+        });
+    },
+
+    async getClientOptions(id: string): Promise<string> {
+        const {token} = useAuth();
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.value;
+        const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/client/options/' + id);
+        return new Promise(resolve => {
+            resolve(response.data);
+        });
+    },
+
+    async getClientStates(id: string): Promise<string> {
+        const {token} = useAuth();
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.value;
+        const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/client/states/' + id);
         return new Promise(resolve => {
             resolve(response.data);
         });
