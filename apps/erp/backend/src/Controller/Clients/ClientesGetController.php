@@ -40,6 +40,8 @@ final class ClientesGetController extends Controller
                 'phone' => $client->firstPhones(),
                 'email' => $client->firstEmails(),
                 'state' => $this->stateButton($client->state()),
+                'creditoFavor' => $this->creditoFavorTag(0),
+                'saldoCobrar' => $this->saldoCobrar(0),
             ];
         }, $response->clients()), JsonResponse::HTTP_OK);
     }
@@ -50,6 +52,16 @@ final class ClientesGetController extends Controller
         $class = $state === 'active' ? 'btn-green' : 'btn-red';
 
         return '<button type="button" class="btn btn-sm btn-table changeState ' . $class . '">' . $title . '</button>';
+    }
+
+    private function creditoFavorTag(float $credito)
+    {
+        return '<p class="borde-green1">$' . number_format($credito, 4) . '</p>';
+    }
+
+    private function saldoCobrar(float $saldo)
+    {
+        return '<p class="borde-yellow1">$' . number_format($saldo, 4) . '</p>';
     }
 
 }

@@ -52,8 +52,8 @@
                                         <td></td>
                                         <td>{{client.phone.number}}</td>
                                         <td>{{client.email.email}}</td>
-                                        <td></td>
-                                        <td></td>
+                                        <td v-html="client.creditoFavor"></td>
+                                        <td v-html="client.saldoCobrar"></td>
                                         <td class=" td-btn-med">
                                             <span v-html="client.state" @click.prevent="changeState(client.id)"></span>
                                         </td>
