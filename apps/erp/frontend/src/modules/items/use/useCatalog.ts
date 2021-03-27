@@ -6,9 +6,7 @@ const catalogs: Ref<Catalog | null> = ref(null);
 
 export function useCatalog() {
     async function getCatalog() {
-        if (null === catalogs.value) {
-            catalogs.value = await api.getCatalog()
-        }
+        catalogs.value = await api.getCatalog()
     }
 
     return {

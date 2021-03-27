@@ -24,6 +24,7 @@ final class ClientGetController extends Controller
 
         return new JsonResponse([
             'id' => $client->id(),
+            'companyId' => $client->companyId(),
             'name' => $client->name(),
             'lastname' => $client->lastname(),
             'dni' => $client->dni(),

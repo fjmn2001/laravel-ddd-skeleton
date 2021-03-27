@@ -17,7 +17,7 @@ final class LeftMenuGetController
         'companies' => [
             ['name' => 'companies', 'title' => 'Companies', 'class' => 'fa fa-building-o fa-fw']
         ],
-        'clients' => [
+        'sales' => [
             ['name' => 'clients', 'title' => 'Clients', 'class' => 'fa fa-users']
         ],
 

@@ -11,6 +11,7 @@ use Medine\ERP\Clients\Domain\Entity\ClientHasEmail;
 use Medine\ERP\Clients\Domain\Entity\ClientHasPhone;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientClientCategory;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientClientType;
+use Medine\ERP\Clients\Domain\ValueObjects\ClientCompanyId;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientCreatedAt;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientDni;
 use Medine\ERP\Clients\Domain\ValueObjects\ClientDniType;
@@ -43,6 +44,7 @@ final class MySqlClientRepository  extends MySqlRepository implements ClientRepo
     {
         DB::table('clients')->insert([
             'id' => $client->id()->value(),
+            'company_id' => $client->companyId()->value(),
             'name' => $client->name()->value(),
             'lastname' => $client->lastname()->value(),
             'dni' => $client->dni()->value(),
@@ -63,6 +65,7 @@ final class MySqlClientRepository  extends MySqlRepository implements ClientRepo
     {
 
         DB::table('clients')->where('clients.id', $client->id()->value())->take(1)->update([
+            'company_id' => $client->companyId()->value(),
             'name' => $client->name()->value(),
             'lastname' => $client->lastname()->value(),
             'dni' => $client->dni()->value(),
@@ -112,6 +115,7 @@ final class MySqlClientRepository  extends MySqlRepository implements ClientRepo
 
         $client = Client::fromDatabase(
             new ClientId($row->id),
+            new ClientCompanyId($row->company_id),
             new ClientName($row->name),
             new ClientLastname($row->lastname),
             new ClientDni($row->dni),
@@ -207,6 +211,7 @@ final class MySqlClientRepository  extends MySqlRepository implements ClientRepo
         return function ($row) {
             $client = Client::fromDatabase(
                 new ClientId($row->id),
+                new ClientCompanyId($row->company_id),
                 new ClientName($row->name),
                 new ClientLastname($row->lastname),
                 new ClientDni($row->dni),

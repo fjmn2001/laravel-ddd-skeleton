@@ -35,6 +35,7 @@
 import {defineComponent, nextTick, ref} from 'vue'
 import {useFilters} from "@/modules/clients/use/useFilters";
 import {useClients} from "@/modules/clients/use/useClients";
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 export default defineComponent({
     emits: ['search'],
@@ -43,11 +44,13 @@ export default defineComponent({
 
         const {setFilters} = useFilters()
         const {loading, getClients} = useClients();
+        const {user} = useAuth();
 
 
         async function search() {
             await setFilters([
                 {field: 'name', value: name.value},
+                {field: 'companyId', value: user?.value?.company.id}
             ])
             getClients();
         }

@@ -42,6 +42,7 @@ final class ClientSearcher
         return function (Client $client) {
             return new ClientResponse(
                 $client->id()->value(),
+                $client->companyId()->value(),
                 $client->name()->value(),
                 $client->lastname()->value(),
                 $client->dni()->value(),

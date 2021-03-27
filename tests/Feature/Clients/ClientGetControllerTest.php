@@ -33,8 +33,11 @@ final class ClientGetControllerTest extends TestCase
             User::factory()->create()
         );
         $clientId = Uuid::random()->value();
+        $companyId = Uuid::random()->value();
+
         $client = [
             'id' => $clientId,
+            'companyId' => $companyId,
             'name' => $this->faker->name,
             'lastname' => $this->faker->lastName,
             'dni' => '336-225-55',

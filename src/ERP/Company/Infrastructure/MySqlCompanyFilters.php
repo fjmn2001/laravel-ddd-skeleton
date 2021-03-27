@@ -22,9 +22,10 @@ final class MySqlCompanyFilters extends Filters
 
     protected function user(FilterValue $value)
     {
+        $value = $this->value($value->value());
         $this->builder->join('company_has_user', function (JoinClause $join) use ($value) {
             $join->on('company_has_user.company_id', '=', 'companies.id');
-            $join->whereIn('company_has_user.user_id', $value->value());
+            $join->whereIn('company_has_user.user_id', $value);
         });
     }
 }
