@@ -23,6 +23,7 @@ class RouteServiceProvider extends ServiceProvider
         'src/ERP/Locations/Infrastructure/config/routes/index.php',
         'src/ERP/Menu/Infrastructure/config/routes/index.php',
         'src/ERP/ItemCategories/Infrastructure/config/routes/index.php',
+        'src/ERP/ClientCategories/Infrastructure/config/routes/index.php',
         'apps/erp/backend/routes/petty_cash.php',
         'routes/api.php'
     ];
