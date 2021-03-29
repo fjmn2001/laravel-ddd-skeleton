@@ -19,15 +19,16 @@ final class MysqlClientCategoryRepository implements ClientCategoryRepository
         // TODO: Implement find() method.
     }
 
-    public function save(ClientCategory $client): void
+    public function save(ClientCategory $clientCategory): void
     {
         DB::table('client_category')->insert([
-            'id' => $client->id()->value(),
-            'name' => $client->name()->value(),
-            'description' => $client->description()->value(),
-            'state' => $client->state()->value(),
-            'created_at' => $client->createdAt()->value(),
-            'updated_at' => $client->updatedAt()->value(),
+            'id' => $clientCategory->id()->value(),
+            'company_id' => $clientCategory->CompanyId()->value(),
+            'name' => $clientCategory->name()->value(),
+            'description' => $clientCategory->description()->value(),
+            'state' => $clientCategory->state()->value(),
+            'created_at' => $clientCategory->createdAt()->value(),
+            'updated_at' => $clientCategory->updatedAt()->value(),
         ]);
     }
 

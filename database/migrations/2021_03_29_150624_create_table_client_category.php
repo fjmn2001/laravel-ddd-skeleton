@@ -15,6 +15,7 @@ class CreateTableClientCategory extends Migration
     {
         Schema::create('client_category', function (Blueprint $table) {
             $table->uuid('id');
+            $table->uuid('company_id');
             $table->string('name');
             $table->string('description');
             $table->string('state');

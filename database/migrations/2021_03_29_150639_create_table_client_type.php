@@ -14,7 +14,8 @@ class CreateTableClientType extends Migration
     public function up()
     {
         Schema::create('client_type', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
+            $table->uuid('company_id');
             $table->string('name');
             $table->string('description');
             $table->string('state');

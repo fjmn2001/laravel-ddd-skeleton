@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\ClientCategories;
+namespace Tests\Feature\ClientTypes;
 
 use App\Models\User;
 use Faker\Factory;
@@ -11,7 +11,7 @@ use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-final class ClientCategoryPostControllerTest extends TestCase
+final class ClientTypesPostControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -26,7 +26,7 @@ final class ClientCategoryPostControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_should_create_a_new_client_category()
+    public function it_should_create_a_new_client_type()
     {
 
         Passport::actingAs(
@@ -36,7 +36,7 @@ final class ClientCategoryPostControllerTest extends TestCase
         $clientCategoryId = Uuid::random()->value();
         $companyId = Uuid::random()->value();
 
-        $response = $this->postJson('/api/client_category', [
+        $response = $this->postJson('/api/_client_type', [
             'id' => $clientCategoryId,
             'companyId' => $companyId,
             'name' => $this->faker->name,

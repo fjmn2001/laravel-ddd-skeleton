@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-
 namespace Medine\ERP\ClientCategories\Domain\Entity;
 
-
+use Medine\ERP\ClientCategories\Domain\ValueObjects\ClientCategoryCompanyId;
 use Medine\ERP\ClientCategories\Domain\ValueObjects\ClientCategoryCreatedAt;
 use Medine\ERP\ClientCategories\Domain\ValueObjects\ClientCategoryDescription;
 use Medine\ERP\ClientCategories\Domain\ValueObjects\ClientCategoryId;
@@ -17,6 +16,7 @@ final class ClientCategory
 {
 
     private $id;
+    private $companyId;
     private $name;
     private $description;
     private $state;
@@ -25,6 +25,7 @@ final class ClientCategory
 
     private function __construct(
         ClientCategoryId $id,
+        ClientCategoryCompanyId $companyId,
         ClientCategoryName $name,
         ClientCategoryDescription $description,
         ClientCategoryState $state,
@@ -33,6 +34,7 @@ final class ClientCategory
     )
     {
         $this->id = $id;
+        $this->companyId = $companyId;
         $this->name = $name;
         $this->description = $description;
         $this->state = $state;
@@ -42,6 +44,7 @@ final class ClientCategory
 
     public static function create(
         ClientCategoryId $id,
+        ClientCategoryCompanyId $companyId,
         ClientCategoryName $name,
         ClientCategoryDescription $description,
         ClientCategoryState $state
@@ -49,6 +52,7 @@ final class ClientCategory
     {
         return new self(
             $id,
+            $companyId,
             $name,
             $description,
             $state,
@@ -60,6 +64,11 @@ final class ClientCategory
     public function id(): ClientCategoryId
     {
         return $this->id;
+    }
+
+    public function CompanyId(): ClientCategoryCompanyId
+    {
+        return $this->companyId;
     }
 
     public function name(): ClientCategoryName
