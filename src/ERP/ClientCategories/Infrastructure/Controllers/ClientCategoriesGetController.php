@@ -7,8 +7,10 @@ namespace Medine\ERP\ClientCategories\Infrastructure\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Medine\ERP\ClientCategories\Application\Response\ClientCategoryResponse;
 use Medine\ERP\ClientCategories\Application\Search\ClientCategorySearcher;
 use Medine\ERP\ClientCategories\Application\Search\ClientCategorySearcherRequest;
+use function Lambdish\Phunctional\map;
 
 final class ClientCategoriesGetController extends Controller
 {
@@ -31,6 +33,13 @@ final class ClientCategoriesGetController extends Controller
             (int)$request->offset
         ));
 
-        return response()->json([], JsonResponse::HTTP_OK);
+        return new JsonResponse(map(function (ClientCategoryResponse $client) {
+            return [
+                'id' => $client->id(),
+                'name' => $client->name(),
+                'description' => $client->discription(),
+                'state' => $client->stateButton(),
+            ];
+        }, $response->clientCategory()), JsonResponse::HTTP_OK);
     }
 }

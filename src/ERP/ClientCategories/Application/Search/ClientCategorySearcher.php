@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace Medine\ERP\ClientCategories\Application\Search;
 
+use Medine\ERP\ClientCategories\Application\Response\ClientCategoriesResponse;
+use Medine\ERP\ClientCategories\Application\Response\ClientCategoryResponse;
 use Medine\ERP\ClientCategories\Domain\Contracts\ClientCategoryRepository;
+use Medine\ERP\ClientCategories\Domain\Entity\ClientCategory;
 use Medine\ERP\Shared\Domain\Criteria;
 use Medine\ERP\Shared\Domain\Criteria\Filters;
 use Medine\ERP\Shared\Domain\Criteria\Order;
+
+use function Lambdish\Phunctional\map;
 
 final class ClientCategorySearcher
 {
@@ -30,8 +35,21 @@ final class ClientCategorySearcher
             $request->limit()
         );
 
-        $response = $this->repository->matching($criteria);
+        return new ClientCategoriesResponse(...map(
+            $this->toResponse(),
+            $this->repository->matching($criteria)
+        ));
+    }
 
-        dd($response);
+    private function toResponse(): callable
+    {
+        return function (ClientCategory $clientCategory) {
+            return new ClientCategoryResponse(
+                $clientCategory->id()->value(),
+                $clientCategory->name()->value(),
+                $clientCategory->description()->value(),
+                $clientCategory->state()->value(),
+            );
+        };
     }
 }

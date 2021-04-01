@@ -26,7 +26,7 @@ final class ClientTypesGetControllerTest extends TestCase
     /**
      * @test
      */
-    public function if_should_get_the_existing_client_category()
+    public function if_should_get_the_existing_client_type()
     {
         Passport::actingAs(
             User::factory()->create()
