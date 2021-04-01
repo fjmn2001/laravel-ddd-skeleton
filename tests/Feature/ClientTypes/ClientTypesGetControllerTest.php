@@ -6,12 +6,12 @@ namespace Tests\Feature\ClientTypes;
 
 use App\Models\User;
 use Faker\Factory;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Laravel\Passport\Passport;
 use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-final class ClientTypesPostControllerTest extends TestCase
+final class ClientTypesGetControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -26,25 +26,34 @@ final class ClientTypesPostControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_should_create_a_new_client_type()
+    public function if_should_get_the_existing_client_category()
     {
-
         Passport::actingAs(
             User::factory()->create()
         );
 
         $clientTypeId = Uuid::random()->value();
+        $clientTypeName = $this->faker->name;
         $companyId = Uuid::random()->value();
 
         $response = $this->postJson('/api/_client_type', [
             'id' => $clientTypeId,
             'companyId' => $companyId,
-            'name' => $this->faker->name,
+            'name' => $clientTypeName,
             'description' => $this->faker->text(20),
             'state' => 'active',
         ]);
 
         $response->assertJson([]);
         $response->assertStatus(201);
+
+        $response = $this->json('GET', '/api/_client_type', [
+            "page" => 1,
+            'filters' => [
+                ['field' => 'name', 'value' => $clientTypeName]
+            ]
+        ]);
+
+        $response->assertStatus(200);
     }
 }

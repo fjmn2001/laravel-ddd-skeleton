@@ -9,9 +9,17 @@ namespace Medine\ERP\ClientCategories\Infrastructure\Persistence;
 use Illuminate\Support\Facades\DB;
 use Medine\ERP\ClientCategories\Domain\Contracts\ClientCategoryRepository;
 use Medine\ERP\ClientCategories\Domain\Entity\ClientCategory;
+use Medine\ERP\ClientCategories\Domain\ValueObjects\ClientCategoryCompanyId;
+use Medine\ERP\ClientCategories\Domain\ValueObjects\ClientCategoryCreatedAt;
+use Medine\ERP\ClientCategories\Domain\ValueObjects\ClientCategoryDescription;
 use Medine\ERP\ClientCategories\Domain\ValueObjects\ClientCategoryId;
+use Medine\ERP\ClientCategories\Domain\ValueObjects\ClientCategoryName;
+use Medine\ERP\ClientCategories\Domain\ValueObjects\ClientCategoryState;
+use Medine\ERP\ClientCategories\Domain\ValueObjects\ClientCategoryUpdatedAt;
+use Medine\ERP\Clients\Infrastructure\Repository\MySqlClientsFilters;
+use Medine\ERP\Shared\Infrastructure\MySqlRepository;
 
-final class MysqlClientCategoryRepository implements ClientCategoryRepository
+final class MysqlClientCategoryRepository extends MySqlRepository implements ClientCategoryRepository
 {
 
     public function find(ClientCategoryId $id): ?ClientCategory
@@ -39,6 +47,24 @@ final class MysqlClientCategoryRepository implements ClientCategoryRepository
 
     public function matching(\Medine\ERP\Shared\Domain\Criteria $criteria): array
     {
-        // TODO: Implement matching() method.
+        $query = DB::table('client_category');
+        $query = (new MySqlClientCategoryFilters($query))($criteria);
+        $query = $this->completeBuilder($criteria, $query);
+        return $query->get()->map($this->buildClientCategorys())->toArray();
+    }
+
+    private function buildClientCategorys(): \Closure
+    {
+        return function ($row) {
+            return ClientCategory::fromDatabase(
+                new ClientCategoryId($row->id),
+                new ClientCategoryCompanyId($row->company_id),
+                new ClientCategoryName($row->name),
+                new ClientCategoryDescription($row->description),
+                new ClientCategoryState($row->state),
+                new ClientCategoryCreatedAt($row->created_at),
+                new ClientCategoryUpdatedAt($row->updated_at)
+            );
+        };
     }
 }

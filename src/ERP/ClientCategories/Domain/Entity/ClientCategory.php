@@ -61,6 +61,28 @@ final class ClientCategory
         );
     }
 
+    public static function fromDatabase(
+        ClientCategoryId $id,
+        ClientCategoryCompanyId $companyId,
+        ClientCategoryName $name,
+        ClientCategoryDescription $description,
+        ClientCategoryState $state,
+        ClientCategoryCreatedAt $createdAt,
+        ClientCategoryUpdatedAt $updatedAt
+
+    ): self
+    {
+        return new self(
+            $id,
+            $companyId,
+            $name,
+            $description,
+            $state,
+            $createdAt,
+            $updatedAt
+        );
+    }
+
     public function id(): ClientCategoryId
     {
         return $this->id;

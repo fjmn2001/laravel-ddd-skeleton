@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\ClientTypes;
+namespace Tests\Feature\ClientCategories;
 
 use App\Models\User;
 use Faker\Factory;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Laravel\Passport\Passport;
 use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-final class ClientTypesPostControllerTest extends TestCase
+final class ClientCategoriesGetControllerTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -26,25 +26,34 @@ final class ClientTypesPostControllerTest extends TestCase
     /**
      * @test
      */
-    public function it_should_create_a_new_client_type()
+    public function if_should_get_the_existing_client_type()
     {
-
         Passport::actingAs(
             User::factory()->create()
         );
 
-        $clientTypeId = Uuid::random()->value();
+        $clientCategoryId = Uuid::random()->value();
+        $clientCategoryName = $this->faker->name;
         $companyId = Uuid::random()->value();
 
-        $response = $this->postJson('/api/_client_type', [
-            'id' => $clientTypeId,
+        $response = $this->postJson('/api/client_category', [
+            'id' => $clientCategoryId,
             'companyId' => $companyId,
-            'name' => $this->faker->name,
+            'name' => $clientCategoryName,
             'description' => $this->faker->text(20),
             'state' => 'active',
         ]);
 
         $response->assertJson([]);
         $response->assertStatus(201);
+
+        $response = $this->json('GET', '/api/client_category', [
+            "page" => 1,
+            'filters' => [
+                ['field' => 'name', 'value' => $clientCategoryName]
+            ]
+        ]);
+
+        $response->assertStatus(200);
     }
 }

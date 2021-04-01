@@ -7,11 +7,19 @@ namespace Medine\ERP\ClientTypes\Infrastructure\Persistence;
 
 
 use Illuminate\Support\Facades\DB;
+use Medine\ERP\Clients\Infrastructure\Repository\MySqlClientsFilters;
 use Medine\ERP\ClientTypes\Domain\Contracts\ClientTypeRepository;
 use Medine\ERP\ClientTypes\Domain\Entity\ClientType;
+use Medine\ERP\ClientTypes\Domain\ValueObjects\ClientTypeCompanyId;
+use Medine\ERP\ClientTypes\Domain\ValueObjects\ClientTypeCreatedAt;
+use Medine\ERP\ClientTypes\Domain\ValueObjects\ClientTypeDescription;
 use Medine\ERP\ClientTypes\Domain\ValueObjects\ClientTypeId;
+use Medine\ERP\ClientTypes\Domain\ValueObjects\ClientTypeName;
+use Medine\ERP\ClientTypes\Domain\ValueObjects\ClientTypeState;
+use Medine\ERP\ClientTypes\Domain\ValueObjects\ClientTypeUpdatedAt;
+use Medine\ERP\Shared\Infrastructure\MySqlRepository;
 
-final class MysqlClientTypesRepository implements ClientTypeRepository
+final class MysqlClientTypesRepository  extends MySqlRepository implements ClientTypeRepository
 {
 
     public function find(ClientTypeId $id): ?ClientType
@@ -39,6 +47,24 @@ final class MysqlClientTypesRepository implements ClientTypeRepository
 
     public function matching(\Medine\ERP\Shared\Domain\Criteria $criteria): array
     {
-        // TODO: Implement matching() method.
+        $query = DB::table('client_type');
+        $query = (new MySqlClientTypesFilters($query))($criteria);
+        $query = $this->completeBuilder($criteria, $query);
+        return $query->get()->map($this->buildClientTypes())->toArray();
+    }
+
+    private function buildClientTypes(): \Closure
+    {
+        return function ($row) {
+            return ClientType::fromDatabase(
+                new ClientTypeId($row->id),
+                new ClientTypeCompanyId($row->company_id),
+                new ClientTypeName($row->name),
+                new ClientTypeDescription($row->description),
+                new ClientTypeState($row->state),
+                new ClientTypeCreatedAt($row->created_at),
+                new ClientTypeUpdatedAt($row->updated_at)
+            );
+        };
     }
 }

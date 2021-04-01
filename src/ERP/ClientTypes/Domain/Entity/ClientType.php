@@ -63,6 +63,27 @@ final class ClientType
         );
     }
 
+    public static function fromDatabase(
+        ClientTypeId $id,
+        ClientTypeCompanyId $companyId,
+        ClientTypeName $name,
+        ClientTypeDescription $description,
+        ClientTypeState $state,
+        ClientTypeCreatedAt $createdAt,
+        ClientTypeUpdatedAt $updatedAt
+    ): self
+    {
+        return new self(
+            $id,
+            $companyId,
+            $name,
+            $description,
+            $state,
+            $createdAt,
+            $updatedAt
+        );
+    }
+
     public function id(): ClientTypeId
     {
         return $this->id;
