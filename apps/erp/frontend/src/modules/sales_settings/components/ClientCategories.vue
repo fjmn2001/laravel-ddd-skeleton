@@ -85,29 +85,34 @@
         </div>
         <no-results v-if="ClientCategories.length === 0 && !loading"></no-results>
         <loading v-if="loading"></loading>
+        <options-modal :name="'optionsModal'"></options-modal>
     </div>
 </template>
 
 <script lang="ts">
 import {defineComponent, onMounted, ref, Ref, watch} from "vue";
 import toastr from "toastr";
+import $ from 'jquery'
 
-import {Company} from "@/modules/auth/types/Company";
+import {useModal} from "@/use/useModal";
 import {useAuth} from "@/modules/auth/use/useAuth";
 import {useClientCategory} from "@/modules/sales_settings/use/useClientCategory/useClientCategory";
+import {useItemCategoryFilters} from "@/modules/inventory_settings/use/useItemCategoryFilters";
+import {api} from "@/modules/sales_settings/services/client_category/api";
 import {ClientCategory} from "@/modules/sales_settings/types/ClientCategory";
+import {Company} from "@/modules/auth/types/Company";
 
 import Loading from "@/components/table/Loading.vue";
 import NoResults from "@/components/table/NoResults.vue";
-import {useItemCategoryFilters} from "@/modules/inventory_settings/use/useItemCategoryFilters";
-import {api} from "@/modules/sales_settings/services/client_category/api";
+import OptionsModal from "@/components/modal/optionsModal.vue";
 
 export default defineComponent({
-    components: {Loading, NoResults},
+    components: {Loading, NoResults, OptionsModal},
 
     setup() {
         const {user} = useAuth();
         const {create, clientCategory, reset} = useClientCategory();
+        const {show, populateLoading, populateBody, hide} = useModal();
         const ClientCategories: Ref<ClientCategory[]> = ref([]);
 
         const {setFilters} = useItemCategoryFilters();
@@ -180,12 +185,35 @@ export default defineComponent({
             await getClientCategory()
         }
 
-        async function changeState() {
-            console.log('search')
+        async function changeState(id: string) {
+            show('optionsModal')
+            populateLoading('optionsModal')
+            const modal = $('#optionsModal');
+            const response = await api.getClientCategoryStates(id);
+            populateBody('optionsModal', response)
+            modal.off('click', '.updateState').on('click', '.updateState', async (e) => {
+                console.log(e);
+                hide('optionsModal')
+            });
         }
 
-        async function showOptionsModal() {
-            console.log('search')
+        async function showOptionsModal(id: string) {
+            show('optionsModal')
+            populateLoading('optionsModal')
+
+            const html = await api.getClientCategoryOptions(id)
+            const modal = $('#optionsModal');
+
+            populateBody('optionsModal', html)
+            modal.off('click', '.edit').on('click', '.edit', async () => {
+                populateLoading('optionsModal')
+                hide('optionsModal')
+            });
+
+            modal.off('click', '.changeState').on('click', '.changeState', async () => {
+                hide('optionsModal')
+                changeState(id)
+            });
         }
 
         onMounted(async () => {

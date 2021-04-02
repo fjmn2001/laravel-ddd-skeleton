@@ -85,13 +85,16 @@
         </div>
         <no-results v-if="ClientTypes.length === 0 && !loading"></no-results>
         <loading v-if="loading"></loading>
+        <options-modal :name="'optionsModal'"></options-modal>
     </div>
 </template>
 
 <script lang="ts">
 import {defineComponent, onMounted, ref, Ref, watch} from "vue";
 import toastr from "toastr";
+import $ from 'jquery'
 
+import {useModal} from "@/use/useModal";
 import {useAuth} from "@/modules/auth/use/useAuth";
 import {Company} from "@/modules/auth/types/Company";
 import {useClientType} from "@/modules/sales_settings/use/useClientType/useClientType";
@@ -99,15 +102,17 @@ import {ClientType} from "@/modules/sales_settings/types/ClientType";
 
 import Loading from "@/components/table/Loading.vue";
 import NoResults from "@/components/table/NoResults.vue";
+import OptionsModal from "@/components/modal/optionsModal.vue";
 import {useClientTypeFilters} from "@/modules/sales_settings/use/useClientType/useClientTypeFilters";
 import {api} from "@/modules/sales_settings/services/client_type/api";
 
 export default defineComponent({
-    components: {Loading, NoResults},
+    components: {Loading, NoResults, OptionsModal},
 
     setup() {
         const {user} = useAuth();
         const {create, clientType, reset} = useClientType();
+        const {show, populateLoading, populateBody, hide} = useModal();
         const ClientTypes: Ref<ClientType[]> = ref([]);
 
         const {setFilters} = useClientTypeFilters();
@@ -179,12 +184,35 @@ export default defineComponent({
             await getClientTypes()
         }
 
-        async function changeState() {
-            console.log('search')
+        async function changeState(id: string) {
+            show('optionsModal')
+            populateLoading('optionsModal')
+            const modal = $('#optionsModal');
+            const response = await api.getClientTypeStates(id);
+            populateBody('optionsModal', response)
+            modal.off('click', '.updateState').on('click', '.updateState', async (e) => {
+                console.log(e);
+                hide('optionsModal')
+            });
         }
 
-        async function showOptionsModal() {
-            console.log('search')
+        async function showOptionsModal(id: string) {
+            show('optionsModal')
+            populateLoading('optionsModal')
+
+            const html = await api.getClientTypeOptions(id)
+            const modal = $('#optionsModal');
+
+            populateBody('optionsModal', html)
+            modal.off('click', '.edit').on('click', '.edit', async () => {
+                populateLoading('optionsModal')
+                hide('optionsModal')
+            });
+
+            modal.off('click', '.changeState').on('click', '.changeState', async () => {
+                hide('optionsModal')
+                changeState(id)
+            });
         }
 
         onMounted(async () => {
