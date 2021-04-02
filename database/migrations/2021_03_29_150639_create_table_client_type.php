@@ -20,6 +20,7 @@ class CreateTableClientType extends Migration
             $table->string('description');
             $table->string('state');
             $table->timestamps();
+            $table->primary('id');
         });
     }
 

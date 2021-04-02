@@ -2,8 +2,27 @@ import {useAuth} from "@/modules/auth/use/useAuth";
 import axios from "axios";
 import {ClientCategory} from "@/modules/sales_settings/types/ClientCategory";
 import {useClientCategory} from "@/modules/sales_settings/use/useClientCategory/useClientCategory";
+import {useItemCategoryFilters} from "@/modules/inventory_settings/use/useItemCategoryFilters";
 
 export const api = {
+
+    async getClientCategories(): Promise <ClientCategory[]> {
+        const {token} = useAuth();
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.value;
+        const {filters, orderBy, order, limit, offset} = useItemCategoryFilters();
+        const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/client_categories', {
+            params: {
+                filters: filters.value,
+                orderBy: orderBy.value,
+                order: order.value,
+                limit: limit.value,
+                offset: offset.value
+            }
+        });
+        return new Promise(resolve => {
+            resolve(response.data);
+        });
+    },
 
     async createClientCategory(): Promise<ClientCategory> {
         const {user} = useAuth();

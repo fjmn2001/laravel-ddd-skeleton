@@ -8,7 +8,7 @@ const clientCategory: Ref<ClientCategory> = ref({
     id: uuidv4(),
     name: '',
     description: '',
-    state: '',
+    state: 'active',
     companyId: ''
 });
 
@@ -18,9 +18,20 @@ export function useClientCategory() {
         await api.createClientCategory()
     }
 
+    function reset() {
+        clientCategory.value = {
+            id: uuidv4(),
+            name: '',
+            description: '',
+            state: 'active',
+            companyId: ''
+        };
+    }
+
     return {
         clientCategory,
 
         create,
+        reset,
     }
 }

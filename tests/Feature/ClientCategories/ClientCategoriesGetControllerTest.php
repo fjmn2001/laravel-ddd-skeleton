@@ -47,7 +47,7 @@ final class ClientCategoriesGetControllerTest extends TestCase
         $response->assertJson([]);
         $response->assertStatus(201);
 
-        $response = $this->json('GET', '/api/client_category', [
+        $response = $this->json('GET', '/api/client_categories', [
             "page" => 1,
             'filters' => [
                 ['field' => 'name', 'value' => $clientCategoryName]

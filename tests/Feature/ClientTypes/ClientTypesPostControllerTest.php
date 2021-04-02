@@ -36,7 +36,7 @@ final class ClientTypesPostControllerTest extends TestCase
         $clientTypeId = Uuid::random()->value();
         $companyId = Uuid::random()->value();
 
-        $response = $this->postJson('/api/_client_type', [
+        $response = $this->postJson('/api/client_type', [
             'id' => $clientTypeId,
             'companyId' => $companyId,
             'name' => $this->faker->name,

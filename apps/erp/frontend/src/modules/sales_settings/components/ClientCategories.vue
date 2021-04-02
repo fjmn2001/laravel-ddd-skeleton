@@ -56,14 +56,31 @@
         <div class=" pl-2 pr-2 table-responsive" v-if="ClientCategories.length > 0 && !loading">
             <table class="table">
                 <thead>
-                <tr>
-                    <th></th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Estado</th>
-                    <th>Opciones</th>
-                </tr>
+                    <tr>
+                        <th></th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Opciones</th>
+                    </tr>
                 </thead>
+                <tbody>
+                    <tr v-for="ClientCategory in ClientCategories" :key="ClientCategory.id">
+                        <td></td>
+                        <td v-html="ClientCategory.name"></td>
+                        <td v-html="ClientCategory.description"></td>
+                        <td>
+                            <span v-html="ClientCategory.state" @click.prevent="changeState(ClientCategory.id)"></span>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <a class="btn btn-sm btn-opt" href="#" @click.prevent="showOptionsModal(ClientCategory.id)">
+                                    <img src="@/assets/images/icons/3puntos_H.svg">
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
         <no-results v-if="ClientCategories.length === 0 && !loading"></no-results>
@@ -82,14 +99,18 @@ import {ClientCategory} from "@/modules/sales_settings/types/ClientCategory";
 
 import Loading from "@/components/table/Loading.vue";
 import NoResults from "@/components/table/NoResults.vue";
+import {useItemCategoryFilters} from "@/modules/inventory_settings/use/useItemCategoryFilters";
+import {api} from "@/modules/sales_settings/services/client_category/api";
+
 export default defineComponent({
     components: {Loading, NoResults},
 
     setup() {
         const {user} = useAuth();
-        const {create, clientCategory} = useClientCategory();
+        const {create, clientCategory, reset} = useClientCategory();
         const ClientCategories: Ref<ClientCategory[]> = ref([]);
 
+        const {setFilters} = useItemCategoryFilters();
 
         const loading: Ref<boolean> = ref(true);
         const sending: Ref<boolean> = ref(false);
@@ -98,7 +119,13 @@ export default defineComponent({
         //..
         const name: Ref<string> = ref('');
         const description: Ref<string> = ref('');
-        const state: Ref<string> = ref('');
+        const state: Ref<string> = ref('active');
+
+        async function getClientCategory() {
+            loading.value = true;
+            ClientCategories.value = await api.getClientCategories();
+            loading.value = false;
+        }
 
         watch(() => name.value, (val) => clientCategory.value.name = val)
         watch(() => description.value, (val) => clientCategory.value.description = val)
@@ -106,9 +133,24 @@ export default defineComponent({
         //when changeCompany
         watch(() => user.value?.company, async (company: Company | undefined) => {
             if (company) {
-                console.log(company);
+                await setFilters([
+                    {field: 'companyId', value: company.id}
+                ]);
+                await getClientCategory();
             }
         })
+
+        async function myReset() {
+            name.value = '';
+            description.value = '';
+            state.value = 'active';
+            editing.value = false;
+            reset();
+            await setFilters([
+                {field: 'companyId', value: user?.value?.company.id}
+            ]);
+            await getClientCategory()
+        }
 
         async function submit() {
             try {
@@ -118,6 +160,7 @@ export default defineComponent({
                 } else {
                     await create()
                     toastr.success("Su solicitud se ha procesado correctamente.");
+                    await myReset();
                 }
             } catch (e) {
                 toastr.error(e?.response?.data?.message);
@@ -127,23 +170,28 @@ export default defineComponent({
             }
         }
 
-
-        async function myReset() {
-            console.log('Reset')
+        async function search() {
+            await setFilters([
+                {field: 'companyId', value: user?.value?.company.id},
+                {field: 'name', value: name.value},
+                {field: 'description', value: description.value},
+                {field: 'state', value: state}
+            ]);
+            await getClientCategory()
         }
 
-        async function search() {
+        async function changeState() {
             console.log('search')
         }
 
-        async function getClientCategory() {
-            loading.value = true;
-            setTimeout(() => {
-                loading.value = false;
-            }, 2000)
+        async function showOptionsModal() {
+            console.log('search')
         }
 
         onMounted(async () => {
+            await setFilters([
+                {field: 'companyId', value: user?.value?.company.id}
+            ]);
             await getClientCategory();
         });
 
@@ -160,6 +208,8 @@ export default defineComponent({
             submit,
             myReset,
             search,
+            changeState,
+            showOptionsModal,
         }
     }
 });

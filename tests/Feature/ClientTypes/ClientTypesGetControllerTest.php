@@ -47,7 +47,7 @@ final class ClientTypesGetControllerTest extends TestCase
         $response->assertJson([]);
         $response->assertStatus(201);
 
-        $response = $this->json('GET', '/api/_client_type', [
+        $response = $this->json('GET', '/api/client_types', [
             "page" => 1,
             'filters' => [
                 ['field' => 'name', 'value' => $clientTypeName]

@@ -64,6 +64,23 @@
                     <th>Opciones</th>
                 </tr>
                 </thead>
+                <tbody>
+                <tr v-for="ClientType in ClientTypes" :key="ClientType.id">
+                    <td></td>
+                    <td v-html="ClientType.name"></td>
+                    <td v-html="ClientType.description"></td>
+                    <td>
+                        <span v-html="ClientType.state" @click.prevent="changeState(ClientType.id)"></span>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <a class="btn btn-sm btn-opt" href="#" @click.prevent="showOptionsModal(ClientType.id)">
+                                <img src="@/assets/images/icons/3puntos_H.svg">
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
             </table>
         </div>
         <no-results v-if="ClientTypes.length === 0 && !loading"></no-results>
@@ -82,15 +99,18 @@ import {ClientType} from "@/modules/sales_settings/types/ClientType";
 
 import Loading from "@/components/table/Loading.vue";
 import NoResults from "@/components/table/NoResults.vue";
+import {useClientTypeFilters} from "@/modules/sales_settings/use/useClientType/useClientTypeFilters";
+import {api} from "@/modules/sales_settings/services/client_type/api";
 
 export default defineComponent({
     components: {Loading, NoResults},
 
     setup() {
         const {user} = useAuth();
-        const {create, clientType} = useClientType();
+        const {create, clientType, reset} = useClientType();
         const ClientTypes: Ref<ClientType[]> = ref([]);
 
+        const {setFilters} = useClientTypeFilters();
 
         const loading: Ref<boolean> = ref(true);
         const sending: Ref<boolean> = ref(false);
@@ -99,7 +119,13 @@ export default defineComponent({
         //..
         const name: Ref<string> = ref('');
         const description: Ref<string> = ref('');
-        const state: Ref<string> = ref('');
+        const state: Ref<string> = ref('active');
+
+        async function getClientTypes() {
+            loading.value = true;
+            ClientTypes.value = await api.getClientTypes();
+            loading.value = false;
+        }
 
         watch(() => name.value, (val) => clientType.value.name = val)
         watch(() => description.value, (val) => clientType.value.description = val)
@@ -107,9 +133,24 @@ export default defineComponent({
         //when changeCompany
         watch(() => user.value?.company, async (company: Company | undefined) => {
             if (company) {
-                console.log(company);
+                await setFilters([
+                    {field: 'companyId', value: company.id}
+                ]);
+                await getClientTypes();
             }
         })
+
+        async function myReset() {
+            name.value = '';
+            description.value = '';
+            state.value = 'active';
+            editing.value = false;
+            reset();
+            await setFilters([
+                {field: 'companyId', value: user?.value?.company.id}
+            ]);
+            await getClientTypes();
+        }
 
         async function submit() {
             try {
@@ -119,6 +160,7 @@ export default defineComponent({
                 } else {
                     await create()
                     toastr.success("Su solicitud se ha procesado correctamente.");
+                    await myReset();
                 }
             } catch (e) {
                 toastr.error(e?.response?.data?.message);
@@ -127,23 +169,29 @@ export default defineComponent({
             }
         }
 
-        async function myReset() {
-            console.log('Reset')
+        async function search() {
+            await setFilters([
+                {field: 'companyId', value: user?.value?.company.id},
+                {field: 'name', value: name.value},
+                {field: 'description', value: description.value},
+                {field: 'state', value: state}
+            ]);
+            await getClientTypes()
         }
 
-        async function search() {
+        async function changeState() {
             console.log('search')
         }
 
-        async function getClientType() {
-            loading.value = true;
-            setTimeout(() => {
-                loading.value = false;
-            }, 2000)
+        async function showOptionsModal() {
+            console.log('search')
         }
 
         onMounted(async () => {
-            await getClientType();
+            await setFilters([
+                {field: 'companyId', value: user?.value?.company.id}
+            ]);
+            await getClientTypes();
         });
 
         return {
@@ -159,6 +207,8 @@ export default defineComponent({
             submit,
             myReset,
             search,
+            changeState,
+            showOptionsModal,
         }
     }
 });

@@ -7,7 +7,7 @@ const clientType: Ref<ClientType> = ref({
     id: uuidv4(),
     name: '',
     description: '',
-    state: '',
+    state: 'active',
     companyId: ''
 });
 
@@ -17,9 +17,20 @@ export function useClientType() {
         await api.createClientType()
     }
 
+    function reset() {
+        clientType.value = {
+            id: uuidv4(),
+            name: '',
+            description: '',
+            state: 'active',
+            companyId: ''
+        };
+    }
+
     return {
         clientType,
 
         create,
+        reset,
     }
 }

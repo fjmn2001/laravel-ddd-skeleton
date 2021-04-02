@@ -20,6 +20,7 @@ class CreateTableClientCategory extends Migration
             $table->string('description');
             $table->string('state');
             $table->timestamps();
+            $table->primary('id');
         });
     }
 

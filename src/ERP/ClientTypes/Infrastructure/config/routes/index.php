@@ -11,14 +11,14 @@ use Medine\ERP\ClientTypes\Infrastructure\Controllers\ClientTypeStatesGetControl
 
 
 Route::middleware('auth:api')->group(function () {
-    Route::post('/_client_type', ClientTypePostController::class);
+    Route::post('/client_type', ClientTypePostController::class);
 
-    Route::get('/_client_type/{id}', ClientTypeGetController::class);
-    Route::get('/_client_type/states/{id}', ClientTypeStatesGetController::class);
-    Route::get('/_client_type/options/{id}', ClientTypeOptionsGetController::class);
-    Route::get('/_client_type', ClientTypesGetController::class);
+    Route::get('/client_type/{id}', ClientTypeGetController::class);
+    Route::get('/client_type/states/{id}', ClientTypeStatesGetController::class);
+    Route::get('/client_type/options/{id}', ClientTypeOptionsGetController::class);
+    Route::get('/client_types', ClientTypesGetController::class);
 
-    Route::put('/_client_type/{id}', ClientTypePutController::class);
-    Route::put('/_client_type/state/{id}', ClientTypeStatePutController::class);
+    Route::put('/client_type/{id}', ClientTypePutController::class);
+    Route::put('/client_type/state/{id}', ClientTypeStatePutController::class);
 
 });
