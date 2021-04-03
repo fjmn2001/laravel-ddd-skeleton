@@ -39,7 +39,12 @@ export const api = {
         });
     },
 
-
+    async fincClientCategory(id: string): Promise <ClientCategory> {
+        const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/client_category/' + id);
+        return new Promise(resolve => {
+            resolve(response.data)
+        })
+    },
 
     async getClientCategoryOptions(id: string): Promise<string> {
         const {token} = useAuth();

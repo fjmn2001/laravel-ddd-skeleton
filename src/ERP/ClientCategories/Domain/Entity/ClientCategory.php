@@ -88,7 +88,7 @@ final class ClientCategory
         return $this->id;
     }
 
-    public function CompanyId(): ClientCategoryCompanyId
+    public function companyId(): ClientCategoryCompanyId
     {
         return $this->companyId;
     }

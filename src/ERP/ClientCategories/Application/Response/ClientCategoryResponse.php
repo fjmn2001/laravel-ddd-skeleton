@@ -9,18 +9,21 @@ use Illuminate\Support\Str;
 final class ClientCategoryResponse
 {
     private $id;
+    private $companyId;
     private $name;
     private $discription;
     private $state;
 
     public function __construct(
         string $id,
+        string $companyId,
         string $name,
         string $discription,
         string $state
     )
     {
         $this->id = $id;
+        $this->companyId = $companyId;
         $this->name = $name;
         $this->discription = $discription;
         $this->state = $state;
@@ -29,6 +32,11 @@ final class ClientCategoryResponse
     public function id(): string
     {
         return $this->id;
+    }
+
+    public function companyId(): string
+    {
+        return $this->companyId;
     }
 
     public function name(): string

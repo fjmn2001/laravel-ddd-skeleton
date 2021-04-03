@@ -46,6 +46,7 @@ final class ClientCategorySearcher
         return function (ClientCategory $clientCategory) {
             return new ClientCategoryResponse(
                 $clientCategory->id()->value(),
+                $clientCategory->companyId()->value(),
                 $clientCategory->name()->value(),
                 $clientCategory->description()->value(),
                 $clientCategory->state()->value(),

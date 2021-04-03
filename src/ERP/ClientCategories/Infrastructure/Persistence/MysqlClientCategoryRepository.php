@@ -24,14 +24,24 @@ final class MysqlClientCategoryRepository extends MySqlRepository implements Cli
 
     public function find(ClientCategoryId $id): ?ClientCategory
     {
-        // TODO: Implement find() method.
+        $object = DB::table('client_category')->find($id->value());
+
+        return empty($object) ? null : ClientCategory::fromDatabase(
+            new ClientCategoryId($object->id),
+            new ClientCategoryCompanyId($object->company_id),
+            new ClientCategoryName($object->name),
+            new ClientCategoryDescription($object->description),
+            new ClientCategoryState($object->state),
+            new ClientCategoryCreatedAt($object->created_at),
+            new ClientCategoryUpdatedAt($object->updated_at)
+        );
     }
 
     public function save(ClientCategory $clientCategory): void
     {
         DB::table('client_category')->insert([
             'id' => $clientCategory->id()->value(),
-            'company_id' => $clientCategory->CompanyId()->value(),
+            'company_id' => $clientCategory->companyId()->value(),
             'name' => $clientCategory->name()->value(),
             'description' => $clientCategory->description()->value(),
             'state' => $clientCategory->state()->value(),
