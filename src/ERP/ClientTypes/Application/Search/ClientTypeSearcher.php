@@ -45,6 +45,7 @@ final class ClientTypeSearcher
         return function (ClientType $clientType) {
             return new ClientTypeResponse(
                 $clientType->id()->value(),
+                $clientType->companyId()->value(),
                 $clientType->name()->value(),
                 $clientType->description()->value(),
                 $clientType->state()->value(),

@@ -89,7 +89,7 @@ final class ClientType
         return $this->id;
     }
 
-    public function CompanyId(): ClientTypeCompanyId
+    public function companyId(): ClientTypeCompanyId
     {
         return $this->companyId;
     }

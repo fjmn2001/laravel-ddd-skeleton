@@ -39,6 +39,13 @@ export const api = {
         });
     },
 
+    async fincClientType(id: string): Promise <ClientType> {
+        const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/client_type/' + id);
+        return new Promise(resolve => {
+            resolve(response.data)
+        })
+    },
+
     async getClientTypeOptions(id: string): Promise<string> {
         const {token} = useAuth();
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.value;

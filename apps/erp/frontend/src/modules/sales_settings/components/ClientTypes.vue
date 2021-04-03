@@ -206,6 +206,12 @@ export default defineComponent({
             populateBody('optionsModal', html)
             modal.off('click', '.edit').on('click', '.edit', async () => {
                 populateLoading('optionsModal')
+                const response = await api.fincClientType(id);
+                clientType.value = response;
+                name.value = response.name;
+                description.value = response.description;
+                state.value = response.state;
+                editing.value = true;
                 hide('optionsModal')
             });
 

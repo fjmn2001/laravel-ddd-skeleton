@@ -24,14 +24,24 @@ final class MysqlClientTypesRepository  extends MySqlRepository implements Clien
 
     public function find(ClientTypeId $id): ?ClientType
     {
-        // TODO: Implement find() method.
+        $object = DB::table('client_type')->find($id->value());
+
+        return empty($object) ? null : ClientType::fromDatabase(
+            new ClientTypeId($object->id),
+            new ClientTypeCompanyId($object->company_id),
+            new ClientTypeName($object->name),
+            new ClientTypeDescription($object->description),
+            new ClientTypeState($object->state),
+            new ClientTypeCreatedAt($object->created_at),
+            new ClientTypeUpdatedAt($object->updated_at)
+        );
     }
 
     public function save(ClientType $clientType): void
     {
         DB::table('client_type')->insert([
             'id' => $clientType->id()->value(),
-            'company_id' => $clientType->CompanyId()->value(),
+            'company_id' => $clientType->companyId()->value(),
             'name' => $clientType->name()->value(),
             'description' => $clientType->description()->value(),
             'state' => $clientType->state()->value(),
