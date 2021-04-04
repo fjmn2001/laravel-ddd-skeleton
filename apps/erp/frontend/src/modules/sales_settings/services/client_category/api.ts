@@ -77,5 +77,15 @@ export const api = {
         return new Promise(resolve => {
             resolve(response.data);
         });
-    }
+    },
+
+    async updateClientCategoryState(id: string, state: string): Promise<ClientCategory> {
+        const response = await axios.put(process.env.VUE_APP_ERP_URL + '/api/client_category/state/' + id, {
+            id,
+            state
+        });
+        return new Promise(resolve => {
+            resolve(response.data);
+        });
+    },
 };

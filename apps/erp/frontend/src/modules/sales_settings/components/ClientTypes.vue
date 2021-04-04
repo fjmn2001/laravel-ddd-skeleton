@@ -196,8 +196,16 @@ export default defineComponent({
             const response = await api.getClientTypeStates(id);
             populateBody('optionsModal', response)
             modal.off('click', '.updateState').on('click', '.updateState', async (e) => {
-                console.log(e);
+                populateLoading('optionsModal')
+                await api.updateClientTypeState(
+                    $(e.target).data('id'),
+                    $(e.target).data('state')
+                )
                 hide('optionsModal')
+                await setFilters([
+                    {field: 'companyId', value: user?.value?.company.id}
+                ]);
+                await getClientTypes();
             });
         }
 

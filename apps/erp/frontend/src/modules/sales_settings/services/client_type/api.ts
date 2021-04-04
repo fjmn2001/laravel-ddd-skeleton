@@ -77,5 +77,14 @@ export const api = {
         return new Promise(resolve => {
             resolve(response.data);
         });
+    },
+    async updateClientTypeState(id: string, state: string): Promise<ClientType> {
+        const response = await axios.put(process.env.VUE_APP_ERP_URL + '/api/client_type/state/' + id, {
+            id,
+            state
+        });
+        return new Promise(resolve => {
+            resolve(response.data)
+        })
     }
 };
