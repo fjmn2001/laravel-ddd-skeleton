@@ -27,7 +27,7 @@ final class ClientTypePutController extends Controller
             $id,
             $request->companyId,
             $request->name,
-            $request->description,
+            !empty($request->description) ? $request->description : '',
             $request->state
         ));
 
