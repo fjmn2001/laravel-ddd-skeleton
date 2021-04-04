@@ -161,12 +161,17 @@ export default defineComponent({
             try {
                 sending.value = true
                 if (editing.value) {
-                    console.log('edit');
+                    await api.updateClientCategory();
                 } else {
                     await create()
                     toastr.success("Su solicitud se ha procesado correctamente.");
-                    await myReset();
                 }
+
+                myReset();
+                await setFilters([
+                    {field: 'companyId', value: user?.value?.company.id}
+                ]);
+                await getClientCategory()
             } catch (e) {
                 toastr.error(e?.response?.data?.message);
                 console.log(e);

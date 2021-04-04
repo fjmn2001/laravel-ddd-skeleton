@@ -63,4 +63,19 @@ export const api = {
             resolve(response.data);
         });
     },
+
+    async updateClientType(): Promise<ClientType> {
+        const {clientType} = useClientType();
+        const response = await axios.put(process.env.VUE_APP_ERP_URL + '/api/client_type/' + clientType.value.id, {
+            id: clientType.value.id,
+            name: clientType.value.name,
+            description: clientType.value.description,
+            state: clientType.value.state,
+            companyId: clientType.value.companyId,
+        });
+
+        return new Promise(resolve => {
+            resolve(response.data);
+        });
+    }
 };

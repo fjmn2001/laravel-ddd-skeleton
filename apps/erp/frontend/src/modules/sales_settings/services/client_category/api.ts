@@ -63,4 +63,19 @@ export const api = {
             resolve(response.data);
         });
     },
+
+    async updateClientCategory(): Promise<ClientCategory> {
+        const {clientCategory} = useClientCategory();
+        const response = await axios.put(process.env.VUE_APP_ERP_URL + '/api/client_category/' + clientCategory.value.id, {
+            id: clientCategory.value.id,
+            name: clientCategory.value.name,
+            description: clientCategory.value.description,
+            state: clientCategory.value.state,
+            companyId: clientCategory.value.companyId,
+        });
+
+        return new Promise(resolve => {
+            resolve(response.data);
+        });
+    }
 };
