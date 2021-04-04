@@ -5,15 +5,29 @@ declare(strict_types=1);
 namespace Medine\ERP\ClientTypes\Infrastructure\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Medine\ERP\ClientTypes\Application\Updater\ClientTypeStateUpdater;
+use Medine\ERP\ClientTypes\Application\Updater\ClientTypeStateUpdaterRequest;
 
 final class ClientTypeStatePutController extends Controller
 {
-    public function __construct()
+    private $stateUpdater;
+
+    public function __construct(
+        ClientTypeStateUpdater $stateUpdater
+    )
     {
+        $this->stateUpdater = $stateUpdater;
     }
 
-    public function __invoke()
+    public function __invoke(string $id, Request $request): JsonResponse
     {
-        // TODO: Implement __invoke() method.
+        ($this->stateUpdater)(new ClientTypeStateUpdaterRequest(
+            $id,
+            $request->state
+        ));
+
+        return response()->json([], JsonResponse::HTTP_OK);
     }
 }
