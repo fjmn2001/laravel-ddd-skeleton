@@ -12,6 +12,6 @@ interface ClientCategoryRepository
 {
     public function find(ClientCategoryId $id): ?ClientCategory;
     public function save(ClientCategory $clientCategory): void;
-    public function update(ClientCategory $client): void;
+    public function update(ClientCategory $clientCategory): void;
     public function matching(\Medine\ERP\Shared\Domain\Criteria $criteria): array;
 }

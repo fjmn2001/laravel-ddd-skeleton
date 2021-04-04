@@ -52,7 +52,15 @@ final class MysqlClientTypesRepository  extends MySqlRepository implements Clien
 
     public function update(ClientType $clientType): void
     {
-        // TODO: Implement update() method.
+        DB::table('client_type')->where('id', $clientType->id()->value())->take(1)
+            ->update([
+                'company_id' => $clientType->companyId()->value(),
+                'name' => $clientType->name()->value(),
+                'description' => $clientType->description()->value(),
+                'state' => $clientType->state()->value(),
+                'created_at' => $clientType->createdAt()->value(),
+                'updated_at' => $clientType->updatedAt()->value(),
+            ]);
     }
 
     public function matching(\Medine\ERP\Shared\Domain\Criteria $criteria): array

@@ -50,9 +50,16 @@ final class MysqlClientCategoryRepository extends MySqlRepository implements Cli
         ]);
     }
 
-    public function update(ClientCategory $client): void
+    public function update(ClientCategory $clientCategory): void
     {
-        // TODO: Implement update() method.
+        DB::table('client_category')->where('id', $clientCategory->id()->value())->take(1)
+            ->update([
+                'name' => $clientCategory->name()->value(),
+                'description' => $clientCategory->description()->value(),
+                'state' => $clientCategory->state()->value(),
+                'created_at' => $clientCategory->createdAt()->value(),
+                'updated_at' => $clientCategory->updatedAt()->value(),
+            ]);
     }
 
     public function matching(\Medine\ERP\Shared\Domain\Criteria $criteria): array

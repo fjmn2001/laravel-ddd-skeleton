@@ -119,4 +119,28 @@ final class ClientType
         return $this->updatedAt;
     }
 
+    public function changeName(ClientTypeName $newName)
+    {
+        if(false == ($this->name()->equals($newName))){
+            $this->name = $newName;
+            $this->updatedAt = new ClientTypeUpdatedAt();
+        }
+    }
+
+    public function changeDescription(ClientTypeDescription $newDescription)
+    {
+        if(false == ($this->description()->equals($newDescription))){
+            $this->description = $newDescription;
+            $this->updatedAt = new ClientTypeUpdatedAt();
+        }
+    }
+
+    public function changeState(ClientTypeState $newState)
+    {
+        if(false == ($this->state()->equals($newState))){
+            $this->state = $newState;
+            $this->updatedAt = new ClientTypeUpdatedAt();
+        }
+    }
+
 }

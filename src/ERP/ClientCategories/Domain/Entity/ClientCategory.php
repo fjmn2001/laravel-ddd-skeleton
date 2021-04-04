@@ -118,4 +118,28 @@ final class ClientCategory
         return $this->updatedAt;
     }
 
+    public function changeName(ClientCategoryName $newName): void
+    {
+        if(false == ($this->name()->equals($newName))){
+            $this->name = $newName;
+            $this->updatedAt = new ClientCategoryUpdatedAt();
+        }
+    }
+
+    public function changeDescription(ClientCategoryDescription $newDescription): void
+    {
+        if(false == ($this->description()->equals($newDescription))){
+            $this->description = $newDescription;
+            $this->updatedAt = new ClientCategoryUpdatedAt();
+        }
+    }
+
+    public function changeState(ClientCategoryState $newState): void
+    {
+        if(false == ($this->state()->equals($newState))){
+            $this->state = $newState;
+            $this->updatedAt = new ClientCategoryUpdatedAt();
+        }
+    }
+
 }
