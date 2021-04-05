@@ -18,7 +18,8 @@ final class LeftMenuGetController
             ['name' => 'companies', 'title' => 'Companies', 'class' => 'fa fa-building-o fa-fw']
         ],
         'sales' => [
-            ['name' => 'clients', 'title' => 'Clients', 'class' => 'fa fa-users']
+            ['name' => 'clients', 'title' => 'Clients', 'class' => 'fa fa-users'],
+            ['name' => 'sales_settings', 'title' => 'Setting', 'class' => 'fa-fw icon-settings']
         ],
 
     ];
