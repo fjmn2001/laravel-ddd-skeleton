@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Medine\Apps\ERP\Backend\Controller\Locations;
+namespace Medine\ERP\Locations\Infrastructure\Controller;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Medine\ERP\Locations\Application\Create\LocationCreator;
 use Medine\ERP\Locations\Application\Create\LocationCreatorRequest;
 
-final class LocationsPostController
+final class LocationPostController
 {
     private $creator;
 

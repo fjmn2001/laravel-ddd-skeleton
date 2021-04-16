@@ -6,15 +6,6 @@ namespace Tests\Unit\ERP\Locations\Domain;
 
 use Faker\Factory;
 use Medine\ERP\Locations\Domain\Entity\Location;
-use Medine\ERP\Locations\Domain\ValueObject\LocationAddress;
-use Medine\ERP\Locations\Domain\ValueObject\LocationBarcode;
-use Medine\ERP\Locations\Domain\ValueObject\LocationCode;
-use Medine\ERP\Locations\Domain\ValueObject\LocationCompanyId;
-use Medine\ERP\Locations\Domain\ValueObject\LocationId;
-use Medine\ERP\Locations\Domain\ValueObject\LocationItemState;
-use Medine\ERP\Locations\Domain\ValueObject\LocationMainContact;
-use Medine\ERP\Locations\Domain\ValueObject\LocationName;
-use Medine\ERP\Locations\Domain\ValueObject\LocationState;
 
 final class LocationMother
 {
@@ -49,15 +40,15 @@ final class LocationMother
     ): Location
     {
         return Location::create(
-            new LocationId($id),
-            new LocationCode($code),
-            new LocationName($name),
-            new LocationMainContact($mainContact),
-            new LocationBarcode($barcode),
-            new LocationAddress($address),
-            new LocationItemState($itemState),
-            new LocationState($state),
-            new LocationCompanyId($companyId),
+            $id,
+            $code,
+            $name,
+            $mainContact,
+            $barcode,
+            $address,
+            $itemState,
+            $state,
+            $companyId,
             $createdBy
         );
     }

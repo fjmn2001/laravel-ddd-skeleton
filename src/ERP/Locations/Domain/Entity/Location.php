@@ -32,7 +32,7 @@ final class Location
     private $createdAt;
     private $updatedAt;
 
-    public function __construct(
+    private function __construct(
         LocationId $id,
         LocationCode $code,
         LocationName $name,
@@ -64,32 +64,65 @@ final class Location
     }
 
     public static function create(
-        LocationId $id,
-        LocationCode $code,
-        LocationName $name,
-        LocationMainContact $mainContact,
-        LocationBarcode $barcode,
-        LocationAddress $address,
-        LocationItemState $itemState,
-        LocationState $state,
-        LocationCompanyId $companyId,
+        string $id,
+        string $code,
+        string $name,
+        string $mainContact,
+        string $barcode,
+        string $address,
+        string $itemState,
+        string $state,
+        string $companyId,
         int $createdBy
     ): self
     {
         return new self(
-            $id,
-            $code,
-            $name,
-            $mainContact,
-            $barcode,
-            $address,
-            $itemState,
-            $state,
-            $companyId,
+            new LocationId($id),
+            new LocationCode($code),
+            new LocationName($name),
+            new LocationMainContact($mainContact),
+            new LocationBarcode($barcode),
+            new LocationAddress($address),
+            new LocationItemState($itemState),
+            new LocationState($state),
+            new LocationCompanyId($companyId),
             $createdBy,
             $createdBy,
             new LocationCreatedAt(),
             new LocationUpdatedAt()
+        );
+    }
+
+    public static function fromValue(
+        $id,
+        $code,
+        $name,
+        $mainContact,
+        $barcode,
+        $address,
+        $itemState,
+        $state,
+        $companyId,
+        $createdBy,
+        $updatedBy,
+        $createdAt,
+        $updatedAt
+    ): self
+    {
+        return new self(
+            new LocationId($id),
+            new LocationCode($code),
+            new LocationName($name),
+            new LocationMainContact($mainContact),
+            new LocationBarcode($barcode),
+            new LocationAddress($address),
+            new LocationItemState($itemState),
+            new LocationState($state),
+            new LocationCompanyId($companyId),
+            $createdBy,
+            $updatedBy,
+            new LocationCreatedAt($createdAt),
+            new LocationUpdatedAt($updatedAt)
         );
     }
 
