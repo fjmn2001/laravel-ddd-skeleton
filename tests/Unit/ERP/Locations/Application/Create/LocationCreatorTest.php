@@ -14,14 +14,14 @@ final class LocationCreatorTest extends TestCase
     /**
      * @test
      */
-    public function it_should_create_a_valid_location_and_return_null()
+    public function it_should_create_a_valid_location_and_return_null(): void
     {
         $repository = $this->createMock(LocationRepository::class);
         $this->shouldCreate($repository);
         $creator = new LocationCreator($repository);
         $response = ($creator)(LocationCreatorRequestMother::random());
 
-        $this->assertNull($response);
+        self::assertNull($response);
     }
 
     private function shouldCreate(MockObject $repository): void
