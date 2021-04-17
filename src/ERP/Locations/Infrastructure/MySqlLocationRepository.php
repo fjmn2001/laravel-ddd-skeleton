@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Medine\ERP\Locations\Domain\Entity\Location;
 use Medine\ERP\Locations\Domain\LocationRepository;
 use Medine\ERP\Locations\Domain\ValueObject\LocationId;
+use Medine\ERP\Shared\Domain\Criteria;
 use Medine\ERP\Shared\Infrastructure\MySqlRepository;
 
 final class MySqlLocationRepository extends MySqlRepository implements LocationRepository
@@ -60,5 +61,14 @@ final class MySqlLocationRepository extends MySqlRepository implements LocationR
                 $location->updated_at,
             );
         };
+    }
+
+    public function matching(Criteria $criteria): array
+    {
+        $query = DB::table('locations');
+        $query = (new MySqlLocationFilters($query))($criteria);
+        $query = $this->completeBuilder($criteria, $query);
+
+        return $query->get()->map($this->buildLocation())->toArray();
     }
 }
