@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Locations\Domain\Entity;
 
+use Medine\ERP\Locations\Domain\ValueObject\LocationAddress;
 use Medine\ERP\Locations\Domain\ValueObject\LocationBarcode;
 use Medine\ERP\Locations\Domain\ValueObject\LocationCode;
 use Medine\ERP\Locations\Domain\ValueObject\LocationCompanyId;
 use Medine\ERP\Locations\Domain\ValueObject\LocationCreatedAt;
-use Medine\ERP\Locations\Domain\ValueObject\LocationAddress;
 use Medine\ERP\Locations\Domain\ValueObject\LocationId;
 use Medine\ERP\Locations\Domain\ValueObject\LocationItemState;
 use Medine\ERP\Locations\Domain\ValueObject\LocationMainContact;
@@ -189,5 +189,53 @@ final class Location
     public function updatedAt(): LocationUpdatedAt
     {
         return $this->updatedAt;
+    }
+
+    public function changeCode(string $code): void
+    {
+        $this->code = new LocationCode($code);
+        $this->updatedAt = new LocationUpdatedAt();
+    }
+
+    public function changeName(string $name): void
+    {
+        $this->name = new LocationName($name);
+        $this->updatedAt = new LocationUpdatedAt();
+    }
+
+    public function changeMainContact(string $mainContact): void
+    {
+        $this->mainContact = new LocationMainContact($mainContact);
+        $this->updatedAt = new LocationUpdatedAt();
+    }
+
+    public function changeBarcode(?string $barcode): void
+    {
+        $this->barcode = new LocationBarcode($barcode);
+        $this->updatedAt = new LocationUpdatedAt();
+    }
+
+    public function changeAddress(string $address): void
+    {
+        $this->address = new LocationAddress($address);
+        $this->updatedAt = new LocationUpdatedAt();
+    }
+
+    public function changeItemState(string $itemState): void
+    {
+        $this->itemState = new LocationItemState($itemState);
+        $this->updatedAt = new LocationUpdatedAt();
+    }
+
+    public function changeState(string $state): void
+    {
+        $this->state = new LocationState($state);
+        $this->updatedAt = new LocationUpdatedAt();
+    }
+
+    public function changeUpdatedBy(int $updatedBy): void
+    {
+        $this->updatedBy = $updatedBy;
+        $this->updatedAt = new LocationUpdatedAt();
     }
 }

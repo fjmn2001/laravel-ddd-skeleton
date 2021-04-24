@@ -33,6 +33,21 @@ final class MySqlLocationRepository extends MySqlRepository implements LocationR
         ]);
     }
 
+    public function update(Location $location): void
+    {
+        DB::table('locations')->where('id', $location->id()->value())->update([
+            'code' => $location->code()->value(),
+            'name' => $location->name()->value(),
+            'main_contact' => $location->mainContact()->value(),
+            'barcode' => $location->barcode()->value(),
+            'address' => $location->address()->value(),
+            'item_State' => $location->itemState()->value(),
+            'state' => $location->state()->value(),
+            'updated_by' => $location->updatedBy(),
+            'updated_at' => $location->updatedAt()->value(),
+        ]);
+    }
+
     public function find(LocationId $id): ?Location
     {
         return DB::table('locations')->where('locations.id', $id->value())

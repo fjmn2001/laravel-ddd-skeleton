@@ -5,24 +5,25 @@ declare(strict_types=1);
 namespace Medine\ERP\Locations\Application\Find;
 
 use Medine\ERP\Locations\Domain\LocationRepository;
+use Medine\ERP\Locations\Domain\Service\LocationFinder as DomainLocationFinder;
+use Medine\ERP\Locations\Domain\Service\LocationNotExists;
 use Medine\ERP\Locations\Domain\ValueObject\LocationId;
 
 final class LocationFinder
 {
-    private $repository;
+    private $finder;
 
     public function __construct(LocationRepository $repository)
     {
-        $this->repository = $repository;
+        $this->finder = new DomainLocationFinder($repository);
     }
 
-    public function __invoke(LocationFinderRequest $request)
+    /**
+     * @throws LocationNotExists
+     */
+    public function __invoke(LocationFinderRequest $request): LocationFinderResponse
     {
-        $location = $this->repository->find(new LocationId($request->id()));
-
-        if (null === $location) {
-            throw new LocationNotExists($request->id());
-        }
+        $location = ($this->finder)(new LocationId($request->id()));
 
         return new LocationFinderResponse(
             $location->id()->value(),

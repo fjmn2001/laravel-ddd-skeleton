@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Medine\ERP\Locations\Application\Find;
+namespace Medine\ERP\Locations\Domain\Service;
 
 final class LocationNotExists extends \Exception
 {

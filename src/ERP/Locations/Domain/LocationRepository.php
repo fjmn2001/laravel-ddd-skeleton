@@ -17,4 +17,6 @@ interface LocationRepository
     public function matching(Criteria $criteria): array;
 
     public function count(Criteria $criteria): int;
+
+    public function update(Location $location): void;
 }

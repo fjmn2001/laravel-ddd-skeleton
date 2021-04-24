@@ -17,10 +17,10 @@ final class LocationCountSearcherTest extends TestCase
     {
         $repository = $this->createMock(LocationRepository::class);
         $searcher = new LocationCountSearcher($repository);
+
+        $repository->method('count')->willReturn(1);
         $response = ($searcher)(LocationCountSearcherRequestMother::random());
 
-        $repository->method('count')->willReturn(0);
-
-        self::assertEquals(0, $response->count());
+        self::assertEquals(1, $response->count());
     }
 }
