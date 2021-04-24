@@ -71,4 +71,12 @@ final class MySqlLocationRepository extends MySqlRepository implements LocationR
 
         return $query->get()->map($this->buildLocation())->toArray();
     }
+
+    public function count(Criteria $criteria): int
+    {
+        $query = DB::table('locations');
+        $query = (new MySqlLocationFilters($query))($criteria);
+
+        return $query->count();
+    }
 }

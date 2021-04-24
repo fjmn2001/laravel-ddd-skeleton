@@ -15,4 +15,6 @@ interface LocationRepository
     public function find(LocationId $id): ?Location;
 
     public function matching(Criteria $criteria): array;
+
+    public function count(Criteria $criteria): int;
 }
