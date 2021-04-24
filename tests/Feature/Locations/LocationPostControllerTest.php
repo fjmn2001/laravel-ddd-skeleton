@@ -11,18 +11,8 @@ use Laravel\Passport\Passport;
 use Medine\ERP\Shared\Domain\ValueObjects\Uuid;
 use Tests\TestCase;
 
-final class LocationPostControllerTest extends TestCase
+final class LocationPostControllerTest extends LocationFeatureBase
 {
-    use DatabaseTransactions;
-
-    protected $faker;
-
-    protected function setUp(): void
-    {
-        $this->faker = Factory::create();
-        parent::setUp();
-    }
-
     /**
      * @test
      */
@@ -32,18 +22,16 @@ final class LocationPostControllerTest extends TestCase
             User::factory()->create()
         );
 
-        $response = $this->postJson('/api/location', [
-            'id' => Uuid::random()->value(),
-            'code' => $this->faker->randomElement(['code1', 'code2']),
-            'name' => $this->faker->randomElement(['location1', 'location2']),
-            'mainContact' => $this->faker->name,
-            'barcode' => $this->faker->randomElement(['barcode1', 'barcode2']),
-            'address' => $this->faker->randomElement(['address1', 'address2']),
-            'itemState' => $this->faker->randomElement(['available', 'not_available']),
-            'state' => $this->faker->randomElement(['active', 'inactive']),
-            'companyId' => Uuid::random()->value(),
-
-        ]);
+        $id = Uuid::random()->value();
+        $code = $this->faker->randomElement(['code1', 'code2']);
+        $name = $this->faker->randomElement(['location1', 'location2']);
+        $mainContact = $this->faker->name;
+        $barcode = $this->faker->randomElement(['barcode1', 'barcode2']);
+        $address = $this->faker->randomElement(['address1', 'address2']);
+        $itemState = $this->faker->randomElement(['available', 'not_available']);
+        $state = $this->faker->randomElement(['active', 'inactive']);
+        $companyId = Uuid::random()->value();
+        $response = $this->buildLocation($id, $code, $name, $mainContact, $barcode, $address, $itemState, $state, $companyId);
 
         $response->assertJson([]);
         $response->assertStatus(201);
