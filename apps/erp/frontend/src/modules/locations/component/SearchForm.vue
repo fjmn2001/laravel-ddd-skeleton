@@ -37,23 +37,31 @@
 
 <script lang="ts">
 import {defineComponent, Ref, ref} from "vue";
+import {useItems} from '../use/useItems'
 
 export default defineComponent({
     setup() {
         const code: Ref<string> = ref('')
         const name: Ref<string> = ref('')
+        const {loading, getItems} = useItems()
 
         function search() {
-            console.log('search');
+            getItems([
+                {field: 'code', value: code.value},
+                {field: 'name', value: name.value},
+            ]);
         }
 
-        function clean() {
-            console.log('clean')
+        async function clean() {
+            code.value = ''
+            name.value = ''
+            search()
         }
 
         return {
             code,
             name,
+            loading,
             search,
             clean
         }
