@@ -9,6 +9,7 @@ import clients from "../modules/clients/router";
 import inventorySettings from "../modules/inventory_settings/router";
 import items from "../modules/items/router";
 import SalesSetting from "../modules/sales_settings/router";
+import locations from "../modules/locations/router";
 
 const routes: Array<RouteRecordRaw> = [
     ...auth,
@@ -24,7 +25,8 @@ const routes: Array<RouteRecordRaw> = [
             ...SalesSetting,
             ...companies,
             ...inventorySettings,
-            ...items
+            ...items,
+            ...locations
         ]
     }
     // {
