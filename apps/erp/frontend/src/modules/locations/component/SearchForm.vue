@@ -26,6 +26,7 @@
                                 @click.prevent="search">Buscar
                         </button>
                         <button type="button" class="btn btn-outline-secondary btn-sm mr-0 pl-3 pr-3 limpia"
+                                :disabled="loading"
                                 @click.prevent="clean">Limpiar
                         </button>
                     </div>
