@@ -4,6 +4,7 @@ import {api} from "@/modules/locations/service/api";
 import {Location} from "@/modules/locations/type/Location";
 
 const locations: Ref<Location[]> = ref([]);
+const count: Ref<number> = ref(0);
 const orderBy: Ref<string> = ref('created_at');
 const order: Ref<string> = ref('desc');
 const limit: Ref<number> = ref(10);
@@ -15,13 +16,8 @@ export function useLocations() {
 
     async function getLocations(filters: Array<Filter>) {
         loading.value = true
-        locations.value = await api.getLocations(
-            filters,
-            orderBy.value,
-            order.value,
-            limit.value,
-            offset.value
-        )
+        locations.value = await api.getLocations(filters, orderBy.value, order.value, limit.value, offset.value)
+        count.value = await api.getLocationsCount(filters)
         loading.value = false
         loaded.value = true
     }
@@ -40,6 +36,7 @@ export function useLocations() {
 
     return {
         locations,
+        count,
         getLocations,
         hasData,
         showRows,

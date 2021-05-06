@@ -10,7 +10,7 @@
                     class="fa fa-chevron-up"></i></a>
             </div>
 
-            <div id="des02" class="pb-3 pl-4 pr-4 pt-3" v-if="showRows">
+            <div id="des02" class="pb-3 pl-4 pr-4 pt-3" v-if="showRows()">
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -59,7 +59,7 @@
                     </table>
                 </div>
             </div>
-            <table-pager :totalRows="itemsCount"
+            <table-pager :totalRows="count"
                          @setFromPager="mySetFromPager"
                          v-show="showRows()"></table-pager>
             <no-results v-if="showNoResults()"></no-results>
@@ -80,8 +80,7 @@ import {useLocations} from "@/modules/locations/use/useLocations";
 export default defineComponent({
     components: {TablePager, NoResults, Loading, OptionsModal},
     setup() {
-        const {locations, loading, showRows, showNoResults} = useLocations()
-        const itemsCount = 0
+        const {locations, count, loading, showRows, showNoResults} = useLocations()
 
         function mySetFromPager() {
             console.log('set from pager')
@@ -97,7 +96,7 @@ export default defineComponent({
 
         return {
             locations,
-            itemsCount,
+            count,
             loading,
             mySetFromPager,
             changeState,
