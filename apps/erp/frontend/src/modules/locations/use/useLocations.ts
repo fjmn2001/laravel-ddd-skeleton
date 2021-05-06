@@ -17,9 +17,9 @@ export function useLocations() {
     async function getLocations(filters: Array<Filter>) {
         loading.value = true
         locations.value = await api.getLocations(filters, orderBy.value, order.value, limit.value, offset.value)
-        count.value = await api.getLocationsCount(filters)
         loading.value = false
         loaded.value = true
+        count.value = await api.getLocationsCount(filters)
     }
 
     function hasData() {
