@@ -11,6 +11,8 @@ const offset: Ref<number> = ref(0);
 const loading: Ref<boolean> = ref(false)
 
 export function useLocations() {
+    const loaded = ref(false)
+
     async function getLocations(filters: Array<Filter>) {
         loading.value = true
         locations.value = await api.getLocations(
@@ -21,10 +23,27 @@ export function useLocations() {
             offset.value
         )
         loading.value = false
+        loaded.value = true
+    }
+
+    function hasData() {
+        return locations.value.length > 0 && loaded;
+    }
+
+    function showRows() {
+        return hasData() && !loading.value
+    }
+
+    function showNoResults() {
+        return !hasData() && !loading.value
     }
 
     return {
+        locations,
         getLocations,
+        hasData,
+        showRows,
+        showNoResults,
         loading
     };
 }
