@@ -13,17 +13,29 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import {defineComponent, onMounted} from "vue";
 import Breadcrumbs from '@/components/Breadcrums.vue';
 import SearchForm from "@/modules/locations/component/SearchForm.vue";
 import MainTable from "@/modules/locations/component/MainTable.vue";
 import {useCore} from "@/modules/shared/use/useCore";
+import {useLocations} from "@/modules/locations/use/useLocations";
 
 export default defineComponent({
     components: {Breadcrumbs, SearchForm, MainTable},
     setup() {
         const {ERP_URL} = useCore();
         const breadcrumbUrl: string = ERP_URL + '/api/locations/breadcrumbs'
+        const {getLocations} = useLocations()
+
+        async function initComponent() {
+            //await getCatalog();
+            //setFromPager({pLimit: 10, pOffset: 0})
+            await getLocations([]);
+        }
+
+        onMounted(async () => {
+            await initComponent();
+        })
 
         return {
             breadcrumbUrl

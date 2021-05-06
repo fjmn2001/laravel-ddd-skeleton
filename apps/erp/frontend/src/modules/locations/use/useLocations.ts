@@ -2,6 +2,7 @@ import {Filter} from "@/types/Filter";
 import {Ref, ref} from "vue";
 import {api} from "@/modules/locations/service/api";
 import {Location} from "@/modules/locations/type/Location";
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 const locations: Ref<Location[]> = ref([]);
 const count: Ref<number> = ref(0);
@@ -13,9 +14,11 @@ const loading: Ref<boolean> = ref(false)
 
 export function useLocations() {
     const loaded = ref(false)
+    const {user} = useAuth();
 
     async function getLocations(filters: Array<Filter>) {
         loading.value = true
+        filters.push({field: 'companyId', value: user?.value?.company.id})
         locations.value = await api.getLocations(filters, orderBy.value, order.value, limit.value, offset.value)
         loading.value = false
         loaded.value = true
