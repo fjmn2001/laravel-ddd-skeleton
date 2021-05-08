@@ -59,11 +59,11 @@
                     </table>
                 </div>
             </div>
-            <table-pager :totalRows="count"
-                         @setFromPager="mySetFromPager"
-                         v-show="showRows()"></table-pager>
-            <no-results v-if="showNoResults()"></no-results>
             <loading v-if="loading"></loading>
+            <table-pager :totalRows="count"
+                         @setFromPager="setFromPager"
+                         v-show="!showNoResults()"></table-pager>
+            <no-results v-if="showNoResults()"></no-results>
             <options-modal :name="'optionsModal'"></options-modal>
         </div>
     </div>
@@ -80,11 +80,7 @@ import {useLocations} from "@/modules/locations/use/useLocations";
 export default defineComponent({
     components: {TablePager, NoResults, Loading, OptionsModal},
     setup() {
-        const {locations, count, loading, showRows, showNoResults} = useLocations()
-
-        function mySetFromPager() {
-            console.log('set from pager')
-        }
+        const {locations, count, loading, showRows, showNoResults, setFromPager} = useLocations()
 
         function changeState() {
             console.log('change state')
@@ -98,7 +94,7 @@ export default defineComponent({
             locations,
             count,
             loading,
-            mySetFromPager,
+            setFromPager,
             changeState,
             showOptionsModal,
             showRows,
