@@ -22,11 +22,10 @@
                 <div class="row pt-3">
                     <div
                         class="col-lg-3 col-md-4 col-sm-12 d-flex justify-content-center offset-lg-8 offset-md-7 offset-sm-0">
-                        <button type="button" class="btn btn-blue-deg btn-sm mr-1 mr-lg-5" :disabled="loading"
+                        <button type="button" class="btn btn-blue-deg btn-sm mr-1 mr-lg-5"
                                 @click.prevent="search">Buscar
                         </button>
                         <button type="button" class="btn btn-outline-secondary btn-sm mr-0 pl-3 pr-3 limpia"
-                                :disabled="loading"
                                 @click.prevent="clean">Limpiar
                         </button>
                     </div>
@@ -36,21 +35,31 @@
     </div>
 </template>
 
-<script lang="ts">
-import {defineComponent, Ref, ref} from "vue";
-import {useLocations} from '../use/useLocations'
+<script>
+import {defineComponent, ref, watch} from "vue";
+import {useAuth} from "@/modules/auth/use/useAuth";
 
 export default defineComponent({
-    setup() {
-        const code: Ref<string> = ref('')
-        const name: Ref<string> = ref('')
-        const {loading, getLocations} = useLocations()
+    props: ['tableName'],
+    setup(props) {
+        const {user} = useAuth();
+        const code = ref('')
+        const name = ref('')
 
         function search() {
-            getLocations([
-                {field: 'code', value: code.value},
-                {field: 'name', value: name.value},
-            ]);
+            const list = window.$('body').find("#list" + props.tableName);
+
+            list.setGridParam({postData: null});
+            list.setGridParam({
+                postData: {
+                    filters: [
+                        {field: 'companyId', value: user?.value?.company.id},
+                        {field: 'code', value: code.value},
+                        {field: 'name', value: name.value},
+                    ]
+                }
+            });
+            list.trigger('reloadGrid');
         }
 
         async function clean() {
@@ -59,10 +68,16 @@ export default defineComponent({
             search()
         }
 
+        //when changeCompany
+        watch(() => user.value?.company, async (company) => {
+            if (company) {
+                await clean()
+            }
+        })
+
         return {
             code,
             name,
-            loading,
             search,
             clean
         }
