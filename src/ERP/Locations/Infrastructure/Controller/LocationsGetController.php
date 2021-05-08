@@ -8,8 +8,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Medine\ERP\Locations\Application\Search\LocationSearcher;
 use Medine\ERP\Locations\Application\Search\LocationSearcherRequest;
-use Medine\ERP\Locations\Application\Search\LocationSearcherResponse;
-use function Lambdish\Phunctional\map;
 
 final class LocationsGetController
 {
@@ -24,22 +22,17 @@ final class LocationsGetController
     {
         $response = ($this->searcher)(new LocationSearcherRequest(
             (array)$request->filters,
-            $request->orderBy,
-            $request->order,
-            (int)$request->offset,
-            (int)$request->limit
+            (int)$request->rows,
+            (int)$request->page,
+            (string)$request->sidx,
+            (string)$request->sord
         ));
 
-        return new JsonResponse(map(function (LocationSearcherResponse $searcherResponse) {
-            return [
-                'id' => $searcherResponse->id(),
-                'code' => $searcherResponse->code(),
-                'name' => $searcherResponse->name(),
-                'mainContact' => $searcherResponse->mainContact(),
-                'barcode' => $searcherResponse->barcode(),
-                'address' => $searcherResponse->address(),
-                'state' => $searcherResponse->state()
-            ];
-        }, $response->locations()));
+        return new JsonResponse([
+            'rows' => $response->rows(),
+            'page' => $response->page(),
+            'total_pages' => $response->totalPages(),
+            'records' => $response->records()
+        ]);
     }
 }

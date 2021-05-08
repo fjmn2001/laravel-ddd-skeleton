@@ -7,24 +7,24 @@ namespace Medine\ERP\Locations\Application\Search;
 final class LocationSearcherRequest
 {
     private $filters;
-    private $orderBy;
-    private $order;
-    private $offset;
-    private $limit;
+    private $rows;
+    private $page;
+    private $sidx;
+    private $sord;
 
     public function __construct(
         array $filters,
-        ?string $orderBy,
-        ?string $order,
-        ?int $offset,
-        ?int $limit
+        ?int $rows,
+        ?int $page,
+        ?string $sidx,
+        ?string $sord
     )
     {
         $this->filters = $filters;
-        $this->orderBy = $orderBy;
-        $this->order = $order;
-        $this->offset = $offset;
-        $this->limit = $limit;
+        $this->rows = $rows;
+        $this->page = $page;
+        $this->sidx = $sidx;
+        $this->sord = $sord;
     }
 
     public function filters(): array
@@ -32,23 +32,23 @@ final class LocationSearcherRequest
         return $this->filters;
     }
 
-    public function orderBy(): ?string
+    public function rows(): ?int
     {
-        return $this->orderBy;
+        return $this->rows;
     }
 
-    public function order(): ?string
+    public function page(): ?int
     {
-        return $this->order;
+        return $this->page;
     }
 
-    public function offset(): ?int
+    public function sidx(): ?string
     {
-        return $this->offset;
+        return $this->sidx;
     }
 
-    public function limit(): ?int
+    public function sord(): ?string
     {
-        return $this->limit;
+        return $this->sord;
     }
 }
