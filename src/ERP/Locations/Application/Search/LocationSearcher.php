@@ -28,11 +28,11 @@ final class LocationSearcher
     public function __invoke(LocationSearcherRequest $request): LocationsSearcherResponse
     {
         $count = ($this->counter)($request->filters());
-        [$totalPages, $page, $start] = (new JqgridUtils)->pagination($count, $request->rows(), $request->page());
+        [$totalPages, $page, $offset] = (new JqgridUtils)->pagination($count, $request->rows(), $request->page());
         $criteria = new Criteria(
             Filters::fromValues($request->filters()),
             Order::fromValues($request->sidx(), $request->sord()),
-            $start,
+            $offset,
             $request->rows()
         );
 

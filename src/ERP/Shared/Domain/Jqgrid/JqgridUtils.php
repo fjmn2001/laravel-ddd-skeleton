@@ -6,8 +6,17 @@ namespace Medine\ERP\Shared\Domain\Jqgrid;
 
 final class JqgridUtils
 {
-    public function pagination(int $count = 0, ?int $limit = 10, ?int $page = 1): array
+    public function pagination(int $count, ?int $limit, ?int $page): array
     {
+        if (null === $limit) {
+            $limit = 10;
+        }
+
+        if (null === $page) {
+            $page = 1;
+        }
+
+
         $total_pages = (int)($count > 0 ? ceil($count / $limit) : 0);
 
         if ($page > $total_pages) {
