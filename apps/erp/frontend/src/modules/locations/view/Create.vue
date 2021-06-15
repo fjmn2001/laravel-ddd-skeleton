@@ -6,24 +6,51 @@
 
                 <generals-details></generals-details>
             </div>
+            <pre>
+                {{ catalogs }}
+            </pre>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import {defineComponent, onMounted, ref} from "vue";
 import Breadcrumbs from '@/components/Breadcrums.vue';
 import GeneralsDetails from "@/modules/locations/component/GeneralsDetails.vue";
 import {useCore} from "@/modules/shared/use/useCore";
+import axios from "axios";
+import {Catalog} from "@/modules/locations/type/Catalog";
 
 export default defineComponent({
     components: {Breadcrumbs, GeneralsDetails},
     setup() {
         const {ERP_URL} = useCore();
         const breadcrumbUrl: string = ERP_URL + '/api/locations/breadcrumbs'
+        const loading = ref(true)
+        const catalogs = ref({})
+        const details = ref({})
+
+        function defaultValues() {
+            return {}
+        }
+
+        async function retrieveCatalogs(): Promise<Catalog> {
+            const response = await axios.get(process.env.VUE_APP_ERP_URL + '/api/locations/catalogs');
+            return new Promise(resolve => {
+                resolve(response.data);
+            });
+        }
+
+        onMounted(async () => {
+            details.value = await defaultValues()
+            catalogs.value = await retrieveCatalogs()
+        })
 
         return {
-            breadcrumbUrl
+            breadcrumbUrl,
+            loading,
+            catalogs,
+            details
         }
     }
 })

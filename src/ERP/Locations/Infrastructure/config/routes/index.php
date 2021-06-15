@@ -14,7 +14,7 @@ use Medine\ERP\Locations\Infrastructure\Controller\LocationsGetController;
 Route::middleware('auth:api')->group(function () {
     //get
     Route::get('/locations/count', LocationsCountGetController::class);
-    Route::get('/locations/catalogs/{companyId}', LocationsCatalogsGetController::class);
+    Route::get('/locations/catalogs', LocationsCatalogsGetController::class);
     Route::get('/locations/options/{id}', LocationOptionsGetController::class);
     Route::get('/locations/{id}', LocationGetController::class);
     Route::get('/locations', LocationsGetController::class);

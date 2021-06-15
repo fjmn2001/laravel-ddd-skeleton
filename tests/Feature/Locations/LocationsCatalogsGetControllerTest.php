@@ -22,7 +22,7 @@ final class LocationsCatalogsGetControllerTest extends LocationFeatureBase
         $companyId = Uuid::uuid4();
         $this->buildCompany($companyId, $this->faker);
 
-        $response = $this->getJson('/api/locations/catalogs/' . $companyId);
+        $response = $this->getJson('/api/locations/catalogs');
 
         $response->assertStatus(200);
     }
