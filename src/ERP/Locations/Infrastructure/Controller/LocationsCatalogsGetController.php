@@ -27,7 +27,7 @@ final class LocationsCatalogsGetController
         /** @var LocationCatalogSearcherResponse $response */
         $response = ($this->searcher)(new CatalogSearcherRequest(
             [
-                ['field' => 'module', 'value' => 'items']
+                ['field' => 'module', 'value' => 'locations']
             ],
             'order',
             'asc'

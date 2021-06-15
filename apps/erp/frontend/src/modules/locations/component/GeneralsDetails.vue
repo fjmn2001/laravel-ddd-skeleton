@@ -36,12 +36,15 @@
                         <label>Estado del ítem *</label>
                         <select2 name="itemState" required="" v-model="itemState" :config="{}" :attr="{}">
                             <option value="">Select</option>
+                            <option :value="o.id" v-for="o in catalogs.itemStates" v-html="o.title"
+                                    :key="o.id"></option>
                         </select2>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-12">
                         <label>Estado *</label>
                         <select2 name="state" required="" v-model="state" :config="{}" :attr="{}">
                             <option value="">Select</option>
+                            <option :value="o.id" v-for="o in catalogs.states" v-html="o.title" :key="o.id"></option>
                         </select2>
                     </div>
                 </div>
@@ -52,10 +55,11 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from "vue";
+import {defineComponent, onMounted, ref} from "vue";
 
 export default defineComponent({
-    setup() {
+    props: ['catalogs'],
+    setup(props) {
         const code = ref('')
         const name = ref('')
         const mainContact = ref('')
@@ -63,6 +67,8 @@ export default defineComponent({
         const address = ref('')
         const itemState = ref('')
         const state = ref('')
+
+        onMounted(() => console.log(props.catalogs))
 
         return {
             code,

@@ -4,11 +4,10 @@
             <div class="pl-1 pr-1">
                 <breadcrumbs :breadcrumbUrl="breadcrumbUrl"></breadcrumbs>
 
-                <generals-details></generals-details>
+                <generals-details :catalogs="catalogs" v-if="!loading"></generals-details>
+
+                <loading v-if="loading"></loading>
             </div>
-            <pre>
-                {{ catalogs }}
-            </pre>
         </div>
     </div>
 </template>
@@ -20,9 +19,10 @@ import GeneralsDetails from "@/modules/locations/component/GeneralsDetails.vue";
 import {useCore} from "@/modules/shared/use/useCore";
 import axios from "axios";
 import {Catalog} from "@/modules/locations/type/Catalog";
+import Loading from "@/components/table/Loading.vue";
 
 export default defineComponent({
-    components: {Breadcrumbs, GeneralsDetails},
+    components: {Loading, Breadcrumbs, GeneralsDetails},
     setup() {
         const {ERP_URL} = useCore();
         const breadcrumbUrl: string = ERP_URL + '/api/locations/breadcrumbs'
@@ -44,6 +44,7 @@ export default defineComponent({
         onMounted(async () => {
             details.value = await defaultValues()
             catalogs.value = await retrieveCatalogs()
+            loading.value = false
         })
 
         return {
