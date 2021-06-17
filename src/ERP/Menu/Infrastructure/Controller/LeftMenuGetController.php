@@ -12,6 +12,7 @@ final class LeftMenuGetController
     private $leftOptions = [
         'inventory' => [
             ['name' => 'items', 'title' => 'Items catalogs', 'class' => 'fa-fw icon-puzzle'],
+            ['name' => 'locations', 'title' => 'Locations', 'class' => 'fa-fw icon-puzzle'],
             ['name' => 'inventory_settings', 'title' => 'Setting', 'class' => 'fa-fw icon-settings']
         ],
         'companies' => [

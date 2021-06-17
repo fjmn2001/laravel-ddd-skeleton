@@ -6,17 +6,16 @@ namespace Medine\ERP\Items\Application\Find;
 
 use Medine\ERP\Items\Application\Response\ItemResponse;
 use Medine\ERP\Items\Domain\Contracts\ItemRepository;
+use Medine\ERP\Items\Domain\Service\ItemFinder as DomainItemFinder;
 use Medine\ERP\Items\Domain\ValueObjects\ItemId;
 
 final class ItemFinder
 {
-    private $repository;
     private $finder;
 
     public function __construct(ItemRepository $repository)
     {
-        $this->repository = $repository;
-        $this->finder = new \Medine\ERP\Items\Domain\Service\ItemFinder($repository);
+        $this->finder = new DomainItemFinder($repository);
     }
 
     public function __invoke(ItemFinderRequest $request): ItemResponse

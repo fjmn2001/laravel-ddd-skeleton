@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Medine\ERP\Locations\Domain\Entity;
 
+use Medine\ERP\Locations\Domain\ValueObject\LocationAddress;
 use Medine\ERP\Locations\Domain\ValueObject\LocationBarcode;
 use Medine\ERP\Locations\Domain\ValueObject\LocationCode;
 use Medine\ERP\Locations\Domain\ValueObject\LocationCompanyId;
 use Medine\ERP\Locations\Domain\ValueObject\LocationCreatedAt;
-use Medine\ERP\Locations\Domain\ValueObject\LocationAddress;
 use Medine\ERP\Locations\Domain\ValueObject\LocationId;
 use Medine\ERP\Locations\Domain\ValueObject\LocationItemState;
 use Medine\ERP\Locations\Domain\ValueObject\LocationMainContact;
@@ -32,7 +32,7 @@ final class Location
     private $createdAt;
     private $updatedAt;
 
-    public function __construct(
+    private function __construct(
         LocationId $id,
         LocationCode $code,
         LocationName $name,
@@ -64,32 +64,65 @@ final class Location
     }
 
     public static function create(
-        LocationId $id,
-        LocationCode $code,
-        LocationName $name,
-        LocationMainContact $mainContact,
-        LocationBarcode $barcode,
-        LocationAddress $address,
-        LocationItemState $itemState,
-        LocationState $state,
-        LocationCompanyId $companyId,
+        string $id,
+        string $code,
+        string $name,
+        string $mainContact,
+        string $barcode,
+        string $address,
+        string $itemState,
+        string $state,
+        string $companyId,
         int $createdBy
     ): self
     {
         return new self(
-            $id,
-            $code,
-            $name,
-            $mainContact,
-            $barcode,
-            $address,
-            $itemState,
-            $state,
-            $companyId,
+            new LocationId($id),
+            new LocationCode($code),
+            new LocationName($name),
+            new LocationMainContact($mainContact),
+            new LocationBarcode($barcode),
+            new LocationAddress($address),
+            new LocationItemState($itemState),
+            new LocationState($state),
+            new LocationCompanyId($companyId),
             $createdBy,
             $createdBy,
             new LocationCreatedAt(),
             new LocationUpdatedAt()
+        );
+    }
+
+    public static function fromValue(
+        $id,
+        $code,
+        $name,
+        $mainContact,
+        $barcode,
+        $address,
+        $itemState,
+        $state,
+        $companyId,
+        $createdBy,
+        $updatedBy,
+        $createdAt,
+        $updatedAt
+    ): self
+    {
+        return new self(
+            new LocationId($id),
+            new LocationCode($code),
+            new LocationName($name),
+            new LocationMainContact($mainContact),
+            new LocationBarcode($barcode),
+            new LocationAddress($address),
+            new LocationItemState($itemState),
+            new LocationState($state),
+            new LocationCompanyId($companyId),
+            $createdBy,
+            $updatedBy,
+            new LocationCreatedAt($createdAt),
+            new LocationUpdatedAt($updatedAt)
         );
     }
 
@@ -156,5 +189,53 @@ final class Location
     public function updatedAt(): LocationUpdatedAt
     {
         return $this->updatedAt;
+    }
+
+    public function changeCode(string $code): void
+    {
+        $this->code = new LocationCode($code);
+        $this->updatedAt = new LocationUpdatedAt();
+    }
+
+    public function changeName(string $name): void
+    {
+        $this->name = new LocationName($name);
+        $this->updatedAt = new LocationUpdatedAt();
+    }
+
+    public function changeMainContact(string $mainContact): void
+    {
+        $this->mainContact = new LocationMainContact($mainContact);
+        $this->updatedAt = new LocationUpdatedAt();
+    }
+
+    public function changeBarcode(?string $barcode): void
+    {
+        $this->barcode = new LocationBarcode($barcode);
+        $this->updatedAt = new LocationUpdatedAt();
+    }
+
+    public function changeAddress(string $address): void
+    {
+        $this->address = new LocationAddress($address);
+        $this->updatedAt = new LocationUpdatedAt();
+    }
+
+    public function changeItemState(string $itemState): void
+    {
+        $this->itemState = new LocationItemState($itemState);
+        $this->updatedAt = new LocationUpdatedAt();
+    }
+
+    public function changeState(string $state): void
+    {
+        $this->state = new LocationState($state);
+        $this->updatedAt = new LocationUpdatedAt();
+    }
+
+    public function changeUpdatedBy(int $updatedBy): void
+    {
+        $this->updatedBy = $updatedBy;
+        $this->updatedAt = new LocationUpdatedAt();
     }
 }

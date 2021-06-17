@@ -17,12 +17,13 @@ final class ItemFinder
         $this->repository = $repository;
     }
 
-    public function __invoke(ItemId $id): ?Item
+    public function __invoke(ItemId $id): Item
     {
         $item = $this->repository->find($id);
 
-        if (null == $item)
+        if (null === $item) {
             throw new ItemNotExistsException($id);
+        }
 
         return $item;
     }

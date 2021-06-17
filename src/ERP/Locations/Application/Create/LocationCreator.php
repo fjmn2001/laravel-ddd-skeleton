@@ -6,15 +6,6 @@ namespace Medine\ERP\Locations\Application\Create;
 
 use Medine\ERP\Locations\Domain\Entity\Location;
 use Medine\ERP\Locations\Domain\LocationRepository;
-use Medine\ERP\Locations\Domain\ValueObject\LocationBarcode;
-use Medine\ERP\Locations\Domain\ValueObject\LocationCode;
-use Medine\ERP\Locations\Domain\ValueObject\LocationCompanyId;
-use Medine\ERP\Locations\Domain\ValueObject\LocationAddress;
-use Medine\ERP\Locations\Domain\ValueObject\LocationId;
-use Medine\ERP\Locations\Domain\ValueObject\LocationItemState;
-use Medine\ERP\Locations\Domain\ValueObject\LocationMainContact;
-use Medine\ERP\Locations\Domain\ValueObject\LocationName;
-use Medine\ERP\Locations\Domain\ValueObject\LocationState;
 
 final class LocationCreator
 {
@@ -28,15 +19,15 @@ final class LocationCreator
     public function __invoke(LocationCreatorRequest $request)
     {
         $location = Location::create(
-            new LocationId($request->id()),
-            new LocationCode($request->code()),
-            new LocationName($request->name()),
-            new LocationMainContact($request->mainContact()),
-            new LocationBarcode($request->barcode()),
-            new LocationAddress($request->address()),
-            new LocationItemState($request->itemState()),
-            new LocationState($request->state()),
-            new LocationCompanyId($request->companyId()),
+            $request->id(),
+            $request->code(),
+            $request->name(),
+            $request->mainContact(),
+            $request->barcode(),
+            $request->address(),
+            $request->itemState(),
+            $request->state(),
+            $request->companyId(),
             $request->createdBy()
         );
 
