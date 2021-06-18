@@ -49,7 +49,7 @@
 .ui-jqgrid tr.jqgfirstrow td {padding: 0 2px 0 2px;border-right-width: 1px; border-right-style: solid; height:auto;}
 .ui-jqgrid tr.jqgroup td {font-weight: normal; overflow: hidden; white-space: pre; height: 22px;padding: 0 2px 0 2px;border-bottom-width: 1px; border-bottom-color: inherit; border-bottom-style: solid;}
 .ui-jqgrid tr.jqfoot td {font-weight: bold; overflow: hidden; white-space: pre; height: 22px;padding: 0 2px 0 2px;border-bottom-width: 1px; border-bottom-color: inherit; border-bottom-style: solid;}
-.ui-jqgrid tr.ui-row-ltr td {text-align:left;border-right-width: 1px; border-right-color: inherit; border-right-style: solid;}
+.ui-jqgrid tr.ui-row-ltr td {text-align:left;border-right-width: 1px; border-right-color: inherit; border-right-style: solid; border-color: #e5ebec}
 .ui-jqgrid tr.ui-row-rtl td {text-align:right;border-left-width: 1px; border-left-color: inherit; border-left-style: solid;}
 .ui-jqgrid td.jqgrid-rownum { padding: 0 2px 0 2px; margin: 0; border: 0 none;}
 .ui-jqgrid .ui-jqgrid-resize-mark { width:2px; left:0; background-color:#777; cursor: e-resize; cursor: col-resize; position:absolute; top:0; height:100px; overflow:hidden; display:none; border:0 none; z-index: 99999;}
@@ -249,7 +249,7 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 .ui-jqgrid .ui-jqgrid-view textarea,
 .ui-jqgrid .ui-jqgrid-view button {
     font-size: 11px;
-    margin-left: 7px;
+    margin-left: 8px;
     margin-top: 4px;
 }
 .ui-jqgrid .ui-scroll-popup {width: 95px;}
@@ -267,4 +267,8 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 .ui-jqgrid .ui-pg-table .ui-pg-button.ui-state-disabled:hover > .ui-pg-div > .ui-icon {
 	margin-left: 3px;
 	margin-right: 3px;
+}
+
+.ui-jqgrid tr.ui-row-ltr td:first-child input{
+    margin-left: -2px;
 }
