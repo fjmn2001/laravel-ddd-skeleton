@@ -346,6 +346,7 @@ div.tablediv > .table-bordered {
     padding: 0px 0px 2px 2px;
     background-color: #ffffff;
     border: 1px solid #e5ebec;
+    margin-left: 22px;
 }
 .ui-jqgrid .ui-separator {
 	height: 18px;
@@ -878,8 +879,8 @@ ul.ui-search-menu li, ul.ui-nav-menu li {
 }
 
 .ui-icon-seek-next, .ui-icon-seek-prev, .ui-icon-seek-first, .ui-icon-seek-end{
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     text-align: center;
     border-radius: 15px;
     padding: 0px;
@@ -890,6 +891,8 @@ ul.ui-search-menu li, ul.ui-nav-menu li {
     box-shadow: 0px 0px 7px rgb(0 0 0 / 19%);
     margin: 4px;
 }
+
+
 
 /*
 .ui-jqgrid .ui-jqgrid-caption,

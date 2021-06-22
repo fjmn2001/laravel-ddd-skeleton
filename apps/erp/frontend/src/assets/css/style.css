@@ -17945,3 +17945,24 @@ a.selected i {
     margin-top: 10px;
     margin-left: 5px;
 }
+
+
+.ui-icon-seek-end{
+    background: #ffffff url('../images/icons/two-arrow-right.svg') no-repeat center;
+    background-size: 10px 10px;
+}
+
+.ui-icon-seek-first{
+    background: #ffffff url('../images/icons/two-arrow-left.svg') no-repeat center;
+    background-size: 10px 10px;
+}
+
+.ui-icon-seek-next{
+    background: #ffffff url('../images/icons/one-arrow-right.svg') no-repeat center;
+    background-size: 10px 10px;
+}
+
+.ui-icon-seek-prev{
+    background: #ffffff url('../images/icons/one-arrow-left.svg') no-repeat center;
+    background-size: 10px 10px;
+}
