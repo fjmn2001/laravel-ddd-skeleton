@@ -7356,8 +7356,9 @@ ul.list-icons li i {
     .mini-sidebar .sidebar {
         position: fixed;
         transition: all .3s ease;
-        left: 0px;
+        left: -60px;
         width: 60px;
+        display: none;
     }
 
     .mini-sidebar.show-sidebar .sidebar {
@@ -7457,7 +7458,7 @@ ul.list-icons li i {
     .main-conta {
         margin-top: 1rem !important;
         padding-top: 10px !important;
-        padding-left: 70px !important;
+        padding-left: 10px !important;
         padding-right: 10px !important;
     }
 
