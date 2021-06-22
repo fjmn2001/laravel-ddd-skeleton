@@ -289,7 +289,7 @@ div.tablediv > .table-bordered {
 	margin: 0;
 }
 .ui-jqgrid .ui-pg-table td {
-	font-weight:normal;
+	font-weight:700;
 	vertical-align:middle;
 	/*padding:0px 6px;*/
 }
@@ -326,27 +326,32 @@ div.tablediv > .table-bordered {
 	font-size: 12px !important;
   	width: 50px;
   	background-color: #ffffff;
-  	border: 1px solid #fff !important;
+  	border: 1px solid #e9e9e9 !important;
   	height: 24px !important;
-  	color: #555555;
+  	color: #576984;
   	display: inline-block;
-  	/* padding: 4px 6px; */
+  	padding: 4px 6px;
   	vertical-align: middle;
 	text-align: center;
+    font-weight: 600;
+    border-radius: 6px;
 
 }
 .ui-jqgrid .ui-pg-selbox,
 .ui-jqgrid .ui-jqgrid-toppager .ui-pg-selbox {
     font-size: 12px;
-    line-height: inherit;
+    font-weight: 600;
+    color: #576984;
+    line-height: normal;
     display: block;
-    height: 33px;
+    height: 26px;
     width: 57px;
     margin-top: 3px;
-    padding: 0px 0px 2px 2px;
+    padding: 0px 0px 0px 6px;
     background-color: #ffffff;
     border: 1px solid #e5ebec;
     margin-left: 22px;
+    border-radius: 6px;
 }
 .ui-jqgrid .ui-separator {
 	height: 18px;
@@ -395,7 +400,7 @@ div.tablediv > .table-bordered {
 .ui-jqgrid .ui-jqgrid-pager .ui-paging-info,
 .ui-jqgrid .ui-jqgrid-toppager .ui-paging-info
 {
-	font-weight: normal;
+	font-weight: 700;
 	height:auto;
 	margin-top:3px;
 	margin-right:4px;
