@@ -11,15 +11,15 @@ final class LeftMenuGetController
 {
     private $leftOptions = [
         'inventory' => [
-            ['name' => 'items', 'title' => 'Items catalogs', 'class' => 'fa-fw icon-puzzle'],
-            ['name' => 'locations', 'title' => 'Locations', 'class' => 'fa-fw icon-puzzle'],
+            ['name' => 'items', 'title' => 'Items catalogs', 'class' => 'fa-fw icon-social-dropbox'],
+            ['name' => 'locations', 'title' => 'Locations', 'class' => 'fa-fw icon-location-pin'],
             ['name' => 'inventory_settings', 'title' => 'Setting', 'class' => 'fa-fw icon-settings']
         ],
         'companies' => [
             ['name' => 'companies', 'title' => 'Companies', 'class' => 'fa fa-building-o fa-fw']
         ],
         'sales' => [
-            ['name' => 'clients', 'title' => 'Clients', 'class' => 'fa fa-users'],
+            ['name' => 'clients', 'title' => 'Clients', 'class' => 'fa-fw icon-people'],
             ['name' => 'sales_settings', 'title' => 'Setting', 'class' => 'fa-fw icon-settings']
         ],
 
