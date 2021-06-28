@@ -271,3 +271,22 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 .ui-jqgrid tr.ui-row-ltr td:first-child input{
     margin-left: -2px;
 }
+
+
+
+.ui-jqgrid tr.jqgfirstrow td , .ui-jqgrid .ui-jqgrid-htable thead th
+{
+    width: 100% !important;
+}
+
+.table > tbody > tr > td:first-child, .ui-jqgrid .ui-jqgrid-htable thead th:first-child
+{
+    display: table-cell !important;
+    width: 35px !important;
+}
+
+.ui-jqgrid-btable, .ui-jqgrid-htable, .ui-jqgrid, .ui-jqgrid-view, .ui-jqgrid-hdiv, .ui-jqgrid-bdiv, .ui-jqgrid-pager
+{
+    width: 1500px !important;
+}
+
