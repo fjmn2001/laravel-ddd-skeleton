@@ -287,6 +287,6 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 
 .ui-jqgrid-btable, .ui-jqgrid-htable, .ui-jqgrid, .ui-jqgrid-view, .ui-jqgrid-hdiv, .ui-jqgrid-bdiv, .ui-jqgrid-pager
 {
-    width: 1500px !important;
+    width: 100% !important;
 }
 
