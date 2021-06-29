@@ -405,6 +405,9 @@ div.tablediv > .table-bordered {
 	margin-top:3px;
 	margin-right:4px;
 	display: inline;
+    right: 10px;
+    position: absolute;
+    top: -2px;
 }
 .ui-jqgrid .ui-jqgrid-pager .ui-paging-pager,
 .ui-jqgrid .ui-jqgrid-toppager .ui-paging-pager
@@ -897,7 +900,9 @@ ul.ui-search-menu li, ul.ui-nav-menu li {
     margin: 4px;
 }
 
-
+#pagertableName_center{
+    display: flex;
+}
 
 /*
 .ui-jqgrid .ui-jqgrid-caption,
