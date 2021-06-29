@@ -904,6 +904,10 @@ ul.ui-search-menu li, ul.ui-nav-menu li {
     display: flex;
 }
 
+.ui-jqgrid .ui-jqgrid-btable tbody tr.jqgrow td:nth-last-child(2){
+    border-right: none;
+}
+
 /*
 .ui-jqgrid .ui-jqgrid-caption,
 .ui-jqgrid .ui-jqgrid-pager,
