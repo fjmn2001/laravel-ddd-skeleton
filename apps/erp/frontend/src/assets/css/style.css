@@ -16377,6 +16377,11 @@ ul.pro-amenities li span i {
     .numbered-bg .step-title {
         padding-right: 0;
     }
+
+    .ui-jqgrid-btable, .ui-jqgrid-htable, .ui-jqgrid, .ui-jqgrid-view, .ui-jqgrid-hdiv, .ui-jqgrid-bdiv, .ui-jqgrid-pager
+    {
+        width: 1000px !important;
+    }
 }
 
 /* Fonts ---------------------------------- */
