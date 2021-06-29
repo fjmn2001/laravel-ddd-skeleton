@@ -289,3 +289,6 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
     width: 100% !important;
 }
 
+.table th, .table td {
+    border-top: none !important;
+}

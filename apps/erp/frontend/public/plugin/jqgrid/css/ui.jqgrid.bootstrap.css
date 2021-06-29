@@ -1,12 +1,10 @@
 /*Grid*/
 .ui-jqgrid {
 	position: relative;
-	border: 1px solid #ddd;      /*default*/
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
     z-index: 1;
-    margin: -3px;
 }
 .ui-jqgrid .ui-jqgrid-view {
 	position: relative;
@@ -56,7 +54,7 @@
 }
 .ui-jqgrid .ui-jqgrid-hbox {
 	float: left;
-	padding-right: 20px;
+	padding-right: 0px !important;
 }
 .ui-jqgrid .ui-jqgrid-htable {
 	margin-bottom: 0;
