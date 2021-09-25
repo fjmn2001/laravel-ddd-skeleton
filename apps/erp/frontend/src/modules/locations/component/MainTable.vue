@@ -6,12 +6,12 @@
                     <h5 class="xtitle-buscar">List of locations </h5>
                     <p class="ml-md-3 ml-sm-0 pt-md-0 pt-sm-1 xsubtitle-buscar">(Main table)</p>
                 </div>
-                <a href="#" id="desplegar-busqueda1" data-toggle="collapse"><i
+                <a href="#des02" id="desplegar-busqueda1" data-toggle="collapse"><i
                     class="fa fa-chevron-up"></i></a>
             </div>
 
-            <div>
-                <table :id="'list' + tableName">
+            <div id="des02" class="table-responsive">
+                <table class="table" :id="'list' + tableName">
                     <tr>
                         <td></td>
                     </tr>

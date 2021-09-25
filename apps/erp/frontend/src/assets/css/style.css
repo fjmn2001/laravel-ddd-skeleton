@@ -7356,8 +7356,9 @@ ul.list-icons li i {
     .mini-sidebar .sidebar {
         position: fixed;
         transition: all .3s ease;
-        left: 0px;
+        left: -60px;
         width: 60px;
+        display: none;
     }
 
     .mini-sidebar.show-sidebar .sidebar {
@@ -7457,7 +7458,7 @@ ul.list-icons li i {
     .main-conta {
         margin-top: 1rem !important;
         padding-top: 10px !important;
-        padding-left: 70px !important;
+        padding-left: 10px !important;
         padding-right: 10px !important;
     }
 
@@ -16376,6 +16377,11 @@ ul.pro-amenities li span i {
     .numbered-bg .step-title {
         padding-right: 0;
     }
+
+    .ui-jqgrid-btable, .ui-jqgrid-htable, .ui-jqgrid, .ui-jqgrid-view, .ui-jqgrid-hdiv, .ui-jqgrid-bdiv, .ui-jqgrid-pager
+    {
+        width: 1000px !important;
+    }
 }
 
 /* Fonts ---------------------------------- */
@@ -17944,4 +17950,25 @@ a.selected i {
     height: 50px;
     margin-top: 10px;
     margin-left: 5px;
+}
+
+
+.ui-icon-seek-end{
+    background: #ffffff url('../images/icons/two-arrow-right.svg') no-repeat center;
+    background-size: 10px 10px;
+}
+
+.ui-icon-seek-first{
+    background: #ffffff url('../images/icons/two-arrow-left.svg') no-repeat center;
+    background-size: 10px 10px;
+}
+
+.ui-icon-seek-next{
+    background: #ffffff url('../images/icons/one-arrow-right.svg') no-repeat center;
+    background-size: 10px 10px;
+}
+
+.ui-icon-seek-prev{
+    background: #ffffff url('../images/icons/one-arrow-left.svg') no-repeat center;
+    background-size: 10px 10px;
 }
